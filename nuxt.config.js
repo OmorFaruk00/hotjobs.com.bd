@@ -21,9 +21,22 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
+
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'stylesheet',id:'bootstrap-style', href: 'css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: 'css/icons.min.css' },
+      { rel: 'stylesheet', href: 'css/app.min.css' },
+      { rel: 'stylesheet', href: 'css/style.css' },
+    ],
+    script: [
+      { src: '/libs/jquery/jquery.min.js' },
+      { src: 'libs/bootstrap/js/bootstrap.bundle.min.js' },
+      { src: 'libs/metismenu/metisMenu.min.js' },
+      { src: 'libs/simplebar/simplebar.min.js' },
+      { src: 'libs/node-waves/waves.min.js' },
+      { src: 'js/pages/dashboard.init.js' },
+    ],
   },
   /*
   ** Global CSS
