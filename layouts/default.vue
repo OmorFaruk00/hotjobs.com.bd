@@ -12,8 +12,6 @@
 
       <div class="main-content bg-light">
 
-
-
         <nuxt/>
 
         <!--footer-->

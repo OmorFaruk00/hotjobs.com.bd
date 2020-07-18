@@ -266,7 +266,7 @@ button:focus {
 /*-- End Navbar --*/
 /*-- Banner --*/
 .banner-img-one {
-    background-image: url("../img/home-1/banner.jpg");
+    background-image: url("../images/banner.jpg");
     opacity: 0.9;
 }
 
@@ -805,7 +805,7 @@ button:focus {
 .job-item {
     margin-bottom: 30px;
     border: 1px solid #c1c1c1;
-    padding: 10px;
+    padding: 20px;
     position: relative;
 }
 
@@ -1135,6 +1135,10 @@ button:focus {
     left: 50%;
     top: 0;
     background-color: #f8f8f8;
+}
+
+.popular-wrap ul li img{
+  width: 40px;
 }
 
 .popular-right {
