@@ -1,10 +1,10 @@
 <template>
-<h1>lorem</h1>
+    $END$
 </template>
 
 <script>
     export default {
-        name: "defaut"
+        name: "Footer"
     }
 </script>
 
