@@ -5,7 +5,7 @@
         <!-- LOGO -->
         <div class="navbar-brand-box">
 
-          <nuxt-link to="/dashboard" class="logo logo-dark">
+          <nuxt-link to="/" class="logo logo-dark">
 
             <span class="logo-sm">
               <img src="~/static/images/small_logo.png" alt="" height="45">
