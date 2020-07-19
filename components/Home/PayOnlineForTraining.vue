@@ -3,158 +3,57 @@
     <div class="card">
       <div class="card-body">
 
-        <h1 class="card-title text-center">Popular Companies</h1>
+        <h1 class="card-title text-center">Pay Online For Training</h1>
 
+        <div class="training-price">
+          <div class="row">
 
-        <carousel v-if="isNuxtReady" :autoplay="true" :nav="false"
-                  :responsive="{0:{items:1,nav:false},576:{items:1,nav:false},768:{items:2,nav:false},992:{items:3,nav:false},1200:{items:4,nav:false}}">
+            <div class="col-lg-6 mix web ui">
+              <div class="job-item training-price-item price-left-side">
+                <img src="../../static/images/box/1.png" alt="Job">
+                <div class="job-inner align-items-center">
+                  <div class="training-price-inner-left">
+                    <a href="company-details.html">Post Budget Discussion on VAT & TAX Changes 2020</a>
+                    <p>3 - 4 Jul 2020</p>
+                  </div>
+                </div>
+              </div>
 
-          <div class="companies-item">
-            <img src="../../static/images/companies/1.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Winbrans.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Quadra, Street, Canada
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
+              <div class="job-item training-price-item price-left-side">
+                <img src="../../static/images/box/1.png" alt="Job">
+                <div class="job-inner align-items-center">
+                  <div class="training-price-inner-left">
+                    <a href="company-details.html">Post Budget Discussion on VAT & TAX Changes 2020</a>
+                    <p>3 - 4 Jul 2020</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mix web ui">
+              <div class="job-item training-price-item price-left-side">
+                <img src="../../static/images/box/1.png" alt="Job">
+                <div class="job-inner align-items-center">
+                  <div class="training-price-inner-left">
+                    <a href="company-details.html">Post Budget Discussion on VAT & TAX Changes 2020</a>
+                    <p>3 - 4 Jul 2020</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="job-item training-price-item price-left-side">
+                <img src="../../static/images/box/1.png" alt="Job">
+                <div class="job-inner align-items-center">
+                  <div class="training-price-inner-left">
+                    <a href="company-details.html">Post Budget Discussion on VAT & TAX Changes 2020</a>
+                    <p>3 - 4 Jul 2020</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/2.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Infiniza.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              North Street, California
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/3.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Glovibo.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Barming Road, UK
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/4.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Bizotic.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Washington, New York
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/1.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Winbrans.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Quadra, Street, Canada
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/2.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Infiniza.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              North Street, California
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/3.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Glovibo.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Barming Road, UK
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/4.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Bizotic.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Washington, New York
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/1.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Winbrans.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Quadra, Street, Canada
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/2.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Infiniza.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              North Street, California
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/3.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Glovibo.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Barming Road, UK
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-          <div class="companies-item">
-            <img src="../../static/images/companies/4.png" alt="Companies">
-            <h3>
-              <a href="company-details.html">Bizotic.com</a>
-            </h3>
-            <p>
-              <i class="icofont-location-pin"></i>
-              Washington, New York
-            </p>
-            <a class="companies-btn" href="create-account.html">Hiring</a>
-          </div>
-
-        </carousel>
+        </div>
 
       </div>
     </div>
@@ -162,29 +61,9 @@
 </template>
 
 <script>
-  const carousel = () => window && window !== undefined ? import("vue-owl-carousel") : null;
-  export default {
-    name: "PayOnlineForTraining",
-    data() {
-      return {
-        isNuxtReady: false,
-      }
-    },
-    components: {
-      carousel,
-    },
-
-    mounted() {
-      const vm = this;
-      if (process.browser) {
-        window.onNuxtReady(app => {
-          console.log("Nuxt ready!");
-          vm.isNuxtReady = true;
-        });
-      }
-    },
-
-  }
+    export default {
+        name: "PayOnlineForTraining"
+    }
 </script>
 
 <style scoped>

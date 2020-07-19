@@ -49,7 +49,12 @@
 
         <div class="row">
           <!--Pay Online For Training-->
+          <homePopularCompanies/>
+
+          <!--Pay Online For Training-->
           <homePayOnlineForTraining/>
+
+
         </div>
 
       </div>
@@ -68,6 +73,7 @@
   import homeTender from "~/components/Home/Tender";
   import homeCounter from "~/components/Home/Counter";
   import homeMostPopular from "~/components/Home/MostPopular";
+  import homePopularCompanies from "~/components/Home/PopularCompanies";
   import homePayOnlineForTraining from "~/components/Home/PayOnlineForTraining";
 
 
@@ -81,6 +87,7 @@
       homeTender,
       homeCounter,
       homeMostPopular,
+      homePopularCompanies,
       homePayOnlineForTraining
     },
 
