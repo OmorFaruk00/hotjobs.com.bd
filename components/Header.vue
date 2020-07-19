@@ -25,7 +25,7 @@
         </button>
 
 
-        <div class="dropdown dropdown-mega d-none d-lg-block ml-2">
+        <!--<div class="dropdown dropdown-mega d-none d-lg-block ml-2">
           <button type="button" class="btn header-item waves-effect" data-toggle="dropdown"
                   aria-haspopup="false" aria-expanded="false">
             Menu
@@ -119,30 +119,123 @@
             </div>
 
           </div>
+        </div>-->
+
+      </div>
+
+
+      <div class="d-flex middle-header">
+
+        <div class="dropdown d-inline-block">
+
+          <a href="javaScript:void(0)">
+            <i class="bx bxl-facebook-circle" style="font-size: 40px;"></i>
+          </a>
+
+          <a href="javaScript:void(0)">
+            <i class="bx bxl-youtube" style="font-size: 40px;"></i>
+          </a>
+
+          <a href="javaScript:void(0)">
+            <i class="bx bxl-linkedin-square" style="font-size: 40px;"></i>
+          </a>
+
         </div>
+
+
       </div>
 
       <div class="d-flex">
 
         <div class="dropdown d-inline-block">
+          <button type="button" class="btn header-item noti-icon waves-effect text-info"
+                  id="page-header-notifications-dropdown"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            Sign in <span style="color: #423A3D;">or</span> Create Account
+
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+               aria-labelledby="page-header-notifications-dropdown">
+
+            <div data-simplebar style="max-height: 330px;padding: 0 10px">
+
+              <div class="card bg-light my-3">
+                <div class="card-body">
+                  <div class="media">
+
+                    <div class="avatar-xs mr-3">
+                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                            <i class="bx bx-user-check"></i>
+                        </span>
+                    </div>
+
+                    <div class="media-body">
+                      <h6 class="mt-0 mb-1">My Hotjobs</h6>
+                      <div class="font-size-12 text-muted">
+                        <p class="mb-1">Sign in or create your My Hotjobs account to manage your profile</p>
+                        <p class="mb-0">
+                          <nuxt-link to="/" class="btn btn-outline-primary">Sign in</nuxt-link>
+                          <nuxt-link to="/" class="btn btn-outline-info">Create account</nuxt-link>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <hr>
+
+              <div class="card bg-light my-3">
+                <div class="card-body">
+                  <div class="media">
+
+                    <div class="avatar-xs mr-3">
+                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                            <i class="bx bx-user-pin"></i>
+                        </span>
+                    </div>
+
+                    <div class="media-body">
+                      <h6 class="mt-0 mb-1">Employers</h6>
+                      <div class="font-size-12 text-muted">
+                        <p class="mb-1">Lorem ipsum dolor sit amet.</p>
+                        <p class="mb-0">
+                          <nuxt-link to="/" class="btn btn-outline-primary">Sign in</nuxt-link>
+                          <nuxt-link to="/" class="btn btn-outline-info">Create account</nuxt-link>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="dropdown d-inline-block">
+
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
-                 alt="Header Avatar">
+                 alt="">
             <span class="d-none d-xl-inline-block ml-1">Admin</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </button>
+
           <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
             <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
               Profile</a>
-            <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle mr-1"></i> My
-              Wallet</a>
-            <a class="dropdown-item d-block" href="#"><span
-              class="badge badge-success float-right">11</span><i
-              class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i>
-              Lock screen</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" href="#"><i
               class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
@@ -150,14 +243,15 @@
         </div>
 
       </div>
+
     </div>
   </header>
 </template>
 
 <script>
-    export default {
-        name: "Header"
-    }
+  export default {
+    name: "Header"
+  }
 </script>
 
 <style scoped>
