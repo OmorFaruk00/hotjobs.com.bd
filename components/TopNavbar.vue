@@ -8,7 +8,7 @@
 
             <ul class="navbar-nav justify-content-center">
               <li class="nav-item dropdown">
-                <nuxt-link class="nav-link dropdown-toggle arrow-none" to="/">Employability Test <span
+                <nuxt-link class="nav-link dropdown-toggle arrow-none" to="/employability-help">Employability Test <span
                   class="badge badge-secondary">New</span></nuxt-link>
               </li>
 

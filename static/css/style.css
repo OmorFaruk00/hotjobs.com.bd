@@ -4742,7 +4742,7 @@ button:focus {
 /*employability_help*/
 
 .employability-help-img {
-  background-image: url("../img/home-1/banner.jpg");
+  background-image: url("../images/banner.jpg");
   background-size: 100% 100%;
   opacity: 0.9;
 }
