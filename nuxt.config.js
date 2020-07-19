@@ -30,6 +30,7 @@ export default {
       { rel: 'stylesheet', href: 'css/style.css' },
       { rel: 'stylesheet', href: 'css/responsive.css' },
     ],
+
     script: [
       { src: '/libs/jquery/jquery.min.js' },
       { src: 'libs/bootstrap/js/bootstrap.bundle.min.js' },
