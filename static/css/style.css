@@ -2223,7 +2223,7 @@ button:focus {
 /*----- Create Account Page -----*/
 /*-- Page Title --*/
 .page-title-area {
-  height: 300px;
+  height: 200px;
   background: -webkit-gradient(linear, left top, right top, from(#EC1A3A), color-stop(63%, #423A3D));
   background: linear-gradient(90deg, #EC1A3A 0%, #423A3D 63%);
 }
@@ -2826,9 +2826,6 @@ button:focus {
 /*----- End Post A Job Page -----*/
 /*----- Login Page -----*/
 /*-- Job --*/
-.login-area {
-  padding-bottom: 200px;
-}
 
 .login-area h2 {
   text-align: center;

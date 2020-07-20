@@ -176,8 +176,8 @@
                       <div class="font-size-12 text-muted">
                         <p class="mb-1">Sign in or create your My Hotjobs account to manage your profile</p>
                         <p class="mb-0">
-                          <nuxt-link to="/" class="btn btn-outline-primary">Sign in</nuxt-link>
-                          <nuxt-link to="/" class="btn btn-outline-info">Create account</nuxt-link>
+                          <nuxt-link to="/job-seeker-login" class="btn btn-outline-primary">Sign in</nuxt-link>
+                          <nuxt-link to="/job-seeker-create" class="btn btn-outline-info">Create account</nuxt-link>
                         </p>
                       </div>
                     </div>
@@ -185,8 +185,6 @@
                   </div>
                 </div>
               </div>
-
-
 
 
               <hr>

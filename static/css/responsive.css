@@ -41,7 +41,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     -webkit-box-shadow: 0px 6px 8px 0px #dddddd69;
-            box-shadow: 0px 6px 8px 0px #dddddd69;
+    box-shadow: 0px 6px 8px 0px #dddddd69;
   }
   .navbar-area .common-btn a {
     font-size: 13px;
@@ -70,7 +70,7 @@
     padding: 5px 15px;
     border-radius: 20px;
     -webkit-box-shadow: 0px 0px 0 5px #ffffff80;
-            box-shadow: 0px 0px 0 5px #ffffff80;
+    box-shadow: 0px 0px 0 5px #ffffff80;
   }
   .banner-form-area form {
     padding-right: 0;
@@ -176,7 +176,7 @@
     font-size: 18px;
     padding: 15px 50px;
     -webkit-box-shadow: 0 0 0 5px #cce6cf;
-            box-shadow: 0 0 0 5px #cce6cf;
+    box-shadow: 0 0 0 5px #cce6cf;
   }
   .portal-item h2 {
     font-size: 20px;
@@ -215,8 +215,8 @@
   }
   .job-item .job-inner .job-inner-left {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 60%;
-            flex: 0 0 60%;
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
     max-width: 60%;
   }
   .job-item .job-inner .job-inner-left h3 {
@@ -233,8 +233,8 @@
   }
   .job-item .job-inner .job-inner-right {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 40%;
-            flex: 0 0 40%;
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
     max-width: 40%;
   }
   .job-item .job-inner .job-inner-right ul li {
@@ -387,25 +387,25 @@
   @-webkit-keyframes app-a-one {
     50% {
       -webkit-transform: translate(0, 10px);
-              transform: translate(0, 10px);
+      transform: translate(0, 10px);
     }
   }
   @keyframes app-a-one {
     50% {
       -webkit-transform: translate(0, 10px);
-              transform: translate(0, 10px);
+      transform: translate(0, 10px);
     }
   }
   @-webkit-keyframes app-a-two {
     50% {
       -webkit-transform: translate(10px, 0);
-              transform: translate(10px, 0);
+      transform: translate(10px, 0);
     }
   }
   @keyframes app-a-two {
     50% {
       -webkit-transform: translate(10px, 0);
-              transform: translate(10px, 0);
+      transform: translate(10px, 0);
     }
   }
   /*-- End App --*/
@@ -617,11 +617,12 @@
   /*-- Page Title --*/
   .page-title-area {
     height: 100%;
+    margin-top: 72px!important;
+    padding: 30px 0;
   }
   .page-title-text {
     margin-top: 0;
-    padding-top: 200px;
-    padding-bottom: 100px;
+    padding: 20px 0;
   }
   .page-title-text h2 {
     margin-bottom: 8px;
@@ -1317,7 +1318,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     -webkit-box-shadow: 0px 6px 8px 0px #dddddd69;
-            box-shadow: 0px 6px 8px 0px #dddddd69;
+    box-shadow: 0px 6px 8px 0px #dddddd69;
   }
   .navbar-area .common-btn a {
     font-size: 13px;
@@ -1346,7 +1347,7 @@
     padding: 5px 15px;
     border-radius: 20px;
     -webkit-box-shadow: 0px 0px 0 5px #ffffff80;
-            box-shadow: 0px 0px 0 5px #ffffff80;
+    box-shadow: 0px 0px 0 5px #ffffff80;
   }
   .banner-form-area form {
     padding-right: 0;
@@ -1450,7 +1451,7 @@
     font-size: 18px;
     padding: 15px 50px;
     -webkit-box-shadow: 0 0 0 5px #cce6cf;
-            box-shadow: 0 0 0 5px #cce6cf;
+    box-shadow: 0 0 0 5px #cce6cf;
   }
   .portal-item h2 {
     font-size: 20px;
@@ -1820,11 +1821,12 @@
   /*-- Page Title --*/
   .page-title-area {
     height: 100%;
+    margin-top: 72px!important;
+    padding: 30px 0;
   }
   .page-title-text {
     margin-top: 0;
-    padding-top: 200px;
-    padding-bottom: 100px;
+
   }
   .page-title-text h2 {
     margin-bottom: 8px;
