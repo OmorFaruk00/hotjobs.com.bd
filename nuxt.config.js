@@ -65,7 +65,17 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
   ],
+
+  axios: {
+    init(axios, context) {
+      axios.defaults.httpsAgent = new https.Agent({ rejectUnauthorized: false });
+    },
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    baseURL: 'http://localhost:8000/',
+  },
+
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
