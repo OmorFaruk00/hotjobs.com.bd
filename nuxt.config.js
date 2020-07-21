@@ -27,6 +27,7 @@ export default {
       { rel: 'stylesheet',id:'bootstrap-style', href: '/css/bootstrap.min.css' },
       { rel: 'stylesheet', href: '/css/icons.min.css' },
       { rel: 'stylesheet', href: '/css/app.min.css' },
+      { rel: 'stylesheet', href: '/css/app.min.css' },
       { rel: 'stylesheet', href: '/css/style.css' },
       { rel: 'stylesheet', href: '/css/responsive.css' },
     ],

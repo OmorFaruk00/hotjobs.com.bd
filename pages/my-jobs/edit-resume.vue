@@ -49,8 +49,6 @@
                                aria-labelledby="headingPersonalDetails" data-parent="#accordion">
                             <div class="card-body">
 
-                              <!--            <button type="submit" class="btn login-btn">Add Personal Details</button>-->
-
                               <div class="text-center" v-if="!employee.personal_details">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         @click="addPersonalDetailsModal">Add Personal Details
@@ -62,7 +60,8 @@
                                 <div class="text-right my-2">
 
                                   <button type="submit" class="btn btn-outline-secondary"
-                                          @click="editPersonalDetailsModal(employee.personal_details)"><i class="bx bx-edit"></i> Edit
+                                          @click="editPersonalDetailsModal(employee.personal_details)"><i
+                                    class="bx bx-edit"></i> Edit
                                   </button>
 
                                 </div>
@@ -195,19 +194,42 @@
                           </div>
                           <div id="collapseAddressDetails" class="collapse" aria-labelledby="headingAddressDetails"
                                data-parent="#accordion">
+
                             <div class="card-body">
-                              Anim pariatur cliche reprehenderit, enim eiusmod high life
-                              accusamus terry richardson ad squid. 3 wolf moon officia
-                              aute, non cupidatat skateboard dolor brunch. Food truck
-                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                              sunt aliqua put a bird on it squid single-origin coffee
-                              nulla assumenda shoreditch et. Nihil anim keffiyeh
-                              helvetica, craft beer labore wes anderson cred nesciunt
-                              sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                              Leggings occaecat craft beer farm-to-table, raw denim
-                              aesthetic synth nesciunt you probably haven't heard of them
-                              accusamus labore sustainable VHS.
+
+                              <div class="text-center" v-if="!employee.address">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        @click="addAddressModal">Add Address
+                                </button>
+                              </div>
+
+                              <div class="table-responsive" v-if="employee.address">
+
+                                <div class="text-right my-2">
+
+                                  <button type="submit" class="btn btn-outline-secondary"
+                                          @click="editAddressModal(employee.address)"><i
+                                    class="bx bx-edit"></i> Edit
+                                  </button>
+
+                                </div>
+
+                                <table class="table">
+                                  <tr>
+
+                                    <th>Present Address <br>
+                                      <span>{{ employee.address.present_village }}</span>
+                                    </th>
+
+                                    <th>Permanent Address<br>
+                                      <span>{{ employee.address.permanent_village }}</span>
+                                    </th>
+
+                                  </tr>
+                                </table>
+                              </div>
                             </div>
+
                           </div>
                         </div>
                         <!--Address Details-->
@@ -563,6 +585,236 @@
       </div>
     </div>
 
+    <!--addAddressModal-->
+    <div class="modal fade" id="addAddress" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Address</h5>
+            <h5 class="modal-title" v-else>Update Address</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="createAddress()">
+            <div class="modal-body">
+
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" v-model="address.same_address" type="checkbox"
+                           name="present_location" id="same_address">
+                    <label class="form-check-label" for="same_address">
+                      Same as Present Address
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+
+                  <h1>Present Address</h1>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" v-model="address.present_location" type="radio"
+                           name="present_location" id="insideBangladesh" value="0" checked>
+                    <label class="form-check-label" for="insideBangladesh">
+                      Inside Bangladesh
+                    </label>
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" v-model="address.present_location" type="radio"
+                           name="present_location" id="outsideBangladesh" value="1" checked>
+                    <label class="form-check-label" for="outsideBangladesh">
+                      Outside Bangladesh
+                    </label>
+                  </div>
+
+                  <div class="form-group" v-if="address.present_location == 0">
+                    <label>District</label>
+                    <select v-model="address.present_district_id" name="present_district_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('present_district_id') }"
+                            v-on:change="fetchPresentThana" required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in districts" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="present_district_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.present_location == 0">
+                    <label>Thana / Upazila</label>
+                    <select v-model="address.present_thana_id" name="present_thana_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('present_thana_id') }"
+                            v-on:change="fetchPresentUnion" required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in thanas" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="present_thana_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.present_location == 0">
+                    <label>Union</label>
+                    <select v-model="address.present_union_id" name="present_union_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('present_union_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in unions" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="present_union_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.present_location == 1">
+                    <label>Country</label>
+                    <select v-model="address.present_country_id" name="present_country_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('present_country_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
+                        row.countries_isd_code }})
+                      </option>
+
+                    </select>
+
+                    <has-error :form="address" field="present_country_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Present Village</label>
+                    <textarea v-model="address.present_village" id="present_village" cols="30" rows="2" name="present_village" placeholder="Enter present village"
+                              class="form-control" :class="{ 'is-invalid': address.errors.has('present_village') }"></textarea>
+
+                    <has-error :form="address" field="present_village"></has-error>
+                  </div>
+
+
+                </div>
+
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6" v-if="!address.same_address">
+
+                  <h1>Permanent Address</h1>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" v-model="address.permanent_location" type="radio"
+                           name="permanent_location" id="permanentInsideBangladesh" value="0" checked>
+                    <label class="form-check-label" for="permanentInsideBangladesh">
+                      Inside Bangladesh
+                    </label>
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" v-model="address.permanent_location" type="radio"
+                           name="permanent_location" id="permanentOutsideBangladesh" value="1" checked>
+                    <label class="form-check-label" for="permanentOutsideBangladesh">
+                      Outside Bangladesh
+                    </label>
+
+                    <has-error :form="address" field="present_location"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.permanent_location == 0">
+                    <label>District</label>
+                    <select v-model="address.permanent_district_id" name="permanent_district_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_district_id') }"
+                            v-on:change="fetchPermanentThana" required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in districts" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="permanent_district_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.permanent_location == 0">
+                    <label>Thana / Upazila</label>
+                    <select v-model="address.permanent_thana_id" name="permanent_thana_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_thana_id') }"
+                            v-on:change="fetchPermanentUnion" required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in permanent_thanas" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="permanent_thana_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.permanent_location == 0">
+                    <label>Union</label>
+                    <select v-model="address.permanent_union_id" name="permanent_union_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_union_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in permanent_unions" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="address" field="permanent_union_id"></has-error>
+                  </div>
+
+                  <div class="form-group" v-if="address.permanent_location == 1">
+                    <label>Country</label>
+                    <select v-model="address.permanent_country_id" name="permanent_country_id"
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_country_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
+                        row.countries_isd_code }})
+                      </option>
+
+                    </select>
+
+                    <has-error :form="address" field="permanent_country_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Permanent Village</label>
+                    <textarea v-model="address.permanent_village" id="" cols="30" rows="2" name="permanent_village" placeholder="Enter permanent village"
+                              class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_village') }"></textarea>
+
+                    <has-error :form="address" field="permanent_village"></has-error>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -596,6 +848,11 @@
       return {
         editMode: false,
         countries: '',
+        districts: '',
+        thanas: '',
+        permanent_thanas: '',
+        unions: '',
+        permanent_unions: '',
         employee: "",
         form: new Form({
           id: '',
@@ -618,6 +875,24 @@
           email: '',
           alternate_email: '',
         }),
+        address: new Form({
+          id: '',
+          present_location: '',
+          present_district_id: '',
+          present_thana_id: '',
+          present_union_id: '',
+          present_country_id: '',
+          present_village:'',
+
+          same_address:'',
+
+          permanent_location: '',
+          permanent_district_id: '',
+          permanent_thana_id: '',
+          permanent_union_id: '',
+          permanent_country_id: '',
+          permanent_village:'',
+        }),
         url: this.$axios.defaults.baseURL,
       }
     },
@@ -628,14 +903,15 @@
     },
 
     methods: {
+
+      // fetch data start
+
       async getAuthEmployee() {
         var token = window.$nuxt.$cookies.get('token');
 
         return await this.$axios.get('/auth-employee/' + token + '?token=' + token)
           .then((response) => {
             this.employee = response.data
-
-            console.log(response.data);
           })
           .catch((error) => {
 
@@ -665,13 +941,117 @@
           })
       },
 
+      async fetchDistrictLists() {
+        return await this.$axios.get('district-lists')
+          .then((response) => {
+
+            this.districts = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      fetchPresentThana() {
+
+        var vm = this;
+
+        var district_id = this.address.present_district_id;
+
+        this.$axios.get('fetch-thana-lists/' + district_id).then(function (response) {
+
+          vm.thanas = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+      },
+
+      fetchPermanentThana() {
+
+        var vm = this;
+
+        var district_id = this.address.permanent_district_id;
+
+        this.$axios.get('fetch-thana-lists/' + district_id).then(function (response) {
+
+          vm.permanent_thanas = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+      },
+
+      fetchPresentUnion() {
+
+        var vm = this;
+
+        var thana_id = this.address.present_thana_id;
+
+        this.$axios.get('fetch-union-lists/' + thana_id).then(function (response) {
+
+          vm.unions = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+      },
+
+      fetchPermanentUnion() {
+
+        var vm = this;
+
+        var thana_id = this.address.permanent_thana_id;
+
+        this.$axios.get('fetch-union-lists/' + thana_id).then(function (response) {
+
+          vm.permanent_unions = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+      },
+
+      // fetch data end
+
+      // personal information start
       addPersonalDetailsModal() {
         this.editMode = false;
         this.form.reset();
         this.fetchCountryLists(),
           $('#addPersonalDetails').modal('show');
       },
-
       editPersonalDetailsModal(row) {
         this.editMode = true;
         this.form.reset();
@@ -680,7 +1060,6 @@
         this.form.fill(row);
 
       },
-
       createPersonalDetails() {
 
         var token = window.$nuxt.$cookies.get('token');
@@ -705,6 +1084,60 @@
 
           })
       },
+      // personal information end
+
+
+      // address start
+      addAddressModal() {
+        this.editMode = false;
+        this.form.reset();
+        this.fetchCountryLists(),
+          this.fetchDistrictLists(),
+          $('#addAddress').modal('show');
+      },
+
+      editAddressModal(row) {
+
+        this.editMode = false;
+        this.form.reset();
+        this.fetchCountryLists(),
+        this.fetchDistrictLists(),
+        this.fetchPresentThana(),
+        this.fetchPermanentThana(),
+        this.fetchPresentUnion(),
+        this.fetchPermanentUnion(),
+        $('#addAddress').modal('show');
+        this.address.fill(row);
+      },
+
+      createAddress() {
+
+        // alert('w');
+        // return false;
+
+        var token = window.$nuxt.$cookies.get('token');
+        this.address.post(this.url + 'employee-address-detail?token=' + token)
+          .then(() => {
+
+            $('#addAddress').modal('hide');
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // address end
 
     },
 
