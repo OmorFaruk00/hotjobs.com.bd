@@ -17,7 +17,7 @@
         <div class="col-lg-10">
           <div class="card">
             <div class="card-body">
-              <h1>Edit resume</h1>
+              <h1>Dashboard</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, iste!</p>
 
             </div>
@@ -33,10 +33,10 @@
 </template>
 
 <script>
-  import dashboardNavbar from '~/components/Dashboard/navbar'
+  import dashboardNavbar from '~/components/MyJobs/navbar'
 
   export default {
-    name: "edit-resume",
+    name: "dashboard",
     components: {
       dashboardNavbar
     }

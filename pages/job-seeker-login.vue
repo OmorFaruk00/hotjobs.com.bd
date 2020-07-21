@@ -117,7 +117,7 @@
               maxAge:1800
             })
 
-            window.location.href  = "/dashboard";
+            window.location.href  = "/my-jobs/dashboard";
 
           })
           .catch((error) => {

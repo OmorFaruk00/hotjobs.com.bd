@@ -311,3 +311,40 @@
     color: #fff !important;
   }
 </style>
+
+first_name: '',
+last_name: '',
+father_name: '',
+mother_name: '',
+date_of_birth: '',
+mobile_no_1: '',
+religion: '',
+marital_status: '',
+nationality: '',
+national_id_no: '',
+passport_number: '',
+passport_issue_date: '',
+country_id: '',
+mobile_no_1: '',
+mobile_no_2: '',
+mobile_no_3: '',
+email: '',
+alternate_email: '',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

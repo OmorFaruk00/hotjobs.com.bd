@@ -24,20 +24,20 @@ export default {
 
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
-      { rel: 'stylesheet',id:'bootstrap-style', href: 'css/bootstrap.min.css' },
-      { rel: 'stylesheet', href: 'css/icons.min.css' },
-      { rel: 'stylesheet', href: 'css/app.min.css' },
-      { rel: 'stylesheet', href: 'css/style.css' },
-      { rel: 'stylesheet', href: 'css/responsive.css' },
+      { rel: 'stylesheet',id:'bootstrap-style', href: '/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: '/css/icons.min.css' },
+      { rel: 'stylesheet', href: '/css/app.min.css' },
+      { rel: 'stylesheet', href: '/css/style.css' },
+      { rel: 'stylesheet', href: '/css/responsive.css' },
     ],
 
     script: [
       { src: '/libs/jquery/jquery.min.js' },
-      { src: 'libs/bootstrap/js/bootstrap.bundle.min.js' },
-      { src: 'libs/metismenu/metisMenu.min.js' },
-      { src: 'libs/simplebar/simplebar.min.js' },
-      { src: 'libs/node-waves/waves.min.js' },
-      { src: 'js/pages/dashboard.init.js' },
+      { src: '/libs/bootstrap/js/bootstrap.bundle.min.js' },
+      { src: '/libs/metismenu/metisMenu.min.js' },
+      { src: '/libs/simplebar/simplebar.min.js' },
+      { src: '/libs/node-waves/waves.min.js' },
+      { src: '/js/pages/dashboard.init.js' },
     ],
   },
   /*
