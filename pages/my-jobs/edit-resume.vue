@@ -355,19 +355,49 @@
                           </div>
                           <div id="collapseOtherRelevantInformation" class="collapse"
                                aria-labelledby="headingOtherRelevantInformation" data-parent="#accordion">
+
                             <div class="card-body">
-                              Other Relevant Information Anim pariatur cliche reprehenderit, enim eiusmod high life
-                              accusamus terry richardson ad squid. 3 wolf moon officia
-                              aute, non cupidatat skateboard dolor brunch. Food truck
-                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                              sunt aliqua put a bird on it squid single-origin coffee
-                              nulla assumenda shoreditch et. Nihil anim keffiyeh
-                              helvetica, craft beer labore wes anderson cred nesciunt
-                              sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                              Leggings occaecat craft beer farm-to-table, raw denim
-                              aesthetic synth nesciunt you probably haven't heard of them
-                              accusamus labore sustainable VHS.
+
+                              <div class="text-center" v-if="!employee.other_relevant_information">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        @click="addOtherRelevantInformationModal">Add Other Relevant Information
+                                </button>
+                              </div>
+
+                              <div class="table-responsive" v-if="employee.other_relevant_information">
+
+                                <div class="text-right my-2">
+
+                                  <button type="submit" class="btn btn-outline-secondary"
+                                          @click="editOtherRelevantInformationModal(employee.other_relevant_information)"><i
+                                    class="bx bx-edit"></i> Edit
+                                  </button>
+
+                                </div>
+
+                                <table class="table">
+                                  <tr>
+                                    <th colspan="2">Career Summary <br>
+                                      <span>{{ employee.other_relevant_information.career_summary }}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Special Qualification <br>
+                                      <span>{{ employee.other_relevant_information.special_qualification }}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Keywords<br>
+                                      <span>{{ employee.other_relevant_information.keywords }}</span>
+                                    </th>
+                                  </tr>
+
+                                </table>
+                              </div>
                             </div>
+
                           </div>
                         </div>
                         <!--Other Relevant Information -->
@@ -1004,6 +1034,71 @@
       </div>
     </div>
 
+    <!--addOtherRelevantInformationModal-->
+    <div class="modal fade" id="addOtherRelevantInformationModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Other Relevant Information</h5>
+            <h5 class="modal-title" v-else>Update Other Relevant Information</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="createOtherRelevantInformation()">
+            <div class="modal-body">
+
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Career Summary</label>
+                    <textarea v-model="relevant.career_summary" cols="30" rows="2" name="career_summary" placeholder="Enter career summary"
+                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('career_summary') }"></textarea>
+                    <has-error :form="relevant" field="career_summary"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Special Qualification</label>
+                    <textarea v-model="relevant.special_qualification" cols="30" rows="2" name="special_qualification" placeholder="Enter special qualification"
+                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('special_qualification') }"></textarea>
+                    <has-error :form="relevant" field="special_qualification"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Keywords</label>
+                    <textarea v-model="relevant.keywords" cols="30" rows="2" name="keywords" placeholder="Enter keywords"
+                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('keywords') }"></textarea>
+                    <has-error :form="relevant" field="keywords"></has-error>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -1089,6 +1184,12 @@
           expected_salary:'',
           looking_for_job_level:'',
           available_for_job_nature:'',
+        }),
+        relevant: new Form({
+          id: '',
+          career_summary:'',
+          special_qualification:'',
+          keywords:'',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -1333,14 +1434,13 @@
           })
       },
       // address end
-      //
-      // address start
+
+      // CareerAndApplicationInformationModal start
       addCareerAndApplicationInformationModal() {
         this.editMode = false;
         this.form.reset();
           $('#addCareerAndApplicationInformation').modal('show');
       },
-
       editCareerAndApplicationInformationModal(row) {
 
         this.editMode = false;
@@ -1348,7 +1448,6 @@
         $('#addCareerAndApplicationInformation').modal('show');
         this.career.fill(row);
       },
-
       createCareerAndApplicationInformation() {
 
         var token = window.$nuxt.$cookies.get('token');
@@ -1356,6 +1455,46 @@
           .then(() => {
 
             $('#addCareerAndApplicationInformation').modal('hide');
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // CareerAndApplicationInformationModal end
+
+      // OtherRelevantInformationModal start
+      addOtherRelevantInformationModal() {
+        this.editMode = false;
+        this.relevant.reset();
+          $('#addOtherRelevantInformationModal').modal('show');
+      },
+      editOtherRelevantInformationModal(row) {
+
+        this.editMode = false;
+        this.relevant.reset();
+        $('#addOtherRelevantInformationModal').modal('show');
+        this.relevant.fill(row);
+      },
+
+      createOtherRelevantInformation() {
+
+        var token = window.$nuxt.$cookies.get('token');
+        this.relevant.post(this.url + 'employee-other-relevant-information?token=' + token)
+          .then(() => {
+
+            $('#addOtherRelevantInformationModal').modal('hide');
             Toast.fire({
               icon: 'success',
               title: 'Successfully Submitted'
