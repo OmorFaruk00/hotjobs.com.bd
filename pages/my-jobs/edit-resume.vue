@@ -248,19 +248,65 @@
                           </div>
                           <div id="collapseCareerAndApplicationInformation" class="collapse"
                                aria-labelledby="headingCareerAndApplicationInformation" data-parent="#accordion">
+
                             <div class="card-body">
-                              Anim pariatur cliche reprehenderit, enim eiusmod high life
-                              accusamus terry richardson ad squid. 3 wolf moon officia
-                              aute, non cupidatat skateboard dolor brunch. Food truck
-                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                              sunt aliqua put a bird on it squid single-origin coffee
-                              nulla assumenda shoreditch et. Nihil anim keffiyeh
-                              helvetica, craft beer labore wes anderson cred nesciunt
-                              sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                              Leggings occaecat craft beer farm-to-table, raw denim
-                              aesthetic synth nesciunt you probably haven't heard of them
-                              accusamus labore sustainable VHS.
+
+                              <div class="text-center" v-if="!employee.career_and_application_information">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        @click="addCareerAndApplicationInformationModal">Add Career and Application Information
+                                </button>
+                              </div>
+
+                              <div class="table-responsive" v-if="employee.career_and_application_information">
+
+                                <div class="text-right my-2">
+
+                                  <button type="submit" class="btn btn-outline-secondary"
+                                          @click="editCareerAndApplicationInformationModal(employee.career_and_application_information)"><i
+                                    class="bx bx-edit"></i> Edit
+                                  </button>
+
+                                </div>
+
+                                <table class="table">
+                                  <tr>
+
+                                    <th colspan="2">Objective <br>
+                                      <span>{{ employee.career_and_application_information.objective }}</span>
+                                    </th>
+
+
+                                  </tr>
+
+                                  <tr>
+
+                                    <th>Present Salary<br>
+                                      <span>{{ employee.career_and_application_information.present_salary}}</span>
+
+                                    </th>
+
+                                    <th>Expected Salary<br>
+                                      <span>{{ employee.career_and_application_information.expected_salary}}</span>
+                                    </th>
+
+                                  </tr>
+
+                                  <tr>
+
+                                    <th>Looking for (Job Level)<br>
+                                      <span>{{ employee.career_and_application_information.looking_for_job_level}}</span>
+
+                                    </th>
+
+                                    <th>Available for (Job Nature)<br>
+                                      <span>{{ employee.career_and_application_information.available_for_job_nature}}</span>
+                                    </th>
+
+                                  </tr>
+                                </table>
+                              </div>
                             </div>
+
                           </div>
                         </div>
                         <!--Career and Application Information -->
@@ -815,6 +861,149 @@
       </div>
     </div>
 
+    <!--addCareerAndApplicationInformation-->
+    <div class="modal fade" id="addCareerAndApplicationInformation" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Career And Application Information</h5>
+            <h5 class="modal-title" v-else>Update Career And Application Information</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="createCareerAndApplicationInformation()">
+            <div class="modal-body">
+
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Objective</label>
+                    <textarea v-model="career.objective" cols="30" rows="2" name="objective" placeholder="Enter objective"
+                              class="form-control" :class="{ 'is-invalid': career.errors.has('objective') }"></textarea>
+                    <has-error :form="career" field="objective"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Present Salary</label>
+                    <input v-model="career.present_salary" type="number" name="present_salary" placeholder="Enter present salary"
+                           class="form-control" :class="{ 'is-invalid': career.errors.has('present_salary') }">
+                    <has-error :form="career" field="present_salary"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Expected Salary</label>
+                    <input v-model="career.expected_salary" type="number" name="expected_salary" placeholder="Enter expected salary"
+                           class="form-control" :class="{ 'is-invalid': career.errors.has('expected_salary') }">
+                    <has-error :form="career" field="expected_salary"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Looking for (Job Level)</label>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.looking_for_job_level" type="radio"
+                             name="looking_for_job_level" id="Entry" value="Entry">
+                      <label class="form-check-label" for="Entry">
+                        Entry
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.looking_for_job_level" type="radio"
+                             name="looking_for_job_level" id="Mid" value="Mid">
+                      <label class="form-check-label" for="Mid">
+                        Mid
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.looking_for_job_level" type="radio"
+                             name="looking_for_job_level" id="Top" value="Top">
+                      <label class="form-check-label" for="Top">
+                        Top
+                      </label>
+                    </div>
+
+                    <has-error :form="career" field="looking_for_job_level"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Available for (Job Nature)</label>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.available_for_job_nature" type="radio"
+                             name="available_for_job_nature" id="FullTime" value="Full Time">
+                      <label class="form-check-label" for="FullTime">
+                        Full Time
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.available_for_job_nature" type="radio"
+                             name="available_for_job_nature" id="PartTime" value="Part Time">
+                      <label class="form-check-label" for="PartTime">
+                        Part Time
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.available_for_job_nature" type="radio"
+                             name="available_for_job_nature" id="Contract" value="Contract">
+                      <label class="form-check-label" for="Contract">
+                        Contract
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.available_for_job_nature" type="radio"
+                             name="available_for_job_nature" id="Internship" value="Internship">
+                      <label class="form-check-label" for="Internship">
+                        Internship
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" v-model="career.available_for_job_nature" type="radio"
+                             name="available_for_job_nature" id="Freelance" value="Freelance">
+                      <label class="form-check-label" for="Freelance">
+                        Freelance
+                      </label>
+                    </div>
+
+                    <has-error :form="career" field="available_for_job_nature"></has-error>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -892,6 +1081,14 @@
           permanent_union_id: '',
           permanent_country_id: '',
           permanent_village:'',
+        }),
+        career: new Form({
+          id: '',
+          objective:'',
+          present_salary:'',
+          expected_salary:'',
+          looking_for_job_level:'',
+          available_for_job_nature:'',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -1095,7 +1292,6 @@
           this.fetchDistrictLists(),
           $('#addAddress').modal('show');
       },
-
       editAddressModal(row) {
 
         this.editMode = false;
@@ -1109,7 +1305,6 @@
         $('#addAddress').modal('show');
         this.address.fill(row);
       },
-
       createAddress() {
 
         // alert('w');
@@ -1120,6 +1315,47 @@
           .then(() => {
 
             $('#addAddress').modal('hide');
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // address end
+      //
+      // address start
+      addCareerAndApplicationInformationModal() {
+        this.editMode = false;
+        this.form.reset();
+          $('#addCareerAndApplicationInformation').modal('show');
+      },
+
+      editCareerAndApplicationInformationModal(row) {
+
+        this.editMode = false;
+        this.form.reset();
+        $('#addCareerAndApplicationInformation').modal('show');
+        this.career.fill(row);
+      },
+
+      createCareerAndApplicationInformation() {
+
+        var token = window.$nuxt.$cookies.get('token');
+        this.career.post(this.url + 'employee-career-and-application-information?token=' + token)
+          .then(() => {
+
+            $('#addCareerAndApplicationInformation').modal('hide');
             Toast.fire({
               icon: 'success',
               title: 'Successfully Submitted'
