@@ -253,7 +253,8 @@
 
                               <div class="text-center" v-if="!employee.career_and_application_information">
                                 <button type="submit" class="btn btn-outline-secondary"
-                                        @click="addCareerAndApplicationInformationModal">Add Career and Application Information
+                                        @click="addCareerAndApplicationInformationModal">Add Career and Application
+                                  Information
                                 </button>
                               </div>
 
@@ -262,8 +263,9 @@
                                 <div class="text-right my-2">
 
                                   <button type="submit" class="btn btn-outline-secondary"
-                                          @click="editCareerAndApplicationInformationModal(employee.career_and_application_information)"><i
-                                    class="bx bx-edit"></i> Edit
+                                          @click="editCareerAndApplicationInformationModal(employee.career_and_application_information)">
+                                    <i
+                                      class="bx bx-edit"></i> Edit
                                   </button>
 
                                 </div>
@@ -424,8 +426,9 @@
                                 <div class="text-right my-2">
 
                                   <button type="submit" class="btn btn-outline-secondary"
-                                          @click="editOtherRelevantInformationModal(employee.other_relevant_information)"><i
-                                    class="bx bx-edit"></i> Edit
+                                          @click="editOtherRelevantInformationModal(employee.other_relevant_information)">
+                                    <i
+                                      class="bx bx-edit"></i> Edit
                                   </button>
 
                                 </div>
@@ -462,7 +465,7 @@
                   </div>
                 </div>
 
-                <div class="tab-pane" id="education_training" role="tabpanel">
+                <div class="tab-pane" id="education_training" role="tabpanel2">
                   <div class="card-body">
                     <div id="accordion2">
                       <div class="card mb-1 shadow-none">
@@ -493,45 +496,111 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="card mb-1 shadow-none">
-                        <div class="card-header" id="headingTwo">
+                        <div class="card-header" id="headingTrainingSummary">
                           <h6 class="m-0">
-                            <a href="#collapseTwo" class="text-dark collapsed" data-toggle="collapse"
+                            <a href="#collapseTrainingSummary" class="text-dark collapsed" data-toggle="collapse"
                                aria-expanded="false"
-                               aria-controls="collapseTwo">
-                              Collapsible Group Item #2
+                               aria-controls="collapseTrainingSummary">
+                              Training Summary
                             </a>
                           </h6>
                         </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                             data-parent="#accordion">
+                        <div id="collapseTrainingSummary" class="collapse" aria-labelledby="headingTrainingSummary"
+                             data-parent="#accordion2">
                           <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+                            <div class="card-body">
+
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        @click="addTrainingSummariesModal">Add Training Summaries
+                                </button>
+                              </div>
+
+                              <div class="table-responsive" v-if="employee.training_summaries.length > 0" v-for="(row,index) in employee.training_summaries">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                  <h5 class="text-muted">Training {{ index+1 }}</h5>
+
+                                  <div class="text-right" style="margin-top: -30px;">
+                                    <div class="btn-group">
+
+                                      <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                              @click="editTrainingSummariesModal(row)"><i
+                                        class="bx bx-edit"></i> Edit
+                                      </button>
+
+                                      <button type="submit" class="btn btn-outline-warning btn-sm"
+                                              @click="deleteTrainingSummariesModal(row.id)"><i
+                                        class="bx bx-trash"></i> Delete
+                                      </button>
+
+                                    </div>
+                                  </div>
+
+
+                                </div>
+
+
+                                <table class="table">
+                                  <tr>
+                                    <th>Training Title <br>
+                                      <span>{{ row.training_title}}</span>
+                                    </th>
+
+                                    <th>Country <br>
+                                      <span>{{ row.country.countries_name}}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Topics Covered<br>
+                                      <span>{{ row.topics_covered}}</span>
+                                    </th>
+
+                                    <th>Training Year<br>
+                                      <span>{{ row.year.name}}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Institute<br>
+                                      <span>{{ row.institute}}</span>
+                                    </th>
+
+                                    <th>Duration<br>
+                                      <span>{{ row.duration}}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Location<br>
+                                      <span>{{ row.location}}</span>
+                                    </th>
+
+                                  </tr>
+
+                                </table>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
+
                       <div class="card mb-0 shadow-none">
-                        <div class="card-header" id="headingThree">
+                        <div class="card-header" id="headingProfessionalCertificationSummary">
                           <h6 class="m-0">
-                            <a href="#collapseThree" class="text-dark collapsed" data-toggle="collapse"
+                            <a href="#collapseProfessionalCertificationSummary" class="text-dark collapsed"
+                               data-toggle="collapse"
                                aria-expanded="false"
-                               aria-controls="collapseThree">
-                              Collapsible Group Item #3
+                               aria-controls="collapseProfessionalCertificationSummary">
+                              Professional Certification Summary
                             </a>
                           </h6>
                         </div>
-                        <div id="collapseThree" class="collapse"
-                             aria-labelledby="headingThree" data-parent="#accordion">
+                        <div id="collapseProfessionalCertificationSummary" class="collapse"
+                             aria-labelledby="headingProfessionalCertificationSummary" data-parent="#accordion2">
                           <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life
                             accusamus terry richardson ad squid. 3 wolf moon officia
@@ -912,15 +981,16 @@
 
                   <div class="form-group">
                     <label>Present Village</label>
-                    <textarea v-model="address.present_village" id="present_village" cols="30" rows="2" name="present_village" placeholder="Enter present village"
-                              class="form-control" :class="{ 'is-invalid': address.errors.has('present_village') }"></textarea>
+                    <textarea v-model="address.present_village" id="present_village" cols="30" rows="2"
+                              name="present_village" placeholder="Enter present village"
+                              class="form-control"
+                              :class="{ 'is-invalid': address.errors.has('present_village') }"></textarea>
 
                     <has-error :form="address" field="present_village"></has-error>
                   </div>
 
 
                 </div>
-
 
 
                 <div class="col-lg-6 col-md-6 col-sm-6" v-if="!address.same_address">
@@ -1005,8 +1075,10 @@
 
                   <div class="form-group">
                     <label>Permanent Village</label>
-                    <textarea v-model="address.permanent_village" id="" cols="30" rows="2" name="permanent_village" placeholder="Enter permanent village"
-                              class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_village') }"></textarea>
+                    <textarea v-model="address.permanent_village" id="" cols="30" rows="2" name="permanent_village"
+                              placeholder="Enter permanent village"
+                              class="form-control"
+                              :class="{ 'is-invalid': address.errors.has('permanent_village') }"></textarea>
 
                     <has-error :form="address" field="permanent_village"></has-error>
                   </div>
@@ -1027,7 +1099,8 @@
     </div>
 
     <!--addCareerAndApplicationInformation-->
-    <div class="modal fade" id="addCareerAndApplicationInformation" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+    <div class="modal fade" id="addCareerAndApplicationInformation" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
          aria-hidden="true">
 
       <div class="modal-dialog modal-lg">
@@ -1050,7 +1123,8 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Objective</label>
-                    <textarea v-model="career.objective" cols="30" rows="2" name="objective" placeholder="Enter objective"
+                    <textarea v-model="career.objective" cols="30" rows="2" name="objective"
+                              placeholder="Enter objective"
                               class="form-control" :class="{ 'is-invalid': career.errors.has('objective') }"></textarea>
                     <has-error :form="career" field="objective"></has-error>
                   </div>
@@ -1060,7 +1134,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Present Salary</label>
-                    <input v-model="career.present_salary" type="number" name="present_salary" placeholder="Enter present salary"
+                    <input v-model="career.present_salary" type="number" name="present_salary"
+                           placeholder="Enter present salary"
                            class="form-control" :class="{ 'is-invalid': career.errors.has('present_salary') }">
                     <has-error :form="career" field="present_salary"></has-error>
                   </div>
@@ -1070,7 +1145,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Expected Salary</label>
-                    <input v-model="career.expected_salary" type="number" name="expected_salary" placeholder="Enter expected salary"
+                    <input v-model="career.expected_salary" type="number" name="expected_salary"
+                           placeholder="Enter expected salary"
                            class="form-control" :class="{ 'is-invalid': career.errors.has('expected_salary') }">
                     <has-error :form="career" field="expected_salary"></has-error>
                   </div>
@@ -1170,7 +1246,8 @@
     </div>
 
     <!--addOtherRelevantInformationModal-->
-    <div class="modal fade" id="addOtherRelevantInformationModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+    <div class="modal fade" id="addOtherRelevantInformationModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
          aria-hidden="true">
 
       <div class="modal-dialog modal-lg">
@@ -1193,8 +1270,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Career Summary</label>
-                    <textarea v-model="relevant.career_summary" cols="30" rows="2" name="career_summary" placeholder="Enter career summary"
-                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('career_summary') }"></textarea>
+                    <textarea v-model="relevant.career_summary" cols="30" rows="2" name="career_summary"
+                              placeholder="Enter career summary"
+                              class="form-control"
+                              :class="{ 'is-invalid': relevant.errors.has('career_summary') }"></textarea>
                     <has-error :form="relevant" field="career_summary"></has-error>
                   </div>
 
@@ -1203,8 +1282,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Special Qualification</label>
-                    <textarea v-model="relevant.special_qualification" cols="30" rows="2" name="special_qualification" placeholder="Enter special qualification"
-                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('special_qualification') }"></textarea>
+                    <textarea v-model="relevant.special_qualification" cols="30" rows="2" name="special_qualification"
+                              placeholder="Enter special qualification"
+                              class="form-control"
+                              :class="{ 'is-invalid': relevant.errors.has('special_qualification') }"></textarea>
                     <has-error :form="relevant" field="special_qualification"></has-error>
                   </div>
 
@@ -1213,8 +1294,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Keywords</label>
-                    <textarea v-model="relevant.keywords" cols="30" rows="2" name="keywords" placeholder="Enter keywords"
-                              class="form-control" :class="{ 'is-invalid': relevant.errors.has('keywords') }"></textarea>
+                    <textarea v-model="relevant.keywords" cols="30" rows="2" name="keywords"
+                              placeholder="Enter keywords"
+                              class="form-control"
+                              :class="{ 'is-invalid': relevant.errors.has('keywords') }"></textarea>
                     <has-error :form="relevant" field="keywords"></has-error>
                   </div>
 
@@ -1274,7 +1357,8 @@
                   <div class="form-group">
                     <label>Special (Skill)</label>
                     <select v-model="prefer_area.special_skill_id" name="special_skill_id"
-                            class="form-control bSelect" :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }">
+                            class="form-control bSelect"
+                            :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }">
 
                       <option v-for="row in skill_general_categories" v-html="row.name"></option>
 
@@ -1286,7 +1370,8 @@
                 <div class="col-lg-12 co-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Inside Bangladesh</label>
-                    <input v-model="prefer_area.inside_bangladesh" type="text" name="inside_bangladesh" placeholder="Enter inside bangladesh"
+                    <input v-model="prefer_area.inside_bangladesh" type="text" name="inside_bangladesh"
+                           placeholder="Enter inside bangladesh"
                            class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('inside_bangladesh') }">
                     <has-error :form="prefer_area" field="inside_bangladesh"></has-error>
                   </div>
@@ -1295,7 +1380,8 @@
                 <div class="col-lg-12 co-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Outside Bangladesh</label>
-                    <input v-model="prefer_area.outside_bangladesh" type="text" name="outside_bangladesh" placeholder="Enter outside bangladesh"
+                    <input v-model="prefer_area.outside_bangladesh" type="text" name="outside_bangladesh"
+                           placeholder="Enter outside bangladesh"
                            class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('outside_bangladesh') }">
                     <has-error :form="prefer_area" field="outside_bangladesh"></has-error>
                   </div>
@@ -1304,8 +1390,10 @@
                 <div class="col-lg-12 co-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Preferred Organization Type</label>
-                    <input v-model="prefer_area.preferred_organization_type" type="text" name="preferred_organization_type" placeholder="Enter outside bangladesh"
-                           class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('preferred_organization_type') }">
+                    <input v-model="prefer_area.preferred_organization_type" type="text"
+                           name="preferred_organization_type" placeholder="Enter outside bangladesh"
+                           class="form-control"
+                           :class="{ 'is-invalid': prefer_area.errors.has('preferred_organization_type') }">
                     <has-error :form="prefer_area" field="preferred_organization_type"></has-error>
                   </div>
                 </div>
@@ -1313,6 +1401,119 @@
               </div>
 
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!--    addTrainingSummariesModal-->
+    <div class="modal fade" id="addTrainingSummariesModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Training Summaries</h5>
+            <h5 class="modal-title" v-else>Update Training Summaries</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="editMode ? updateTrainingSummaries() : createTrainingSummaries()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Training Title</label>
+                    <input v-model="training_summery.training_title" type="text" name="training_title"
+                           placeholder="Enter training title"
+                           class="form-control"
+                           :class="{ 'is-invalid': training_summery.errors.has('training_title') }">
+                    <has-error :form="training_summery" field="training_title"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Topics Covered</label>
+                    <input v-model="training_summery.topics_covered" type="text" name="topics_covered"
+                           placeholder="Enter topics covered"
+                           class="form-control"
+                           :class="{ 'is-invalid': training_summery.errors.has('topics_covered') }">
+                    <has-error :form="training_summery" field="topics_covered"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Institute</label>
+                    <input v-model="training_summery.institute" type="text" name="institute"
+                           placeholder="Enter institute"
+                           class="form-control" :class="{ 'is-invalid': training_summery.errors.has('institute') }">
+                    <has-error :form="training_summery" field="institute"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Location</label>
+                    <input v-model="training_summery.location" type="text" name="location"
+                           placeholder="Enter location"
+                           class="form-control" :class="{ 'is-invalid': training_summery.errors.has('location') }">
+                    <has-error :form="training_summery" field="location"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Country</label>
+                    <select v-model="training_summery.country_id" name="country_id"
+                            class="form-control" :class="{ 'is-invalid': training_summery.errors.has('country_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
+                        row.countries_isd_code }})
+                      </option>
+
+                    </select>
+
+                    <has-error :form="training_summery" field="country_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Year</label>
+                    <select v-model="training_summery.training_year_id" name="country_id"
+                            class="form-control"
+                            :class="{ 'is-invalid': training_summery.errors.has('training_year_id') }"
+                            required>
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in years" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="training_summery" field="training_year_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Duration</label>
+                    <input v-model="training_summery.duration" type="text" name="duration"
+                           placeholder="Enter duration"
+                           class="form-control"
+                           :class="{ 'is-invalid': training_summery.errors.has('duration') }">
+                    <has-error :form="training_summery" field="duration"></has-error>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
@@ -1360,11 +1561,12 @@
         countries: '',
         districts: '',
         thanas: '',
+        years: '',
         permanent_thanas: '',
         unions: '',
         permanent_unions: '',
         employee: '',
-        skill_general_categories:'',
+        skill_general_categories: '',
         form: new Form({
           id: '',
           first_name: '',
@@ -1393,38 +1595,49 @@
           present_thana_id: '',
           present_union_id: '',
           present_country_id: '',
-          present_village:'',
+          present_village: '',
 
-          same_address:'',
+          same_address: '',
 
           permanent_location: '',
           permanent_district_id: '',
           permanent_thana_id: '',
           permanent_union_id: '',
           permanent_country_id: '',
-          permanent_village:'',
+          permanent_village: '',
         }),
         career: new Form({
           id: '',
-          objective:'',
-          present_salary:'',
-          expected_salary:'',
-          looking_for_job_level:'',
-          available_for_job_nature:'',
+          objective: '',
+          present_salary: '',
+          expected_salary: '',
+          looking_for_job_level: '',
+          available_for_job_nature: '',
         }),
         relevant: new Form({
           id: '',
-          career_summary:'',
-          special_qualification:'',
-          keywords:'',
+          career_summary: '',
+          special_qualification: '',
+          keywords: '',
         }),
         prefer_area: new Form({
           id: '',
-          inside_bangladesh:'',
-          outside_bangladesh:'',
-          preferred_organization_type:'',
-          general_skill_id:'',
-          special_skill_id:'',
+          inside_bangladesh: '',
+          outside_bangladesh: '',
+          preferred_organization_type: '',
+          general_skill_id: '',
+          special_skill_id: '',
+        }),
+
+        training_summery: new Form({
+          id: '',
+          training_title: '',
+          country_id: '',
+          topics_covered: '',
+          training_year_id: '',
+          institute: '',
+          duration: '',
+          location: '',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -1446,6 +1659,24 @@
           .then((response) => {
             this.employee = response.data
           })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      async fetchYearLists() {
+        return await this.$axios.get('year-lists')
+          .then((response) => {
+
+            this.years = response.data;
+
+          })
+
           .catch((error) => {
 
             Toast.fire({
@@ -1651,12 +1882,12 @@
         this.editMode = false;
         this.form.reset();
         this.fetchCountryLists(),
-        this.fetchDistrictLists(),
-        this.fetchPresentThana(),
-        this.fetchPermanentThana(),
-        this.fetchPresentUnion(),
-        this.fetchPermanentUnion(),
-        $('#addAddress').modal('show');
+          this.fetchDistrictLists(),
+          this.fetchPresentThana(),
+          this.fetchPermanentThana(),
+          this.fetchPresentUnion(),
+          this.fetchPermanentUnion(),
+          $('#addAddress').modal('show');
         this.address.fill(row);
       },
       createAddress() {
@@ -1692,7 +1923,7 @@
       addCareerAndApplicationInformationModal() {
         this.editMode = false;
         this.form.reset();
-          $('#addCareerAndApplicationInformation').modal('show');
+        $('#addCareerAndApplicationInformation').modal('show');
       },
       editCareerAndApplicationInformationModal(row) {
 
@@ -1731,7 +1962,7 @@
       addOtherRelevantInformationModal() {
         this.editMode = false;
         this.relevant.reset();
-          $('#addOtherRelevantInformationModal').modal('show');
+        $('#addOtherRelevantInformationModal').modal('show');
       },
       editOtherRelevantInformationModal(row) {
 
@@ -1782,6 +2013,102 @@
         $('#addPreferAreaModal').modal('show');
         this.prefer_area.fill(row);
       },
+      // addPreferredAreas end
+
+      // addTrainingSummariesModal start
+      addTrainingSummariesModal() {
+        this.editMode = false;
+        this.training_summery.reset();
+        this.fetchCountryLists();
+        this.fetchYearLists();
+        $('#addTrainingSummariesModal').modal('show');
+      },
+
+      editTrainingSummariesModal(row) {
+
+        this.editMode = true;
+        this.training_summery.reset();
+        this.fetchCountryLists();
+        this.fetchYearLists();
+        $('#addTrainingSummariesModal').modal('show');
+        this.training_summery.fill(row);
+
+      },
+
+      createTrainingSummaries() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.training_summery.post(this.url + 'employee-training-summary?token=' + token)
+          .then(() => {
+
+            $('#addTrainingSummariesModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateTrainingSummaries(){
+        var token = window.$nuxt.$cookies.get('token');
+        this.training_summery.put(this.url + 'employee-training-summary/' + this.training_summery.id + '?token=' + token)
+          .then(() => {
+
+            $('#addTrainingSummariesModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+
+      deleteTrainingSummariesModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.training_summery.delete(this.url + 'employee-training-summary/' + row + '?token='+token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
       // address end
 
     },
@@ -1797,16 +2124,20 @@
         this.getAuthEmployee();
       });
 
+      this.$on('AfterDelete', () => {
+        this.getAuthEmployee();
+      });
+
     },
 
-    mounted(){
+    mounted() {
       // $('.bSelect').selectpicker('refresh');
     }
 
   }
   $('.bSelect').selectpicker({
-    liveSearch:true,
-    size:5
+    liveSearch: true,
+    size: 5
   });
 </script>
 
