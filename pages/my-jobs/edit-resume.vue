@@ -518,7 +518,8 @@
                                 </button>
                               </div>
 
-                              <div class="table-responsive" v-if="employee.training_summaries.length > 0" v-for="(row,index) in employee.training_summaries">
+                              <div class="table-responsive" v-if="employee.training_summaries.length > 0"
+                                   v-for="(row,index) in employee.training_summaries">
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                   <h5 class="text-muted">Training {{ index+1 }}</h5>
@@ -601,19 +602,68 @@
                         </div>
                         <div id="collapseProfessionalCertificationSummary" class="collapse"
                              aria-labelledby="headingProfessionalCertificationSummary" data-parent="#accordion2">
+
                           <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addProfessionalCertificationSummaryModal">Add Professional Certification
+                                Summary
+                              </button>
+                            </div>
+
+                            <div class="table-responsive"
+                                 v-if="employee.professional_certification_summaries.length > 0"
+                                 v-for="(row,index) in employee.professional_certification_summaries">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="text-muted">Professional Qualification {{ index+1 }}</h5>
+
+                                <div class="text-right" style="margin-top: -30px;">
+                                  <div class="btn-group">
+
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editProfessionalCertificationSummaryModal(row)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+
+                                    <button type="submit" class="btn btn-outline-warning btn-sm"
+                                            @click="deleteProfessionalCertificationSummaryModal(row.id)"><i
+                                      class="bx bx-trash"></i> Delete
+                                    </button>
+
+                                  </div>
+                                </div>
+
+
+                              </div>
+
+
+                              <table class="table">
+                                <tr>
+                                  <th>Certification<br>
+                                    <span>{{ row.certification}}</span>
+                                  </th>
+
+                                  <th>Location<br>
+                                    <span>{{ row.location}}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Institute<br>
+                                    <span>{{ row.institute}}</span>
+                                  </th>
+
+                                  <th>Duration<br>
+                                    <span>{{ row.from_duration}} to {{ row.to_duration}}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
                           </div>
+
                         </div>
                       </div>
                     </div>
@@ -1525,6 +1575,93 @@
       </div>
     </div>
 
+    <!--addProfessionalCertificationSummaryModal-->
+    <div class="modal fade" id="addProfessionalCertificationSummaryModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Professional Certification Summary</h5>
+            <h5 class="modal-title" v-else>Update Professional Certification Summary</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="editMode ? updateProfessionalCertificationSummary() : createProfessionalCertificationSummary()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Certification</label>
+                    <input v-model="certificate.certification" type="text" name="certification"
+                           placeholder="Enter certification"
+                           class="form-control"
+                           :class="{ 'is-invalid': certificate.errors.has('certification') }">
+                    <has-error :form="certificate" field="certification"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Institute</label>
+                    <input v-model="certificate.institute" type="text" name="institute"
+                           placeholder="Enter institute"
+                           class="form-control"
+                           :class="{ 'is-invalid': certificate.errors.has('institute') }">
+                    <has-error :form="certificate" field="institute"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Location</label>
+                    <input v-model="certificate.location" type="text" name="location"
+                           placeholder="Enter location"
+                           class="form-control"
+                           :class="{ 'is-invalid': certificate.errors.has('location') }">
+                    <has-error :form="certificate" field="location"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>From Duration</label>
+
+                    <datepicker v-model="certificate.from_duration"
+                                :class="{ 'is-invalid': certificate.errors.has('from_duration') }"></datepicker>
+
+                    <has-error :form="certificate" field="from_duration"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>To Duration</label>
+                    <datepicker v-model="certificate.to_duration"
+                                :class="{ 'is-invalid': certificate.errors.has('to_duration') }"></datepicker>
+
+                    <has-error :form="certificate" field="to_duration"></has-error>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -1638,6 +1775,16 @@
           institute: '',
           duration: '',
           location: '',
+        }),
+
+        certificate: new Form({
+          id: '',
+          certification: '',
+          location: '',
+          institute: '',
+          from_duration: '',
+          to_duration: '',
+
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -2015,7 +2162,7 @@
       },
       // addPreferredAreas end
 
-      // addTrainingSummariesModal start
+      // addTrainingSummaries start
       addTrainingSummariesModal() {
         this.editMode = false;
         this.training_summery.reset();
@@ -2060,7 +2207,7 @@
           })
       },
 
-      updateTrainingSummaries(){
+      updateTrainingSummaries() {
         var token = window.$nuxt.$cookies.get('token');
         this.training_summery.put(this.url + 'employee-training-summary/' + this.training_summery.id + '?token=' + token)
           .then(() => {
@@ -2083,7 +2230,6 @@
           })
       },
 
-
       deleteTrainingSummariesModal(row) {
         Swal.fire({
           title: 'Are you sure?',
@@ -2096,7 +2242,7 @@
         }).then((result) => {
           if (result.value) {
             var token = window.$nuxt.$cookies.get('token');
-            this.training_summery.delete(this.url + 'employee-training-summary/' + row + '?token='+token).then(() => {
+            this.training_summery.delete(this.url + 'employee-training-summary/' + row + '?token=' + token).then(() => {
               Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
@@ -2109,7 +2255,96 @@
           }
         })
       },
-      // address end
+      // addTrainingSummaries end
+
+      // addProfessionalCertificationSummary start
+      addProfessionalCertificationSummaryModal() {
+        this.editMode = false;
+        this.certificate.reset();
+        $('#addProfessionalCertificationSummaryModal').modal('show');
+      },
+
+      editProfessionalCertificationSummaryModal(row) {
+        this.editMode = true;
+        this.certificate.reset();
+        $('#addProfessionalCertificationSummaryModal').modal('show');
+        this.certificate.fill(row);
+      },
+
+      createProfessionalCertificationSummary() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.certificate.post(this.url + 'employee-professional-certification-summary?token=' + token)
+          .then(() => {
+
+            $('#addProfessionalCertificationSummaryModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateProfessionalCertificationSummary() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.certificate.put(this.url + 'employee-professional-certification-summary/' + this.certificate.id + '?token=' + token)
+          .then(() => {
+
+            $('#addProfessionalCertificationSummaryModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+      deleteProfessionalCertificationSummaryModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.certificate.delete(this.url + 'employee-training-summary/' + row + '?token=' + token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
+      // addTrainingSummaries end
 
     },
 
