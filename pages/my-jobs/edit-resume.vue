@@ -45,7 +45,7 @@
                             </h6>
                           </div>
 
-                          <div id="collapsePersonalDetails" class="collapse show"
+                          <div id="collapsePersonalDetails" class="collapse"
                                aria-labelledby="headingPersonalDetails" data-parent="#accordion">
                             <div class="card-body">
 
@@ -235,7 +235,7 @@
                         <!--Address Details-->
 
                         <!--Career and Application Information -->
-                        <div class="card mb-0 shadow-none">
+                        <div class="card mb-1 shadow-none">
                           <div class="card-header" id="headingCareerAndApplicationInformation">
                             <h6 class="m-0">
                               <a href="#collapseCareerAndApplicationInformation" class="text-dark collapsed"
@@ -312,7 +312,7 @@
                         <!--Career and Application Information -->
 
                         <!--Preferred Areas -->
-                        <div class="card mb-0 shadow-none">
+                        <div class="card mb-1 shadow-none">
                           <div class="card-header" id="headingPreferredAreas">
                             <h6 class="m-0">
                               <a href="#collapsePreferredAreas" class="text-dark collapsed" data-toggle="collapse"
@@ -324,25 +324,80 @@
                           </div>
                           <div id="collapsePreferredAreas" class="collapse"
                                aria-labelledby="headingPreferredAreas" data-parent="#accordion">
+
                             <div class="card-body">
-                              Anim pariatur cliche reprehenderit, enim eiusmod high life
-                              accusamus terry richardson ad squid. 3 wolf moon officia
-                              aute, non cupidatat skateboard dolor brunch. Food truck
-                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                              sunt aliqua put a bird on it squid single-origin coffee
-                              nulla assumenda shoreditch et. Nihil anim keffiyeh
-                              helvetica, craft beer labore wes anderson cred nesciunt
-                              sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                              Leggings occaecat craft beer farm-to-table, raw denim
-                              aesthetic synth nesciunt you probably haven't heard of them
-                              accusamus labore sustainable VHS.
+
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        @click="addPreferredAreasModal">Add Preferred Areas
+                                </button>
+                              </div>
+
+                              <!--<div class="table-responsive" v-if="employee.preferred_areas">
+
+                                <div class="text-right my-2">
+
+                                  <button type="submit" class="btn btn-outline-secondary"
+                                          @click="editPreferred_areasModal(employee.preferred_areas)"><i
+                                    class="bx bx-edit"></i> Edit
+                                  </button>
+
+                                </div>
+
+                                <table class="table">
+                                  <tr>
+                                    <th colspan="2">Preferred Job Categories</th>
+                                  </tr>
+
+
+
+                                  <tr>
+                                    <th>Functional <br>
+
+                                    <span v-for="row in employee.preferred_areas.preferred_areas_skills">
+                                        {{ row.skill.name }} ,
+                                    </span>
+
+                                    </th>
+
+                                    <th>Special Skill <br>
+                                    <span>test</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Preferred Job Location</th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Inside Bangladesh<br>
+                                    <span>{{ employee.preferred_areas.inside_bangladesh }}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Outside Bangladesh<br>
+                                    <span>{{ employee.preferred_areas.outside_bangladesh }}</span>
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <th colspan="2">Add your preferred organization type<br>
+                                    <span>{{ employee.preferred_areas.preferred_organization_type }}</span>
+                                    </th>
+                                  </tr>
+
+                                </table>
+                              </div>-->
+
                             </div>
+
                           </div>
                         </div>
                         <!--Preferred Areas -->
 
                         <!--Other Relevant Information -->
-                        <div class="card mb-0 shadow-none">
+                        <div class="card mb-1 shadow-none">
                           <div class="card-header" id="headingOtherRelevantInformation">
                             <h6 class="m-0">
                               <a href="#collapseOtherRelevantInformation" class="text-dark collapsed"
@@ -408,16 +463,96 @@
                 </div>
 
                 <div class="tab-pane" id="education_training" role="tabpanel">
-                  <p class="mb-0">
-                    Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                    single-origin coffee squid. Exercitation +1 labore velit, blog
-                    sartorial PBR leggings next level wes anderson artisan four loko
-                    farm-to-table craft beer twee. Qui photo booth letterpress,
-                    commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-                    vinyl cillum PBR. Homo nostrud organic, assumenda labore
-                    aesthetic magna delectus.
-                  </p>
+                  <div class="card-body">
+                    <div id="accordion2">
+                      <div class="card mb-1 shadow-none">
+                        <div class="card-header" id="headingAcademicSummary">
+                          <h6 class="m-0">
+                            <a href="#collapseAcademicSummary" class="text-dark" data-toggle="collapse"
+                               aria-expanded="true"
+                               aria-controls="collapseAcademicSummary">
+                              Academic Summary
+                            </a>
+                          </h6>
+                        </div>
+
+                        <div id="collapseAcademicSummary" class="collapse"
+                             aria-labelledby="headingAcademicSummary" data-parent="#accordion2">
+                          <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                            accusamus terry richardson ad squid. 3 wolf moon officia
+                            aute, non cupidatat skateboard dolor brunch. Food truck
+                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                            sunt aliqua put a bird on it squid single-origin coffee
+                            nulla assumenda shoreditch et. Nihil anim keffiyeh
+                            helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                            Leggings occaecat craft beer farm-to-table, raw denim
+                            aesthetic synth nesciunt you probably haven't heard of them
+                            accusamus labore sustainable VHS.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mb-1 shadow-none">
+                        <div class="card-header" id="headingTwo">
+                          <h6 class="m-0">
+                            <a href="#collapseTwo" class="text-dark collapsed" data-toggle="collapse"
+                               aria-expanded="false"
+                               aria-controls="collapseTwo">
+                              Collapsible Group Item #2
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                             data-parent="#accordion">
+                          <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                            accusamus terry richardson ad squid. 3 wolf moon officia
+                            aute, non cupidatat skateboard dolor brunch. Food truck
+                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                            sunt aliqua put a bird on it squid single-origin coffee
+                            nulla assumenda shoreditch et. Nihil anim keffiyeh
+                            helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                            Leggings occaecat craft beer farm-to-table, raw denim
+                            aesthetic synth nesciunt you probably haven't heard of them
+                            accusamus labore sustainable VHS.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mb-0 shadow-none">
+                        <div class="card-header" id="headingThree">
+                          <h6 class="m-0">
+                            <a href="#collapseThree" class="text-dark collapsed" data-toggle="collapse"
+                               aria-expanded="false"
+                               aria-controls="collapseThree">
+                              Collapsible Group Item #3
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="collapseThree" class="collapse"
+                             aria-labelledby="headingThree" data-parent="#accordion">
+                          <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                            accusamus terry richardson ad squid. 3 wolf moon officia
+                            aute, non cupidatat skateboard dolor brunch. Food truck
+                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                            sunt aliqua put a bird on it squid single-origin coffee
+                            nulla assumenda shoreditch et. Nihil anim keffiyeh
+                            helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                            Leggings occaecat craft beer farm-to-table, raw denim
+                            aesthetic synth nesciunt you probably haven't heard of them
+                            accusamus labore sustainable VHS.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
+
+
                 <div class="tab-pane" id="employment" role="tabpanel">
                   <p class="mb-0">
                     Etsy mixtape wayfarers, ethical wes anderson tofu before they
@@ -1099,6 +1234,96 @@
       </div>
     </div>
 
+    <!--addPreferAreaModal-->
+    <div class="modal fade" id="addPreferAreaModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Prefer Area</h5>
+            <h5 class="modal-title" v-else>Update Prefer Area</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="createPreferredAreas()">
+            <div class="modal-body">
+
+              <div class="row">
+
+                <div class="col-lg-6 co-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Functional (Skill)</label>
+                    <select v-model="prefer_area.general_skill_id" name="general_skill_id"
+                            class="form-control " :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }">
+
+                      <option v-for="row in skill_general_categories" v-html="row.name"></option>
+
+                    </select>
+
+
+                    <has-error :form="prefer_area" field="general_skill_id"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 co-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Special (Skill)</label>
+                    <select v-model="prefer_area.special_skill_id" name="special_skill_id"
+                            class="form-control bSelect" :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }">
+
+                      <option v-for="row in skill_general_categories" v-html="row.name"></option>
+
+                    </select>
+                    <has-error :form="prefer_area" field="special_skill_id"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 co-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Inside Bangladesh</label>
+                    <input v-model="prefer_area.inside_bangladesh" type="text" name="inside_bangladesh" placeholder="Enter inside bangladesh"
+                           class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('inside_bangladesh') }">
+                    <has-error :form="prefer_area" field="inside_bangladesh"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 co-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Outside Bangladesh</label>
+                    <input v-model="prefer_area.outside_bangladesh" type="text" name="outside_bangladesh" placeholder="Enter outside bangladesh"
+                           class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('outside_bangladesh') }">
+                    <has-error :form="prefer_area" field="outside_bangladesh"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 co-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Preferred Organization Type</label>
+                    <input v-model="prefer_area.preferred_organization_type" type="text" name="preferred_organization_type" placeholder="Enter outside bangladesh"
+                           class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('preferred_organization_type') }">
+                    <has-error :form="prefer_area" field="preferred_organization_type"></has-error>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -1108,7 +1333,7 @@
 
   import Vue from 'vue'
   import Swal from 'sweetalert2'
-  import datepicker from 'vuejs-datepicker';
+  import datepicker from 'vuejs-datepicker'
   import {Form, HasError, AlertError} from 'vform'
 
   Vue.component(HasError.name, HasError)
@@ -1128,6 +1353,7 @@
 
   export default {
     name: "edit-resume",
+
     data() {
       return {
         editMode: false,
@@ -1137,7 +1363,8 @@
         permanent_thanas: '',
         unions: '',
         permanent_unions: '',
-        employee: "",
+        employee: '',
+        skill_general_categories:'',
         form: new Form({
           id: '',
           first_name: '',
@@ -1191,13 +1418,21 @@
           special_qualification:'',
           keywords:'',
         }),
+        prefer_area: new Form({
+          id: '',
+          inside_bangladesh:'',
+          outside_bangladesh:'',
+          preferred_organization_type:'',
+          general_skill_id:'',
+          special_skill_id:'',
+        }),
         url: this.$axios.defaults.baseURL,
       }
     },
     components: {
       dashboardNavbar,
       editResumeHorizontalTab,
-      datepicker
+      datepicker,
     },
 
     methods: {
@@ -1244,6 +1479,24 @@
           .then((response) => {
 
             this.districts = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      async fetchSkillGeneralCategory() {
+        return await this.$axios.get('skill-general-category')
+          .then((response) => {
+
+            this.skill_general_categories = response.data;
 
           })
 
@@ -1487,7 +1740,6 @@
         $('#addOtherRelevantInformationModal').modal('show');
         this.relevant.fill(row);
       },
-
       createOtherRelevantInformation() {
 
         var token = window.$nuxt.$cookies.get('token');
@@ -1514,8 +1766,25 @@
       },
       // address end
 
-    },
+      // addPreferredAreas start
+      addPreferredAreasModal() {
+        this.editMode = false;
+        this.prefer_area.reset();
+        this.fetchSkillGeneralCategory();
+        $('#addPreferAreaModal').modal('show');
+      },
 
+      editPreferred_areasModal(row) {
+
+        this.editMode = false;
+        this.prefer_area.reset();
+        this.fetchSkillGeneralCategory();
+        $('#addPreferAreaModal').modal('show');
+        this.prefer_area.fill(row);
+      },
+      // address end
+
+    },
 
     created() {
       this.getAuthEmployee();
@@ -1528,8 +1797,17 @@
         this.getAuthEmployee();
       });
 
+    },
+
+    mounted(){
+      // $('.bSelect').selectpicker('refresh');
     }
+
   }
+  $('.bSelect').selectpicker({
+    liveSearch:true,
+    size:5
+  });
 </script>
 
 <style scoped>

@@ -28,6 +28,7 @@ export default {
       { rel: 'stylesheet', href: '/css/icons.min.css' },
       { rel: 'stylesheet', href: '/css/app.min.css' },
       { rel: 'stylesheet', href: '/css/app.min.css' },
+      { rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css' },
       { rel: 'stylesheet', href: '/css/style.css' },
       { rel: 'stylesheet', href: '/css/responsive.css' },
     ],
@@ -35,6 +36,7 @@ export default {
     script: [
       { src: '/libs/jquery/jquery.min.js' },
       { src: '/libs/bootstrap/js/bootstrap.bundle.min.js' },
+      { src: '/bootstrap-select/dist/js/bootstrap-select.min.js' },
       { src: '/libs/metismenu/metisMenu.min.js' },
       { src: '/libs/simplebar/simplebar.min.js' },
       { src: '/libs/node-waves/waves.min.js' },

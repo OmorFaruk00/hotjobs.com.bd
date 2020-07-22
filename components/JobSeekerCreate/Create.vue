@@ -312,12 +312,3 @@
   }
 </style>
 
-
-career_summary:'',
-special_qualification:'',
-keywords:'',
-
-
-
-
-
