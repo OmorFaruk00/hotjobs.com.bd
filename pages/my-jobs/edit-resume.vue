@@ -982,6 +982,101 @@
                         </div>
                       </div>
 
+                      <div class="card mb-1 shadow-none">
+                        <div class="card-header" id="headingReferences">
+                          <h6 class="m-0">
+                            <a href="#collapseReferences" class="text-dark" data-toggle="collapse"
+                               aria-expanded="true"
+                               aria-controls="collapseReferences">
+                              References
+                            </a>
+                          </h6>
+                        </div>
+
+                        <div id="collapseReferences" class="collapse"
+                             aria-labelledby="headingReferences" data-parent="#accordion4">
+
+                          <div class="card-body">
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addReferencesModal()"> Add References
+                              </button>
+                            </div>
+
+                            <div class="table-responsive" v-if="employee.references.length > 0"
+                                 v-for="(row,index) in employee.references">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="text-muted">References {{ index+1 }}</h5>
+
+                                <div class="text-right" style="margin-top: -30px;">
+                                  <div class="btn-group">
+
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editReferencesModal(row)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+
+                                    <button type="submit" class="btn btn-outline-warning btn-sm"
+                                            @click="deleteReferencesModal(row.id)"><i
+                                      class="bx bx-trash"></i> Delete
+                                    </button>
+
+                                  </div>
+                                </div>
+
+
+                              </div>
+
+
+                              <table class="table">
+
+                                <tr>
+                                  <th>Name <br>
+                                    <span>{{ row.name}}</span></th>
+
+                                  <th>Designation <br>
+                                    <span>{{ row.designation}}</span></th>
+                                </tr>
+
+                                <tr>
+                                  <th>Mobile <br>
+                                    <span>{{ row.mobile}}</span></th>
+
+                                  <th>Email <br>
+                                    <span>{{ row.email}}</span></th>
+                                </tr>
+
+                                <tr>
+                                  <th>Relation <br>
+                                    <span>{{ row.relation}}</span></th>
+
+                                  <th>Organization <br>
+                                    <span>{{ row.organization}}</span></th>
+                                </tr>
+
+                                <tr>
+                                  <th>Phone (off) <br>
+                                    <span>{{ row.phone_off}}</span></th>
+
+                                  <th>phone (res)<br>
+                                    <span>{{ row.phone_res}}</span></th>
+                                </tr>
+
+                                <tr>
+                                  <th colspan="2">Address<br>
+                                    <span>{{ row.address}}</span></th>
+                                </tr>
+
+                              </table>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
                     </div>
 
                   </div>
@@ -2367,6 +2462,141 @@
       </div>
     </div>
 
+    <!--addReferencesModal-->
+    <div class="modal fade" id="addReferencesModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Reference</h5>
+            <h5 class="modal-title" v-else>Update Reference</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="editMode ? updateReferences() : createReferences()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input v-model="reference.name" type="text" name="name"
+                           placeholder="Enter name"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('name') }">
+                    <has-error :form="reference" field="name"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Designation</label>
+                    <input v-model="reference.designation" type="text" name="designation"
+                           placeholder="Enter designation"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('designation') }">
+                    <has-error :form="reference" field="designation"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Mobile</label>
+                    <input v-model="reference.mobile" type="text" name="mobile"
+                           placeholder="Enter mobile"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('mobile') }">
+                    <has-error :form="reference" field="mobile"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>email</label>
+                    <input v-model="reference.email" type="email" name="email"
+                           placeholder="Enter email"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('email') }">
+                    <has-error :form="reference" field="email"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Relation</label>
+                    <select v-model="reference.relation" name="relation"
+                            class="form-control" :class="{ 'is-invalid': reference.errors.has('relation') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="Relative">Relative</option>
+                      <option value="Family Friend">Family Friend</option>
+                      <option value="Academic">Academic</option>
+                      <option value="Professional">Professional</option>
+                      <option value="Others">Others</option>
+
+                    </select>
+                    <has-error :form="reference" field="relation"></has-error>
+                  </div>
+
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Organization</label>
+                    <input v-model="reference.organization" type="text" name="organization"
+                           placeholder="Enter organization"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('organization') }">
+                    <has-error :form="reference" field="organization"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Phone (Off)</label>
+                    <input v-model="reference.phone_off" type="text" name="phone_off"
+                           placeholder="Enter phone (off)"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('phone_off') }">
+                    <has-error :form="reference" field="phone_off"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Phone (Ress)</label>
+                    <input v-model="reference.phone_res" type="text" name="phone_res"
+                           placeholder="Enter phone (ress)"
+                           class="form-control"
+                           :class="{ 'is-invalid': reference.errors.has('phone_res') }">
+                    <has-error :form="reference" field="phone_res"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea v-model="reference.address" id="address" cols="30" rows="3"
+                              name="present_village" placeholder="Enter address"
+                              class="form-control"
+                              :class="{ 'is-invalid': reference.errors.has('address') }"></textarea>
+
+                    <has-error :form="reference" field="address"></has-error>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -2525,6 +2755,19 @@
           reading: '',
           writing: '',
           speaking: '',
+        }),
+
+        reference: new Form({
+          id: '',
+          name: '',
+          designation: '',
+          mobile: '',
+          email: '',
+          relation: '',
+          organization: '',
+          phone_off: '',
+          phone_res: '',
+          address: '',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -3217,7 +3460,7 @@
       // addExperienceAtBangladeshArmyModal end
 
 
-      // addExperienceModal start
+      // addLanguageModal start
       addLanguageModal() {
         this.editMode = false;
         this.language.reset();
@@ -3304,7 +3547,98 @@
           }
         })
       },
-      // addExperienceModal end
+      // addLanguageModal end
+
+
+      // addReferencesModal start
+      addReferencesModal() {
+        this.editMode = false;
+        this.reference.reset();
+        $('#addReferencesModal').modal('show');
+      },
+
+      editReferencesModal(row) {
+        this.editMode = true;
+        this.reference.reset();
+        $('#addReferencesModal').modal('show');
+        this.reference.fill(row);
+      },
+
+      createReferences() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.reference.post(this.url + 'employee-references?token=' + token)
+          .then(() => {
+
+            $('#addReferencesModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateReferences() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.reference.put(this.url + 'employee-references/' + this.reference.id + '?token=' + token)
+          .then(() => {
+
+            $('#addReferencesModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+      deleteReferencesModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.reference.delete(this.url + 'employee-references/' + row + '?token=' + token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
+      // addReferencesModal end
+
 
     },
 
