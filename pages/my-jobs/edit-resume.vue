@@ -793,19 +793,82 @@
 
                         <div id="collapseEmploymentHistoryArmy" class="collapse"
                              aria-labelledby="headingEmploymentHistoryArmy" data-parent="#accordion3">
+
                           <div class="card-body">
-                            Army Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+
+                            <div class="text-center">
+                              <button type="submit" v-if="!employee.employment_history_army"
+                                      class="btn btn-outline-secondary"
+                                      @click="addExperienceAtBangladeshArmyModal">Add Experience at Bangladesh Army
+                              </button>
+                            </div>
+
+                            <div class="table-responsive" v-if="employee.employment_history_army">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="text-right">
+                                  <div class="btn-group">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editExperienceAtBangladeshArmyModal(employee.employment_history_army)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+                                  </div>
+                                </div>
+
+                              </div>
+
+
+                              <table class="table">
+                                <tr>
+                                  <th>Ba No <br>
+                                    <span>{{ employee.employment_history_army.ba_no }}</span>
+                                  </th>
+
+                                  <th>Ba Name <br>
+                                    <span>{{ employee.employment_history_army.ba_name }}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Type <br>
+                                    <span>{{ employee.employment_history_army.type }}</span>
+                                  </th>
+
+                                  <th>Trade <br>
+                                    <span>{{ employee.employment_history_army.trade }}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Ranks <br>
+                                    <span>{{ employee.employment_history_army.ranks }}</span>
+                                  </th>
+
+                                  <th>Arms <br>
+                                    <span>{{ employee.employment_history_army.arms }}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Course <br>
+                                    <span>{{ employee.employment_history_army.course }}</span>
+                                  </th>
+
+                                  <th>Date Of Commission<br>
+                                    <span>{{ employee.employment_history_army.date_of_commission }}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th colspan="2">Date Of Retirement <br>
+                                    <span>{{ employee.employment_history_army.date_of_retirement }}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
                           </div>
+
                         </div>
                       </div>
 
@@ -1859,7 +1922,8 @@
 
                     <textarea v-model="experience.area_of_experiences" name="area_of_experiences" cols="30" rows="2"
                               class="form-control"
-                              :class="{ 'is-invalid': experience.errors.has('area_of_experiences') }" placeholder="Enter area of experiences"></textarea>
+                              :class="{ 'is-invalid': experience.errors.has('area_of_experiences') }"
+                              placeholder="Enter area of experiences"></textarea>
 
                     <has-error :form="experience" field="area_of_experiences"></has-error>
                   </div>
@@ -1873,7 +1937,8 @@
 
                     <textarea v-model="experience.responsibilities" name="responsibilities" cols="30" rows="4"
                               class="form-control"
-                              :class="{ 'is-invalid': experience.errors.has('responsibilities') }" placeholder="Enter responsibilities"></textarea>
+                              :class="{ 'is-invalid': experience.errors.has('responsibilities') }"
+                              placeholder="Enter responsibilities"></textarea>
 
                     <has-error :form="experience" field="responsibilities"></has-error>
                   </div>
@@ -1917,6 +1982,182 @@
 
                 </div>
 
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!--addExperienceAtBangladeshArmyModal-->
+    <div class="modal fade" id="addExperienceAtBangladeshArmyModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add ExperienceAt Bangladesh Army</h5>
+            <h5 class="modal-title" v-else>Update ExperienceAt Bangladesh Army</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="createExperienceAtBangladeshArmy()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Ba no</label>
+                    <select v-model="experience_army.ba_no" name="gender"
+                            class="form-control" :class="{ 'is-invalid': experience_army.errors.has('ba_no') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="BA">BA</option>
+                      <option value="BSS">BSS</option>
+                      <option value="JSS">JSS</option>
+                      <option value="BSP">BSP</option>
+                      <option value="BJO">BJO</option>
+                      <option value="No">No</option>
+
+                    </select>
+                    <has-error :form="experience_army" field="ba_no"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Ba Name</label>
+                    <input v-model="experience_army.ba_name" type="text" name="ba_name"
+                           placeholder="Enter ba name"
+                           class="form-control"
+                           :class="{ 'is-invalid': experience_army.errors.has('ba_name') }">
+                    <has-error :form="experience_army" field="ba_name"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Type</label>
+                    <select v-model="experience_army.type" name="type"
+                            class="form-control" :class="{ 'is-invalid': experience_army.errors.has('type') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="Officer">Officer</option>
+                      <option value="JCO">JCO</option>
+                      <option value="NCO">NCO</option>
+
+                    </select>
+                    <has-error :form="experience_army" field="type"></has-error>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label>Trade</label>
+                    <input v-model="experience_army.trade" type="text" name="trade"
+                           placeholder="Enter trade"
+                           class="form-control"
+                           :class="{ 'is-invalid': experience_army.errors.has('trade') }">
+                    <has-error :form="experience_army" field="trade"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Date Of Commission</label>
+                    <datepicker v-model="experience_army.date_of_commission"
+                                :class="{ 'is-invalid': experience_army.errors.has('date_of_commission') }"
+                                required></datepicker>
+                    <has-error :form="experience_army" field="date_of_commission"></has-error>
+                  </div>
+
+
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Ranks</label>
+                    <select v-model="experience_army.ranks" name="ranks"
+                            class="form-control" :class="{ 'is-invalid': experience_army.errors.has('ranks') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="2Lt">2Lt</option>
+                      <option value="Lt">Lt</option>
+                      <option value="Capt">Capt</option>
+                      <option value="Maj">Maj</option>
+                      <option value="Lt Col">Lt Col</option>
+                      <option value="Col">Col</option>
+                      <option value="Brig Gen">Brig Gen</option>
+                      <option value="Maj Gen">Maj Gen</option>
+                      <option value="Lt Gen">Lt Gen</option>
+                      <option value="Gen">Gen</option>
+                      <option value="Snk">Snk</option>
+                      <option value="L/cpl">L/cpl</option>
+                      <option value="Cpl">Cpl</option>
+                      <option value="Sgt">Sgt</option>
+                      <option value="WO">WO</option>
+                      <option value="SWO">SWO</option>
+                      <option value="MWO">MWO</option>
+                      <option value="H/Lt">H/Lt</option>
+                      <option value="H/Capt">H/Capt</option>
+                    </select>
+                    <has-error :form="experience_army" field="ranks"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Arms</label>
+                    <select v-model="experience_army.arms" name="arms"
+                            class="form-control" :class="{ 'is-invalid': experience_army.errors.has('arms') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="AC">AC</option>
+                      <option value="Arty">Arty</option>
+                      <option value="EB">EB</option>
+                      <option value="BIR">BIR</option>
+                      <option value="Sigs">Sigs</option>
+                      <option value="Engr">Engr</option>
+                      <option value="EME">EME</option>
+                      <option value="Ord">Ord</option>
+                      <option value="ASC">ASC</option>
+                      <option value="AMC">AMC</option>
+                      <option value="AEC">AEC</option>
+                      <option value="CMP">CMP</option>
+                      <option value="ADC">ADC</option>
+                      <option value="AFNS">AFNS</option>
+                      <option value="RVFC">RVFC</option>
+                      <option value="ACC">ACC</option>
+                    </select>
+                    <has-error :form="experience_army" field="arms"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Course</label>
+                    <input v-model="experience_army.course" type="text" name="course"
+                           placeholder="Enter course"
+                           class="form-control"
+                           :class="{ 'is-invalid': experience_army.errors.has('course') }">
+                    <has-error :form="experience_army" field="course"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Date Of Retirement</label>
+                    <datepicker v-model="experience_army.date_of_retirement"
+                                :class="{ 'is-invalid': experience_army.errors.has('date_of_retirement') }"
+                                required></datepicker>
+                    <has-error :form="experience_army" field="date_of_retirement"></has-error>
+                  </div>
+
+                </div>
 
               </div>
             </div>
@@ -2069,6 +2310,19 @@
           from_duration: '',
           to_duration: '',
 
+        }),
+
+        experience_army: new Form({
+          id: '',
+          ba_no: '',
+          ba_name: '',
+          ranks: '',
+          type: '',
+          arms: '',
+          trade: '',
+          course: '',
+          date_of_commission: '',
+          date_of_retirement: '',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -2718,6 +2972,47 @@
         })
       },
       // addTrainingSummaries end
+
+      // address start
+      addExperienceAtBangladeshArmyModal() {
+        this.editMode = false;
+        this.experience_army.reset();
+        $('#addExperienceAtBangladeshArmyModal').modal('show');
+      },
+      editExperienceAtBangladeshArmyModal(row) {
+
+        this.editMode = true;
+        this.experience_army.reset();
+        $('#addExperienceAtBangladeshArmyModal').modal('show');
+        this.experience_army.fill(row);
+
+      },
+
+      createExperienceAtBangladeshArmy() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.experience_army.post(this.url + 'employee-employment-history-army?token=' + token)
+          .then(() => {
+
+            $('#addExperienceAtBangladeshArmyModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // address end
 
     },
 
