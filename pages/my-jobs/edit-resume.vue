@@ -2331,7 +2331,7 @@
         }).then((result) => {
           if (result.value) {
             var token = window.$nuxt.$cookies.get('token');
-            this.certificate.delete(this.url + 'employee-training-summary/' + row + '?token=' + token).then(() => {
+            this.certificate.delete(this.url + 'employee-professional-certification-summary/' + row + '?token=' + token).then(() => {
               Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
