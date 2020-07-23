@@ -671,7 +671,6 @@
                   </div>
                 </div>
 
-
                 <div class="tab-pane" id="employment" role="tabpanel3">
                   <div class="card-body">
                     <div id="accordion3">
@@ -809,8 +808,9 @@
                                 <div class="text-right">
                                   <div class="btn-group">
                                     <button type="submit" class="btn btn-outline-secondary btn-sm"
-                                            @click="editExperienceAtBangladeshArmyModal(employee.employment_history_army)"><i
-                                      class="bx bx-edit"></i> Edit
+                                            @click="editExperienceAtBangladeshArmyModal(employee.employment_history_army)">
+                                      <i
+                                        class="bx bx-edit"></i> Edit
                                     </button>
                                   </div>
                                 </div>
@@ -878,16 +878,113 @@
                   </div>
                 </div>
 
-                <div class="tab-pane" id="other_information" role="tabpanel">
-                  <p class="mb-0">
-                    Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                    art party before they sold out master cleanse gluten-free squid
-                    scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                    art party locavore wolf cliche high life echo park Austin. Cred
-                    vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                    farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral,
-                    mustache readymade keffiyeh craft.
-                  </p>
+                <div class="tab-pane" id="other_information" role="tabpanel4">
+                  <div class="card-body">
+                    <div id="accordion4">
+
+                      <div class="card mb-1 shadow-none">
+                        <div class="card-header" id="headingSpecialization">
+                          <h6 class="m-0">
+                            <a href="#collapseSpecialization" class="text-dark" data-toggle="collapse"
+                               aria-expanded="true"
+                               aria-controls="collapseSpecialization">
+                              Specialization
+                            </a>
+                          </h6>
+                        </div>
+
+                        <div id="collapseSpecialization" class="collapse"
+                             aria-labelledby="headingSpecialization" data-parent="#accordion4">
+
+                          <div class="card-body">
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, minima!</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="card mb-1 shadow-none">
+                        <div class="card-header" id="headingLanguageProficiency">
+                          <h6 class="m-0">
+                            <a href="#collapseLanguageProficiency" class="text-dark" data-toggle="collapse"
+                               aria-expanded="true"
+                               aria-controls="collapseLanguageProficiency">
+                              Language Proficiency
+                            </a>
+                          </h6>
+                        </div>
+
+                        <div id="collapseLanguageProficiency" class="collapse"
+                             aria-labelledby="headingSpecialization" data-parent="#accordion4">
+
+                          <div class="card-body">
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addLanguageModal()"> Add Language
+                              </button>
+                            </div>
+
+                            <div class="table-responsive" v-if="employee.language_proficiencies.length > 0"
+                                 v-for="(row,index) in employee.language_proficiencies">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="text-muted">Language {{ index+1 }}</h5>
+
+                                <div class="text-right" style="margin-top: -30px;">
+                                  <div class="btn-group">
+
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editLanguageModal(row)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+
+                                    <button type="submit" class="btn btn-outline-warning btn-sm"
+                                            @click="deleteLanguageModal(row.id)"><i
+                                      class="bx bx-trash"></i> Delete
+                                    </button>
+
+                                  </div>
+                                </div>
+
+
+                              </div>
+
+
+                              <table class="table">
+
+                                <tr>
+                                  <th>Language <br>
+                                    <span>{{ row.language }}</span>
+                                  </th>
+
+                                  <th>Reading <br>
+                                    <span>{{ row.reading }}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Writing <br>
+                                    <span>{{ row.writing }}</span>
+                                  </th>
+
+                                  <th>Speaking <br>
+                                    <span>{{ row.speaking }}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
                 </div>
 
                 <div class="tab-pane" id="photograph" role="tabpanel">
@@ -2173,6 +2270,103 @@
       </div>
     </div>
 
+    <!--addLanguageModal-->
+    <div class="modal fade" id="addLanguageModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Language</h5>
+            <h5 class="modal-title" v-else>Update Language</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="editMode ? updateLanguage() : createLanguage()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>language</label>
+                    <input v-model="language.language" type="text" name="language"
+                           placeholder="Enter language"
+                           class="form-control"
+                           :class="{ 'is-invalid': language.errors.has('language') }">
+                    <has-error :form="language" field="language"></has-error>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label>Reading</label>
+                    <select v-model="language.reading" name="reading"
+                            class="form-control" :class="{ 'is-invalid': language.errors.has('reading') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Low">Low</option>
+
+                    </select>
+                    <has-error :form="language" field="reading"></has-error>
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Writing</label>
+                    <select v-model="language.writing" name="writing"
+                            class="form-control" :class="{ 'is-invalid': language.errors.has('writing') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Low">Low</option>
+
+                    </select>
+                    <has-error :form="language" field="writing"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Speaking</label>
+                    <select v-model="language.speaking" name="speaking"
+                            class="form-control" :class="{ 'is-invalid': language.errors.has('speaking') }">
+                      <option value="" selected>Select one</option>
+
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Low">Low</option>
+
+                    </select>
+                    <has-error :form="language" field="speaking"></has-error>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -2323,6 +2517,14 @@
           course: '',
           date_of_commission: '',
           date_of_retirement: '',
+        }),
+
+        language: new Form({
+          id: '',
+          language: '',
+          reading: '',
+          writing: '',
+          speaking: '',
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -2971,9 +3173,9 @@
           }
         })
       },
-      // addTrainingSummaries end
+      // addExperienceModal end
 
-      // address start
+      // addExperienceAtBangladeshArmyModal start
       addExperienceAtBangladeshArmyModal() {
         this.editMode = false;
         this.experience_army.reset();
@@ -3012,7 +3214,97 @@
 
           })
       },
-      // address end
+      // addExperienceAtBangladeshArmyModal end
+
+
+      // addExperienceModal start
+      addLanguageModal() {
+        this.editMode = false;
+        this.language.reset();
+        $('#addLanguageModal').modal('show');
+      },
+
+      editLanguageModal(row) {
+        this.editMode = true;
+        this.language.reset();
+        $('#addLanguageModal').modal('show');
+        this.language.fill(row);
+      },
+
+      createLanguage() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.language.post(this.url + 'employee-language-proficiency?token=' + token)
+          .then(() => {
+
+            $('#addLanguageModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateLanguage() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.language.put(this.url + 'employee-language-proficiency/' + this.language.id + '?token=' + token)
+          .then(() => {
+
+            $('#addLanguageModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+      deleteLanguageModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.language.delete(this.url + 'employee-language-proficiency/' + row + '?token=' + token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
+      // addExperienceModal end
 
     },
 
