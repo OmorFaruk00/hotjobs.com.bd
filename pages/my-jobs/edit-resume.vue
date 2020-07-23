@@ -1083,15 +1083,34 @@
                 </div>
 
                 <div class="tab-pane" id="photograph" role="tabpanel">
-                  <p class="mb-0">
-                    Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                    art party before they sold out master cleanse gluten-free squid
-                    scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                    art party locavore wolf cliche high life echo park Austin. Cred
-                    vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                    farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral,
-                    mustache readymade keffiyeh craft.
-                  </p>
+                  <div class="card-body">
+
+                    <form
+                      @submit.prevent="uploadProfile()">
+
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <div class="form-group">
+
+
+                          <img :src="getPhoto()" alt="employee.image_url">
+
+
+                          <input type="file" class="form-control" name="profile_photo" ref="profile_photo"
+                                 id="profile_photo" v-on:change="handleProfilePicUpload()" accept="images/*">
+
+                          <!--<input v-model="reference.name" type="text" name="name"
+                                 placeholder="Enter name"
+                                 class="form-control"
+                                 :class="{ 'is-invalid': reference.errors.has('name') }">
+                          <has-error :form="reference" field="name"></has-error>-->
+                        </div>
+
+                      </div>
+
+                    </form>
+
+                  </div>
                 </div>
               </div>
 
@@ -2780,6 +2799,11 @@
 
     methods: {
 
+      getPhoto() {
+        let image_url = this.url + this.employee.image_url;
+        return image_url;
+      },
+
       // fetch data start
 
       async getAuthEmployee() {
@@ -3639,6 +3663,28 @@
       },
       // addReferencesModal end
 
+
+      async handleProfilePicUpload() {
+
+        var token = window.$nuxt.$cookies.get('token');
+        let formData = new FormData();
+        formData.append('image_url', this.$refs.profile_photo.files[0]);
+
+        return await this.$axios.post('employee-profile-image?token=' + token, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+          .then((response) => {
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+          })
+          .catch((error) => {
+            Swal("Failed!", "There was something wrong.", "warning");
+          });
+      }
 
     },
 
