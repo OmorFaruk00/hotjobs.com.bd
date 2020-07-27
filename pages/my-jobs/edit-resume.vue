@@ -898,7 +898,13 @@
 
                           <div class="card-body">
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, minima!</p>
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addSpecializationSkillModal()"> Add Specialization Skill
+                              </button>
+                            </div>
+
+
                           </div>
 
                         </div>
@@ -1174,8 +1180,11 @@
 
                   <div class="form-group">
                     <label>Date Of Birth</label>
-                    <datepicker v-model="form.date_of_birth"
-                                :class="{ 'is-invalid': form.errors.has('date_of_birth') }"></datepicker>
+                    <no-ssr>
+
+                      <datepicker v-model="form.date_of_birth"
+                                  :class="{ 'is-invalid': form.errors.has('date_of_birth') }"></datepicker>
+                    </no-ssr>
 
                     <has-error :form="form" field="date_of_birth"></has-error>
                   </div>
@@ -1249,9 +1258,11 @@
 
                   <div class="form-group">
                     <label>Passport Issue Date</label>
+                    <no-ssr>
 
-                    <datepicker v-model="form.passport_issue_date"
-                                :class="{ 'is-invalid': form.errors.has('passport_issue_date') }"></datepicker>
+                      <datepicker v-model="form.passport_issue_date"
+                                  :class="{ 'is-invalid': form.errors.has('passport_issue_date') }"></datepicker>
+                    </no-ssr>
 
                     <has-error :form="form" field="passport_issue_date"></has-error>
                   </div>
@@ -1313,8 +1324,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <button type="submit" v-show="!editMode" class="btn btn-success">Submit</button>
-              <button type="submit" v-show="editMode" class="btn btn-success">Update</button>
+              <button type="submit" :disabled="form.busy" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" :disabled="form.busy" v-show="editMode" class="btn btn-success">Update</button>
             </div>
           </form>
 
@@ -2038,16 +2049,22 @@
                   <div class="form-group">
                     <label>From Duration</label>
 
-                    <datepicker v-model="certificate.from_duration"
-                                :class="{ 'is-invalid': certificate.errors.has('from_duration') }"></datepicker>
+                    <no-ssr>
+
+                      <datepicker v-model="certificate.from_duration"
+                                  :class="{ 'is-invalid': certificate.errors.has('from_duration') }"></datepicker>
+                    </no-ssr>
 
                     <has-error :form="certificate" field="from_duration"></has-error>
                   </div>
 
                   <div class="form-group">
                     <label>To Duration</label>
-                    <datepicker v-model="certificate.to_duration"
-                                :class="{ 'is-invalid': certificate.errors.has('to_duration') }"></datepicker>
+                    <no-ssr>
+
+                      <datepicker v-model="certificate.to_duration"
+                                  :class="{ 'is-invalid': certificate.errors.has('to_duration') }"></datepicker>
+                    </no-ssr>
 
                     <has-error :form="certificate" field="to_duration"></has-error>
                   </div>
@@ -2166,8 +2183,11 @@
                   <div class="form-group">
                     <label>From Date</label>
 
-                    <datepicker v-model="experience.from_date"
-                                :class="{ 'is-invalid': experience.errors.has('from_date') }"></datepicker>
+                    <no-ssr>
+
+                      <datepicker v-model="experience.from_date"
+                                  :class="{ 'is-invalid': experience.errors.has('from_date') }"></datepicker>
+                    </no-ssr>
 
                     <has-error :form="experience" field="from_date"></has-error>
                   </div>
@@ -2177,9 +2197,11 @@
 
                     <input type="text" value="Continuing" v-if="experience.currently_working == 1" readonly>
 
-                    <datepicker v-else v-model="experience.to_date"
-                                :class="{ 'is-invalid': experience.errors.has('to_date') }" required></datepicker>
+                    <no-ssr>
+                      <datepicker v-if="!experience.currently_working == 1" v-model="experience.to_date"
+                                  :class="{ 'is-invalid': experience.errors.has('to_date') }" required></datepicker>
 
+                    </no-ssr>
                     <has-error :form="experience" field="to_date"></has-error>
                   </div>
 
@@ -2284,9 +2306,13 @@
 
                   <div class="form-group">
                     <label>Date Of Commission</label>
-                    <datepicker v-model="experience_army.date_of_commission"
-                                :class="{ 'is-invalid': experience_army.errors.has('date_of_commission') }"
-                                required></datepicker>
+                    <no-ssr>
+
+
+                      <datepicker v-model="experience_army.date_of_commission"
+                                  :class="{ 'is-invalid': experience_army.errors.has('date_of_commission') }"
+                                  required></datepicker>
+                    </no-ssr>
                     <has-error :form="experience_army" field="date_of_commission"></has-error>
                   </div>
 
@@ -2362,9 +2388,11 @@
 
                   <div class="form-group">
                     <label>Date Of Retirement</label>
-                    <datepicker v-model="experience_army.date_of_retirement"
-                                :class="{ 'is-invalid': experience_army.errors.has('date_of_retirement') }"
-                                required></datepicker>
+                    <no-ssr>
+                      <datepicker v-model="experience_army.date_of_retirement"
+                                  :class="{ 'is-invalid': experience_army.errors.has('date_of_retirement') }"
+                                  required></datepicker>
+                    </no-ssr>
                     <has-error :form="experience_army" field="date_of_retirement"></has-error>
                   </div>
 
@@ -2625,7 +2653,6 @@
 
   import Vue from 'vue'
   import Swal from 'sweetalert2'
-  import datepicker from 'vuejs-datepicker'
   import {Form, HasError, AlertError} from 'vform'
 
   Vue.component(HasError.name, HasError)
@@ -2794,7 +2821,6 @@
     components: {
       dashboardNavbar,
       editResumeHorizontalTab,
-      datepicker,
     },
 
     methods: {
@@ -3705,15 +3731,15 @@
 
     },
 
-    mounted() {
+    /*mounted() {
       // $('.bSelect').selectpicker('refresh');
-    }
+    }*/
 
   }
-  $('.bSelect').selectpicker({
+  /*$('.bSelect').selectpicker({
     liveSearch: true,
     size: 5
-  });
+  });*/
 </script>
 
 <style scoped>

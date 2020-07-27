@@ -1,4 +1,3 @@
-
 export default {
   /*
   ** Nuxt rendering mode
@@ -15,44 +14,45 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: process.env.npm_package_name || '',
+
+    title: 'Hot Jobs BD',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'Hot Jobs BD'},
     ],
 
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
-      { rel: 'stylesheet',id:'bootstrap-style', href: '/css/bootstrap.min.css' },
-      { rel: 'stylesheet', href: '/css/icons.min.css' },
-      { rel: 'stylesheet', href: '/css/app.min.css' },
-      { rel: 'stylesheet', href: '/css/app.min.css' },
-      { rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css' },
-      { rel: 'stylesheet', href: '/css/style.css' },
-      { rel: 'stylesheet', href: '/css/responsive.css' },
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'},
+      {rel: 'stylesheet', id: 'bootstrap-style', href: '/css/bootstrap.min.css'},
+      {rel: 'stylesheet', href: '/css/icons.min.css'},
+      {rel: 'stylesheet', href: '/css/app.min.css'},
+      {rel: 'stylesheet', href: '/css/app.min.css'},
+      // {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
+      {rel: 'stylesheet', href: '/css/style.css'},
+      {rel: 'stylesheet', href: '/css/responsive.css'},
     ],
 
     script: [
-      { src: '/libs/jquery/jquery.min.js' },
-      { src: '/libs/bootstrap/js/bootstrap.bundle.min.js' },
-      { src: '/bootstrap-select/dist/js/bootstrap-select.min.js' },
-      { src: '/libs/metismenu/metisMenu.min.js' },
-      { src: '/libs/simplebar/simplebar.min.js' },
-      { src: '/libs/node-waves/waves.min.js' },
-      { src: '/js/pages/dashboard.init.js' },
+      {src: '/libs/jquery/jquery.min.js'},
+      {src: '/libs/bootstrap/js/bootstrap.bundle.min.js'},
+      // {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
+      {src: '/libs/metismenu/metisMenu.min.js'},
+      {src: '/libs/simplebar/simplebar.min.js'},
+      {src: '/libs/node-waves/waves.min.js'},
+      {src: '/js/pages/dashboard.init.js'},
     ],
   },
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    {src:'@/plugins/datepicker.js', ssr:false,}
   ],
   /*
   ** Auto import components
@@ -62,8 +62,7 @@ export default {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+  buildModules: [],
   /*
   ** Nuxt.js modules
   */
@@ -74,9 +73,9 @@ export default {
 
   axios: {
     init(axios, context) {
-      axios.defaults.httpsAgent = new https.Agent({ rejectUnauthorized: false });
+      axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {'Access-Control-Allow-Origin': '*'},
     baseURL: 'http://localhost:8000/',
   },
 
@@ -84,6 +83,5 @@ export default {
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-  build: {
-  }
+  build: {}
 }
