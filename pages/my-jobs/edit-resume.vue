@@ -954,6 +954,41 @@
                             </div>
 
 
+                            <hr>
+
+                            <div class="text-center" v-if="!employee.specialization_skill_description">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addSpecializationSkillDescriptionModal()"> Add Skill Description
+                              </button>
+                            </div>
+
+
+                            <div class="table-responsive" v-if="employee.specialization_skill_description">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="text-right">
+                                  <div class="btn-group">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editSpecializationSkillDescriptionModal(employee.specialization_skill_description)">
+                                      <i
+                                        class="bx bx-edit"></i> Edit
+                                    </button>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              <table class="table">
+                                <tr>
+                                  <th>Description <br>
+                                    <span>{{ employee.specialization_skill_description.description }}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
+
+
                           </div>
 
                         </div>
@@ -2779,8 +2814,10 @@
 
                   <div class="form-group">
 
-                    <select v-if="specialization_skill.ntvqf == 'NTVQF'" v-model="specialization_skill.ntvqf_level" name="ntvqf_level"
-                            class="form-control" :class="{ 'is-invalid': specialization_skill.errors.has('ntvqf_level') }">
+                    <select v-if="specialization_skill.ntvqf == 'NTVQF'" v-model="specialization_skill.ntvqf_level"
+                            name="ntvqf_level"
+                            class="form-control"
+                            :class="{ 'is-invalid': specialization_skill.errors.has('ntvqf_level') }">
 
                       <option value="" selected>Select one</option>
                       <option value="Pre-Voc Level 1">Pre-Voc Level 1</option>
@@ -2805,8 +2842,68 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <button type="submit" :disabled="specialization_skill.busy" v-show="!editMode" class="btn btn-success">Submit</button>
-              <button type="submit" :disabled="specialization_skill.busy" v-show="editMode" class="btn btn-success">Update</button>
+              <button type="submit" :disabled="specialization_skill.busy" v-show="!editMode" class="btn btn-success">
+                Submit
+              </button>
+              <button type="submit" :disabled="specialization_skill.busy" v-show="editMode" class="btn btn-success">
+                Update
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!--    addSpecializationSkillDescriptionModal-->
+    <div class="modal fade" id="addSpecializationSkillDescriptionModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Specialization Skill Description</h5>
+            <h5 class="modal-title" v-else>Update Specialization Skill Description</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="createSpecializationSkillDescription()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea v-model="specialization_skill_description.description" name="area_of_experiences"
+                              cols="30" rows="2"
+                              class="form-control"
+                              :class="{ 'is-invalid': specialization_skill_description.errors.has('description') }"
+                              placeholder="Enter description"></textarea>
+
+                    <has-error :form="specialization_skill_description" field="description"></has-error>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" :disabled="specialization_skill_description.busy" v-show="!editMode"
+                      class="btn btn-success">Submit
+              </button>
+              <button type="submit" :disabled="specialization_skill_description.busy" v-show="editMode"
+                      class="btn btn-success">Update
+              </button>
             </div>
           </form>
 
@@ -2996,6 +3093,12 @@
           ntvqf: '',
           ntvqf_level: '',
         }),
+
+        specialization_skill_description: new Form({
+          id: '',
+          description: '',
+        }),
+
         url: this.$axios.defaults.baseURL,
       }
     },
@@ -3005,7 +3108,6 @@
     },
 
     methods: {
-
 
 
       // fetch data start
@@ -3986,6 +4088,46 @@
         })
       },
       // SpecializationSkill end
+
+      // SpecializationSkillDescription start
+      addSpecializationSkillDescriptionModal() {
+        this.editMode = false;
+        this.specialization_skill_description.reset();
+        $('#addSpecializationSkillDescriptionModal').modal('show');
+      },
+
+      editSpecializationSkillDescriptionModal(row) {
+        this.editMode = true;
+        this.specialization_skill_description.reset();
+        $('#addSpecializationSkillDescriptionModal').modal('show');
+        this.specialization_skill_description.fill(row);
+      },
+
+      createSpecializationSkillDescription() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.specialization_skill_description.post(this.url + 'employee-specialization-skill-description?token=' + token)
+          .then(() => {
+
+            $('#addSpecializationSkillDescriptionModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // SpecializationSkillDescription end
 
 
     },
