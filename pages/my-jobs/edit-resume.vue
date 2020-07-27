@@ -961,8 +961,6 @@
                                       @click="addSpecializationSkillDescriptionModal()"> Add Skill Description
                               </button>
                             </div>
-
-
                             <div class="table-responsive" v-if="employee.specialization_skill_description">
 
                               <div class="col-lg-12 col-md-12 col-sm-12">
@@ -982,6 +980,38 @@
                                 <tr>
                                   <th>Description <br>
                                     <span>{{ employee.specialization_skill_description.description }}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
+
+                            <hr>
+
+                            <div class="text-center" v-if="!employee.extra_curricular_activities">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addSpecializationExtracurricularActivitiesModal()"> Add Extracurricular Activities
+                              </button>
+                            </div>
+                            <div class="table-responsive" v-if="employee.extra_curricular_activities">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="text-right">
+                                  <div class="btn-group">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editSpecializationExtracurricularActivitiesModal(employee.extra_curricular_activities)">
+                                      <i
+                                        class="bx bx-edit"></i> Edit
+                                    </button>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              <table class="table">
+                                <tr>
+                                  <th>Extracurricular Activities <br>
+                                    <span>{{ employee.extra_curricular_activities.description }}</span>
                                   </th>
                                 </tr>
 
@@ -2855,7 +2885,7 @@
       </div>
     </div>
 
-    <!--    addSpecializationSkillDescriptionModal-->
+    <!--addSpecializationSkillDescriptionModal-->
     <div class="modal fade" id="addSpecializationSkillDescriptionModal" tabindex="-1" role="dialog"
          aria-labelledby="addUserLabel"
          aria-hidden="true">
@@ -2902,6 +2932,61 @@
                       class="btn btn-success">Submit
               </button>
               <button type="submit" :disabled="specialization_skill_description.busy" v-show="editMode"
+                      class="btn btn-success">Update
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <!--addSpecializationExtracurricularActivitiesModal-->
+    <div class="modal fade" id="addSpecializationExtracurricularActivitiesModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Specialization Extracurricular Activities</h5>
+            <h5 class="modal-title" v-else>Update Specialization Extracurricular Activities</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="createSpecializationExtracurricularActivities()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea v-model="specialization_skill_activities.description" name="description"
+                              cols="30" rows="2"
+                              class="form-control"
+                              :class="{ 'is-invalid': specialization_skill_activities.errors.has('description') }"
+                              placeholder="Enter description"></textarea>
+
+                    <has-error :form="specialization_skill_activities" field="description"></has-error>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" :disabled="specialization_skill_activities.busy" v-show="!editMode"
+                      class="btn btn-success">Submit
+              </button>
+              <button type="submit" :disabled="specialization_skill_activities.busy" v-show="editMode"
                       class="btn btn-success">Update
               </button>
             </div>
@@ -3095,6 +3180,11 @@
         }),
 
         specialization_skill_description: new Form({
+          id: '',
+          description: '',
+        }),
+
+        specialization_skill_activities: new Form({
           id: '',
           description: '',
         }),
@@ -4109,6 +4199,47 @@
           .then(() => {
 
             $('#addSpecializationSkillDescriptionModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+      // SpecializationSkillDescription end
+
+
+      // SpecializationSkillDescription start
+      addSpecializationExtracurricularActivitiesModal() {
+        this.editMode = false;
+        this.specialization_skill_activities.reset();
+        $('#addSpecializationExtracurricularActivitiesModal').modal('show');
+      },
+
+      editSpecializationExtracurricularActivitiesModal(row) {
+        this.editMode = true;
+        this.specialization_skill_activities.reset();
+        $('#addSpecializationExtracurricularActivitiesModal').modal('show');
+        this.specialization_skill_activities.fill(row);
+      },
+
+      createSpecializationExtracurricularActivities() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.specialization_skill_activities.post(this.url + 'employee-extra-curricular-activities?token=' + token)
+          .then(() => {
+
+            $('#addSpecializationExtracurricularActivitiesModal').modal('hide');
 
             Toast.fire({
               icon: 'success',
