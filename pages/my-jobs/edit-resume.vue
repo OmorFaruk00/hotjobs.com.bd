@@ -905,6 +905,55 @@
                             </div>
 
 
+                            <div class="table-responsive" v-if="employee.specialization__skills.length > 0"
+                                 v-for="(row,index) in employee.specialization__skills">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="text-muted">Skill -{{ index+1 }}</h5>
+
+                                <div class="text-right" style="margin-top: -30px;">
+                                  <div class="btn-group">
+
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editSpecializationSkillModal(row)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+
+                                    <button type="submit" class="btn btn-outline-warning btn-sm"
+                                            @click="deleteSpecializationSkillModal(row.id)"><i
+                                      class="bx bx-trash"></i> Delete
+                                    </button>
+
+                                  </div>
+                                </div>
+
+
+                              </div>
+
+
+                              <table class="table">
+                                <tr>
+                                  <th>Skill Name <br>
+                                    <span>{{ row.skill_name}}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Skill learned by
+                                    <br>
+
+                                    <span class="badge badge-info text-white">{{ row.self }}</span>
+                                    <span class="badge badge-info text-white">{{ row.job }}</span>
+                                    <span class="badge badge-info text-white">{{ row.educational }}</span>
+                                    <span class="badge badge-info text-white">{{ row.professional_training }}</span>
+                                    <span class="badge badge-info text-white" v-if="row.ntvqf == 'NTVQF'"> {{ row.ntvqf_level }}</span>
+                                  </th>
+                                </tr>
+
+                              </table>
+                            </div>
+
+
                           </div>
 
                         </div>
@@ -1105,11 +1154,6 @@
                           <input type="file" class="form-control" name="profile_photo" ref="profile_photo"
                                  id="profile_photo" v-on:change="handleProfilePicUpload()" accept="images/*">
 
-                          <!--<input v-model="reference.name" type="text" name="name"
-                                 placeholder="Enter name"
-                                 class="form-control"
-                                 :class="{ 'is-invalid': reference.errors.has('name') }">
-                          <has-error :form="reference" field="name"></has-error>-->
                         </div>
 
                       </div>
@@ -1880,7 +1924,7 @@
       </div>
     </div>
 
-    <!--    addTrainingSummariesModal-->
+    <!--addTrainingSummariesModal-->
     <div class="modal fade" id="addTrainingSummariesModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel"
          aria-hidden="true">
 
@@ -2644,6 +2688,132 @@
       </div>
     </div>
 
+    <!--addSpecializationSkillModal-->
+    <div class="modal fade" id="addSpecializationSkillModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Specialization Skill</h5>
+            <h5 class="modal-title" v-else>Update Specialization Skill</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="editMode ? updateSpecializationSkill() : createSpecializationSkill()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Skill Name</label>
+                    <input v-model="specialization_skill.skill_name" type="text" name="skill_name"
+                           placeholder="Enter skill name"
+                           class="form-control"
+                           :class="{ 'is-invalid': specialization_skill.errors.has('skill_name') }">
+                    <has-error :form="specialization_skill" field="skill_name"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>How did you learn the skill ?</label> <br>
+
+
+                    <b-form-checkbox
+                      id="Self"
+                      v-model="specialization_skill.self"
+                      name="self"
+                      value="Self"
+                      unchecked-value=""
+                    >
+                      Self
+                    </b-form-checkbox>
+
+                    <b-form-checkbox
+                      id="job"
+                      v-model="specialization_skill.job"
+                      name="job"
+                      value="Job"
+                      unchecked-value=""
+                    >
+                      Job
+                    </b-form-checkbox>
+
+                    <b-form-checkbox
+                      id="educational"
+                      v-model="specialization_skill.educational"
+                      name="educational"
+                      value="Educational"
+                      unchecked-value=""
+                    >
+                      Educational
+                    </b-form-checkbox>
+
+                    <b-form-checkbox
+                      id="professional_training"
+                      v-model="specialization_skill.professional_training"
+                      name="professional_training"
+                      value="Professional Training"
+                      unchecked-value=""
+                    >
+                      Professional Training
+                    </b-form-checkbox>
+
+                    <b-form-checkbox
+                      id="ntvqf"
+                      v-model="specialization_skill.ntvqf"
+                      name="ntvqf"
+                      value="NTVQF"
+                      unchecked-value=""
+                    >
+                      NTVQF
+                    </b-form-checkbox>
+
+                  </div>
+
+                  <div class="form-group">
+
+                    <select v-if="specialization_skill.ntvqf == 'NTVQF'" v-model="specialization_skill.ntvqf_level" name="ntvqf_level"
+                            class="form-control" :class="{ 'is-invalid': specialization_skill.errors.has('ntvqf_level') }">
+
+                      <option value="" selected>Select one</option>
+                      <option value="Pre-Voc Level 1">Pre-Voc Level 1</option>
+
+                      <option value="Pre-Voc Level 2">Pre-Voc Level 2</option>
+                      <option value="NTVQF Level 1">NTVQF Level 1</option>
+                      <option value="NTVQF Level 2">NTVQF Level 2</option>
+                      <option value="NTVQF Level 3">NTVQF Level 3</option>
+                      <option value="NTVQF Level 4">NTVQF Level 4</option>
+                      <option value="NTVQF Level 5">NTVQF Level 5</option>
+                      <option value="NTVQF Level 6">NTVQF Level 6</option>
+
+                    </select>
+
+                    <has-error :form="specialization_skill" field="ntvqf_level"></has-error>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" :disabled="specialization_skill.busy" v-show="!editMode" class="btn btn-success">Submit</button>
+              <button type="submit" :disabled="specialization_skill.busy" v-show="editMode" class="btn btn-success">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -2815,6 +2985,17 @@
           phone_res: '',
           address: '',
         }),
+
+        specialization_skill: new Form({
+          id: '',
+          skill_name: '',
+          self: '',
+          job: '',
+          educational: '',
+          professional_training: '',
+          ntvqf: '',
+          ntvqf_level: '',
+        }),
         url: this.$axios.defaults.baseURL,
       }
     },
@@ -2825,10 +3006,7 @@
 
     methods: {
 
-      getPhoto() {
-        let image_url = this.url + this.employee.image_url;
-        return image_url;
-      },
+
 
       // fetch data start
 
@@ -3689,7 +3867,7 @@
       },
       // addReferencesModal end
 
-
+      // profile-picture start
       async handleProfilePicUpload() {
 
         var token = window.$nuxt.$cookies.get('token');
@@ -3710,7 +3888,105 @@
           .catch((error) => {
             Swal("Failed!", "There was something wrong.", "warning");
           });
-      }
+      },
+
+      getPhoto() {
+        let image_url = this.url + this.employee.image_url;
+        return image_url;
+      },
+
+      // profile-picture start
+
+
+      // SpecializationSkill start
+      addSpecializationSkillModal() {
+        this.editMode = false;
+        this.specialization_skill.reset();
+        $('#addSpecializationSkillModal').modal('show');
+      },
+
+      editSpecializationSkillModal(row) {
+        this.editMode = true;
+        this.specialization_skill.reset();
+        $('#addSpecializationSkillModal').modal('show');
+        this.specialization_skill.fill(row);
+      },
+
+      createSpecializationSkill() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.specialization_skill.post(this.url + 'employee-specialization-skill?token=' + token)
+          .then(() => {
+
+            $('#addSpecializationSkillModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateSpecializationSkill() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.specialization_skill.put(this.url + 'employee-specialization-skill/' + this.specialization_skill.id + '?token=' + token)
+          .then(() => {
+
+            $('#addSpecializationSkillModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+      deleteSpecializationSkillModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.specialization_skill.delete(this.url + 'employee-specialization-skill/' + row + '?token=' + token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
+      // SpecializationSkill end
+
 
     },
 
@@ -3731,15 +4007,8 @@
 
     },
 
-    /*mounted() {
-      // $('.bSelect').selectpicker('refresh');
-    }*/
-
   }
-  /*$('.bSelect').selectpicker({
-    liveSearch: true,
-    size: 5
-  });*/
+
 </script>
 
 <style scoped>

@@ -52,7 +52,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    {src:'@/plugins/datepicker.js', ssr:false,}
+    {src:'@/plugins/datepicker.js', ssr:false,},
+    {src: '@/plugins/vueBootstrap.js'},
   ],
   /*
   ** Auto import components
