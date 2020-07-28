@@ -1055,7 +1055,8 @@
 
                             <div class="text-center" v-if="!employee.extra_curricular_activities">
                               <button type="submit" class="btn btn-outline-secondary"
-                                      @click="addSpecializationExtracurricularActivitiesModal()"> Add Extracurricular Activities
+                                      @click="addSpecializationExtracurricularActivitiesModal()"> Add Extracurricular
+                                Activities
                               </button>
                             </div>
                             <div class="table-responsive" v-if="employee.extra_curricular_activities">
@@ -1532,36 +1533,31 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
 
-
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="address.same_address" type="checkbox"
-                           name="present_location" id="same_address">
-                    <label class="form-check-label" for="same_address">
-                      Same as Present Address
-                    </label>
-                  </div>
+                  <b-form-checkbox
+                    id="same_address"
+                    v-model="address.same_address"
+                    name="same_address"
+                    value="1"
+                    unchecked-value="0"
+                  >
+                    Same as Present Address
+                  </b-form-checkbox>
 
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-6">
 
-                  <h1>Present Address</h1>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="address.present_location" type="radio"
-                           name="present_location" id="insideBangladesh" value="0" checked>
-                    <label class="form-check-label" for="insideBangladesh">
-                      Inside Bangladesh
-                    </label>
-                  </div>
+                  <b-form-group label="Present Address">
+                    <b-form-radio v-model="address.present_location" name="present_location" value="0">Inside
+                      Bangladesh
+                    </b-form-radio>
+                    <b-form-radio v-model="address.present_location" name="present_location" value="1">Outside
+                      Bangladesh
+                    </b-form-radio>
+                  </b-form-group>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="address.present_location" type="radio"
-                           name="present_location" id="outsideBangladesh" value="1" checked>
-                    <label class="form-check-label" for="outsideBangladesh">
-                      Outside Bangladesh
-                    </label>
-                  </div>
+                  <has-error :form="address" field="present_location"></has-error>
 
                   <div class="form-group" v-if="address.present_location == 0">
                     <label>District</label>
@@ -1635,27 +1631,19 @@
                 </div>
 
 
-                <div class="col-lg-6 col-md-6 col-sm-6" v-if="!address.same_address">
+                <div class="col-lg-6 col-md-6 col-sm-6" v-if="address.same_address == 0">
 
                   <h1>Permanent Address</h1>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="address.permanent_location" type="radio"
-                           name="permanent_location" id="permanentInsideBangladesh" value="0" checked>
-                    <label class="form-check-label" for="permanentInsideBangladesh">
+                  <b-form-group label="Permanent Address">
+                    <b-form-radio v-model="address.permanent_location" name="permanent_location" value="0" seleted>
                       Inside Bangladesh
-                    </label>
-                  </div>
+                    </b-form-radio>
+                    <b-form-radio v-model="address.permanent_location" name="permanent_location" value="1">Outside
+                      Bangladesh
+                    </b-form-radio>
+                  </b-form-group>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="address.permanent_location" type="radio"
-                           name="permanent_location" id="permanentOutsideBangladesh" value="1" checked>
-                    <label class="form-check-label" for="permanentOutsideBangladesh">
-                      Outside Bangladesh
-                    </label>
-
-                    <has-error :form="address" field="present_location"></has-error>
-                  </div>
 
                   <div class="form-group" v-if="address.permanent_location == 0">
                     <label>District</label>
@@ -3088,7 +3076,8 @@
                   <div class="form-group">
                     <label>Level of Education</label>
                     <select v-model="education.level_of_education_id" name="level_of_education_id"
-                            class="form-control" :class="{ 'is-invalid': education.errors.has('level_of_education_id') }"
+                            class="form-control"
+                            :class="{ 'is-invalid': education.errors.has('level_of_education_id') }"
                             @change="fetchLevelOfEducationDegree()">
                       <option value="0" selected>Select one</option>
 
@@ -3113,7 +3102,7 @@
                     <label>Exam Degree Title</label>
                     <select v-model="education.exam_degree_title_id" name="exam_degree_title_id"
                             class="form-control" :class="{ 'is-invalid': education.errors.has('exam_degree_title_id') }"
-                            >
+                    >
                       <option value="" selected>Select one</option>
 
                       <option v-for="row in degrees" :value="row.id">{{ row.name }}</option>
@@ -3159,11 +3148,11 @@
                     <label>Result</label>
                     <select v-model="education.result" name="result"
                             class="form-control" :class="{ 'is-invalid': education.errors.has('result') }"
-                            >
+                    >
                       <option value="" selected>Select one</option>
 
                       <option value="First Division/Class">First Division/Class</option>
-                      <option value="Second  Division/Class">Second  Division/Class</option>
+                      <option value="Second  Division/Class">Second Division/Class</option>
                       <option value="Third Division/Class">Third Division/Class</option>
                       <option value="Grade">Grade</option>
                       <option value="Appeared">Appeared</option>
@@ -3219,7 +3208,7 @@
                     <select v-model="education.passing_year_id" name="passing_year_id"
                             class="form-control"
                             :class="{ 'is-invalid': education.errors.has('passing_year_id') }"
-                            >
+                    >
                       <option value="" selected>Select one</option>
 
                       <option v-for="row in years" :value="row.id">{{ row.name }}</option>
@@ -3733,22 +3722,22 @@
       addAddressModal() {
         this.editMode = false;
         this.form.reset();
-        this.fetchCountryLists(),
-          this.fetchDistrictLists(),
-          $('#addAddress').modal('show');
+        this.fetchCountryLists();
+        this.fetchDistrictLists();
+        $('#addAddress').modal('show');
       },
       editAddressModal(row) {
 
         this.editMode = false;
         this.form.reset();
-        this.fetchCountryLists(),
-          this.fetchDistrictLists(),
-          this.fetchPresentThana(),
-          this.fetchPermanentThana(),
-          this.fetchPresentUnion(),
-          this.fetchPermanentUnion(),
-          $('#addAddress').modal('show');
+        this.fetchCountryLists();
+        this.fetchDistrictLists();
+        $('#addAddress').modal('show');
         this.address.fill(row);
+        this.fetchPresentThana();
+        this.fetchPresentUnion();
+        this.fetchPermanentThana();
+        this.fetchPermanentUnion();
       },
       createAddress() {
 
@@ -4580,7 +4569,7 @@
         $('#addEducationModal').modal('show');
       },
 
-      fetchLevelOfEducationDegree(){
+      fetchLevelOfEducationDegree() {
         var vm = this;
 
         var level_of_education_id = this.education.level_of_education_id;
