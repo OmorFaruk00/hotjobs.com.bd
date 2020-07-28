@@ -27,3 +27,29 @@
   }
 }
 </style>
+
+education
+addEducationModal
+
+'level_of_education_id' => 'required',
+'show_this_degree' => 'nullable',
+'exam_degree_title_id' => 'required',
+'concentration' => 'required',
+'institute_name' => 'required',
+'foreign_institute' => 'nullable|integer', //1=yes
+
+
+'result' => 'required', // ['First Division','Second Division','Third Division','Grade','Appeared','Enrolled','Awarded','Do not mention','Pass']
+'hide_marks_or_cgpa' => 'nullable|integer', //1=hide;
+'marks' => 'nullable',
+'cgpa' => 'nullable',
+'scale' => 'nullable',
+'passing_year_id' => 'required',
+'duration' => 'nullable',
+
+
+'achievement' => 'nullable',
+
+
+
+

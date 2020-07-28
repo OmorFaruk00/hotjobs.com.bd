@@ -481,19 +481,84 @@
 
                         <div id="collapseAcademicSummary" class="collapse"
                              aria-labelledby="headingAcademicSummary" data-parent="#accordion2">
+
                           <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-outline-secondary"
+                                      @click="addEducationModal"> Add Education (If Required)
+                              </button>
+                            </div>
+
+                            <div class="table-responsive" v-if="employee.academic_summaries.length > 0"
+                                 v-for="(row,index) in employee.academic_summaries">
+
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="text-muted">Academic {{ index+1 }}</h5>
+
+                                <div class="text-right" style="margin-top: -30px;">
+                                  <div class="btn-group">
+
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            @click="editEducationModal(row)"><i
+                                      class="bx bx-edit"></i> Edit
+                                    </button>
+
+                                    <button type="submit" class="btn btn-outline-warning btn-sm"
+                                            @click="deleteEducationModal(row.id)"><i
+                                      class="bx bx-trash"></i> Delete
+                                    </button>
+
+                                  </div>
+                                </div>
+
+
+                              </div>
+
+
+                              <!--<table class="table">
+                                <tr>
+                                  <th>Training Title <br>
+                                    <span>{{ row.training_title}}</span>
+                                  </th>
+
+                                  <th>Country <br>
+                                    <span>{{ row.country.countries_name}}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Topics Covered<br>
+                                    <span>{{ row.topics_covered}}</span>
+                                  </th>
+
+                                  <th>Training Year<br>
+                                    <span>{{ row.year.name}}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th>Institute<br>
+                                    <span>{{ row.institute}}</span>
+                                  </th>
+
+                                  <th>Duration<br>
+                                    <span>{{ row.duration}}</span>
+                                  </th>
+                                </tr>
+
+                                <tr>
+                                  <th colspan="2">Location<br>
+                                    <span>{{ row.location}}</span>
+                                  </th>
+
+                                </tr>
+
+                              </table>-->
+
+                            </div>
                           </div>
+
                         </div>
                       </div>
 
@@ -2065,7 +2130,7 @@
 
                   <div class="form-group">
                     <label>Year</label>
-                    <select v-model="training_summery.training_year_id" name="country_id"
+                    <select v-model="training_summery.training_year_id" name="training_year_id"
                             class="form-control"
                             :class="{ 'is-invalid': training_summery.errors.has('training_year_id') }"
                             required>
@@ -2996,6 +3061,213 @@
       </div>
     </div>
 
+    <!--addEducationModal-->
+    <div class="modal fade" id="addEducationModal" tabindex="-1" role="dialog"
+         aria-labelledby="addUserLabel"
+         aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" v-if="!editMode">Add Education</h5>
+            <h5 class="modal-title" v-else>Update Education</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form
+            @submit.prevent="editMode ? updateEducation() : createEducation()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Level of Education</label>
+                    <select v-model="education.level_of_education_id" name="level_of_education_id"
+                            class="form-control" :class="{ 'is-invalid': education.errors.has('level_of_education_id') }"
+                            @change="fetchLevelOfEducationDegree()">
+                      <option value="0" selected>Select one</option>
+
+                      <option v-for="row in level_of_educations" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="education" field="level_of_education_id"></has-error>
+                  </div>
+
+                  <b-form-checkbox
+                    id="show_this_degree"
+                    v-model="education.show_this_degree"
+                    name="show_this_degree"
+                    value="1"
+                    unchecked-value="0"
+                  >
+                    Show this degree in summary view at employer's end
+                  </b-form-checkbox>
+
+                  <div class="form-group">
+                    <label>Exam Degree Title</label>
+                    <select v-model="education.exam_degree_title_id" name="exam_degree_title_id"
+                            class="form-control" :class="{ 'is-invalid': education.errors.has('exam_degree_title_id') }"
+                            >
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in degrees" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+
+                    <has-error :form="education" field="exam_degree_title_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Concentration/ Major/Group</label>
+                    <input v-model="education.concentration" type="text" name="concentration"
+                           placeholder="Enter Concentration/ Major/Group"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('concentration') }">
+                    <has-error :form="education" field="concentration"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Institute Name</label>
+                    <input v-model="education.institute_name" type="text" name="institute_name"
+                           placeholder="Enter institute name"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('institute_name') }">
+                    <has-error :form="education" field="institute_name"></has-error>
+                  </div>
+
+                  <b-form-checkbox
+                    id="foreign_institute"
+                    v-model="education.foreign_institute"
+                    name="foreign_institute"
+                    value="1"
+                    unchecked-value="0"
+                  >
+                    This is a foreign institute
+                  </b-form-checkbox>
+
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label>Result</label>
+                    <select v-model="education.result" name="result"
+                            class="form-control" :class="{ 'is-invalid': education.errors.has('result') }"
+                            >
+                      <option value="" selected>Select one</option>
+
+                      <option value="First Division/Class">First Division/Class</option>
+                      <option value="Second  Division/Class">Second  Division/Class</option>
+                      <option value="Third Division/Class">Third Division/Class</option>
+                      <option value="Grade">Grade</option>
+                      <option value="Appeared">Appeared</option>
+                      <option value="Enrolled">Enrolled</option>
+                      <option value="Awarded">Awarded</option>
+                      <option value="Do not mention">Do not mention</option>
+                      <option value="Pass">Pass</option>
+
+                    </select>
+
+                    <has-error :form="education" field="result"></has-error>
+                  </div>
+
+                  <b-form-checkbox
+                    id="hide_marks_or_cgpa"
+                    v-model="education.hide_marks_or_cgpa"
+                    name="hide_marks_or_cgpa"
+                    value="1"
+                    unchecked-value="0"
+                  >
+                    Hide Marks/CGPA
+                  </b-form-checkbox>
+
+                  <div class="form-group">
+                    <label>Marks</label>
+                    <input v-model="education.marks" type="text" name="marks"
+                           placeholder="Enter marks"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('marks') }">
+                    <has-error :form="education" field="marks"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>CGPA</label>
+                    <input v-model="education.cgpa" type="text" name="cgpa"
+                           placeholder="Enter cgpa"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('cgpa') }">
+                    <has-error :form="education" field="cgpa"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Scale</label>
+                    <input v-model="education.scale" type="text" name="scale"
+                           placeholder="Enter scale"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('scale') }">
+                    <has-error :form="education" field="scale"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Passing Year</label>
+                    <select v-model="education.passing_year_id" name="passing_year_id"
+                            class="form-control"
+                            :class="{ 'is-invalid': education.errors.has('passing_year_id') }"
+                            >
+                      <option value="" selected>Select one</option>
+
+                      <option v-for="row in years" :value="row.id">{{ row.name }}</option>
+
+                    </select>
+                    <has-error :form="education" field="passing_year_id"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Duration</label>
+                    <input v-model="education.duration" type="text" name="duration"
+                           placeholder="Enter duration"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('duration') }">
+                    <has-error :form="education" field="duration"></has-error>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="form-group">
+                    <label>Achievement</label>
+                    <input v-model="education.achievement" type="text" name="achievement"
+                           placeholder="Enter achievement"
+                           class="form-control"
+                           :class="{ 'is-invalid': education.errors.has('achievement') }">
+                    <has-error :form="education" field="achievement"></has-error>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" :disabled="education.busy" v-show="!editMode"
+                      class="btn btn-success">Submit
+              </button>
+              <button type="submit" :disabled="education.busy" v-show="editMode"
+                      class="btn btn-success">Update
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -3037,6 +3309,8 @@
         permanent_unions: '',
         employee: '',
         skill_general_categories: '',
+        level_of_educations: '',
+        degrees: '',
         form: new Form({
           id: '',
           first_name: '',
@@ -3187,6 +3461,24 @@
         specialization_skill_activities: new Form({
           id: '',
           description: '',
+        }),
+
+        education: new Form({
+          id: '',
+          level_of_education_id: '',
+          show_this_degree: '',
+          exam_degree_title_id: '',
+          concentration: '',
+          institute_name: '',
+          foreign_institute: '',
+          result: '',
+          hide_marks_or_cgpa: '',
+          marks: '',
+          cgpa: '',
+          scale: '',
+          passing_year_id: '',
+          duration: '',
+          achievement: '',
         }),
 
         url: this.$axios.defaults.baseURL,
@@ -3373,6 +3665,24 @@
 
         });
 
+      },
+
+      async fetchLevelOfEducation() {
+        return await this.$axios.get('fetch-level-of-education')
+          .then((response) => {
+
+            this.level_of_educations = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
       },
 
       // fetch data end
@@ -4259,6 +4569,120 @@
           })
       },
       // SpecializationSkillDescription end
+
+
+      // SpecializationSkill start
+      addEducationModal() {
+        this.editMode = false;
+        this.education.reset();
+        this.fetchYearLists();
+        this.fetchLevelOfEducation();
+        $('#addEducationModal').modal('show');
+      },
+
+      fetchLevelOfEducationDegree(){
+        var vm = this;
+
+        var level_of_education_id = this.education.level_of_education_id;
+
+        this.$axios.get('fetch-degrees/' + level_of_education_id).then(function (response) {
+
+          vm.degrees = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+      },
+
+      editEducationModal(row) {
+        this.editMode = true;
+        this.education.reset();
+        this.fetchYearLists();
+        this.fetchLevelOfEducation();
+        $('#addEducationModal').modal('show');
+        this.education.fill(row);
+        this.fetchLevelOfEducationDegree();
+      },
+
+      createEducation() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.education.post(this.url + 'employee-academic-summary?token=' + token)
+          .then(() => {
+
+            $('#addEducationModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      updateEducation() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.education.put(this.url + 'employee-academic-summary/' + this.education.id + '?token=' + token)
+          .then(() => {
+
+            $('#addEducationModal').modal('hide');
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Updated successfully'
+            });
+
+            this.$emit('afterUpdate');
+
+          })
+          .catch(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      },
+
+      deleteEducationModal(row) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            var token = window.$nuxt.$cookies.get('token');
+            this.education.delete(this.url + 'employee-academic-summary/' + row + '?token=' + token).then(() => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.$emit('AfterDelete');
+            }).catch(() => {
+              Swal("Failed!", "There was something wrong.", "warning");
+            });
+          }
+        })
+      },
+      // SpecializationSkill end
 
 
     },
