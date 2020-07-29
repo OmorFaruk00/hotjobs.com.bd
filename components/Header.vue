@@ -147,7 +147,7 @@
 
       <div class="d-flex">
 
-        <div class="dropdown d-inline-block">
+        <div class="dropdown d-inline-block" v-if="! $nuxt.$cookies.get('token')">
           <button type="button" class="btn header-item noti-icon waves-effect text-info"
                   id="page-header-notifications-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -220,23 +220,31 @@
           </div>
         </div>
 
-        <div class="dropdown d-inline-block">
+        <div class="dropdown d-inline-block" v-if="$nuxt.$cookies.get('token')">
 
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                  alt="">
-            <span class="d-none d-xl-inline-block ml-1">Admin</span>
+            <span class="d-none d-xl-inline-block ml-1">{{ authUser.email}}</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </button>
 
           <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
+            <a class="dropdown-item" href="javaScript:void(0)"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
               Profile</a>
+
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#"><i
-              class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+            <!--<a class="dropdown-item text-danger" href="#"><i
+              class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>-->
+
+            <form id="logoutForm" @submit.prevent="logout()">
+              <input type="hidden" name="_token" value="">
+              <button type="submit"  class="dropdown-item text-danger">
+                <i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>
+                Logout</button>
+            </form>
           </div>
         </div>
 
@@ -248,7 +256,30 @@
 
 <script>
   export default {
-    name: "Header"
+    name: "Header",
+
+    data() {
+      return {
+        authUser:'',
+      }
+    },
+
+    methods:{
+      logout() {
+        window.$nuxt.$cookies.remove('token');
+        window.$nuxt.$cookies.remove('user');
+        // this.$router.push('/');
+        window.location.href  = "/";
+      },
+
+    },
+
+    mounted: function() {
+
+      this.authUser = window.$nuxt.$cookies.get('user');
+
+    },
+
   }
 </script>
 
