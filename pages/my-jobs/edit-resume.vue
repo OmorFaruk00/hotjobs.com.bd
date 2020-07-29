@@ -218,12 +218,26 @@
                                   <tr>
 
                                     <th>Present Address <br>
-                                      <span>{{ employee.address.present_village }}</span>
+                                      <span>{{ employee.address.present_village }} ,</span>
+                                      <span v-if="employee.address.present_location == '0'">
+                                        {{ employee.address.present_union.name }},
+                                        {{ employee.address.present_thana.name }},
+                                        {{ employee.address.present_district.name }}
+                                      </span>
+                                      <span v-else>{{ employee.address.present_country.countries_name }}</span>
                                     </th>
 
-                                    <th>Permanent Address<br>
-                                      <span>{{ employee.address.permanent_village }}</span>
+                                    <th v-if="employee.address.same_address == '0'">Permanent Address<br>
+                                      <span>{{ employee.address.permanent_village }},</span>
+                                      <span v-if="employee.address.permanent_location == '0'">
+                                        {{ employee.address.permanent_union.name }},
+                                        {{ employee.address.permanent_thana.name }},
+                                        {{ employee.address.permanent_district.name }}
+                                      </span>
+                                      <span v-else>{{ employee.address.permanent_country.countries_name }}</span>
                                     </th>
+
+                                    <th v-else>Permanent Address</th>
 
                                   </tr>
                                 </table>
@@ -4560,7 +4574,7 @@
       // SpecializationSkillDescription end
 
 
-      // SpecializationSkill start
+      // addEducationModal start
       addEducationModal() {
         this.editMode = false;
         this.education.reset();
@@ -4671,7 +4685,7 @@
           }
         })
       },
-      // SpecializationSkill end
+      // addEducationModal end
 
 
     },
