@@ -1348,15 +1348,15 @@
                     <form
                       @submit.prevent="uploadProfile()">
 
-                      <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-4 col-sm-12 offset-lg-4 offset-md-4">
 
                         <div class="form-group">
 
 
-                          <img :src="getPhoto()" alt="employee.image_url">
+                          <img :src="getPhoto()" alt="employee.image_url" width="250px">
 
 
-                          <input type="file" class="form-control" name="profile_photo" ref="profile_photo"
+                          <input type="file" class="form-control mt-2" name="profile_photo" ref="profile_photo"
                                  id="profile_photo" v-on:change="handleProfilePicUpload()" accept="images/*">
 
                         </div>
