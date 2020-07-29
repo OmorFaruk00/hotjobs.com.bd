@@ -526,6 +526,66 @@
                                   </div>
                                 </div>
 
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tr>
+                                      <th>Level of Education <br>
+                                        <span>{{ row.level_of_education.name }}</span>
+                                      </th>
+
+                                      <th>Result<br>
+                                        <span>{{ row.result }}</span>
+                                      </th>
+                                    </tr>
+
+                                    <tr v-if="row.result == 'First Division/Class' || row.result == 'Second  Division/Class' || row.result == 'Third Division/Class'">
+                                      <th colspan="2">Marks %<br>
+                                        <span>{{ row.marks }}</span>
+                                      </th>
+
+                                    </tr>
+
+                                    <tr v-if="row.result == 'Grade'">
+                                      <th>CGPA<br>
+                                        <span>{{ row.cgpa }}</span>
+                                      </th>
+
+                                      <th>Scale<br>
+                                        <span>{{ row.scale }}</span>
+                                      </th>
+                                    </tr>
+
+                                    <tr>
+                                      <th>Exam/Degree Title<br>
+                                        <span>{{ row.result }}</span>
+                                      </th>
+                                      <th>Expected Year of Passing <br>
+                                      <span>{{ row.passing_year.name }}</span></th>
+                                    </tr>
+
+                                    <tr>
+                                      <th>Concentration/ Major/Group <br>
+                                        <span>{{ row.concentration }}</span>
+                                      </th>
+                                      <th>Duration (Years)
+                                        <br>
+                                      <span>{{ row.duration }}</span></th>
+                                    </tr>
+
+                                    <tr>
+                                      <th colspan="2">Institute Name <br>
+                                        <span>{{ row.institute_name }}</span>
+                                      </th>
+                                    </tr>
+
+                                    <tr>
+                                      <th colspan="2">Achievement <br>
+                                        <span>{{ row.achievement }}</span>
+                                      </th>
+                                    </tr>
+                                  </table>
+                                </div>
+
 
                               </div>
 
@@ -3191,15 +3251,15 @@
                   </b-form-checkbox>
 
                   <div class="form-group">
-                    <label>Marks</label>
-                    <input v-model="education.marks" type="text" name="marks"
+                    <label>Marks (%)</label>
+                    <input v-model="education.marks" v-if="education.result == 'First Division/Class' || education.result == 'Second  Division/Class' || education.result == 'Third Division/Class'" type="text" name="marks"
                            placeholder="Enter marks"
                            class="form-control"
                            :class="{ 'is-invalid': education.errors.has('marks') }">
                     <has-error :form="education" field="marks"></has-error>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" v-if="education.result == 'Grade'">
                     <label>CGPA</label>
                     <input v-model="education.cgpa" type="text" name="cgpa"
                            placeholder="Enter cgpa"
@@ -3208,7 +3268,7 @@
                     <has-error :form="education" field="cgpa"></has-error>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" v-if="education.result == 'Grade'">
                     <label>Scale</label>
                     <input v-model="education.scale" type="text" name="scale"
                            placeholder="Enter scale"
