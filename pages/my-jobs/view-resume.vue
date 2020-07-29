@@ -386,6 +386,7 @@
   import dashboardNavbar from '~/components/MyJobs/navbar'
 
   export default {
+    middleware: 'authenticated',
     name: "view-resume",
     data() {
       return {
