@@ -328,7 +328,7 @@
                         <!--Career and Application Information -->
 
                         <!--Preferred Areas -->
-                        <div class="card mb-1 shadow-none">
+                        <!--<div class="card mb-1 shadow-none">
                           <div class="card-header" id="headingPreferredAreas">
                             <h6 class="m-0">
                               <a href="#collapsePreferredAreas" class="text-dark collapsed" data-toggle="collapse"
@@ -349,7 +349,7 @@
                                 </button>
                               </div>
 
-                              <!--<div class="table-responsive" v-if="employee.preferred_areas">
+                              &lt;!&ndash;<div class="table-responsive" v-if="employee.preferred_areas">
 
                                 <div class="text-right my-2">
 
@@ -404,12 +404,12 @@
                                   </tr>
 
                                 </table>
-                              </div>-->
+                              </div>&ndash;&gt;
 
                             </div>
 
                           </div>
-                        </div>
+                        </div>-->
                         <!--Preferred Areas -->
 
                         <!--Other Relevant Information -->
@@ -2046,7 +2046,7 @@
                   <div class="form-group">
                     <label>Functional (Skill)</label>
                     <select v-model="prefer_area.general_skill_id" name="general_skill_id"
-                            class="form-control " :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }">
+                            class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }">
 
                       <option v-for="row in skill_general_categories" v-html="row.name"></option>
 
@@ -2061,7 +2061,7 @@
                   <div class="form-group">
                     <label>Special (Skill)</label>
                     <select v-model="prefer_area.special_skill_id" name="special_skill_id"
-                            class="form-control bSelect"
+                            class="form-control"
                             :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }">
 
                       <option v-for="row in skill_general_categories" v-html="row.name"></option>
@@ -3362,6 +3362,7 @@
 
     data() {
       return {
+        aa:'',
         editMode: false,
         countries: '',
         districts: '',
