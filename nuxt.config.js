@@ -78,7 +78,7 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
   },
 
   /*

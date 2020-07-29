@@ -29,7 +29,7 @@
                     employee.personal_details.last_name }}</h4>
                   <h6>Address:
 
-                    <span v-if="present_location == 0">
+                    <span v-if="address.present_location == 0">
                       {{ address.present_union.name }},
                       {{ address.present_thana.name }},
                       {{ address.present_district.name }}
@@ -314,7 +314,7 @@
                       <tr>
                         <th>Current Location</th>
                         <td>
-                          <span v-if="present_location == 0">
+                          <span v-if="address.present_location == 0">
                             {{ address.present_union.name }},
                             {{ address.present_thana.name }},
                             {{ address.present_district.name }}
