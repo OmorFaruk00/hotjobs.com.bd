@@ -3573,6 +3573,13 @@
               title: 'There was something wrong'
             });
 
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
           })
       },
 

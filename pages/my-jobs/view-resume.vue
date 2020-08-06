@@ -386,6 +386,20 @@
 <script>
   import dashboardNavbar from '~/components/MyJobs/navbar'
 
+  import Swal from 'sweetalert2'
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   export default {
     middleware: 'authenticated',
     name: "view-resume",
@@ -439,6 +453,20 @@
               icon: 'warning',
               title: 'There was something wrong'
             });
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
 
           })
       },
