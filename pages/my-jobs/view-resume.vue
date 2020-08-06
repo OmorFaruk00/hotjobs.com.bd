@@ -27,24 +27,25 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                   <h4 v-if="employee.personal_details">{{ employee.personal_details.first_name }} {{
                     employee.personal_details.last_name }}</h4>
-                  <h6>Address:
+                  <h6 v-if="address">Address:
 
                     <span v-if="address.present_location == 0">
                       {{ address.present_union.name }},
                       {{ address.present_thana.name }},
                       {{ address.present_district.name }}
                     </span>
+
                     <span v-if="address.present_location == 1">{{ address.present_country.countries_name }}</span>
 
                   </h6>
 
-                  <h6>Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
-                  <h6>Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
-                  <h6>Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
-                  <h6>Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
+                  <h6 v-if="personal_details.mobile_no_1">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
+                  <h6 v-if="personal_details.mobile_no_2">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
+                  <h6 v-if="personal_details.mobile_no_3">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
+                  <h6 v-if="personal_details.email">Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-12 text-right">
+                <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
 
                   <img :src="getPhoto()" alt="employee.image_url" width="160px">
 
@@ -52,12 +53,12 @@
 
                 <div class="col-12 border"></div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="career_and_application_information">
                   <h4 class="bg-soft-light">Career Objective:</h4>
                   <p>{{ career_and_application_information.objective }}</p>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="employment_histories.length > 0">
                   <h4 class="bg-soft-light">Employment History:</h4>
 
                   <div class="card-body" v-for="(row,index) in employment_histories">
@@ -70,7 +71,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="academic_summaries.length > 0">
                   <h4 class="bg-soft-light">Academic Qualification: :</h4>
 
                   <div class="table-responsive">
@@ -103,7 +104,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="training_summaries.length > 0">
                   <h4 class="bg-soft-light">Training Summary :</h4>
 
                   <div class="table-responsive">
@@ -139,7 +140,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="training_summaries.length > 0">
                   <h4 class="bg-soft-light">Professional Qualification :</h4>
 
                   <div class="table-responsive">
@@ -171,7 +172,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="career_and_application_information">
                   <h4 class="bg-soft-light">Career and Application Information :</h4>
 
                   <div class="table-responsive">
@@ -207,7 +208,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="specialization_skills.length > 0">
                   <h4 class="bg-soft-light">Specialization :</h4>
 
                   <div class="table-responsive">
@@ -221,7 +222,7 @@
                       </thead>
 
                       <tbody>
-                      <tr v-for="row in specialization__skills">
+                      <tr v-for="row in specialization_skills">
                         <td>
                           <ul>
                             <li>{{ row.skill_name }}</li>
@@ -237,7 +238,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="language_proficiencies.length > 0">
                   <h4 class="bg-soft-light">Language Proficiency :</h4>
 
                   <div class="table-responsive">
@@ -265,7 +266,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="personal_details">
                   <h4 class="bg-soft-light">Personal Details :</h4>
 
                   <div class="table-responsive">
@@ -313,15 +314,15 @@
 
                       <tr>
                         <th>Current Location</th>
-                        <td>
+                        <td v-if="address">
                           <span v-if="address.present_location == 0">
                             {{ address.present_union.name }},
                             {{ address.present_thana.name }},
                             {{ address.present_district.name }}
                           </span>
                           <span v-if="address.present_location == 1">{{ address.present_country.countries_name }}</span>
-
                         </td>
+                        <td v-else></td>
                       </tr>
 
                     </table>
@@ -329,7 +330,7 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" v-if="references.length > 0">
                   <h4 class="bg-soft-light">Reference (s) :</h4>
 
                   <div class="table-responsive" v-for="(row,index) in references">
@@ -398,7 +399,7 @@
         academic_summaries: '',
         training_summaries: '',
         professional_certification_summaries: '',
-        specialization__skills: '',
+        specialization_skills: '',
         language_proficiencies: '',
         references: '',
         url: this.$axios.defaults.baseURL,
@@ -420,6 +421,7 @@
         return await this.$axios.get('/auth-employee/' + token + '?token=' + token)
           .then((response) => {
             this.employee = response.data;
+            // console.log(response.data);
             this.address = response.data.address;
             this.personal_details = response.data.personal_details;
             this.career_and_application_information = response.data.career_and_application_information;
@@ -427,7 +429,7 @@
             this.academic_summaries = response.data.academic_summaries;
             this.training_summaries = response.data.training_summaries;
             this.professional_certification_summaries = response.data.professional_certification_summaries;
-            this.specialization__skills = response.data.specialization__skills;
+            this.specialization_skills = response.data.specialization__skills;
             this.language_proficiencies = response.data.language_proficiencies;
             this.references = response.data.references;
           })
