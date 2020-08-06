@@ -234,7 +234,7 @@
                                         {{ employee.address.permanent_thana.name }},
                                         {{ employee.address.permanent_district.name }}
                                       </span>
-                                      <span v-else>{{ employee.address.permanent_country.countries_name }}</span>
+                                      <span v-if="employee.address.same_address != '0' && employee.address.permanent_country.countries_name">{{ employee.address.permanent_country.countries_name }}</span>
                                     </th>
 
                                     <th v-else>Permanent Address</th>
