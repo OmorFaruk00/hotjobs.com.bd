@@ -1623,7 +1623,7 @@
 
 
                   <b-form-group label="Present Address">
-                    <b-form-radio v-model="address.present_location" name="present_location" value="0">Inside
+                    <b-form-radio v-model="address.present_location" name="present_location" value="0" aria-selected="true">Inside
                       Bangladesh
                     </b-form-radio>
                     <b-form-radio v-model="address.present_location" name="present_location" value="1">Outside
@@ -1707,7 +1707,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6" v-if="address.same_address == 0">
 
-                  <h1>Permanent Address</h1>
+<!--                  <h1>Permanent Address</h1>-->
 
                   <b-form-group label="Permanent Address">
                     <b-form-radio v-model="address.permanent_location" name="permanent_location" value="0" seleted>
@@ -3399,16 +3399,16 @@
         }),
         address: new Form({
           id: '',
-          present_location: '',
+          present_location: '0',
           present_district_id: '',
           present_thana_id: '',
           present_union_id: '',
           present_country_id: '',
           present_village: '',
 
-          same_address: '',
+          same_address: '0',
 
-          permanent_location: '',
+          permanent_location: '0',
           permanent_district_id: '',
           permanent_thana_id: '',
           permanent_union_id: '',
@@ -3804,7 +3804,7 @@
       // address start
       addAddressModal() {
         this.editMode = false;
-        this.form.reset();
+        this.address.reset();
         this.fetchCountryLists();
         this.fetchDistrictLists();
         $('#addAddress').modal('show');
@@ -3812,7 +3812,7 @@
       editAddressModal(row) {
 
         this.editMode = false;
-        this.form.reset();
+        this.address.reset();
         this.fetchCountryLists();
         this.fetchDistrictLists();
         $('#addAddress').modal('show');
