@@ -2434,20 +2434,22 @@
                     <input type="text" value="Continuing" v-if="experience.currently_working == 1" readonly>
 
                     <no-ssr>
-                      <datepicker v-if="!experience.currently_working == 1" v-model="experience.to_date"
+                      <datepicker v-if="experience.currently_working != 1" v-model="experience.to_date"
                                   :class="{ 'is-invalid': experience.errors.has('to_date') }" required></datepicker>
 
                     </no-ssr>
                     <has-error :form="experience" field="to_date"></has-error>
                   </div>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" v-model="experience.currently_working" type="checkbox"
-                           name="currently_working" id="currently_working">
-                    <label class="form-check-label" for="currently_working">
-                      Currently Working
-                    </label>
-                  </div>
+                  <b-form-checkbox
+                    id="currently_working"
+                    v-model="experience.currently_working"
+                    name="currently_working"
+                    value="1"
+                    unchecked-value="0"
+                  >
+                    Currently Working
+                  </b-form-checkbox>
 
                 </div>
 
@@ -4458,7 +4460,10 @@
               icon: 'success',
               title: 'Updated successfully'
             });
+
+            this.$emit('afterCreate');
           })
+
           .catch((error) => {
             Swal("Failed!", "There was something wrong.", "warning");
           });

@@ -39,10 +39,10 @@
 
                   </h6>
 
-                  <h6 v-if="personal_details.mobile_no_1">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
-                  <h6 v-if="personal_details.mobile_no_2">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
-                  <h6 v-if="personal_details.mobile_no_3">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
-                  <h6 v-if="personal_details.email">Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
+                  <h6 v-if="personal_details">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
+                  <h6 v-if="personal_details">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
+                  <h6 v-if="personal_details">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
+                  <h6 v-if="personal_details">Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
