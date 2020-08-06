@@ -328,7 +328,7 @@
                         <!--Career and Application Information -->
 
                         <!--Preferred Areas -->
-                        <!--<div class="card mb-1 shadow-none">
+                        <div class="card mb-1 shadow-none">
                           <div class="card-header" id="headingPreferredAreas">
                             <h6 class="m-0">
                               <a href="#collapsePreferredAreas" class="text-dark collapsed" data-toggle="collapse"
@@ -349,7 +349,7 @@
                                 </button>
                               </div>
 
-                              &lt;!&ndash;<div class="table-responsive" v-if="employee.preferred_areas">
+                              <!--<div class="table-responsive" v-if="employee.preferred_areas">
 
                                 <div class="text-right my-2">
 
@@ -404,12 +404,12 @@
                                   </tr>
 
                                 </table>
-                              </div>&ndash;&gt;
+                              </div>-->
 
                             </div>
 
                           </div>
-                        </div>-->
+                        </div>
                         <!--Preferred Areas -->
 
                         <!--Other Relevant Information -->
@@ -1342,7 +1342,7 @@
                   </div>
                 </div>
 
-                <div class="tab-pane" id="photograph" role="tabpanel">
+                <div class="tab-pane" id="photograph" role="tabpanel5">
                   <div class="card-body">
 
                     <form
@@ -2042,16 +2042,19 @@
 
               <div class="row">
 
+
+
                 <div class="col-lg-6 co-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Functional (Skill)</label>
-                    <select v-model="prefer_area.general_skill_id" name="general_skill_id"
-                            class="form-control" :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }">
 
-                      <option v-for="row in skill_general_categories" v-html="row.name"></option>
+                    <b-form-select v-model="prefer_area.general_skill_id" name="general_skill_id" :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }"  class="mb-3" multiple :select-size="5">
 
-                    </select>
+                      <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
+                      <b-form-select-option v-for="row in skill_general_categories" :value="row.id">{{ row.name }}</b-form-select-option>
+
+                    </b-form-select>
 
                     <has-error :form="prefer_area" field="general_skill_id"></has-error>
                   </div>
@@ -2060,13 +2063,13 @@
                 <div class="col-lg-6 co-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Special (Skill)</label>
-                    <select v-model="prefer_area.special_skill_id" name="special_skill_id"
-                            class="form-control"
-                            :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }">
+                    <b-form-select v-model="prefer_area.special_skill_id" name="special_skill_id" :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }"  class="mb-3" multiple :select-size="5">
 
-                      <option v-for="row in skill_general_categories" v-html="row.name"></option>
+                      <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
-                    </select>
+                      <b-form-select-option v-for="row in skill_general_categories" :value="row.id">{{ row.name }}</b-form-select-option>
+
+                    </b-form-select>
                     <has-error :form="prefer_area" field="special_skill_id"></has-error>
                   </div>
                 </div>
@@ -3365,7 +3368,6 @@
 
     data() {
       return {
-        aa:'',
         editMode: false,
         countries: '',
         districts: '',
@@ -3436,8 +3438,8 @@
           inside_bangladesh: '',
           outside_bangladesh: '',
           preferred_organization_type: '',
-          general_skill_id: '',
-          special_skill_id: '',
+          general_skill_id: [],
+          special_skill_id: [],
         }),
 
         training_summery: new Form({
@@ -3946,6 +3948,31 @@
         this.fetchSkillGeneralCategory();
         $('#addPreferAreaModal').modal('show');
         this.prefer_area.fill(row);
+      },
+
+      createPreferredAreas(){
+
+        var token = window.$nuxt.$cookies.get('token');
+        this.prefer_area.post(this.url + 'employee-preferred-areas?token=' + token)
+          .then(() => {
+
+            $('#addPreferAreaModal').modal('hide');
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+            this.$emit('afterCreate');
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+
       },
       // addPreferredAreas end
 
