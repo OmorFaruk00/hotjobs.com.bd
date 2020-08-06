@@ -224,16 +224,19 @@
 
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
-                 alt="">
+
+            <img class="rounded-circle header-profile-user" v-if="getPhoto()" :src="getPhoto()"alt="">
+
+            <img class="rounded-circle header-profile-user" v-else src="~/static/images/logo.png"alt="">
+
             <span class="d-none d-xl-inline-block ml-1">{{ authUser.email}}</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </button>
 
           <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a class="dropdown-item" href="javaScript:void(0)"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
-              Profile</a>
+            <nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i class="bx bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume</nuxt-link>
+            <nuxt-link class="dropdown-item" to="/my-jobs/edit-resume"><i class="bx bx-edit-alt font-size-16 align-middle mr-1"></i>Edit Resume</nuxt-link>
 
             <div class="dropdown-divider"></div>
             <!--<a class="dropdown-item text-danger" href="#"><i
@@ -261,6 +264,7 @@
     data() {
       return {
         authUser:'',
+        url: this.$axios.defaults.baseURL,
       }
     },
 
@@ -270,6 +274,11 @@
         window.$nuxt.$cookies.remove('user');
         // this.$router.push('/');
         window.location.href  = "/";
+      },
+
+      getPhoto() {
+        let image_url = this.url + this.authUser.image_url;
+        return image_url;
       },
 
     },
