@@ -234,7 +234,8 @@
                                         {{ employee.address.permanent_thana.name }},
                                         {{ employee.address.permanent_district.name }}
                                       </span>
-                                      <span v-if="employee.address.same_address != '0' && employee.address.permanent_country.countries_name">{{ employee.address.permanent_country.countries_name }}</span>
+                                      <span
+                                        v-if="employee.address.same_address != '0' && employee.address.permanent_country.countries_name">{{ employee.address.permanent_country.countries_name }}</span>
                                     </th>
 
                                     <th v-else>Permanent Address</th>
@@ -343,13 +344,13 @@
 
                             <div class="card-body">
 
-                              <div class="text-center">
+                              <div class="text-center" v-if="!employee.preferred_areas">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         @click="addPreferredAreasModal">Add Preferred Areas
                                 </button>
                               </div>
 
-                              <!--<div class="table-responsive" v-if="employee.preferred_areas">
+                              <div class="table-responsive" v-else>
 
                                 <div class="text-right my-2">
 
@@ -366,18 +367,19 @@
                                   </tr>
 
 
-
                                   <tr>
                                     <th>Functional <br>
 
-                                    <span v-for="row in employee.preferred_areas.preferred_areas_skills">
-                                        {{ row.skill.name }} ,
+                                      <span v-for="row in employee.preferred_areas.preferred_areas_skills">
+                                        <span class="badge badge-secondary mx-1" v-if="row.skill.type =='general'">{{ row.skill.name }}</span>
                                     </span>
 
                                     </th>
 
                                     <th>Special Skill <br>
-                                    <span>test</span>
+                                      <span v-for="row in employee.preferred_areas.preferred_areas_skills">
+                                        <span class="badge badge-secondary mx-1" v-if="row.skill.type =='special'">{{ row.skill.name }}</span>
+                                    </span>
                                     </th>
                                   </tr>
 
@@ -387,24 +389,24 @@
 
                                   <tr>
                                     <th colspan="2">Inside Bangladesh<br>
-                                    <span>{{ employee.preferred_areas.inside_bangladesh }}</span>
+                                      <span>{{ employee.preferred_areas.inside_bangladesh }}</span>
                                     </th>
                                   </tr>
 
                                   <tr>
                                     <th colspan="2">Outside Bangladesh<br>
-                                    <span>{{ employee.preferred_areas.outside_bangladesh }}</span>
+                                      <span>{{ employee.preferred_areas.outside_bangladesh }}</span>
                                     </th>
                                   </tr>
 
                                   <tr>
                                     <th colspan="2">Add your preferred organization type<br>
-                                    <span>{{ employee.preferred_areas.preferred_organization_type }}</span>
+                                      <span>{{ employee.preferred_areas.preferred_organization_type }}</span>
                                     </th>
                                   </tr>
 
                                 </table>
-                              </div>-->
+                              </div>
 
                             </div>
 
@@ -538,7 +540,8 @@
                                       </th>
                                     </tr>
 
-                                    <tr v-if="row.result == 'First Division/Class' || row.result == 'Second  Division/Class' || row.result == 'Third Division/Class'">
+                                    <tr
+                                      v-if="row.result == 'First Division/Class' || row.result == 'Second  Division/Class' || row.result == 'Third Division/Class'">
                                       <th colspan="2">Marks %<br>
                                         <span>{{ row.marks }}</span>
                                       </th>
@@ -560,7 +563,7 @@
                                         <span>{{ row.result }}</span>
                                       </th>
                                       <th>Expected Year of Passing <br>
-                                      <span>{{ row.passing_year.name }}</span></th>
+                                        <span>{{ row.passing_year.name }}</span></th>
                                     </tr>
 
                                     <tr>
@@ -569,7 +572,7 @@
                                       </th>
                                       <th>Duration (Years)
                                         <br>
-                                      <span>{{ row.duration }}</span></th>
+                                        <span>{{ row.duration }}</span></th>
                                     </tr>
 
                                     <tr>
@@ -1623,7 +1626,8 @@
 
 
                   <b-form-group label="Present Address">
-                    <b-form-radio v-model="address.present_location" name="present_location" value="0" aria-selected="true">Inside
+                    <b-form-radio v-model="address.present_location" name="present_location" value="0"
+                                  aria-selected="true">Inside
                       Bangladesh
                     </b-form-radio>
                     <b-form-radio v-model="address.present_location" name="present_location" value="1">Outside
@@ -1707,7 +1711,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6" v-if="address.same_address == 0">
 
-<!--                  <h1>Permanent Address</h1>-->
+                  <!--                  <h1>Permanent Address</h1>-->
 
                   <b-form-group label="Permanent Address">
                     <b-form-radio v-model="address.permanent_location" name="permanent_location" value="0" seleted>
@@ -2041,18 +2045,18 @@
             <div class="modal-body">
 
               <div class="row">
-
-
-
                 <div class="col-lg-6 co-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Functional (Skill)</label>
 
-                    <b-form-select v-model="prefer_area.general_skill_id" name="general_skill_id" :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }"  class="mb-3" multiple :select-size="5">
+                    <b-form-select v-model="prefer_area.general_skill_id" name="general_skill_id"
+                                   :class="{ 'is-invalid': prefer_area.errors.has('general_skill_id') }" class="mb-3"
+                                   multiple :select-size="5">
 
                       <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
-                      <b-form-select-option v-for="row in skill_general_categories" :value="row.id">{{ row.name }}</b-form-select-option>
+                      <b-form-select-option v-for="(row,key) in skill_general_categories" :value="row.id">{{ row.name }}
+                      </b-form-select-option>
 
                     </b-form-select>
 
@@ -2063,11 +2067,14 @@
                 <div class="col-lg-6 co-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Special (Skill)</label>
-                    <b-form-select v-model="prefer_area.special_skill_id" name="special_skill_id" :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }"  class="mb-3" multiple :select-size="5">
+                    <b-form-select v-model="prefer_area.special_skill_id" name="special_skill_id"
+                                   :class="{ 'is-invalid': prefer_area.errors.has('special_skill_id') }" class="mb-3"
+                                   multiple :select-size="5">
 
                       <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
-                      <b-form-select-option v-for="row in skill_general_categories" :value="row.id">{{ row.name }}</b-form-select-option>
+                      <b-form-select-option v-for="(row,key) in skill_special_categories" :value="row.id">{{ row.name }}
+                      </b-form-select-option>
 
                     </b-form-select>
                     <has-error :form="prefer_area" field="special_skill_id"></has-error>
@@ -3257,7 +3264,9 @@
 
                   <div class="form-group">
                     <label>Marks (%)</label>
-                    <input v-model="education.marks" v-if="education.result == 'First Division/Class' || education.result == 'Second  Division/Class' || education.result == 'Third Division/Class'" type="text" name="marks"
+                    <input v-model="education.marks"
+                           v-if="education.result == 'First Division/Class' || education.result == 'Second  Division/Class' || education.result == 'Third Division/Class'"
+                           type="text" name="marks"
                            placeholder="Enter marks"
                            class="form-control"
                            :class="{ 'is-invalid': education.errors.has('marks') }">
@@ -3378,6 +3387,7 @@
         permanent_unions: '',
         employee: '',
         skill_general_categories: '',
+        skill_special_categories: '',
         level_of_educations: '',
         degrees: '',
         form: new Form({
@@ -3441,6 +3451,9 @@
           general_skill_id: [],
           special_skill_id: [],
         }),
+
+        general_skills: [],
+        special_skills: [],
 
         training_summery: new Form({
           id: '',
@@ -3646,6 +3659,24 @@
           .then((response) => {
 
             this.skill_general_categories = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      async fetchSkillSpecialCategory() {
+        return await this.$axios.get('skill-special-category')
+          .then((response) => {
+
+            this.skill_special_categories = response.data;
 
           })
 
@@ -3938,6 +3969,7 @@
         this.editMode = false;
         this.prefer_area.reset();
         this.fetchSkillGeneralCategory();
+        this.fetchSkillSpecialCategory();
         $('#addPreferAreaModal').modal('show');
       },
 
@@ -3946,12 +3978,35 @@
         this.editMode = false;
         this.prefer_area.reset();
         this.fetchSkillGeneralCategory();
+        this.fetchSkillSpecialCategory();
         $('#addPreferAreaModal').modal('show');
-        this.prefer_area.fill(row);
+
+        this.prefer_area.id = row.id;
+        this.prefer_area.inside_bangladesh = row.inside_bangladesh;
+        this.prefer_area.outside_bangladesh = row.outside_bangladesh;
+        this.prefer_area.preferred_organization_type = row.preferred_organization_type;
+
+        const skills = row.preferred_areas_skills;
+
+        for (const value of skills) {
+
+          if (value.skill.type == 'general') {
+            this.prefer_area.general_skill_id.push(value.skill_id);
+          }
+
+        }
+
+        for (const value of skills) {
+
+          if (value.skill.type == 'special') {
+            this.prefer_area.special_skill_id.push(value.skill_id);
+          }
+
+        }
+
       },
 
-      createPreferredAreas(){
-
+      createPreferredAreas() {
         var token = window.$nuxt.$cookies.get('token');
         this.prefer_area.post(this.url + 'employee-preferred-areas?token=' + token)
           .then(() => {
