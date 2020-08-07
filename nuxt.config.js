@@ -46,13 +46,19 @@ export default {
   /*
   ** Global CSS
   */
-  css: [],
+  css: ['@/assets/style/style.css'],
+
+  transition:{
+    name: 'fade',
+    mode:'out-in',
+  },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    {src:'@/plugins/datepicker.js', ssr:false,},
+    {src:'@/plugins/datepicker.js', ssr:false},
+    {src:'@/plugins/owl.js', ssr:false},
     {src: '@/plugins/vueBootstrap.js'},
     {src: '@/plugins/scrollTo.js'},
   ],

@@ -18,10 +18,10 @@
     "loader": "^2.1.1",
     "nuxt": "^2.13.0",
     "sweetalert2": "^9.17.0",
+    "v-owl-carousel": "^1.0.8",
     "vform": "^1.0.1",
     "vue": "^2.6.11",
     "vue-count-to": "^1.0.13",
-    "vue-owl-carousel": "^2.0.3",
     "vue-scrollto": "^2.18.2",
     "vuejs-datepicker": "^1.6.2"
   },

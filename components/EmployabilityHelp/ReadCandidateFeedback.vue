@@ -5,7 +5,7 @@
 
         <h1 class="card-title text-center">Read candidate feedback</h1>
 
-        <carousel v-if="isNuxtReady" :autoplay="true" :nav="false"
+        <carousel :autoplay="true" :nav="false"
                   :responsive="{0:{items:1,nav:false},576:{items:1,nav:false},768:{items:2,nav:false},992:{items:2,nav:false},1200:{items:2,nav:false}}">
 
           <div class="companies-item">
@@ -161,29 +161,8 @@
 </template>
 
 <script>
-
-  const carousel = () => window && window !== undefined ? import("vue-owl-carousel") : null;
   export default {
     name: "ReadCandidateFeedback",
-    data() {
-      return {
-        isNuxtReady: false,
-      }
-    },
-    components: {
-      carousel
-    },
-
-    mounted() {
-      const vm = this;
-      if (process.browser) {
-        window.onNuxtReady(app => {
-          console.log("Nuxt ready!");
-          vm.isNuxtReady = true;
-        });
-      }
-    },
-
   }
 </script>
 
