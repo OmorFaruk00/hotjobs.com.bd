@@ -18,8 +18,12 @@
         <myFooter/>
       </div>
 
+      <a href="javaScript:void(0)" id="scrollUp" v-scroll-to="'body'"><i class="bx bx-up-arrow-alt"></i></a>
 
     </div>
+
+
+
     <!-- END layout-wrapper -->
   </body>
 </template>
@@ -40,5 +44,21 @@
 </script>
 
 <style scoped>
+
+  #scrollUp {
+    background: #EC1A3A none repeat scroll 0 0;
+    bottom: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    color: #fff;
+    font-size: 25px;
+    height: 30px;
+    /*line-height: 27px;*/
+    position: fixed;
+    right: 7px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    width: 30px;
+    z-index: 200;
+  }
 
 </style>

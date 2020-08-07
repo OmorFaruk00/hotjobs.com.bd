@@ -54,6 +54,7 @@ export default {
   plugins: [
     {src:'@/plugins/datepicker.js', ssr:false,},
     {src: '@/plugins/vueBootstrap.js'},
+    {src: '@/plugins/scrollTo.js'},
   ],
   /*
   ** Auto import components
@@ -70,7 +71,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    'nuxt-vue-multiselect'
   ],
 
   axios: {
