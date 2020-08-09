@@ -417,11 +417,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Industry Type</label>
-                        <select v-model="form.industry_type_id" name="industry_type_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_type_id') }" >
-                          <option value="" selected>Select one</option>
+                        <select v-model="form.industry_category_id" name="industry_category_id"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }" >
+                          <option value="" selected>Select Category</option>
 
-                          <option v-for="row in countries" :value="row.id">{{ row.countries_name }}</option>
+                          <option v-for="row in industry_categories" :value="row.id">{{ row.name }}</option>
 
                         </select>
 
@@ -571,11 +571,11 @@
 
                     <div class="col-12">
                       <b-form-checkbox
-                        id="checkbox-1"
-                        v-model="status"
-                        name="checkbox-1"
-                        value="accepted"
-                        unchecked-value="not_accepted"
+                        id="pricing_policy"
+                        v-model="form.pricing_policy"
+                        name="pricing_policy"
+                        value="1"
+                        unchecked-value="0"
                       >
                         I Have Read <a href="javaScript:void(0)" @click="pricingPolicy">Pricing Policy</a> And Accepted It
                       </b-form-checkbox>
@@ -615,6 +615,7 @@
         countries:'',
         districts:'',
         thanas:'',
+        industry_categories:'',
         form: new Form({
           id: '',
           username: '',
@@ -628,7 +629,7 @@
           city: '',
           company_address: '',
           company_address_bangla: '',
-          industry_type_id: '',
+          industry_category_id: '',
           industry_type: '',
           business_description: '',
           license_no: '',
@@ -638,6 +639,7 @@
           contact_person_email: '',
           contact_person_designation: '',
           contact_person_mobile: '',
+          pricing_policy:'',
 
         }),
       }
@@ -658,6 +660,9 @@
 
       pricingPolicy(){
 
+        alert('working');
+        return false;
+
       },
 
       addEmployerModal() {
@@ -671,6 +676,24 @@
           .then((response) => {
 
             this.countries = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      async fetchIndustryCategoryLists() {
+        return await this.$axios.get('industry-category-lists')
+          .then((response) => {
+
+            this.industry_categories = response.data;
 
           })
 
@@ -732,9 +755,11 @@
     },
 
     created() {
+
       this.$on('FetchData', () => {
         this.fetchCountryLists();
         this.fetchDistrictLists();
+        this.fetchIndustryCategoryLists();
       });
 
     },
