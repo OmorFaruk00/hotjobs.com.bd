@@ -346,7 +346,7 @@
                       <div class="form-group">
                         <label>Company Address</label>
                         <select v-model="form.country_id" name="country_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }" >
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }" @change="countryName()">
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in countries" :value="row.id">{{ row.countries_name }}</option>
@@ -357,7 +357,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12" v-if="country_name == 'Bangladesh' ">
                       <div class="form-group">
                         <select v-model="form.district_id" name="district_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('district_id') }"
@@ -372,7 +372,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12" v-if="country_name == 'Bangladesh' ">
                       <div class="form-group">
                         <select v-model="form.thana_id" name="thana_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('thana_id') }" >
@@ -386,7 +386,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12" v-if="country_name != 'Bangladesh' ">
                       <div class="form-group">
                         <input v-model="form.city" type="text" name="city" placeholder="Enter City"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('city') }" >
@@ -447,7 +447,7 @@
 
                               <b-form-checkbox-group
                                 v-model="form.industry_types"
-                                :options="industry_types"
+                                :options="industry_type_lists"
                                 class="mb-3"
                                 value-field="id"
                                 text-field="name"
@@ -462,7 +462,7 @@
                       </div>
 
                       <div class="mt-3">Selected: <strong>{{ form.industry_types }}</strong></div>
-                      
+
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -599,7 +599,8 @@
         districts:'',
         thanas:'',
         industry_categories:'',
-        industry_types:'',
+        industry_type_lists:'',
+        country_name:'',
         form: new Form({
           id: '',
           username: '',
@@ -695,7 +696,7 @@
         return await this.$axios.get('industry-type-lists')
           .then((response) => {
 
-            this.industry_types = response.data;
+            this.industry_type_lists = response.data;
 
           })
 
@@ -747,6 +748,26 @@
         });
 
       },
+
+      countryName(){
+
+        var vm = this;
+        var country_id = vm.form.country_id;
+
+        this.$axios.get('country-name/' + country_id).then(function (response) {
+
+          vm.country_name = response.data.countries_name;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+      }
 
     },
 
