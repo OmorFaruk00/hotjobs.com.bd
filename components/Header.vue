@@ -442,44 +442,27 @@
                       <div class="card type-box">
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aliquam amet corporis deleniti dolor enim in laboriosam maxime molestias nemo, nobis, officia, quibusdam voluptate?
+
+                            <div class="col-lg-12 col-md-12 col-sm-12" >
+
+                              <b-form-checkbox-group
+                                v-model="form.industry_types"
+                                :options="industry_types"
+                                class="mb-3"
+                                value-field="id"
+                                text-field="name"
+                                disabled-field="notEnabled"
+                              ></b-form-checkbox-group>
+
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis culpa dolorem earum eos itaque neque pariatur, tempora? Culpa fugiat iste iusto sapiente temporibus tenetur.
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dicta eum, exercitationem iste perspiciatis porro reiciendis rerum. Laudantium nobis soluta veniam. A iure minus rem.
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aliquam amet corporis deleniti dolor enim in laboriosam maxime molestias nemo, nobis, officia, quibusdam voluptate?
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur delectus facilis laboriosam mollitia optio quis reprehenderit. Consectetur deleniti eius facilis inventore sapiente sint sit.
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dicta eum, exercitationem iste perspiciatis porro reiciendis rerum. Laudantium nobis soluta veniam. A iure minus rem.
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aliquam amet corporis deleniti dolor enim in laboriosam maxime molestias nemo, nobis, officia, quibusdam voluptate?
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque earum fugit hic in inventore ipsum laborum modi molestiae nobis quibusdam recusandae, ullam voluptatum. Maxime, quam?
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dicta eum, exercitationem iste perspiciatis porro reiciendis rerum. Laudantium nobis soluta veniam. A iure minus rem.
-                            </div>
                           </div>
                         </div>
+
                       </div>
+
+                      <div class="mt-3">Selected: <strong>{{ form.industry_types }}</strong></div>
+                      
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -616,6 +599,7 @@
         districts:'',
         thanas:'',
         industry_categories:'',
+        industry_types:'',
         form: new Form({
           id: '',
           username: '',
@@ -707,6 +691,24 @@
           })
       },
 
+      async fetchIndustryTypeLists() {
+        return await this.$axios.get('industry-type-lists')
+          .then((response) => {
+
+            this.industry_types = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
       async fetchDistrictLists() {
         return await this.$axios.get('district-lists')
           .then((response) => {
@@ -760,6 +762,7 @@
         this.fetchCountryLists();
         this.fetchDistrictLists();
         this.fetchIndustryCategoryLists();
+        this.fetchIndustryTypeLists();
       });
 
     },
