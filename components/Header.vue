@@ -276,7 +276,7 @@
                 </button>
               </div>
 
-              <form @submit.prevent="createEmployee()">
+              <form @submit.prevent="createEmployer()">
                 <div class="modal-body">
                   <div class="row">
 
@@ -443,7 +443,6 @@
                       </div>
                     </div>
 
-
                     <div class="col-12" v-if="form.industry_category_id">
                       <div class="card type-box">
                         <div class="card-body">
@@ -577,7 +576,8 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button type="submit" :disabled="form.busy" class="btn btn-success">Submit</button>
+                  <button type="submit" v-if="form.pricing_policy == 1" :disabled="form.busy" class="btn btn-success">Submit</button>
+                  <button type="submit" v-else  class="btn btn-success" disabled>Submit</button>
                 </div>
               </form>
 
@@ -593,7 +593,24 @@
 </template>
 
 <script>
-  import {Form} from "vform";
+  import Vue from 'vue'
+  import Swal from 'sweetalert2'
+  import {Form, HasError, AlertError} from 'vform'
+
+  Vue.component(HasError.name, HasError)
+  Vue.component(AlertError.name, AlertError)
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   export default {
     name: "Header",
@@ -639,6 +656,7 @@
     },
 
     methods: {
+
       logout() {
         window.$nuxt.$cookies.remove('token');
         window.$nuxt.$cookies.remove('user');
@@ -823,6 +841,26 @@
 
 
       },
+
+      createEmployer() {
+
+        this.form.post(this.url + 'employer')
+          .then(() => {
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Account Created successfully.Please login '
+            });
+            $('#addEmployer').modal('hide');
+
+          })
+          .catch((error) => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      }
 
     },
 
