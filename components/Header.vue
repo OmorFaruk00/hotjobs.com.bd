@@ -288,7 +288,7 @@
                       <div class="form-group">
                         <label>Username</label>
                         <input v-model="form.username" type="text" name="username" placeholder="Enter username"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('username') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('username') }">
                         <has-error :form="form" field="username"></has-error>
                       </div>
                     </div>
@@ -297,7 +297,7 @@
                       <div class="form-group">
                         <label>Password</label>
                         <input v-model="form.password" type="password" name="password" placeholder="Enter password"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('password') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                         <has-error :form="form" field="password"></has-error>
                       </div>
                     </div>
@@ -308,7 +308,7 @@
                         <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                                placeholder="Enter password confirmation"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
-                               >
+                        >
                         <has-error :form="form" field="password_confirmation"></has-error>
                       </div>
                     </div>
@@ -326,7 +326,7 @@
                         <label>Company Name</label>
                         <input v-model="form.company_name" type="text" name="company_name"
                                placeholder="Enter company name"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('company_name') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('company_name') }">
                         <has-error :form="form" field="company_name"></has-error>
                       </div>
                     </div>
@@ -337,7 +337,7 @@
                         <input v-model="form.company_name_bangla" type="text" name="company_name_bangla"
                                placeholder="কোম্পানির নাম বাংলায় লিখুন"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('company_name_bangla') }"
-                               >
+                        >
                         <has-error :form="form" field="company_name_bangla"></has-error>
                       </div>
                     </div>
@@ -346,7 +346,8 @@
                       <div class="form-group">
                         <label>Company Address</label>
                         <select v-model="form.country_id" name="country_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }" @change="countryName()">
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }"
+                                @change="countryName()">
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in countries" :value="row.id">{{ row.countries_name }}</option>
@@ -361,7 +362,7 @@
                       <div class="form-group">
                         <select v-model="form.district_id" name="district_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('district_id') }"
-                                v-on:change="FetchThana" >
+                                v-on:change="FetchThana">
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in districts" :value="row.id">{{ row.name }}</option>
@@ -375,7 +376,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12" v-if="country_name == 'Bangladesh' ">
                       <div class="form-group">
                         <select v-model="form.thana_id" name="thana_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('thana_id') }" >
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('thana_id') }">
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in thanas" :value="row.id">{{ row.name }}</option>
@@ -389,7 +390,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12" v-if="country_name != 'Bangladesh' ">
                       <div class="form-group">
                         <input v-model="form.city" type="text" name="city" placeholder="Enter City"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('city') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('city') }">
                         <has-error :form="form" field="city"></has-error>
                       </div>
                     </div>
@@ -418,7 +419,8 @@
                       <div class="form-group">
                         <label>Industry Type</label>
                         <select v-model="form.industry_category_id" name="industry_category_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }" @change="fetchIndustryCategory()">
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }"
+                                @change="fetchIndustryCategory()">
                           <option value="0" selected>All</option>
 
                           <option v-for="row in industry_categories" :value="row.id">{{ row.name }}</option>
@@ -429,21 +431,25 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12" v-if="form.industry_category_id">
                       <div class="form-group mt-8">
                         <label></label>
-                        <input v-model="form.industry_type" type="industry_type" name="industry_type" placeholder="Search Industry Type"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('industry_type') }" >
-                        <has-error :form="form" field="industry_type"></has-error>
+                        <input v-model="form.industry_type_keyword" type="industry_type_keyword"
+                               name="industry_type_keyword" placeholder="Search Industry Type"
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('industry_type_keyword') }"
+                               @blur="filterIndustryType()">
+                        <has-error :form="form" field="industry_type_keyword"></has-error>
                       </div>
                     </div>
 
-                    <div class="col-12">
+
+                    <div class="col-12" v-if="form.industry_category_id">
                       <div class="card type-box">
                         <div class="card-body">
                           <div class="row">
 
-                            <div class="col-lg-12 col-md-12 col-sm-12" >
+                            <div class="col-lg-12 col-md-12 col-sm-12">
 
                               <b-form-checkbox-group
                                 v-model="form.industry_types"
@@ -468,10 +474,10 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-group">
                         <label>Business Description</label>
-                      <textarea v-model="form.business_description" id="business_description" cols="30" rows="4"
-                                name="present_village" placeholder="Enter Business Description"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('business_description') }"></textarea>
+                        <textarea v-model="form.business_description" id="business_description" cols="30" rows="4"
+                                  name="present_village" placeholder="Enter Business Description"
+                                  class="form-control"
+                                  :class="{ 'is-invalid': form.errors.has('business_description') }"></textarea>
                         <has-error :form="form" field="business_description"></has-error>
                       </div>
                     </div>
@@ -481,7 +487,7 @@
                         <label>Business / Trade License No</label>
                         <input v-model="form.license_no" type="text" name="Business / Trade License No"
                                placeholder="Enter license no"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('license_no') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('license_no') }">
                         <has-error :form="form" field="license_no"></has-error>
                       </div>
                     </div>
@@ -503,7 +509,7 @@
                         <label>Website URL</label>
                         <input v-model="form.website_url" type="text" name="website_url"
                                placeholder="Enter website url"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('website_url') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('website_url') }">
                         <has-error :form="form" field="website_url"></has-error>
                       </div>
                     </div>
@@ -521,7 +527,7 @@
                         <label>Contact Person's Name</label>
                         <input v-model="form.contact_person_name" type="text" name="contact_person_name"
                                placeholder="Enter contact person name"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }">
                         <has-error :form="form" field="contact_person_name"></has-error>
                       </div>
 
@@ -529,7 +535,7 @@
                         <label>Contact Person's Email</label>
                         <input v-model="form.contact_person_email" type="email" name="contact_person_email"
                                placeholder="Enter contact person email"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }">
                         <has-error :form="form" field="contact_person_email"></has-error>
                       </div>
                     </div>
@@ -539,7 +545,8 @@
                         <label>Contact Person's Designation</label>
                         <input v-model="form.contact_person_designation" type="text" name="contact_person_designation"
                                placeholder="Enter contact person designation"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_designation') }" >
+                               class="form-control"
+                               :class="{ 'is-invalid': form.errors.has('contact_person_designation') }">
                         <has-error :form="form" field="contact_person_designation"></has-error>
                       </div>
 
@@ -547,7 +554,7 @@
                         <label>Contact Person's Mobile</label>
                         <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
                                placeholder="Enter contact person mobile"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }" >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }">
                         <has-error :form="form" field="contact_person_mobile"></has-error>
                       </div>
                     </div>
@@ -560,10 +567,10 @@
                         value="1"
                         unchecked-value="0"
                       >
-                        I Have Read <a href="javaScript:void(0)" @click="pricingPolicy">Pricing Policy</a> And Accepted It
+                        I Have Read <a href="javaScript:void(0)" @click="pricingPolicy">Pricing Policy</a> And Accepted
+                        It
                       </b-form-checkbox>
                     </div>
-
 
 
                   </div>
@@ -595,12 +602,12 @@
       return {
         authUser: '',
         url: this.$axios.defaults.baseURL,
-        countries:'',
-        districts:'',
-        thanas:'',
-        industry_categories:'',
-        industry_type_lists:'',
-        country_name:'',
+        countries: '',
+        districts: '',
+        thanas: '',
+        industry_categories: '',
+        industry_type_lists: '',
+        country_name: '',
         form: new Form({
           id: '',
           username: '',
@@ -615,6 +622,7 @@
           company_address: '',
           company_address_bangla: '',
           industry_category_id: '',
+          industry_type_keyword: '',
           industry_types: '',
           business_description: '',
           license_no: '',
@@ -624,7 +632,7 @@
           contact_person_email: '',
           contact_person_designation: '',
           contact_person_mobile: '',
-          pricing_policy:'',
+          pricing_policy: '',
 
         }),
       }
@@ -643,7 +651,7 @@
         return image_url;
       },
 
-      pricingPolicy(){
+      pricingPolicy() {
 
         alert('working');
         return false;
@@ -749,7 +757,7 @@
 
       },
 
-      countryName(){
+      countryName() {
 
         var vm = this;
         var country_id = vm.form.country_id;
@@ -769,10 +777,10 @@
 
       },
 
-      fetchIndustryCategory(){
+      fetchIndustryCategory() {
 
         var vm = this;
-        vm.form.industry_types=[];
+        vm.form.industry_types = [];
         var industry_category_id = vm.form.industry_category_id;
 
         this.$axios.get('fetch-industry-type-lists/' + industry_category_id).then(function (response) {
@@ -787,7 +795,34 @@
           });
 
         });
-      }
+      },
+
+      filterIndustryType() {
+
+        var vm = this;
+        var industry_category_id = vm.form.industry_category_id;
+
+
+        var industry_type_keyword = vm.form.industry_type_keyword;
+
+        this.$axios.get('fetch-keyword-industry-type-lists/' + industry_category_id + '/' + industry_type_keyword).then(function (response) {
+
+          vm.industry_type_lists = response.data;
+
+          console.log(response.data);
+
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+
+
+      },
 
     },
 
@@ -815,12 +850,14 @@
   h3 {
     color: #EC1A3A;
   }
-  .type-box{
+
+  .type-box {
     max-height: 225px;
     overflow-y: scroll;
     border: 1px solid #ddd;
   }
-  .mt-8{
+
+  .mt-8 {
     margin-top: 8px;
   }
 
