@@ -418,8 +418,8 @@
                       <div class="form-group">
                         <label>Industry Type</label>
                         <select v-model="form.industry_category_id" name="industry_category_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }" >
-                          <option value="" selected>Select Category</option>
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }" @change="fetchIndustryCategory()">
+                          <option value="0" selected>All</option>
 
                           <option v-for="row in industry_categories" :value="row.id">{{ row.name }}</option>
 
@@ -615,7 +615,7 @@
           company_address: '',
           company_address_bangla: '',
           industry_category_id: '',
-          industry_type: '',
+          industry_types: '',
           business_description: '',
           license_no: '',
           rl_no: '',
@@ -767,6 +767,26 @@
 
         });
 
+      },
+
+      fetchIndustryCategory(){
+
+        var vm = this;
+        vm.form.industry_types=[];
+        var industry_category_id = vm.form.industry_category_id;
+
+        this.$axios.get('fetch-industry-type-lists/' + industry_category_id).then(function (response) {
+
+          vm.industry_type_lists = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
       }
 
     },
@@ -783,7 +803,7 @@
         this.fetchCountryLists();
         this.fetchDistrictLists();
         this.fetchIndustryCategoryLists();
-        this.fetchIndustryTypeLists();
+        // this.fetchIndustryTypeLists();
       });
 
     },
