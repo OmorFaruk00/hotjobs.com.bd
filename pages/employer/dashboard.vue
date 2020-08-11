@@ -38,6 +38,7 @@
   import employerNavbar from '~/components/Employer/Navbar'
 
   export default {
+    middleware: 'employerAuthenticated',
     name: "dashboard",
     components: {
       employerNavbar,
