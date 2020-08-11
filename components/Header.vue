@@ -205,7 +205,7 @@
                         <p class="mb-1">Lorem ipsum dolor sit amet.</p>
 
                         <p class="mb-0">
-                          <nuxt-link to="/" class="btn btn-outline-primary">Sign in</nuxt-link>
+                          <nuxt-link to="/employer/login" class="btn btn-outline-primary">Sign in</nuxt-link>
                           <button type="button" class="btn btn-outline-info waves-effect waves-light"
                                   @click="addEmployerModal">
                             Create Account
@@ -466,7 +466,7 @@
 
                       </div>
 
-                      <div class="mt-3">Selected: <strong>{{ form.industry_types }}</strong></div>
+<!--                      <div class="mt-3">Selected: <strong>{{ form.industry_types }}</strong></div>-->
 
                     </div>
 
@@ -827,7 +827,7 @@
 
           vm.industry_type_lists = response.data;
 
-          console.log(response.data);
+          // console.log(response.data);
 
 
         }).catch(function (error) {
@@ -861,7 +861,7 @@
               title: 'There was something wrong'
             });
           })
-      }
+      },
 
     },
 
