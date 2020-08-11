@@ -11,17 +11,13 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1>Dashboard</h1>
+              <h1 class="text-center">Account Details</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, iste!</p>
             </div>
           </div>
         </div>
-
       </div>
-
-
     </div>
-
   </div>
 </template>
 
@@ -31,7 +27,7 @@
 
   export default {
     middleware: 'employerAuthenticated',
-    name: "dashboard",
+    name: "edit-profile",
     components: {
       employerNavbar,
       employerSubNavbar,

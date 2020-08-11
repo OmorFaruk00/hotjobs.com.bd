@@ -286,7 +286,7 @@
               class="bx bx-home-circle font-size-16 align-middle mr-1"></i>Dashboard
             </nuxt-link>
 
-            <nuxt-link class="dropdown-item" to="/employer/dashboard"><i
+            <nuxt-link class="dropdown-item" to="/employer/edit-profile"><i
               class="bx bxs-edit font-size-16 align-middle mr-1"></i>Edit Profile
             </nuxt-link>
 
