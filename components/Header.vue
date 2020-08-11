@@ -282,6 +282,10 @@
           <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
 
+            <nuxt-link class="dropdown-item" to="/employer/dashboard"><i
+              class="bx bx-home-circle font-size-16 align-middle mr-1"></i>Dashboard
+            </nuxt-link>
+
             <!--<nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i
               class="bx bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
             </nuxt-link>
