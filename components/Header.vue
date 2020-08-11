@@ -225,7 +225,7 @@
           </div>
         </div>
 
-        <div class="dropdown d-inline-block" v-if="$nuxt.$cookies.get('token')">
+        <div class="dropdown d-inline-block" v-if="$nuxt.$cookies.get('token') && authUser.type == 'employee' ">
 
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
