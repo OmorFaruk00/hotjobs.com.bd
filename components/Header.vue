@@ -849,11 +849,12 @@
 
             Toast.fire({
               icon: 'success',
-              title: 'Account Created successfully.Please login '
+              title: 'Account Created successfully.Please login with valid email and password'
             });
             $('#addEmployer').modal('hide');
 
           })
+
           .catch((error) => {
             Toast.fire({
               icon: 'warning',
