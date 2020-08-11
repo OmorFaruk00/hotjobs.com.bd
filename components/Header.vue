@@ -577,7 +577,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                   <button type="submit" v-if="form.pricing_policy == 1" :disabled="form.busy" class="btn btn-success">Submit</button>
-                  <button type="submit" v-else  class="btn btn-success" disabled>Submit</button>
+                  <button type="submit" v-else  class="btn btn-success" style="cursor: not-allowed" disabled>Submit</button>
                 </div>
               </form>
 

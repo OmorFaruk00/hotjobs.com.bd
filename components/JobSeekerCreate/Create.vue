@@ -157,7 +157,8 @@
                     <label>Password Confirmation</label>
                     <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                            placeholder="Enter password confirmation"
-                           class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" required>
+                           class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
+                           required>
                     <has-error :form="form" field="password_confirmation"></has-error>
                   </div>
                 </div>
@@ -230,8 +231,8 @@
           mobile_number: '',
           password: '',
           password_confirmation: '',
-          country_id:'',
-          category:''
+          country_id: '',
+          category: ''
         }),
         url: this.$axios.defaults.baseURL,
       }
@@ -241,8 +242,8 @@
       addGeneralEmployeeModal() {
         this.form.reset();
         this.fetchCountryLists(),
-        this.fetchSpecialCategory(),
-        $('#addGeneralEmployee').modal('show');
+          this.fetchSpecialCategory(),
+          $('#addGeneralEmployee').modal('show');
       },
 
       async fetchCountryLists() {
