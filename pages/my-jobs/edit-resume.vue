@@ -3372,7 +3372,7 @@
   })
 
   export default {
-    middleware: 'authenticated',
+    middleware: 'employeeAuthenticated',
     name: "edit-resume",
 
     data() {

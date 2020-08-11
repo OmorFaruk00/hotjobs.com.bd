@@ -401,7 +401,7 @@
   })
 
   export default {
-    middleware: 'authenticated',
+    middleware: 'employeeAuthenticated',
     name: "view-resume",
     data() {
       return {

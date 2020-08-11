@@ -10,14 +10,14 @@
         <form @submit.prevent="submitLoginForm()">
           <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
             <div class="form-group">
-              <input type="text" name="username" class="form-control" v-model="username" placeholder="username">
+              <input type="text" name="username" class="form-control" v-model="username" placeholder="username" required>
               <small id="email_help" class="form-text text-danger"></small>
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
             <div class="form-group">
-              <input type="password" name="password" class="form-control" v-model="password" placeholder="Password">
+              <input type="password" name="password" class="form-control" v-model="password" placeholder="Password" required>
               <small id="password_help" class="form-text text-danger"></small>
             </div>
           </div>
@@ -84,9 +84,7 @@
           .then((response) => {
             $(".form-text").html("&nbsp;");
 
-            console.log(response.data);
-
-            /*window.$nuxt.$cookies.remove('token');
+            window.$nuxt.$cookies.remove('token');
             window.$nuxt.$cookies.remove('user');
 
             window.$nuxt.$cookies.set('token', response.data.token, {
@@ -99,17 +97,15 @@
               maxAge:1800
             })
 
-            window.location.href  = "/my-jobs/dashboard";*/
+            window.location.href  = "/employer/dashboard";
 
           })
           .catch((error) => {
-
 
             $(".form-text").html("&nbsp;");
             $.each(error.response.data, function(index, value){
               $("#" + index + "_help").html(value[0]);
             });
-
 
             if (error.response.status == 400) {
               Toast.fire({

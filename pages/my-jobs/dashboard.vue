@@ -36,7 +36,7 @@
   import dashboardNavbar from '~/components/MyJobs/navbar'
 
   export default {
-    middleware: 'authenticated',
+    middleware: 'employeeAuthenticated',
     name: "dashboard",
     components: {
       dashboardNavbar

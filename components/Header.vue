@@ -240,12 +240,54 @@
 
           <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
+            <nuxt-link class="dropdown-item" to="/my-jobs/dashboard"><i
+              class="bx bx-home-circle font-size-16 align-middle mr-1"></i>Dashboard
+            </nuxt-link>
+
             <nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i
-              class="bx bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
+              class="bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
             </nuxt-link>
             <nuxt-link class="dropdown-item" to="/my-jobs/edit-resume"><i
               class="bx bx-edit-alt font-size-16 align-middle mr-1"></i>Edit Resume
             </nuxt-link>
+
+            <div class="dropdown-divider"></div>
+            <!--<a class="dropdown-item text-danger" href="#"><i
+              class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>-->
+
+            <form id="logoutForm" @submit.prevent="logout()">
+              <input type="hidden" name="_token" value="">
+              <button type="submit" class="dropdown-item text-danger">
+                <i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>
+                Logout
+              </button>
+            </form>
+          </div>
+        </div>
+
+
+        <div class="dropdown d-inline-block" v-if="$nuxt.$cookies.get('token') && authUser.type == 'employer' ">
+
+          <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <img class="rounded-circle header-profile-user" v-if="getPhoto()" :src="getPhoto()" alt="">
+
+            <img class="rounded-circle header-profile-user" v-else src="~/static/images/logo.png" alt="">
+
+            <span class="d-none d-xl-inline-block ml-1">{{ authUser.username }}</span>
+            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <!-- item-->
+
+            <!--<nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i
+              class="bx bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
+            </nuxt-link>
+            <nuxt-link class="dropdown-item" to="/my-jobs/edit-resume"><i
+              class="bx bx-edit-alt font-size-16 align-middle mr-1"></i>Edit Resume
+            </nuxt-link>-->
 
             <div class="dropdown-divider"></div>
             <!--<a class="dropdown-item text-danger" href="#"><i
