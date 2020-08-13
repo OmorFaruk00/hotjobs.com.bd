@@ -299,9 +299,9 @@
                           <li class="next" v-show="firstStep"><a href="#">Next</a></li>
                         </ul>
 
-                       <!-- <ul class="pager wizard twitter-bs-wizard-pager-link" v-show="firstStep">
-                          <li class="previous"><a href="#">Previous</a></li>
-                        </ul>-->
+                        <!-- <ul class="pager wizard twitter-bs-wizard-pager-link" v-show="firstStep">
+                           <li class="previous"><a href="#">Previous</a></li>
+                         </ul>-->
 
                       </form>
                     </div>
@@ -428,7 +428,7 @@
 
                                   <small v-if="errors.minimum_salary" class="text-danger with-errors"
                                          v-html="errors.minimum_salary[0]"></small>
-                                  
+
                                 </div>
 
 
@@ -582,12 +582,415 @@
                           <ul class="pager wizard twitter-bs-wizard-pager-link">
 
                             <div class="text-right">
-                              <button v-show="!secondStep && firstStep" type="submit" :disabled="primary_job_information.busy"
+                              <button v-show="!secondStep && firstStep" type="submit"
+                                      :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Submit
                               </button>
                             </div>
 
+
+                            <li class="next" v-show="secondStep"><a href="#">Next</a></li>
+                            <li class="previous" v-show="secondStep"><a href="#">Previous</a></li>
+                          </ul>
+
+                        </form>
+                      </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="candidate-requirements">
+                      <div>
+
+                        <form @submit.prevent="createCandidatesRequirements()">
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Degree</label>
+                            <div class="col-md-10">
+                              <div class="row">
+                                <div class="col-md-2 col-sm-12">
+
+                                  <b-form-select v-model="primary_job_information.job_responsibilities" class="mb-3">
+                                    <b-form-select-option :value="null">Please select an option</b-form-select-option>
+                                    <b-form-select-option value="a">Option A</b-form-select-option>
+                                    <b-form-select-option value="b" disabled>Option B (disabled)</b-form-select-option>
+                                    <b-form-select-option-group label="Grouped options">
+                                      <b-form-select-option :value="{ C: '3PO' }">Option with object value
+                                      </b-form-select-option>
+                                      <b-form-select-option :value="{ R: '2D2' }">Another option with object value
+                                      </b-form-select-option>
+                                    </b-form-select-option-group>
+                                  </b-form-select>
+
+                                </div>
+
+                                <div class="col-md-2 col-sm-12">
+
+                                  <b-form-select v-model="primary_job_information.job_responsibilities" class="mb-3">
+                                    <b-form-select-option :value="null">Please select an option</b-form-select-option>
+                                    <b-form-select-option value="a">Option A</b-form-select-option>
+                                    <b-form-select-option value="b" disabled>Option B (disabled)</b-form-select-option>
+                                    <b-form-select-option-group label="Grouped options">
+                                      <b-form-select-option :value="{ C: '3PO' }">Option with object value
+                                      </b-form-select-option>
+                                      <b-form-select-option :value="{ R: '2D2' }">Another option with object value
+                                      </b-form-select-option>
+                                    </b-form-select-option-group>
+                                  </b-form-select>
+
+                                </div>
+
+                                <div class="col-md-4 col-sm-12 mb-2">
+
+                                  <input type="text" class="form-control">
+
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+
+                                  <button type="button" class="btn btn-info"><i class="bx bx-plus-circle"></i> Add More
+                                  </button>
+
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-12">
+                                  <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                      <thead>
+                                      <tr>
+                                        <th>Level</th>
+                                        <th>Degree</th>
+                                        <th>Concentration/ Major</th>
+                                        <th>Action</th>
+                                      </tr>
+                                      </thead>
+
+                                    </table>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Preferred Educational Institution</label>
+                            <div class="col-md-10">
+
+
+                              <b-form-select v-model="primary_job_information.institution_id" name="institution_id"
+                                             class="mb-3"
+                                             multiple :select-size="5">
+
+                                <b-form-select-option :value="null" disabled>Please select an option
+                                </b-form-select-option>
+
+                                <!--<b-form-select-option v-for="(row,key) in skill_general_categories" :value="row.id">{{ row.name }}
+                                </b-form-select-option>-->
+
+                              </b-form-select>
+
+
+                              <small v-if="errors.job_context" class="text-danger with-errors"
+                                     v-html="errors.job_context[0]"></small>
+
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Other Educational Qualification</label>
+                            <div class="col-md-10">
+                              <textarea v-model="primary_job_information.other_educational_qualification"
+                                        id="other_educational_qualification"
+                                        cols="30"
+                                        rows="3"
+                                        name="other_educational_qualification"
+                                        placeholder="Write other educational qualification"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': primary_job_information.errors.has('other_educational_qualification') }">
+                              </textarea>
+
+                              <small v-if="errors.other_educational_qualification" class="text-danger with-errors"
+                                     v-html="errors.other_educational_qualification[0]"></small>
+
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Training/ Trade Course</label>
+                            <div class="col-md-10">
+                              <textarea v-model="primary_job_information.training_trade_course"
+                                        id="training_trade_course"
+                                        cols="30"
+                                        rows="3"
+                                        name="training_trade_course" placeholder="Write training trade course"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': primary_job_information.errors.has('training_trade_course') }">
+                              </textarea>
+
+                              <small v-if="errors.training_trade_course" class="text-danger with-errors"
+                                     v-html="errors.training_trade_course[0]"></small>
+
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Professional Certification</label>
+                            <div class="col-md-10">
+                              <textarea v-model="primary_job_information.professional_certification"
+                                        id="professional_certification"
+                                        cols="30"
+                                        rows="3"
+                                        name="professional_certification" placeholder="Write professional certification"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': primary_job_information.errors.has('professional_certification') }">
+                              </textarea>
+
+                              <small v-if="errors.professional_certification" class="text-danger with-errors"
+                                     v-html="errors.professional_certification[0]"></small>
+
+                            </div>
+                          </div>
+
+                          <h3>Experience and Business Area</h3>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Experience</label>
+                            <div class="col-md-10 mt-10">
+
+                              <div class="row">
+                                <div class="col-12">
+                                  <b-form-select v-model="primary_job_information.experience_type" class="mb-3">
+                                    <b-form-select-option value="0">No Experience Required</b-form-select-option>
+                                    <b-form-select-option value="1">Experience Required</b-form-select-option>
+                                  </b-form-select>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Minimum year of experience</label>
+
+                                    <select name="primary_job_information.minimum_year_of_experience"
+                                            id="minimum_year_of_experience" class="form-control">
+                                      <option value="Any">Any</option>
+                                      <option :value="number" v-for="number in 50">{{ number }}</option>
+                                    </select>
+
+                                    <small class="text-success">Use both fields for range or use only one field.</small>
+
+                                    <small v-if="errors.minimum_year_of_experience" class="text-danger with-errors"
+                                           v-html="errors.minimum_year_of_experience[0]"></small>
+
+                                  </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Maximum year of experience</label>
+
+                                    <select name="primary_job_information.maximum_year_of_experience"
+                                            id="maximum_year_of_experience" class="form-control">
+                                      <option value="Any">Any</option>
+                                      <option :value="number" v-for="number in 50">{{ number }}</option>
+                                    </select>
+                                    <small v-if="errors.maximum_year_of_experience" class="text-danger with-errors"
+                                           v-html="errors.maximum_year_of_experience[0]"></small>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-12">
+                                  <b-form-checkbox
+                                    id="freshers_applay"
+                                    v-model="status"
+                                    name="freshers_applay"
+                                    value="1"
+                                    unchecked-value="0"
+                                  >
+                                    Freshers are also encouraged to apply
+
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-12">
+                                  <div class="form-group">
+                                    <label>Area of experience</label>
+
+                                    <textarea v-model="primary_job_information.area_of_experience"
+                                              id="area_of_experience"
+                                              cols="30"
+                                              rows="3"
+                                              name="area_of_experience"
+                                              placeholder="Write area of experience"
+                                              class="form-control"
+                                              :class="{ 'is-invalid': primary_job_information.errors.has('area_of_experience') }">
+                                    </textarea>
+
+                                    <small v-if="errors.professional_certification" class="text-danger with-errors"
+                                           v-html="errors.area_of_experience[0]"></small>
+
+                                  </div>
+                                </div>
+
+                                <div class="col-12">
+                                  <div class="form-group">
+                                    <label>Area of business</label>
+
+                                    <textarea v-model="primary_job_information.area_of_business"
+                                              id="area_of_business"
+                                              cols="30"
+                                              rows="3"
+                                              name="area_of_business"
+                                              placeholder="Write area of business"
+                                              class="form-control"
+                                              :class="{ 'is-invalid': primary_job_information.errors.has('area_of_business') }">
+                                    </textarea>
+
+                                    <small v-if="errors.area_of_business" class="text-danger with-errors"
+                                           v-html="errors.area_of_business[0]"></small>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class=" row">
+                            <label class="col-md-2 col-form-label">Skills</label>
+                            <div class="col-md-10 mt-10">
+
+                              <textarea v-model="primary_job_information.skills"
+                                        id="skills" cols="30"
+                                        rows="3"
+                                        name="hard_copy" placeholder="Write skills"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': primary_job_information.errors.has('skills') }"
+                              ></textarea>
+
+                              <small v-if="errors.skills" class="text-danger with-errors"
+                                     v-html="errors.skills[0]"></small>
+
+                            </div>
+
+                          </div>
+
+                          <div class=" row">
+                            <label class="col-md-2 col-form-label">Additional Requirements</label>
+                            <div class="col-md-10 mt-10">
+
+                              <textarea v-model="primary_job_information.additional_requirements"
+                                        id="additional_requirements" cols="30"
+                                        rows="3"
+                                        name="hard_copy" placeholder="Write additional requirements"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': primary_job_information.errors.has('additional_requirements') }"
+                              ></textarea>
+
+                              <small v-if="errors.additional_requirements" class="text-danger with-errors"
+                                     v-html="errors.additional_requirements[0]"></small>
+
+                            </div>
+
+                          </div>
+
+                          <h3>Personal Information</h3>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Gender</label>
+                            <div class="col-md-10">
+
+                              <b-form-checkbox-group
+                                v-model="primary_job_information.gender"
+                                :options="options_gender"
+                                class="mb-3"
+                                value-field="item"
+                                text-field="name"
+                                disabled-field="notEnabled"
+                              ></b-form-checkbox-group>
+
+                              <small v-if="errors.gender" class="text-danger with-errors"
+                                     v-html="errors.gender[0]"></small>
+
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Age</label>
+                            <div class="col-md-10">
+
+                              <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Min</label>
+
+                                    <select name="primary_job_information.age_min"
+                                            id="age_min" class="form-control">
+                                      <option value="Any">Any</option>
+                                      <option :value="number" v-for="number in 90">{{ number }}</option>
+                                    </select>
+
+                                    <small class="text-success"><i class="bx bxs-info-circle"></i> Use both fields for
+                                      range or use only one field.</small>
+
+                                    <small v-if="errors.age_min" class="text-danger with-errors"
+                                           v-html="errors.age_min[0]"></small>
+
+                                  </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Max</label>
+
+                                    <select name="primary_job_information.age_max"
+                                            id="age_max" class="form-control">
+                                      <option value="Any">Any</option>
+                                      <option :value="number" v-for="number in 90">{{ number }}</option>
+                                    </select>
+                                    <small v-if="errors.age_max" class="text-danger with-errors"
+                                           v-html="errors.age_max[0]"></small>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Preferred Retired Army Officer</label>
+                            <div class="col-md-10 mt-10">
+
+                              <input type="checkbox" v-model="primary_job_information.preferred_retired_army_officer"
+                                     id="preferred_retired_army_officer"
+                                     switch="success"/>
+                              <label for="preferred_retired_army_officer" data-on-label="Yes"
+                                     data-off-label="No"></label>
+
+                            </div>
+
+                          </div>
+
+                          <ul class="pager wizard twitter-bs-wizard-pager-link">
+
+                            <div class="text-right">
+                              <button v-show="!secondStep && firstStep" type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Submit
+                              </button>
+                            </div>
 
 
                             <li class="next" v-show="secondStep"><a href="#">Next</a></li>
@@ -643,10 +1046,12 @@
     head: {
       link: [
         {rel: 'stylesheet', href: '/libs/twitter-bootstrap-wizard/prettify.css'},
+        {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css'},
       ],
       script: [
         {src: '/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js'},
         {src: '/libs/twitter-bootstrap-wizard/prettify.js'},
+        {src: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js'},
         {src: '/js/pages/form-wizard.init.js'},
       ],
     },
@@ -662,11 +1067,24 @@
       return {
         firstStep: false,
         secondStep: false,
+        thirdStep: false,
+        fourStep: false,
+        fiveStep: false,
+        sixStep: false,
+        sevenStep: false,
+
+        options_gender: [
+          {item: 'Male', name: 'Male'},
+          {item: 'Female', name: 'Female'},
+          {item: 'Others', name: 'Others'},
+        ],
+
         options: [
           {item: '0', name: 'Basic Listing'},
           {item: '1', name: 'Stand-out Listing'},
           {item: '2', name: 'Stand Out Premium'},
         ],
+
 
         option_employment_status: [
           {item: 'Full Time', name: 'Full Time'},
@@ -747,6 +1165,24 @@
           compensation_other_benefits_items: '',
           festival_bonus: '',
           others: '',
+
+          //3
+          institution_id: '',
+          other_educational_qualification: '',
+          training_trade_course: '',
+          professional_certification: '',
+          experience_type: '',
+          minimum_year_of_experience: '',
+          maximum_year_of_experience: '',
+          freshers_applay: '',
+          area_of_experience: '',
+          area_of_business: '',
+          skills: '',
+          additional_requirements: '',
+          gender: '',
+          age_min: '',
+          age_max: '',
+          preferred_retired_army_officer: '',
 
         }),
         errors: '',
@@ -870,6 +1306,76 @@
           .then((response) => {
 
             vm.secondStep = true;
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+
+        /*this.primary_job_information.post(this.url + 'primary-job-information?token=' + token)
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message
+            });
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
+          })*/
+      },
+
+      createCandidatesRequirements() {
+
+        var vm = this;
+        var form = this.primary_job_information;
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.$axios.post('candidates-requirements?token=' + token, {
+
+          institution_id: form.institution_id,
+          other_educational_qualification: form.other_educational_qualification,
+          training_trade_course: form.training_trade_course,
+          professional_certification: form.professional_certification,
+          experience_type: form.experience_type,
+          minimum_year_of_experience: form.minimum_year_of_experience,
+          maximum_year_of_experience: form.maximum_year_of_experience,
+          freshers_applay: form.freshers_applay,
+          area_of_experience: form.area_of_experience,
+          area_of_business: form.area_of_business,
+          skills: form.skills,
+          additional_requirements: form.additional_requirements,
+          gender: form.gender,
+          age_min: form.age_min,
+          age_max: form.age_max,
+          preferred_retired_army_officer: form.preferred_retired_army_officer,
+
+        })
+          .then((response) => {
+
+            vm.thirdStep = true;
 
           })
           .catch((error) => {
