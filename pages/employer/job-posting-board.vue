@@ -1014,7 +1014,142 @@
                     </div>
 
 
-                    
+                    <div class="tab-pane" id="company-info-visibility">
+                      <div>
+                        <!--<form @submit.prevent="createCandidatesRequirements()">-->
+                        <form>
+
+                          <h3>Information Visibility</h3>
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Company Name</label>
+                            <div class="col-md-10 mt-10">
+
+                              <div class="row">
+
+                                <div class="col-12">
+                                  <input type="checkbox" v-model="primary_job_information.company_name_show_status"
+                                         id="company_name_show_status"
+                                         switch="success"/>
+                                  <label for="company_name_show_status" data-on-label="Show"
+                                         data-off-label="Hide"></label>
+                                </div>
+
+                                <div class="col-12" v-if="!primary_job_information.company_name_show_status == '1'">
+                                  <input type="text" v-model="primary_job_information.company_name"
+                                         class="form-control">
+
+                                  <small v-if="errors.company_name" class="text-danger with-errors"
+                                         v-html="errors.company_name[0]"></small>
+                                </div>
+
+                              </div>
+
+
+                            </div>
+
+                          </div>
+
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Company Address</label>
+                            <div class="col-md-10 mt-10">
+
+                              <input type="checkbox" v-model="primary_job_information.company_address_show_status"
+                                     id="company_address_show_status"
+                                     switch="success"/>
+                              <label for="company_address_show_status" data-on-label="Show"
+                                     data-off-label="Hide"></label>
+
+                            </div>
+
+                          </div>
+
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Company Industry Type</label>
+                            <div class="col-md-10 mt-10">
+
+                              <b-form-select v-model="primary_job_information.company_industry_type_id" class="mb-3">
+                                <b-form-select-option :value="null">Please select an option</b-form-select-option>
+                                <b-form-select-option value="a">Option A</b-form-select-option>
+                              </b-form-select>
+
+                              <small v-if="errors.company_industry_type_id" class="text-danger with-errors"
+                                     v-html="errors.company_industry_type_id[0]"></small>
+
+                            </div>
+
+                          </div>
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Company Business</label>
+                            <div class="col-md-10 mt-10">
+
+                              <div class="row">
+
+                                <div class="col-12">
+                                  <input type="checkbox" v-model="primary_job_information.company_business_show_status"
+                                         id="company_business_show_status"
+                                         switch="success"/>
+                                  <label for="company_business_show_status" data-on-label="Show"
+                                         data-off-label="Hide"></label>
+                                </div>
+
+                                <div class="col-12" v-if="primary_job_information.company_business_show_status == '1'">
+                                  <input type="text" class="form-control" :value="authUser.business_description" readonly>
+                                </div>
+
+                              </div>
+
+
+                            </div>
+
+                          </div>
+
+
+                          <h3>Billing Information</h3>
+
+                          <div class="row">
+                            <label class="col-md-2 col-form-label">Billing Information</label>
+                            <div class="col-md-10 mt-10">
+
+                              <b-form-select v-model="primary_job_information.billing_information_id" class="mb-3">
+                                <b-form-select-option :value="null">Please select an option</b-form-select-option>
+                                <b-form-select-option value="a">Option A</b-form-select-option>
+                              </b-form-select>
+
+                              <small v-if="errors.billing_information_id" class="text-danger with-errors"
+                                     v-html="errors.billing_information_id[0]"></small>
+
+                            </div>
+
+                          </div>
+
+                          <ul class="pager wizard twitter-bs-wizard-pager-link">
+
+                            <div class="text-right">
+                              <!--<button v-show="!thirdStep && secondStep && firstStep" type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Submit
+                              </button>-->
+
+                              <!--<button type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Submit
+                              </button>-->
+                            </div>
+
+
+                            <li class="next" v-show="thirdStep"><a href="#">Next</a></li>
+                            <li class="previous" v-show="thirdStep"><a href="#">Previous</a></li>
+                          </ul>
+
+                        </form>
+                      </div>
+                    </div>
 
                   </div>
 
@@ -1146,6 +1281,7 @@
         level_of_educations: '',
         without_filter_degrees: '',
         all_degrees: '',
+        authUser:'',
 
         degrees: {
           'level_of_education_id': '',
@@ -1208,6 +1344,14 @@
           age_min: '',
           age_max: '',
           preferred_retired_army_officer: '',
+
+          //4
+          company_name_show_status:'',
+          company_name:'',
+          company_address_show_status:'',
+          company_industry_type_id:'',
+          company_business_show_status:'',
+          billing_information_id:'',
 
         }),
         errors: '',
@@ -1326,7 +1470,6 @@
         this.primary_job_information.degree.splice(this.primary_job_information.degree.indexOf(row), 1);
       },
 
-
       levelOfEducationName: function (id) {
 
         var items = this.level_of_educations;
@@ -1373,6 +1516,26 @@
 
       },
 
+      fetchCompanyIndustryType(){
+
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.$axios.post('company-industry-type?token=' + token)
+          .then((response) => {
+
+            console.log(response.data);
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
 
       createPrimaryJobInformation() {
 
@@ -1483,32 +1646,6 @@
 
           })
 
-        /*this.primary_job_information.post(this.url + 'primary-job-information?token=' + token)
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message
-            });
-
-          })
-          .catch((error) => {
-
-            vm.errors = error.response.data;
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Token Not Found'
-              });
-            }
-
-          })*/
       },
 
       createCandidatesRequirements() {
@@ -1553,39 +1690,23 @@
 
           })
 
-        /*this.primary_job_information.post(this.url + 'primary-job-information?token=' + token)
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message
-            });
-
-          })
-          .catch((error) => {
-
-            vm.errors = error.response.data;
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Token Not Found'
-              });
-            }
-
-          })*/
       }
+    },
+
+    mounted: function () {
+
+      this.authUser = window.$nuxt.$cookies.get('user');
+      var authUser = window.$nuxt.$cookies.get('user');
+
+      this.primary_job_information.company_name = authUser.company_name;
+
     },
 
     beforeMount() {
       this.fetchSkill();
       this.fetchLevelOfEducation();
       this.fetchDegrees();
+      this.fetchCompanyIndustryType();
     }
 
   }
