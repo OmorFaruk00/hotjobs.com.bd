@@ -299,9 +299,6 @@
                           <li class="next" v-show="firstStep"><a href="#">Next</a></li>
                         </ul>
 
-                        <!-- <ul class="pager wizard twitter-bs-wizard-pager-link" v-show="firstStep">
-                           <li class="previous"><a href="#">Previous</a></li>
-                         </ul>-->
 
                       </form>
                     </div>
@@ -591,7 +588,7 @@
 
 
                             <li class="next" v-show="secondStep"><a href="#">Next</a></li>
-                            <li class="previous" v-show="secondStep"><a href="#">Previous</a></li>
+                            <li class="previous"><a href="#">Previous</a></li>
                           </ul>
 
                         </form>
@@ -601,7 +598,6 @@
 
                     <div class="tab-pane" id="candidate-requirements">
                       <div>
-
                         <form @submit.prevent="createCandidatesRequirements()">
 
                           <div class="form-group row">
@@ -610,51 +606,47 @@
                               <div class="row">
                                 <div class="col-md-2 col-sm-12">
 
-                                  <b-form-select v-model="primary_job_information.job_responsibilities" class="mb-3">
+                                  <b-form-select v-model="degrees.level_of_education_id"
+                                                 @change="fetchLevelOfEducationDegree()" class="mb-3">
+
                                     <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                                    <b-form-select-option value="a">Option A</b-form-select-option>
-                                    <b-form-select-option value="b" disabled>Option B (disabled)</b-form-select-option>
-                                    <b-form-select-option-group label="Grouped options">
-                                      <b-form-select-option :value="{ C: '3PO' }">Option with object value
-                                      </b-form-select-option>
-                                      <b-form-select-option :value="{ R: '2D2' }">Another option with object value
-                                      </b-form-select-option>
-                                    </b-form-select-option-group>
+                                    <b-form-select-option v-for="row in level_of_educations" :value="row.id">{{ row.name
+                                      }}
+                                    </b-form-select-option>
+
                                   </b-form-select>
 
                                 </div>
 
                                 <div class="col-md-2 col-sm-12">
 
-                                  <b-form-select v-model="primary_job_information.job_responsibilities" class="mb-3">
+                                  <b-form-select v-model="degrees.degree_id" class="mb-3">
                                     <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                                    <b-form-select-option value="a">Option A</b-form-select-option>
-                                    <b-form-select-option value="b" disabled>Option B (disabled)</b-form-select-option>
-                                    <b-form-select-option-group label="Grouped options">
-                                      <b-form-select-option :value="{ C: '3PO' }">Option with object value
-                                      </b-form-select-option>
-                                      <b-form-select-option :value="{ R: '2D2' }">Another option with object value
-                                      </b-form-select-option>
-                                    </b-form-select-option-group>
+
+                                    <b-form-select-option v-for="row in all_degrees" :value="row.id">{{ row.name }}
+                                    </b-form-select-option>
+
                                   </b-form-select>
 
                                 </div>
 
                                 <div class="col-md-4 col-sm-12 mb-2">
 
-                                  <input type="text" class="form-control">
+                                  <input type="text" v-model="degrees.concentration" class="form-control"
+                                         placeholder="Concentration/ Major">
 
                                 </div>
 
                                 <div class="col-md-4 col-sm-12">
 
-                                  <button type="button" class="btn btn-info"><i class="bx bx-plus-circle"></i> Add More
+                                  <button type="button" @click="addDegrees" class="btn btn-info"><i
+                                    class="bx bx-plus-circle"></i> Add More
                                   </button>
 
                                 </div>
                               </div>
 
-                              <div class="row">
+                              <div class="row" v-if="primary_job_information.degree.length > 0">
                                 <div class="col-12">
                                   <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -667,8 +659,19 @@
                                       </tr>
                                       </thead>
 
-                                    </table>
+                                      <tbody>
+                                      <tr v-for="(row,index) in primary_job_information.degree">
+                                        <td v-html="levelOfEducationName(row.level_of_education_id)"></td>
+                                        <td v-html="degreeName(row.degree_id)"></td>
+                                        <td>{{ row.concentration }}</td>
+                                        <td>
+                                          <button type="button" class="btn btn-danger" @click="delete_row(row)"><i
+                                            class="bx bx-trash"></i></button>
+                                        </td>
+                                      </tr>
+                                      </tbody>
 
+                                    </table>
                                   </div>
                                 </div>
                               </div>
@@ -694,8 +697,8 @@
                               </b-form-select>
 
 
-                              <small v-if="errors.job_context" class="text-danger with-errors"
-                                     v-html="errors.job_context[0]"></small>
+                              <small v-if="errors.institution_id" class="text-danger with-errors"
+                                     v-html="errors.institution_id[0]"></small>
 
                             </div>
                           </div>
@@ -767,21 +770,27 @@
                                     <b-form-select-option value="0">No Experience Required</b-form-select-option>
                                     <b-form-select-option value="1">Experience Required</b-form-select-option>
                                   </b-form-select>
+
+                                  <small v-if="errors.experience_type" class="text-danger with-errors"
+                                         v-html="errors.experience_type[0]"></small>
                                 </div>
                               </div>
 
-                              <div class="row">
+                              <div class="row" v-if="primary_job_information.experience_type == '1'">
                                 <div class="col-md-6 col-sm-12">
                                   <div class="form-group">
                                     <label>Minimum year of experience</label>
 
-                                    <select name="primary_job_information.minimum_year_of_experience"
+                                    <select v-model="primary_job_information.minimum_year_of_experience"
+                                            name="minimum_year_of_experience"
                                             id="minimum_year_of_experience" class="form-control">
                                       <option value="Any">Any</option>
                                       <option :value="number" v-for="number in 50">{{ number }}</option>
                                     </select>
 
                                     <small class="text-success">Use both fields for range or use only one field.</small>
+
+                                    <br>
 
                                     <small v-if="errors.minimum_year_of_experience" class="text-danger with-errors"
                                            v-html="errors.minimum_year_of_experience[0]"></small>
@@ -793,7 +802,8 @@
                                   <div class="form-group">
                                     <label>Maximum year of experience</label>
 
-                                    <select name="primary_job_information.maximum_year_of_experience"
+                                    <select v-model="primary_job_information.maximum_year_of_experience"
+                                            name="maximum_year_of_experience"
                                             id="maximum_year_of_experience" class="form-control">
                                       <option value="Any">Any</option>
                                       <option :value="number" v-for="number in 50">{{ number }}</option>
@@ -803,9 +813,9 @@
 
                                   </div>
                                 </div>
-                              </div>
+                              </div v->
 
-                              <div class="row">
+                              <div class="row" v-if="primary_job_information.experience_type == '1'">
                                 <div class="col-12">
                                   <b-form-checkbox
                                     id="freshers_applay"
@@ -821,7 +831,7 @@
                                 </div>
                               </div>
 
-                              <div class="row">
+                              <div class="row" v-if="primary_job_information.experience_type == '1'">
                                 <div class="col-12">
                                   <div class="form-group">
                                     <label>Area of experience</label>
@@ -836,7 +846,7 @@
                                               :class="{ 'is-invalid': primary_job_information.errors.has('area_of_experience') }">
                                     </textarea>
 
-                                    <small v-if="errors.professional_certification" class="text-danger with-errors"
+                                    <small v-if="errors.area_of_experience" class="text-danger with-errors"
                                            v-html="errors.area_of_experience[0]"></small>
 
                                   </div>
@@ -862,6 +872,7 @@
                                   </div>
                                 </div>
                               </div>
+
                             </div>
                           </div>
 
@@ -934,7 +945,7 @@
                                   <div class="form-group">
                                     <label>Min</label>
 
-                                    <select name="primary_job_information.age_min"
+                                    <select v-model="primary_job_information.age_min" name="age_min"
                                             id="age_min" class="form-control">
                                       <option value="Any">Any</option>
                                       <option :value="number" v-for="number in 90">{{ number }}</option>
@@ -953,7 +964,7 @@
                                   <div class="form-group">
                                     <label>Max</label>
 
-                                    <select name="primary_job_information.age_max"
+                                    <select v-model="primary_job_information.age_max" name="age_max"
                                             id="age_max" class="form-control">
                                       <option value="Any">Any</option>
                                       <option :value="number" v-for="number in 90">{{ number }}</option>
@@ -985,21 +996,25 @@
                           <ul class="pager wizard twitter-bs-wizard-pager-link">
 
                             <div class="text-right">
-                              <button v-show="!secondStep && firstStep" type="submit"
+                              <button v-show="!thirdStep && secondStep && firstStep" type="submit"
                                       :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Submit
                               </button>
+
                             </div>
 
 
-                            <li class="next" v-show="secondStep"><a href="#">Next</a></li>
-                            <li class="previous" v-show="secondStep"><a href="#">Previous</a></li>
+                            <li class="next" v-show="thirdStep"><a href="#">Next</a></li>
+                            <li class="previous"><a href="#">Previous</a></li>
                           </ul>
 
                         </form>
                       </div>
                     </div>
+
+
+                    
 
                   </div>
 
@@ -1128,6 +1143,15 @@
         ],
 
         jobs_types: '',
+        level_of_educations: '',
+        without_filter_degrees: '',
+        all_degrees: '',
+
+        degrees: {
+          'level_of_education_id': '',
+          'degree_id': '',
+          'concentration': '',
+        },
 
         primary_job_information: new Form({
           id: '',
@@ -1167,6 +1191,7 @@
           others: '',
 
           //3
+          degree: [],
           institution_id: '',
           other_educational_qualification: '',
           training_trade_course: '',
@@ -1209,6 +1234,145 @@
 
         });
       },
+
+      async fetchLevelOfEducation() {
+        return await this.$axios.get('fetch-level-of-education')
+          .then((response) => {
+
+            this.level_of_educations = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      async fetchDegrees() {
+        return await this.$axios.get('fetch-level-of-degree')
+          .then((response) => {
+
+            this.without_filter_degrees = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      fetchLevelOfEducationDegree() {
+        var vm = this;
+
+        var level_of_education_id = this.degrees.level_of_education_id;
+
+        this.$axios.get('fetch-degrees/' + level_of_education_id).then(function (response) {
+
+          vm.all_degrees = response.data;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+      },
+
+      addDegrees() {
+
+        var vm = this;
+
+        if (!vm.degrees.level_of_education_id) {
+          Toast.fire({
+            icon: 'info',
+            title: 'Enter Education Level'
+          });
+        } else if (!vm.degrees.degree_id) {
+
+          Toast.fire({
+            icon: 'info',
+            title: 'Enter Degree'
+          });
+
+        } else {
+
+          vm.primary_job_information.degree.push({
+            level_of_education_id: vm.degrees.level_of_education_id,
+            degree_id: vm.degrees.degree_id,
+            concentration: vm.degrees.concentration,
+          });
+
+          vm.degrees.level_of_education_id = '';
+          vm.degrees.degree_id = '';
+          vm.degrees.concentration = '';
+
+        }
+
+      },
+
+      delete_row: function (row) {
+        this.primary_job_information.degree.splice(this.primary_job_information.degree.indexOf(row), 1);
+      },
+
+
+      levelOfEducationName: function (id) {
+
+        var items = this.level_of_educations;
+        var level_of_education_id = id;
+
+        let level_of_education = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].id == level_of_education_id) {
+            level_of_education.push(items[i].name);
+          }
+        }
+
+        let separator = "";
+        let strOptions = "";
+        level_of_education.forEach(word => {
+          strOptions += separator + word;
+          separator = " [] ";
+        });
+
+        return strOptions;
+
+      },
+
+      degreeName: function (id) {
+
+        var items = this.without_filter_degrees;
+        var degree_id = id;
+
+        let level_of_education = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].id == degree_id) {
+            level_of_education.push(items[i].name);
+          }
+        }
+
+        let separator = "";
+        let strOptions = "";
+        level_of_education.forEach(word => {
+          strOptions += separator + word;
+          separator = " [] ";
+        });
+
+        return strOptions;
+
+      },
+
 
       createPrimaryJobInformation() {
 
@@ -1420,6 +1584,8 @@
 
     beforeMount() {
       this.fetchSkill();
+      this.fetchLevelOfEducation();
+      this.fetchDegrees();
     }
 
   }
