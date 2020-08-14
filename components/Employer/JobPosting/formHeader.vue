@@ -122,27 +122,6 @@
   }
 </style>
 
-degree
-
-primary_job_information
-...
-institution_id
-other_educational_qualification
-training_trade_course
-professional_certification
-experience_type // 0 =No Experience Required; 1 = Experience Required
-minimum_year_of_experience
-maximum_year_of_experience
-freshers_applay // 1=yes
-area_of_experience
-area_of_business
-skills
-additional_requirements
-gender
-age_min
-age_max
-preferred_retired_army_officer
-
 
 
 
