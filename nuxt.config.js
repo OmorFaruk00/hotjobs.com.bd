@@ -77,6 +77,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
+    'nuxt-moment',
   ],
 
   axios: {

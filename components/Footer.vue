@@ -172,7 +172,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="copyright-item">
-              <p>Copyright @2020 HotJobs. Designed by: <a href="javaScript:void(0)" target="_blank">IT-TEAM,
+              <p>Copyright @{{ date }} HotJobs. Designed by: <a href="javaScript:void(0)" target="_blank">IT-TEAM,
                 DIU</a></p>
             </div>
           </div>
@@ -199,9 +199,14 @@
 </template>
 
 <script>
-    export default {
-        name: "Footer"
-    }
+  export default {
+    name: "Footer",
+    data() {
+      return {
+        date: this.$moment().format('Y')
+      }
+    },
+  }
 </script>
 
 <style scoped>
