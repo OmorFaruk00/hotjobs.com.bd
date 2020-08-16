@@ -1070,10 +1070,14 @@
                             <label class="col-md-2 col-form-label">Company Industry Type</label>
                             <div class="col-md-10 mt-10">
 
-                              <b-form-select v-model="primary_job_information.company_industry_type_id" class="mb-3">
-                                <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                                <b-form-select-option value="a">Option A</b-form-select-option>
-                              </b-form-select>
+                              <b-form-select
+                                v-model="primary_job_information.company_industry_type_id"
+                                :options="company_industry_types"
+                                class="mb-3"
+                                value-field="id"
+                                text-field="name"
+                                disabled-field="notEnabled"
+                              ></b-form-select>
 
                               <small v-if="errors.company_industry_type_id" class="text-danger with-errors"
                                      v-html="errors.company_industry_type_id[0]"></small>
@@ -1282,6 +1286,7 @@
         without_filter_degrees: '',
         all_degrees: '',
         authUser:'',
+        company_industry_types:'',
 
         degrees: {
           'level_of_education_id': '',
@@ -1525,6 +1530,7 @@
           .then((response) => {
 
             console.log(response.data);
+            vm.company_industry_types = response.data;
 
           })
           .catch((error) => {
