@@ -13,7 +13,7 @@
             <div class="card-body">
               <h1 class="text-center">Account Details</h1>
 
-              <form @submit.prevent="createEmployer()">
+              <form @submit.prevent="updateEmployerInfo()">
                 <div class="row">
 
                   <div class="col-12">
@@ -238,25 +238,27 @@
 
                   <div class="col-lg-8 col-md-8 col-sm-12">
 
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <div class="form-group">
-                        <label>Contact Person's Name</label>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <label>Contact Person's Name</label>
 
-                        <b-form-select
-                          v-model="form.contact_people_id"
-                          :options="contact_persons"
-                          class="mb-3"
-                          value-field="id"
-                          text-field="contact_person_name"
-                          disabled-field="notEnabled"
-                        ></b-form-select>
+                          <b-form-select
+                            v-model="form.contact_people_id"
+                            :options="contact_persons"
+                            class="mb-3"
+                            value-field="id"
+                            text-field="contact_person_name"
+                            disabled-field="notEnabled"
+                            @change="fetchContactPeopleDetails"
+                          ></b-form-select>
 
-                        <has-error :form="form" field="contact_person_name"></has-error>
+                          <has-error :form="form" field="contact_person_name"></has-error>
+                        </div>
                       </div>
                     </div>
 
                   </div>
-
 
                   <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="form-group">
@@ -284,6 +286,57 @@
                              placeholder="Enter contact person mobile"
                              class="form-control" readonly>
                     </div>
+                  </div>
+
+                  <div class="col-12">
+                    <h3>Billing Address</h3>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="border-bottom"></div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>Billing Address</label>
+
+                      <input v-model="form.billing_address" type="text" name="billing_address"
+                             placeholder="Enter contact person designation"
+                             class="form-control"
+                             :class="{ 'is-invalid': form.errors.has('billing_address') }"
+                      >
+                      <has-error :form="form" field="billing_address"></has-error>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>Billing Contact Number</label>
+
+                      <input v-model="form.billing_contact_number" type="text" name="billing_contact_number"
+                             placeholder="Enter billing contact number"
+                             class="form-control"
+                             :class="{ 'is-invalid': form.errors.has('billing_contact_number') }"
+                      >
+                      <has-error :form="form" field="billing_contact_number"></has-error>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label>Billing Contact's Email</label>
+
+                      <input v-model="form.billing_contact_email" type="email" name="billing_contact_email"
+                             placeholder="Enter billing contact email"
+                             class="form-control"
+                             :class="{ 'is-invalid': form.errors.has('billing_contact_email') }"
+                      >
+                      <has-error :form="form" field="billing_contact_email"></has-error>
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-right">
+                    <button type="submit" :disabled="form.busy" class="btn btn-success">Submit</button>
                   </div>
 
                 </div>
@@ -357,13 +410,16 @@
           contact_person_email: '',
           contact_person_designation: '',
           contact_person_mobile: '',
-          company_logo:'',
-          contact_people_id:'',
+          company_logo: '',
+          contact_people_id: '',
+          billing_address: '',
+          billing_contact_number: '',
+          billing_contact_email: '',
         }),
-        contact_persons:'',
-        contact_person_designation:'',
-        contact_person_email:'',
-        contact_person_mobile:'',
+        contact_persons: '',
+        contact_person_designation: '',
+        contact_person_email: '',
+        contact_person_mobile: '',
       }
     },
 
@@ -535,6 +591,26 @@
 
       },
 
+      fetchContactPeopleDetails() {
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+        var contact_people_id = vm.form.contact_people_id;
+        this.$axios.get('fetch-contact-people/' + contact_people_id + '?token=' + token).then(function (response) {
+
+          vm.contact_person_designation = response.data.contact_person_designation;
+          vm.contact_person_email = response.data.contact_person_email;
+          vm.contact_person_mobile = response.data.contact_person_mobile;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+      },
+
       findEmployer() {
 
         var vm = this;
@@ -578,10 +654,6 @@
         });
       },
 
-
-
-
-
       // company_logo
       async handleProfilePicUpload() {
 
@@ -614,7 +686,7 @@
       },
       // company_logo
 
-      findImageAndContact(){
+      findImageAndContact() {
 
         var vm = this;
         var token = window.$nuxt.$cookies.get('token');
@@ -633,6 +705,27 @@
           });
 
         });
+      },
+
+      updateEmployerInfo() {
+        var token = window.$nuxt.$cookies.get('token');
+        this.form.post(this.url + 'employer-update' + '?token=' + token)
+          .then(() => {
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Account Created successfully.Please login with valid email and password'
+            });
+
+
+          })
+
+          .catch((error) => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
       },
 
       // old start
@@ -701,7 +794,6 @@
 
     },
 
-
     beforeMount() {
 
       // this.findEmployer();
@@ -713,7 +805,8 @@
       this.oldFetchIndustryCategory();
 
 
-    },
+    }
+    ,
 
     created() {
       this.findEmployer();
