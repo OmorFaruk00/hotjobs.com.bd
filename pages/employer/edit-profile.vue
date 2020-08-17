@@ -159,6 +159,9 @@
 
                           </div>
 
+                          <small v-if="errors.industry_types" class="text-danger with-errors"
+                                 v-html="errors.industry_types[0]"></small>
+
                         </div>
                       </div>
 
@@ -389,6 +392,7 @@
         industry_categories: '',
         industry_type_lists: '',
         country_name: '',
+        errors: '',
         form: new Form({
           id: '',
           company_name: '',
@@ -420,6 +424,7 @@
         contact_person_designation: '',
         contact_person_email: '',
         contact_person_mobile: '',
+        test:[],
       }
     },
 
@@ -638,11 +643,24 @@
           vm.form.company_logo = employee.company_logo;
           vm.form.contact_people_id = employee.contact_people_id;
 
+
           vm.contact_persons = employee.company_contact_peoples;
 
           vm.contact_person_designation = employee.contact_people.contact_person_designation;
           vm.contact_person_email = employee.contact_people.contact_person_email;
           vm.contact_person_mobile = employee.contact_people.contact_person_mobile;
+
+          var billing_information  = employee.billing_information;
+
+          if (billing_information){
+
+              vm.form.billing_address = billing_information.billing_address;
+              vm.form.billing_contact_number = billing_information.billing_contact_number;
+              vm.form.billing_contact_email = billing_information.billing_contact_email;
+
+          }
+
+          // var test = employee.employer_industry_types;
 
         }).catch(function (error) {
 
@@ -708,19 +726,30 @@
       },
 
       updateEmployerInfo() {
+        var vm = this;
         var token = window.$nuxt.$cookies.get('token');
         this.form.post(this.url + 'employer-update' + '?token=' + token)
-          .then(() => {
+          .then((response) => {
 
             Toast.fire({
-              icon: 'success',
-              title: 'Account Created successfully.Please login with valid email and password'
+              icon: response.data.status,
+              title: response.data.message
             });
 
+            vm.$emit('afterUpdate');
+
+            vm.errors=[];
+
+            vm.$router.push('dashboard');
 
           })
 
           .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            console.log(error.response.data);
+
             Toast.fire({
               icon: 'warning',
               title: 'There was something wrong'
@@ -817,6 +846,10 @@
 
       this.$on('afterContactPeople', () => {
         this.findImageAndContact();
+      });
+
+      this.$on('afterUpdate', () => {
+        this.findEmployer();
       });
 
     }
