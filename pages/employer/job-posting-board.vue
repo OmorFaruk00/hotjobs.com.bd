@@ -683,18 +683,23 @@
                             <label class="col-md-2 col-form-label">Preferred Educational Institution</label>
                             <div class="col-md-10">
 
-
-                              <b-form-select v-model="primary_job_information.institution_id" name="institution_id"
-                                             class="mb-3"
-                                             multiple :select-size="5">
+                              <!--<b-form-select v-model="primary_job_information.institution_id" name="institution_id"
+                                             class="mb-3 bSelect"
+                                             >
 
                                 <b-form-select-option :value="null" disabled>Please select an option
                                 </b-form-select-option>
 
-                                <!--<b-form-select-option v-for="(row,key) in skill_general_categories" :value="row.id">{{ row.name }}
-                                </b-form-select-option>-->
+                                <b-form-select-option v-for="(row,key) in institutes" :value="row.id">{{ row.name }}
+                                </b-form-select-option>
 
-                              </b-form-select>
+                              </b-form-select>-->
+
+                              <select v-model="primary_job_information.institution_id" name="institution_id"
+                                      class="form-control bSelect" multiple>
+
+                                <option v-for="(row,key) in institutes" :value="row.id">{{ row.name }}</option>
+                              </select>
 
 
                               <small v-if="errors.institution_id" class="text-danger with-errors"
@@ -1283,6 +1288,7 @@
 
         jobs_types: '',
         level_of_educations: '',
+        institutes: '',
         without_filter_degrees: '',
         all_degrees: '',
         authUser:'',
@@ -1333,7 +1339,7 @@
 
           //3
           degree: [],
-          institution_id: '',
+          institution_id: [],
           other_educational_qualification: '',
           training_trade_course: '',
           professional_certification: '',
@@ -1382,6 +1388,28 @@
           });
 
         });
+      },
+
+      fetchInstitute() {
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+        return this.$axios.get('institute?token=' + token)
+          .then((response) => {
+
+            vm.institutes = response.data;
+
+            // console.log(response.data);
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
       },
 
       async fetchLevelOfEducation() {
@@ -1529,7 +1557,6 @@
         this.$axios.post('company-industry-type?token=' + token)
           .then((response) => {
 
-            console.log(response.data);
             vm.company_industry_types = response.data;
 
           })
@@ -1713,9 +1740,21 @@
       this.fetchLevelOfEducation();
       this.fetchDegrees();
       this.fetchCompanyIndustryType();
+      this.fetchInstitute();
+    },
+
+    updated(){
+      $('.bSelect').selectpicker('refresh');
     }
 
   }
+
+  /*$(document).ready(function() {
+    $('.bSelect').selectpicker({
+      liveSearch:true,
+      size:5
+    });
+  });*/
 </script>
 
 <style scoped>

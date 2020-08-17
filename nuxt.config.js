@@ -41,6 +41,7 @@ export default {
       {src: '/libs/simplebar/simplebar.min.js'},
       {src: '/libs/node-waves/waves.min.js'},
       {src: '/js/pages/dashboard.init.js'},
+      {src: '/js/script.js'},
     ],
   },
   /*
