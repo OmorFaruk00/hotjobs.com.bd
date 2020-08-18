@@ -1009,8 +1009,7 @@
 
                     <div class="tab-pane" id="company-info-visibility">
                       <div>
-                        <!--<form @submit.prevent="createCandidatesRequirements()">-->
-                        <form>
+                        <form @submit.prevent="companyInfoVisibility()">
 
                           <h3>Information Visibility</h3>
 
@@ -1112,14 +1111,17 @@
                             <label class="col-md-2 col-form-label">Billing Information</label>
                             <div class="col-md-10 mt-10">
 
-                              <b-form-select v-model="primary_job_information.billing_information_id" class="mb-3">
-                                <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                                <b-form-select-option value="a">Option A</b-form-select-option>
-                              </b-form-select>
+                              <b-form-select
+                                v-model="primary_job_information.contact_people_id"
+                                :options="company_contact_peoples"
+                                class="mb-3"
+                                value-field="id"
+                                text-field="contact_person_name"
+                                disabled-field="notEnabled"
+                              ></b-form-select>
 
-                              <small v-if="errors.billing_information_id" class="text-danger with-errors"
-                                     v-html="errors.billing_information_id[0]"></small>
-
+                              <small v-if="errors.contact_people_id" class="text-danger with-errors"
+                                     v-html="errors.contact_people_id[0]"></small>
                             </div>
 
                           </div>
@@ -1127,22 +1129,23 @@
                           <ul class="pager wizard twitter-bs-wizard-pager-link">
 
                             <div class="text-right">
-                              <!--<button v-show="!thirdStep && secondStep && firstStep" type="submit"
+                              <button v-show="!fourStep && secondStep && firstStep && thirdStep" type="submit"
                                       :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Submit
-                              </button>-->
+                              </button>
 
                               <!--<button type="submit"
                                       :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Submit
                               </button>-->
+                              
                             </div>
 
 
-                            <li class="next" v-show="thirdStep"><a href="#">Next</a></li>
-                            <li class="previous" v-show="thirdStep"><a href="#">Previous</a></li>
+                            <li class="next" v-show="fourStep"><a href="#">Next</a></li>
+                            <li class="previous" ><a href="#">Previous</a></li>
                           </ul>
 
                         </form>
@@ -1230,7 +1233,6 @@
           {item: '1', name: 'Stand-out Listing'},
           {item: '2', name: 'Stand Out Premium'},
         ],
-
 
         option_employment_status: [
           {item: 'Full Time', name: 'Full Time'},
@@ -1349,19 +1351,16 @@
           company_address_show_status: '',
           company_industry_type_id: '',
           company_business_show_status: '',
-          billing_information_id: '',
+          contact_people_id: '',
 
         }),
         errors: '',
+        company_contact_peoples:'',
         url: this.$axios.defaults.baseURL,
       }
     },
 
     methods: {
-
-      onSelect(option, id) {
-        console.log(option, id);
-      },
 
       fetchSkill() {
         var vm = this;
@@ -1715,7 +1714,59 @@
 
           })
 
-      }
+      },
+
+      companyInfoVisibility() {
+
+        var vm = this;
+        var form = this.primary_job_information;
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.$axios.post('company-info-visibility?token=' + token, {
+
+          company_name_show_status:form.company_name_show_status,
+          company_name:form.company_name,
+          company_address_show_status:form.company_address_show_status,
+          company_industry_type_id:form.company_industry_type_id,
+          company_business_show_status:form.company_business_show_status,
+          contact_people_id:form.contact_people_id,
+
+        })
+          .then((response) => {
+
+            vm.fourStep = true;
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+
+      },
+
+      billingInformation() {
+
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+        this.$axios.get('find-employer/' + token + '?token=' + token).then(function (response) {
+
+          vm.company_contact_peoples = response.data.company_contact_peoples;
+
+        }).catch(function (error) {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        });
+      },
     },
 
     mounted: function () {
@@ -1733,6 +1784,7 @@
       this.fetchDegrees();
       this.fetchCompanyIndustryType();
       this.fetchInstitute();
+      this.billingInformation();
     },
 
     updated() {
