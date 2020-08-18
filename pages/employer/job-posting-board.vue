@@ -683,18 +683,6 @@
                             <label class="col-md-2 col-form-label">Preferred Educational Institution</label>
                             <div class="col-md-10">
 
-                              <!--<b-form-select v-model="primary_job_information.institution_id" name="institution_id"
-                                             class="mb-3 bSelect"
-                                             >
-
-                                <b-form-select-option :value="null" disabled>Please select an option
-                                </b-form-select-option>
-
-                                <b-form-select-option v-for="(row,key) in institutes" :value="row.id">{{ row.name }}
-                                </b-form-select-option>
-
-                              </b-form-select>-->
-
                               <select v-model="primary_job_information.institution_id" name="institution_id"
                                       class="form-control bSelect" multiple>
 
@@ -1106,7 +1094,8 @@
                                 </div>
 
                                 <div class="col-12" v-if="primary_job_information.company_business_show_status == '1'">
-                                  <input type="text" class="form-control" :value="authUser.business_description" readonly>
+                                  <input type="text" class="form-control" :value="authUser.business_description"
+                                         readonly>
                                 </div>
 
                               </div>
@@ -1205,12 +1194,10 @@
     head: {
       link: [
         {rel: 'stylesheet', href: '/libs/twitter-bootstrap-wizard/prettify.css'},
-        {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css'},
       ],
       script: [
         {src: '/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js'},
         {src: '/libs/twitter-bootstrap-wizard/prettify.js'},
-        {src: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js'},
         {src: '/js/pages/form-wizard.init.js'},
       ],
     },
@@ -1291,8 +1278,8 @@
         institutes: '',
         without_filter_degrees: '',
         all_degrees: '',
-        authUser:'',
-        company_industry_types:'',
+        authUser: '',
+        company_industry_types: '',
 
         degrees: {
           'level_of_education_id': '',
@@ -1357,12 +1344,12 @@
           preferred_retired_army_officer: '',
 
           //4
-          company_name_show_status:'',
-          company_name:'',
-          company_address_show_status:'',
-          company_industry_type_id:'',
-          company_business_show_status:'',
-          billing_information_id:'',
+          company_name_show_status: '',
+          company_name: '',
+          company_address_show_status: '',
+          company_industry_type_id: '',
+          company_business_show_status: '',
+          billing_information_id: '',
 
         }),
         errors: '',
@@ -1371,6 +1358,11 @@
     },
 
     methods: {
+
+      onSelect(option, id) {
+        console.log(option, id);
+      },
+
       fetchSkill() {
         var vm = this;
 
@@ -1549,7 +1541,7 @@
 
       },
 
-      fetchCompanyIndustryType(){
+      fetchCompanyIndustryType() {
 
         var vm = this;
         var token = window.$nuxt.$cookies.get('token');
@@ -1743,18 +1735,18 @@
       this.fetchInstitute();
     },
 
-    updated(){
+    updated() {
       $('.bSelect').selectpicker('refresh');
     }
 
   }
 
-  /*$(document).ready(function() {
-    $('.bSelect').selectpicker({
-      liveSearch:true,
-      size:5
-    });
-  });*/
+/*  // $(document).ready(function() {
+  $('.bSelect').selectpicker({
+    liveSearch: true,
+    size: 5
+  });
+  // });*/
 </script>
 
 <style scoped>

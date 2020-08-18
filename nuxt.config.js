@@ -41,7 +41,7 @@ export default {
       {src: '/libs/simplebar/simplebar.min.js'},
       {src: '/libs/node-waves/waves.min.js'},
       {src: '/js/pages/dashboard.init.js'},
-      {src: '/js/script.js'},
+      {src: '/js/app.js'},
     ],
   },
   /*
@@ -79,6 +79,7 @@ export default {
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
     'nuxt-moment',
+    'nuxt-vue-multiselect',
   ],
 
   axios: {
