@@ -748,12 +748,24 @@
 
             vm.errors = error.response.data;
 
-            console.log(error.response.data);
-
             Toast.fire({
               icon: 'warning',
               title: 'There was something wrong'
             });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
           })
       },
 

@@ -1145,7 +1145,394 @@
 
 
                             <li class="next" v-show="fourStep"><a href="#">Next</a></li>
-                            <li class="previous" ><a href="#">Previous</a></li>
+                            <li class="previous"><a href="#">Previous</a></li>
+                          </ul>
+
+                        </form>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" id="matching-criteria">
+                      <div>
+                        <form @submit.prevent="companyMatchingCriteria()">
+
+                          <h3>Matching Criteria</h3>
+
+                          <div class="row">
+
+                            <div class="col-lg-6 col-md6 col-sm-12">
+
+                              <div class="row d-none d-sm-block">
+                                <div class="col align-self-end" style="text-align: end;"><span class="text-center">Set Mandatory</span>
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Age <sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+
+                                  <span v-if="primary_job_information.age_min != '' && primary_job_information.age_max != ''">{{ primary_job_information.age_min }} - {{ primary_job_information.age_max }} year</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.age_maching_status" type="checkbox"
+                                           id="age_maching_status" switch="bool" :disabled="primary_job_information.age_min == '' && primary_job_information.age_max == ''"/>
+                                    <label for="age_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="age_maching_mandatory_status"
+                                    v-model="primary_job_information.age_maching_mandatory_status"
+                                    name="age_maching_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.age_min == '' && primary_job_information.age_max == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Total year of experience <sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.minimum_year_of_experience !='' && primary_job_information.maximum_year_of_experience !=''">{{ primary_job_information.minimum_year_of_experience }} - {{ primary_job_information.maximum_year_of_experience }} years</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.total_year_of_experience_status"
+                                           type="checkbox" id="total_year_of_experience_status" switch="bool" :disabled="primary_job_information.minimum_year_of_experience =='' && primary_job_information.maximum_year_of_experience ==''"/>
+                                    <label for="total_year_of_experience_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="total_year_of_experience_mandatory_status"
+                                    v-model="primary_job_information.total_year_of_experience_mandatory_status"
+                                    name="total_year_of_experience_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.minimum_year_of_experience =='' && primary_job_information.maximum_year_of_experience ==''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Gender <sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.gender.length > 0">
+                                    <span v-for="row in primary_job_information.gender">
+                                      <span class="badge badge-secondary m-1">{{ row }}</span>
+                                    </span>
+                                  </span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.gender_maching_status" type="checkbox"
+                                           id="gender_maching_status" switch="bool" :disabled="primary_job_information.gender == ''"/>
+                                    <label for="gender_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="gender_mandatory_status"
+                                    v-model="primary_job_information.gender_mandatory_status"
+                                    name="gender_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.gender == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Area of experience <sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.area_of_experience != ''">{{ primary_job_information.area_of_experience }}</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.area_of_experience_maching_status"
+                                           type="checkbox" id="area_of_experience_maching_status" switch="bool" :disabled="primary_job_information.area_of_experience == ''"/>
+                                    <label for="area_of_experience_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="area_of_experience_mandatory_status"
+                                    v-model="primary_job_information.area_of_experience_mandatory_status"
+                                    name="area_of_experience_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.area_of_experience == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Skills <sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+                                  <span v-if="primary_job_information.skills != ''">{{ primary_job_information.skills }}</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.skills_maching_status" type="checkbox"
+                                           id="skills_maching_status" switch="bool" :disabled="primary_job_information.skills == ''"/>
+                                    <label for="skills_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="skills_mandatory_status"
+                                    v-model="primary_job_information.skills_mandatory_status"
+                                    name="area_of_experience_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.skills == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div class="col-lg-6 col-md6 col-sm-12">
+
+                              <div class="row d-none d-sm-block">
+                                <div class="col align-self-end" style="text-align: end;"><span class="text-center">Set Mandatory</span>
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Job location (Current)<sup><i
+                                  class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.job_location_type !='' && primary_job_information.job_location_address != ''">{{ primary_job_information.job_location_address }}</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-2</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.job_location_current_maching_status"
+                                           type="checkbox" id="job_location_current_maching_status" switch="bool" :disabled="primary_job_information.job_location_type =='' && primary_job_information.job_location_address == ''"/>
+                                    <label for="job_location_current_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="job_location_current_mandatory_status"
+                                    v-model="primary_job_information.job_location_current_mandatory_status"
+                                    name="job_location_current_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.job_location_type =='' && primary_job_information.job_location_address == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Salary<sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.negotiable_status =='' || primary_job_information.negotiable_status =='0'">{{ primary_job_information.minimum_salary }} - {{ primary_job_information.maximum_salary }}</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-2</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.salary_maching_status" type="checkbox"
+                                           id="salary_maching_status" switch="bool" :disabled="primary_job_information.negotiable_status ==1"/>
+                                    <label for="salary_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="salary_mandatory_status"
+                                    v-model="primary_job_information.salary_mandatory_status"
+                                    name="salary_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.negotiable_status ==1"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Area of business<sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.area_of_business !=''">{{ primary_job_information.area_of_business }}</span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-3</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.area_of_business_maching_status"
+                                           type="checkbox" id="area_of_business_maching_status" switch="bool" :disabled="primary_job_information.area_of_business ==''"/>
+                                    <label for="area_of_business_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="area_of_business_mandatory_status"
+                                    v-model="primary_job_information.area_of_business_mandatory_status"
+                                    name="area_of_business_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.area_of_business ==''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-8">Job level<sup><i class="bx bx-question-mark"></i></sup>
+
+                                  <br>
+
+                                  <span v-if="primary_job_information.job_level.length > 0">
+                                    <span v-for="row in primary_job_information.job_level">
+                                      <span class="badge badge-secondary m-1">{{ row }}</span>
+                                    </span>
+                                  </span>
+
+                                  <span v-else style="font-size: 12px;">Value not provided. <span
+                                    class="text-info">Go Step-2</span></span>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                  <div class="square-switch">
+                                    <input v-model="primary_job_information.job_level_maching_status" type="checkbox"
+                                           id="job_level_maching_status" switch="bool" :disabled="primary_job_information.job_level == ''"/>
+                                    <label for="job_level_maching_status" data-on-label="Yes"
+                                           data-off-label="No"></label>
+                                  </div>
+
+                                </div>
+                                <div class="col-lg-2 text-center">
+
+                                  <b-form-checkbox
+                                    id="job_level_mandatory_status"
+                                    v-model="primary_job_information.job_level_mandatory_status"
+                                    name="job_level_mandatory_status"
+                                    value="1"
+                                    unchecked-value="0"
+                                    :disabled="primary_job_information.job_level == ''"
+                                  >
+                                  </b-form-checkbox>
+
+                                </div>
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                          <ul class="pager wizard twitter-bs-wizard-pager-link">
+
+                            <div class="text-right">
+                              <button v-show="!fiveStep && secondStep && firstStep && thirdStep && fourStep" type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Submit
+                              </button>
+
+                              <!--<button type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Submit
+                              </button>-->
+
+                            </div>
+
+
+                            <li class="next" v-show="fiveStep"><a href="#">Next</a></li>
+                            <li class="previous"><a href="#">Previous</a></li>
                           </ul>
 
                         </form>
@@ -1308,7 +1695,7 @@
           special_instruction: '',
           enclose_photograph: '',
 
-          //
+          // 2
           job_level: '',
           job_context: '',
           job_responsibilities: '',
@@ -1353,9 +1740,29 @@
           company_business_show_status: '',
           contact_people_id: '',
 
+          //5
+          age_maching_status:'',
+          age_maching_mandatory_status:'',
+          total_year_of_experience_status:'',
+          total_year_of_experience_mandatory_status:'',
+          gender_maching_status:'',
+          gender_mandatory_status:'',
+          area_of_experience_maching_status:'',
+          area_of_experience_mandatory_status:'',
+          skills_maching_status:'',
+          skills_mandatory_status:'',
+          job_location_current_maching_status:'',
+          job_location_current_mandatory_status:'',
+          salary_maching_status:'',
+          salary_mandatory_status:'',
+          area_of_business_maching_status:'',
+          area_of_business_mandatory_status:'',
+          job_level_maching_status:'',
+          job_level_mandatory_status:'',
+
         }),
         errors: '',
-        company_contact_peoples:'',
+        company_contact_peoples: '',
         url: this.$axios.defaults.baseURL,
       }
     },
@@ -1599,6 +2006,20 @@
               title: 'There was something wrong'
             });
 
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
           })
 
         /*this.primary_job_information.post(this.url + 'primary-job-information?token=' + token)
@@ -1668,6 +2089,20 @@
               title: 'There was something wrong'
             });
 
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
           })
 
       },
@@ -1712,6 +2147,20 @@
               title: 'There was something wrong'
             });
 
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
           })
 
       },
@@ -1724,12 +2173,12 @@
 
         this.$axios.post('company-info-visibility?token=' + token, {
 
-          company_name_show_status:form.company_name_show_status,
-          company_name:form.company_name,
-          company_address_show_status:form.company_address_show_status,
-          company_industry_type_id:form.company_industry_type_id,
-          company_business_show_status:form.company_business_show_status,
-          contact_people_id:form.contact_people_id,
+          company_name_show_status: form.company_name_show_status,
+          company_name: form.company_name,
+          company_address_show_status: form.company_address_show_status,
+          company_industry_type_id: form.company_industry_type_id,
+          company_business_show_status: form.company_business_show_status,
+          contact_people_id: form.contact_people_id,
 
         })
           .then((response) => {
@@ -1745,6 +2194,80 @@
               icon: 'warning',
               title: 'There was something wrong'
             });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
+          })
+
+      },
+
+      companyMatchingCriteria() {
+
+        var vm = this;
+        var form = this.primary_job_information;
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.$axios.post('matching-criteria?token=' + token, {
+
+          age_maching_status: form.age_maching_status,
+          age_maching_mandatory_status: form.age_maching_mandatory_status,
+          total_year_of_experience_status: form.total_year_of_experience_status,
+          total_year_of_experience_mandatory_status: form.total_year_of_experience_mandatory_status,
+          gender_maching_status: form.gender_maching_status,
+          gender_mandatory_status: form.gender_mandatory_status,
+          area_of_experience_maching_status: form.area_of_experience_maching_status,
+          area_of_experience_mandatory_status: form.area_of_experience_mandatory_status,
+          skills_maching_status: form.skills_maching_status,
+          skills_mandatory_status: form.skills_mandatory_status,
+          job_location_current_maching_status: form.job_location_current_maching_status,
+          job_location_current_mandatory_status: form.job_location_current_mandatory_status,
+          salary_maching_status: form.salary_maching_status,
+          salary_mandatory_status: form.salary_mandatory_status,
+          area_of_business_maching_status: form.area_of_business_maching_status,
+          area_of_business_mandatory_status: form.area_of_business_mandatory_status,
+          job_level_maching_status: form.job_level_maching_status,
+          job_level_mandatory_status: form.job_level_mandatory_status,
+
+        })
+          .then((response) => {
+
+            vm.fiveStep = true;
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
 
           })
 
@@ -1793,12 +2316,12 @@
 
   }
 
-/*  // $(document).ready(function() {
-  $('.bSelect').selectpicker({
-    liveSearch: true,
-    size: 5
-  });
-  // });*/
+  /*  // $(document).ready(function() {
+    $('.bSelect').selectpicker({
+      liveSearch: true,
+      size: 5
+    });
+    // });*/
 </script>
 
 <style scoped>
