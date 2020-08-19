@@ -2638,6 +2638,30 @@
         });
       },
 
+      publishLater() {
+
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+        this.primary_job_information.post(this.url + 'publish-later?token=' + token)
+          .then((response) => {
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Successfully Submitted'
+            });
+
+            vm.$router.push('dashboard');
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
       // preview section
       categoryName: function (id) {
 
