@@ -1173,7 +1173,8 @@
                                   <br>
 
 
-                                  <span v-if="primary_job_information.age_min != '' && primary_job_information.age_max != ''">{{ primary_job_information.age_min }} - {{ primary_job_information.age_max }} year</span>
+                                  <span
+                                    v-if="primary_job_information.age_min != '' && primary_job_information.age_max != ''">{{ primary_job_information.age_min }} - {{ primary_job_information.age_max }} year</span>
 
                                   <span v-else style="font-size: 12px;">Value not provided. <span
                                     class="text-info">Go Step-3</span></span>
@@ -1183,7 +1184,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.age_maching_status" type="checkbox"
-                                           id="age_maching_status" switch="bool" :disabled="primary_job_information.age_min == '' && primary_job_information.age_max == ''"/>
+                                           id="age_maching_status" switch="bool"
+                                           :disabled="primary_job_information.age_min == '' && primary_job_information.age_max == ''"/>
                                     <label for="age_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1209,7 +1211,8 @@
 
                                   <br>
 
-                                  <span v-if="primary_job_information.minimum_year_of_experience !='' && primary_job_information.maximum_year_of_experience !=''">{{ primary_job_information.minimum_year_of_experience }} - {{ primary_job_information.maximum_year_of_experience }} years</span>
+                                  <span
+                                    v-if="primary_job_information.minimum_year_of_experience !='' && primary_job_information.maximum_year_of_experience !=''">{{ primary_job_information.minimum_year_of_experience }} - {{ primary_job_information.maximum_year_of_experience }} years</span>
 
                                   <span v-else style="font-size: 12px;">Value not provided. <span
                                     class="text-info">Go Step-3</span></span>
@@ -1219,7 +1222,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.total_year_of_experience_status"
-                                           type="checkbox" id="total_year_of_experience_status" switch="bool" :disabled="primary_job_information.minimum_year_of_experience =='' && primary_job_information.maximum_year_of_experience ==''"/>
+                                           type="checkbox" id="total_year_of_experience_status" switch="bool"
+                                           :disabled="primary_job_information.minimum_year_of_experience =='' && primary_job_information.maximum_year_of_experience ==''"/>
                                     <label for="total_year_of_experience_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1259,7 +1263,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.gender_maching_status" type="checkbox"
-                                           id="gender_maching_status" switch="bool" :disabled="primary_job_information.gender == ''"/>
+                                           id="gender_maching_status" switch="bool"
+                                           :disabled="primary_job_information.gender == ''"/>
                                     <label for="gender_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1295,7 +1300,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.area_of_experience_maching_status"
-                                           type="checkbox" id="area_of_experience_maching_status" switch="bool" :disabled="primary_job_information.area_of_experience == ''"/>
+                                           type="checkbox" id="area_of_experience_maching_status" switch="bool"
+                                           :disabled="primary_job_information.area_of_experience == ''"/>
                                     <label for="area_of_experience_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1320,7 +1326,8 @@
                                 <div class="col-lg-8">Skills <sup><i class="bx bx-question-mark"></i></sup>
 
                                   <br>
-                                  <span v-if="primary_job_information.skills != ''">{{ primary_job_information.skills }}</span>
+                                  <span
+                                    v-if="primary_job_information.skills != ''">{{ primary_job_information.skills }}</span>
 
                                   <span v-else style="font-size: 12px;">Value not provided. <span
                                     class="text-info">Go Step-3</span></span>
@@ -1330,7 +1337,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.skills_maching_status" type="checkbox"
-                                           id="skills_maching_status" switch="bool" :disabled="primary_job_information.skills == ''"/>
+                                           id="skills_maching_status" switch="bool"
+                                           :disabled="primary_job_information.skills == ''"/>
                                     <label for="skills_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1366,7 +1374,8 @@
 
                                   <br>
 
-                                  <span v-if="primary_job_information.job_location_type !='' && primary_job_information.job_location_address != ''">{{ primary_job_information.job_location_address }}</span>
+                                  <span
+                                    v-if="primary_job_information.job_location_type !='' && primary_job_information.job_location_address != ''">{{ primary_job_information.job_location_address }}</span>
 
                                   <span v-else style="font-size: 12px;">Value not provided. <span
                                     class="text-info">Go Step-2</span></span>
@@ -1376,7 +1385,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.job_location_current_maching_status"
-                                           type="checkbox" id="job_location_current_maching_status" switch="bool" :disabled="primary_job_information.job_location_type =='' && primary_job_information.job_location_address == ''"/>
+                                           type="checkbox" id="job_location_current_maching_status" switch="bool"
+                                           :disabled="primary_job_information.job_location_type =='' && primary_job_information.job_location_address == ''"/>
                                     <label for="job_location_current_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1402,7 +1412,8 @@
 
                                   <br>
 
-                                  <span v-if="primary_job_information.negotiable_status =='' || primary_job_information.negotiable_status =='0'">{{ primary_job_information.minimum_salary }} - {{ primary_job_information.maximum_salary }}</span>
+                                  <span
+                                    v-if="primary_job_information.negotiable_status =='' || primary_job_information.negotiable_status =='0'">{{ primary_job_information.minimum_salary }} - {{ primary_job_information.maximum_salary }}</span>
 
                                   <span v-else style="font-size: 12px;">Value not provided. <span
                                     class="text-info">Go Step-2</span></span>
@@ -1412,7 +1423,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.salary_maching_status" type="checkbox"
-                                           id="salary_maching_status" switch="bool" :disabled="primary_job_information.negotiable_status ==1"/>
+                                           id="salary_maching_status" switch="bool"
+                                           :disabled="primary_job_information.negotiable_status ==1"/>
                                     <label for="salary_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1448,7 +1460,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.area_of_business_maching_status"
-                                           type="checkbox" id="area_of_business_maching_status" switch="bool" :disabled="primary_job_information.area_of_business ==''"/>
+                                           type="checkbox" id="area_of_business_maching_status" switch="bool"
+                                           :disabled="primary_job_information.area_of_business ==''"/>
                                     <label for="area_of_business_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1488,7 +1501,8 @@
 
                                   <div class="square-switch">
                                     <input v-model="primary_job_information.job_level_maching_status" type="checkbox"
-                                           id="job_level_maching_status" switch="bool" :disabled="primary_job_information.job_level == ''"/>
+                                           id="job_level_maching_status" switch="bool"
+                                           :disabled="primary_job_information.job_level == ''"/>
                                     <label for="job_level_maching_status" data-on-label="Yes"
                                            data-off-label="No"></label>
                                   </div>
@@ -1516,7 +1530,8 @@
                           <ul class="pager wizard twitter-bs-wizard-pager-link">
 
                             <div class="text-right">
-                              <button v-show="!fiveStep && secondStep && firstStep && thirdStep && fourStep" type="submit"
+                              <button v-show="!fiveStep && secondStep && firstStep && thirdStep && fourStep"
+                                      type="submit"
                                       :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Submit
@@ -1532,6 +1547,337 @@
 
 
                             <li class="next" v-show="fiveStep"><a href="#">Next</a></li>
+                            <li class="previous"><a href="#">Previous</a></li>
+                          </ul>
+
+                        </form>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" id="preview">
+                      <div>
+                        <form @submit.prevent="publishLater()">
+                          <div class="card">
+                            <div class="card-body">
+
+                              <h4 class="card-title">Preview</h4>
+
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                       aria-orientation="vertical">
+                                    <a class="nav-link mb-2 active" id="v-pills-details-view-tab" data-toggle="pill"
+                                       href="#v-pills-details-view" role="tab" aria-controls="v-pills-details-view"
+                                       aria-selected="true"><i class="bx bxs-copy"></i> Details View</a>
+
+                                    <a class="nav-link mb-2" id="v-pills-search-view-tab" data-toggle="pill"
+                                       href="#v-pills-search-view" role="tab" aria-controls="v-pills-search-view"
+                                       aria-selected="false"><i class="bx bx-search-alt"></i> Search View</a>
+                                  </div>
+                                </div>
+                                <div class="col-md-9">
+                                  <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
+
+                                    <div class="tab-pane fade show active" id="v-pills-details-view" role="tabpanel"
+                                         aria-labelledby="v-pills-search-view-tab">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <i class="bx bx-circle bg-1"></i>
+                                          <i class="bx bx-circle bg-2"></i>
+                                          <i class="bx bx-circle bg-3"></i>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="row">
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+                                              <strong>Category:</strong> <span
+                                              v-html="categoryName(primary_job_information.skill_id)"></span></div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                              <div class="col-12">
+
+                                                <div class="preview-box">
+                                                  <h4>{{ primary_job_information.job_title }}</h4>
+                                                  <h5 v-if="primary_job_information.company_name_show_status == 1">
+                                                    {{ authUser.company_name }}</h5>
+                                                  <h5 v-else>{{ primary_job_information.company_name }}</h5>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Vacancy</h5>
+                                                  <p v-if="primary_job_information.vacancies_status == 1">Not
+                                                    specific</p>
+                                                  <p v-else>
+                                                    {{ primary_job_information.number_of_vacancies }}</p>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Job Responsibilities</h5>
+                                                  <p>{{ primary_job_information.job_responsibilities }}</p>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Employment Status</h5>
+                                                  <span v-if="primary_job_information.employment_status.length > 0">
+
+                                                    <span v-for="row in primary_job_information.employment_status"
+                                                          class="mx-1">
+
+                                                      <span class="badge badge-secondary">{{ row }}</span>
+
+                                                    </span>
+
+                                                  </span>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Additional Requirements</h5>
+                                                  <p>{{ primary_job_information.additional_requirements }}</p>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Workplace</h5>
+                                                  <span v-if="primary_job_information.workplace.length >0">
+
+                                                    <span v-for="row in primary_job_information.workplace" class="mx-1">
+                                                      <span class="badge badge-secondary">{{ row }}</span>
+                                                    </span>
+
+                                                  </span>
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Job Location</h5>
+                                                  <p
+                                                    v-html="primary_job_information.job_location_type == '0' ? 'Inside Bangladesh' : 'Outside Bangladesh'"></p>
+
+                                                  <p v-html="primary_job_information.job_location_address"></p>
+                                                </div>
+
+                                                <div class="preview-box"
+                                                     v-if="primary_job_information.salary_hide == '' || primary_job_information.salary_hide == 0">
+                                                  <h5>Salary</h5>
+
+                                                  <p v-if="primary_job_information.negotiable_status == 1">
+                                                    Negotiable</p>
+                                                  <p v-else>{{ primary_job_information.minimum_salary }} - {{
+                                                    primary_job_information.maximum_salary}} , {{
+                                                    primary_job_information.salary_paid }}</p>
+
+                                                </div>
+
+                                                <div class="preview-box">
+                                                  <h5>Job Source</h5>
+                                                  <p>Hotjobs.com.bd Online Job Posting.</p>
+                                                </div>
+
+
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12"></div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                              <div class="card">
+                                                <div class="card-header bg-dark text-light">
+                                                  Job Summary
+                                                </div>
+                                                <div class="card-body bg-light">
+                                                  <h5><strong>Posted on:</strong> {{ current_date }} </h5>
+                                                  <h5><strong>Vacancy:</strong>
+
+                                                    <span v-if="primary_job_information.vacancies_status == 1">Not specific</span>
+                                                    <span
+                                                      v-else>{{ primary_job_information.number_of_vacancies }}</span>
+
+                                                  </h5>
+
+                                                  <h5><strong>Job Nature:</strong>
+
+                                                    <span v-if="primary_job_information.employment_status.length > 0">
+
+                                                    <span v-for="row in primary_job_information.employment_status"
+                                                          class="mx-1">
+
+                                                      <span class="badge badge-secondary">{{ row }}</span>
+
+                                                    </span>
+
+                                                  </span>
+
+                                                    <span v-else>Not specific</span>
+
+                                                  </h5>
+
+                                                  <h5><strong>Age:</strong>
+
+                                                    <span
+                                                      v-if="primary_job_information.age_min != '' && primary_job_information.age_max != ''">{{ primary_job_information.age_min }} - {{ primary_job_information.age_max }} year</span>
+
+                                                    <span v-else>Not specific</span>
+
+                                                  </h5>
+
+                                                  <h5><strong>Job Location:</strong>
+                                                    <span
+                                                      v-html="primary_job_information.job_location_type == '0' ? 'Inside Bangladesh' : 'Outside Bangladesh'"></span>
+
+                                                    <span v-html="primary_job_information.job_location_address"></span>
+                                                  </h5>
+
+                                                  <h5
+                                                    v-if="primary_job_information.salary_hide == '' || primary_job_information.salary_hide == 0">
+                                                    <strong>Salary:</strong>
+
+                                                    <span v-if="primary_job_information.negotiable_status == 1"> Negotiable</span>
+                                                    <span v-else>
+                                                      {{ primary_job_information.minimum_salary }} - {{
+                                                      primary_job_information.maximum_salary}} , {{
+                                                      primary_job_information.salary_paid }}
+                                                    </span>
+
+                                                  </h5>
+                                                  <h5><strong>Application Deadline:</strong>
+                                                    <span v-if="primary_job_information.application_deadline !=''"
+                                                          v-html="dateFormat(primary_job_information.application_deadline)"></span>
+                                                    <span v-else>Not specific</span>
+                                                  </h5>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 text-center"><strong>Apply
+                                              Procedure </strong></div>
+
+                                            <br>
+                                            <br>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                              <strong>{{ primary_job_information.resume_receiving_option_type
+                                                }}</strong>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 text-center">Application Deadline:
+                                              <strong v-if="primary_job_information.application_deadline !=''"
+                                                      v-html="dateFormat(primary_job_information.application_deadline)">{{
+                                                current_date }}</strong>
+                                              <strong v-else>Not specific</strong>
+
+                                            </div>
+
+                                            <div class="col-12 border-bottom mt-5 mb-2"></div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                              <strong>Company Information</strong> <br>
+
+                                              <span
+                                                v-html="primary_job_information.company_name_show_status == 1 ? this.authUser.company_name : this.primary_job_information.company_name"></span>
+                                              <br>
+
+                                              <span v-if="primary_job_information.company_address_show_status !=''">{{ authUser.company_address }}</span>
+                                              <br>
+
+                                              <span v-if="authUser.website_url !=''">Web: <a target="_blank"
+                                                                                             :href="authUser.website_url">{{ authUser.website_url }}</a></span>
+                                              <br>
+                                              <span v-if="primary_job_information.company_business_show_status !=''">Business: {{ authUser.business_description }}</span>
+
+                                            </div>
+
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-search-view" role="tabpanel"
+                                         aria-labelledby="v-pills-details-view-tab">
+
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <i class="bx bx-circle bg-1"></i>
+                                          <i class="bx bx-circle bg-2"></i>
+                                          <i class="bx bx-circle bg-3"></i>
+                                        </div>
+
+                                        <div class="card-body">
+                                          <div class="card">
+                                            <div class="card-body">
+
+                                              <h5 class="card-title">{{ primary_job_information.job_title }}</h5>
+                                              <h6 class="card-subtitle mb-2 text-muted">
+
+                                                <span v-if="primary_job_information.company_name_show_status == 1">
+                                                  {{ authUser.company_name }}</span>
+
+                                                <span v-else>{{ primary_job_information.company_name }}</span>
+
+                                              </h6>
+
+                                              <ul class="job-preview-list">
+                                                <li v-if="primary_job_information.job_location_address !=''"><i
+                                                  class="bx bx-map"></i> {{ primary_job_information.job_location_address
+                                                  }}
+                                                </li>
+
+                                                <li v-if="primary_job_information.degree.length > 0"><i
+                                                  class="bx bxs-graduation"></i>
+
+                                                  <span v-for="(row,index) in primary_job_information.degree">
+
+                                                    <span class="badge badge-secondary mx-1"
+                                                          v-text="degreeName(row.degree_id)"></span>
+
+                                                  </span>
+
+                                                </li>
+
+                                                <li v-if="primary_job_information.experience_type == 1"><i
+                                                  class="bx bx-briefcase"></i> {{
+                                                  primary_job_information.minimum_year_of_experience }} to {{
+                                                  primary_job_information.maximum_year_of_experience }} year(s)
+                                                </li>
+                                              </ul>
+
+                                              <ul v-if="primary_job_information.application_deadline !=''"
+                                                  class="job-preview-list text-right">
+                                                <li><i class="bx bx-map"></i> Application Deadline:
+
+                                                  <strong
+                                                    v-text="dateFormat(primary_job_information.application_deadline)"></strong>
+
+                                                </li>
+                                              </ul>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <ul class="pager wizard twitter-bs-wizard-pager-link">
+
+                            <div class="text-right">
+                              <button v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"
+                                      type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-success">
+                                Publish Later
+                              </button>
+
+                              <li class="next ml-2"
+                                  v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"><a href="#">Ready
+                                to Process</a></li>
+
+                            </div>
+
                             <li class="previous"><a href="#">Previous</a></li>
                           </ul>
 
@@ -1741,28 +2087,29 @@
           contact_people_id: '',
 
           //5
-          age_maching_status:'',
-          age_maching_mandatory_status:'',
-          total_year_of_experience_status:'',
-          total_year_of_experience_mandatory_status:'',
-          gender_maching_status:'',
-          gender_mandatory_status:'',
-          area_of_experience_maching_status:'',
-          area_of_experience_mandatory_status:'',
-          skills_maching_status:'',
-          skills_mandatory_status:'',
-          job_location_current_maching_status:'',
-          job_location_current_mandatory_status:'',
-          salary_maching_status:'',
-          salary_mandatory_status:'',
-          area_of_business_maching_status:'',
-          area_of_business_mandatory_status:'',
-          job_level_maching_status:'',
-          job_level_mandatory_status:'',
+          age_maching_status: '',
+          age_maching_mandatory_status: '',
+          total_year_of_experience_status: '',
+          total_year_of_experience_mandatory_status: '',
+          gender_maching_status: '',
+          gender_mandatory_status: '',
+          area_of_experience_maching_status: '',
+          area_of_experience_mandatory_status: '',
+          skills_maching_status: '',
+          skills_mandatory_status: '',
+          job_location_current_maching_status: '',
+          job_location_current_mandatory_status: '',
+          salary_maching_status: '',
+          salary_mandatory_status: '',
+          area_of_business_maching_status: '',
+          area_of_business_mandatory_status: '',
+          job_level_maching_status: '',
+          job_level_mandatory_status: '',
 
         }),
         errors: '',
         company_contact_peoples: '',
+        current_date: this.$moment().format('MMMM D,YYYY'),
         url: this.$axios.defaults.baseURL,
       }
     },
@@ -2290,6 +2637,34 @@
 
         });
       },
+
+      // preview section
+      categoryName: function (id) {
+
+        var items = this.jobs_types;
+        var row = id;
+
+        let skill = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].id == row) {
+            skill.push(items[i].name);
+          }
+        }
+
+        let separator = "";
+        let strOptions = "";
+        skill.forEach(word => {
+          strOptions += separator + word;
+          separator = " [] ";
+        });
+
+        return strOptions;
+
+      },
+
+      dateFormat(date) {
+        return this.$moment(date).format('MMMM D,YYYY');
+      },
     },
 
     mounted: function () {
@@ -2328,5 +2703,38 @@
   .mt-10 {
     margin-top: 10px;
   }
+
+  .nav-link.active {
+    color: #ffffff;
+    background-color: #423A3D;
+  }
+
+  .bg-1 {
+    background-color: #F45E55;
+    border-radius: 100%;
+    color: #F45E55;
+  }
+
+  .bg-2 {
+    background-color: #F8BB45;
+    border-radius: 100%;
+    color: #F8BB45;
+  }
+
+  .bg-3 {
+    background-color: #43CB47;
+    border-radius: 100%;
+    color: #43CB47;
+  }
+
+  .h5 {
+    color: #0b0b0b;
+    font-weight: bold;
+  }
+
+  .job-preview-list {
+    list-style: none;
+  }
+
 
 </style>

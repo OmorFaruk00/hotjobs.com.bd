@@ -6,10 +6,12 @@
 {
   opacity: 0;
 }
+
 .modal-backdrop.show {
   z-index: 1;
 }
 
+/*preloader start*/
 .nuxt-progress {
   position: fixed;
   width: 100%;
@@ -17,3 +19,24 @@
   background: url(../images/loading.gif) center no-repeat white;
   height: 100%;
 }
+/*preloader end*/
+
+/*job post form-wizard start*/
+.twitter-bs-wizard .twitter-bs-wizard-nav .step-number {
+  border: 2px solid #423A3D !important;
+  color: #EC1A3A;
+}
+
+.twitter-bs-wizard .twitter-bs-wizard-nav .nav-link.active .step-number {
+  background-color: #423A3D;
+  color: #ffffff;
+}
+.twitter-bs-wizard .twitter-bs-wizard-pager-link li a {
+  padding: 0.38rem 0.75rem;
+}
+
+/*.twitter-bs-wizard .twitter-bs-wizard-pager-link li a {
+  background-color: #556ee6;
+}*/
+
+/*job post form-wizard end*/
