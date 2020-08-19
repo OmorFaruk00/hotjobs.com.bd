@@ -1753,8 +1753,10 @@
                                             <br>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                              <strong>{{ primary_job_information.resume_receiving_option_type
-                                                }}</strong>
+
+                                              <strong v-if="primary_job_information.resume_receiving_option_type == 1">Email</strong>
+                                              <strong v-if="primary_job_information.resume_receiving_option_type == 2">Hard Copy</strong>
+                                              <strong v-if="primary_job_information.resume_receiving_option_type == 3">Walk in Interview</strong>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12 text-center">Application Deadline:
