@@ -1640,7 +1640,7 @@
 
                     <div class="tab-pane" id="preview">
                       <div>
-                        <form @submit.prevent="publishLater()">
+<!--                        <form @submit.prevent="publishLater()">-->
                           <div class="card">
                             <div class="card-body">
 
@@ -1951,23 +1951,26 @@
                           <ul class="pager wizard twitter-bs-wizard-pager-link">
 
                             <div class="text-right">
-                              <button v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"
+                              <button @click="publishLater()" v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"
                                       type="submit"
                                       :disabled="primary_job_information.busy"
                                       class="btn btn-success">
                                 Publish Later
                               </button>
 
-                              <li class="next ml-2"
-                                  v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"><a href="#">Ready
-                                to Process</a></li>
+                              <button @click="readyToProcess()" v-show="firstStep && secondStep && thirdStep && fourStep && fiveStep"
+                                      type="submit"
+                                      :disabled="primary_job_information.busy"
+                                      class="btn btn-warning">
+                                Ready to Process
+                              </button>
 
                             </div>
 
                             <li class="previous"><a href="#">Previous</a></li>
                           </ul>
 
-                        </form>
+<!--                        </form>-->
                       </div>
                     </div>
 
@@ -2191,6 +2194,7 @@
           area_of_business_mandatory_status: '',
           job_level_maching_status: '',
           job_level_mandatory_status: '',
+          status:'',
 
         }),
         errors: '',
@@ -2429,6 +2433,11 @@
 
             vm.firstStep = true;
 
+            Toast.fire({
+              icon: 'info',
+              title: 'Press next button for next step'
+            });
+
           })
           .catch((error) => {
 
@@ -2454,33 +2463,6 @@
             }
 
           })
-
-        /*this.primary_job_information.post(this.url + 'primary-job-information?token=' + token)
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message
-            });
-
-          })
-          .catch((error) => {
-
-            vm.errors = error.response.data;
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Token Not Found'
-              });
-            }
-
-          })*/
       },
 
       createMoreJobInformation() {
@@ -2511,6 +2493,11 @@
           .then((response) => {
 
             vm.secondStep = true;
+
+            Toast.fire({
+              icon: 'info',
+              title: 'Press next button for next step'
+            });
 
           })
           .catch((error) => {
@@ -2570,6 +2557,11 @@
 
             vm.thirdStep = true;
 
+            Toast.fire({
+              icon: 'info',
+              title: 'Press next button for next step'
+            });
+
           })
           .catch((error) => {
 
@@ -2617,6 +2609,11 @@
           .then((response) => {
 
             vm.fourStep = true;
+
+            Toast.fire({
+              icon: 'info',
+              title: 'Press next button for next step'
+            });
 
           })
           .catch((error) => {
@@ -2677,6 +2674,11 @@
           .then((response) => {
 
             vm.fiveStep = true;
+
+            Toast.fire({
+              icon: 'info',
+              title: 'Press next button for next step'
+            });
 
           })
           .catch((error) => {
@@ -2740,10 +2742,54 @@
           })
           .catch((error) => {
 
+
+            if (error.response.status == 402) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Something went wrong.Please try again!.'
+              });
+            }
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+          })
+      },
+
+      readyToProcess() {
+
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+        this.primary_job_information.post(this.url + 'ready-to-publish?token=' + token)
+          .then((response) => {
+
             Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
+              icon: 'success',
+              title: 'Successfully Job Post Submitted'
             });
+
+            vm.$router.push('dashboard');
+          })
+          .catch((error) => {
+
+
+            if (error.response.status == 402) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Something went wrong.Please try again!.'
+              });
+            }
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
 
           })
       },
