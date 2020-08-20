@@ -283,14 +283,17 @@
       },
 
       createEmployee() {
-
+        var vm =this
         this.form.post(this.url + 'employee')
+
           .then(() => {
             Toast.fire({
               icon: 'success',
               title: 'Account Created successfully.Please login '
             });
             $('#addGeneralEmployee').modal('hide');
+            vm.$router.push('login');
+
           })
           .catch((error) => {
             Toast.fire({
