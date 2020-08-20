@@ -15,7 +15,89 @@
 
               <div id="progrss-wizard" class="twitter-bs-wizard">
 
-                <jobPostingFormHeader/>
+<!--                <jobPostingFormHeader/>-->
+
+
+                <ul class="twitter-bs-wizard-nav nav-justified">
+
+                  <li class="nav-item">
+                    <a href="#primary-job-information" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">01</span> <br>
+                      Primary Job Information
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+
+                    <a v-show="firstStep" href="#more-job-information" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">02</span> <br>
+                      More Job Information
+                    </a>
+
+                    <a v-show="!firstStep" href="javaScript:void(0)" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">02</span> <br>
+                      More Job Information
+                    </a>
+
+                  </li>
+
+                  <li class="nav-item">
+                    <a v-show="secondStep" href="#candidate-requirements" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">03</span> <br>
+                      Candidate Requirements
+                    </a>
+
+                    <a v-show="!secondStep" href="javaScript:void(0)" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">03</span> <br>
+                      Candidate Requirements
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a v-show="thirdStep" href="#company-info-visibility" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">04</span> <br>
+                      Company Info Visibility
+                    </a>
+
+                    <a v-show="!thirdStep" href="javaScript:void(0)" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">04</span> <br>
+                      Company Info Visibility
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a v-show="fourStep" href="#matching-criteria" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">05</span> <br>
+                      Matching Criteria
+                    </a>
+
+                    <a v-show="!fourStep" href="javaScript:void(0)" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">05</span> <br>
+                      Matching Criteria
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item">
+                    <a v-show="fiveStep" href="#preview" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">06</span> <br>
+                      Preview
+                    </a>
+
+                    <a v-show="!fiveStep" href="javaScript:void(0)" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">06</span> <br>
+                      Preview
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#complete" class="nav-link" data-toggle="tab">
+                      <span class="step-number mr-2">07</span> <br>
+                      Complete
+                    </a>
+                  </li>
+
+                </ul>
 
                 <div class="mt-3">
 
@@ -519,6 +601,8 @@
                                     <b-form-select-option value="0">NA</b-form-select-option>
                                     <b-form-select-option value="1">Select Option</b-form-select-option>
                                   </b-form-select>
+
+
                                 </div>
 
                                 <div class="col-md-10 col-sm-12"
@@ -2056,7 +2140,7 @@
           negotiable_status: '',
           salary_hide: '',
           additional_salary_info: '',
-          compensation_other_benefits_status: '',
+          compensation_other_benefits_status: '0',
           compensation_other_benefits_items: '',
           festival_bonus: '',
           others: '',
