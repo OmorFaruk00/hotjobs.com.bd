@@ -2738,7 +2738,7 @@
               title: 'Successfully Submitted'
             });
 
-            vm.$router.push('dashboard');
+            vm.$router.push('/employer/dashboard');
           })
           .catch((error) => {
 
@@ -2772,7 +2772,7 @@
               title: 'Successfully Job Post Submitted'
             });
 
-            vm.$router.push('dashboard');
+            vm.$router.push('/employer/dashboard');
           })
           .catch((error) => {
 

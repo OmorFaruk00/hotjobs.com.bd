@@ -43,7 +43,7 @@
   }
 </script>
 
-<style scoped>
+<style>
 
   #scrollUp {
     background: #EC1A3A none repeat scroll 0 0;
@@ -59,6 +59,15 @@
     transition: all 0.3s ease 0s;
     width: 30px;
     z-index: 200;
+  }
+
+  .nuxt-progress {
+    position: fixed;
+    width: 100%;
+    display: block;
+    /*background: url("/assets/images/loading.gif") center no-repeat white;*/
+    height: 100%;
+    background: url('https://hotjobs.com.bd/loading.gif') center no-repeat white;
   }
 
 </style>

@@ -292,7 +292,7 @@
               title: 'Account Created successfully.Please login '
             });
             $('#addGeneralEmployee').modal('hide');
-            vm.$router.push('login');
+            vm.$router.push('/my-jobs/login');
 
           })
           .catch((error) => {

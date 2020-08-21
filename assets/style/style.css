@@ -12,13 +12,13 @@
 }
 
 /*preloader start*/
-.nuxt-progress {
+/*.nuxt-progress {
   position: fixed;
   width: 100%;
   display: block;
   background: url(../images/loading.gif) center no-repeat white;
   height: 100%;
-}
+}*/
 /*preloader end*/
 
 /*job post form-wizard start*/
