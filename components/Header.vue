@@ -894,6 +894,8 @@
 
       createEmployer() {
 
+        var vm = this;
+
         this.form.post(this.url + 'employer')
           .then(() => {
 
@@ -902,6 +904,8 @@
               title: 'Account Created successfully.Please login with valid email and password'
             });
             $('#addEmployer').modal('hide');
+
+            vm.$router.push('/employer/login')
 
           })
 
