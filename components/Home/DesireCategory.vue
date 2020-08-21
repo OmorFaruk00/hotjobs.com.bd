@@ -9,9 +9,13 @@
         <div class="col-12 text-right">
           <div class="btn-group" role="group" aria-label="Basic example">
 
-            <button @click="generalCategoryStep" type="button" class="btn btn-outline-info" :class="general_category_step ? 'active' : ''">Functional</button>
+            <button @click="generalCategoryStep" type="button" class="btn btn-outline-info"
+                    :class="general_category_step ? 'active' : ''">Functional
+            </button>
 
-            <button @click="industialsStep" type="button" class="btn btn-outline-secondary" :class="industials_step ? 'active' : ''">Industrial</button>
+            <button @click="industialsStep" type="button" class="btn btn-outline-secondary"
+                    :class="industials_step ? 'active' : ''">Industrial
+            </button>
 
           </div>
         </div>
@@ -23,7 +27,8 @@
               <h3>
                 <a href="javaScript:void(0)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='test(row.id)' :duration='5000'></countTo>
+                  <countTo :startVal='0' :endVal='row.current_job_posts.length'
+                           :duration='5000'></countTo>
                   )
                 </a>
               </h3>
@@ -37,7 +42,7 @@
               <h3>
                 <a href="javaScript:void(0)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='test(row.id)' :duration='5000'></countTo>
+                  <countTo :startVal='0' :endVal='5' :duration='5000'></countTo>
                   )
                 </a>
               </h3>
@@ -145,8 +150,8 @@
 
     data() {
       return {
-        general_category_step:true,
-        industials_step:false,
+        general_category_step: true,
+        industials_step: false,
         url: this.$axios.defaults.baseURL,
         general_category: '',
         industials: '',
@@ -186,19 +191,15 @@
         });
       },
 
-      generalCategoryStep(){
+      generalCategoryStep() {
         this.general_category_step = true;
         this.industials_step = false;
       },
 
-      industialsStep(){
+      industialsStep() {
         this.industials_step = true;
         this.general_category_step = false;
       },
-
-      test(id) {
-        return 100;
-      }
     },
 
     beforeMount() {
