@@ -97,7 +97,7 @@
               maxAge:1800
             })
 
-            window.location.href  = "/employer/edit-profile";
+            window.location.href  = "/employer/dashboard";
 
           })
           .catch((error) => {

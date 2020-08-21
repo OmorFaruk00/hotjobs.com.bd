@@ -2891,6 +2891,9 @@
   .job-preview-list {
     list-style: none;
   }
+  .nav-item a{
+    text-align: center!important;
+  }
 
 
 </style>
