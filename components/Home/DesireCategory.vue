@@ -42,7 +42,7 @@
               <h3>
                 <a href="javaScript:void(0)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='5' :duration='5000'></countTo>
+                  <countTo :startVal='0' :endVal='row.current_job_posts.length' :duration='5000'></countTo>
                   )
                 </a>
               </h3>
