@@ -22,7 +22,7 @@
 
 
         <div class="row" v-if="general_category_step">
-          <div v-for="row in general_category" class="col-lg-3 col-md-3 col-sm-12">
+          <div v-for="row in general_categories" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
                 <a href="javaScript:void(0)">{{ row.name }}
@@ -43,7 +43,16 @@
                 <a href="javaScript:void(0)">{{ row.name }}
                   (
                   <countTo :startVal='0' :endVal='5' :duration='5000'></countTo>
-                  )
+                  ) {{ number }}
+
+                  <span v-for="inner_row in row.employer">
+                    <span class="badge badge-secondary mx-1">{{ inner_row.id }}
+
+                        <span class="badge badge-info mx-1" v-text="inner_row.post_jobs.length"></span>
+
+                      </span>
+                  </span>
+
                 </a>
               </h3>
             </div>
@@ -153,8 +162,9 @@
         general_category_step: true,
         industials_step: false,
         url: this.$axios.defaults.baseURL,
-        general_category: '',
+        general_categories: '',
         industials: '',
+        number:''
       }
     },
 
@@ -163,7 +173,7 @@
         var vm = this;
         this.$axios.get('skill-general-category').then(function (response) {
 
-          vm.general_category = response.data;
+          vm.general_categories = response.data;
 
         }).catch(function (error) {
 
@@ -177,7 +187,7 @@
 
       fetchIndustryCategory() {
         var vm = this;
-        this.$axios.get('industry-category-lists').then(function (response) {
+        this.$axios.get('industry-category-lists-current-job-post').then(function (response) {
 
           vm.industials = response.data;
 
@@ -200,6 +210,7 @@
         this.industials_step = true;
         this.general_category_step = false;
       },
+
     },
 
     beforeMount() {
