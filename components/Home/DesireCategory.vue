@@ -43,16 +43,7 @@
                 <a href="javaScript:void(0)">{{ row.name }}
                   (
                   <countTo :startVal='0' :endVal='5' :duration='5000'></countTo>
-                  ) {{ number }}
-
-                  <span v-for="inner_row in row.employer">
-                    <span class="badge badge-secondary mx-1">{{ inner_row.id }}
-
-                        <span class="badge badge-info mx-1" v-text="inner_row.post_jobs.length"></span>
-
-                      </span>
-                  </span>
-
+                  )
                 </a>
               </h3>
             </div>
@@ -164,7 +155,6 @@
         url: this.$axios.defaults.baseURL,
         general_categories: '',
         industials: '',
-        number:''
       }
     },
 
@@ -187,7 +177,7 @@
 
       fetchIndustryCategory() {
         var vm = this;
-        this.$axios.get('industry-category-lists-current-job-post').then(function (response) {
+        this.$axios.get('industry-category-lists').then(function (response) {
 
           vm.industials = response.data;
 
