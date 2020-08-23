@@ -61,13 +61,13 @@
     z-index: 200;
   }
 
-  .nuxt-progress {
+  /*.nuxt-progress {
     position: fixed;
     width: 100%;
     display: block;
-    /*background: url("/assets/images/loading.gif") center no-repeat white;*/
+    !*background: url("/assets/images/loading.gif") center no-repeat white;*!
     height: 100%;
-    background: url('https://hotjobs.com.bd/loading.gif') center no-repeat white;
-  }
+    !*background: url('https://hotjobs.com.bd/loading.gif') center no-repeat white;*!
+  }*/
 
 </style>
