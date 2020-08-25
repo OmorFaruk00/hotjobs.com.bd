@@ -142,7 +142,7 @@
           this.$router.push(`/jobsearch/${id}`)
 
         }
-        
+
       },
 
       beforeMount() {

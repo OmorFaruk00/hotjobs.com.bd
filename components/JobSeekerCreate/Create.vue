@@ -170,7 +170,7 @@
                     <input type="checkbox" name="terms_and_conditions" class="form-check-input" id="defaultCheck1"
                            required>
                     <label class="form-check-label" for="defaultCheck1">
-                      I agree to the Bdjobs.com Terms of use. <a href="">Terms & Conditions</a>
+                      I agree to the Hotjobs.com Terms of use. <a href="">Terms & Conditions</a>
                     </label>
 
                     <has-error :form="form" field="terms_and_conditions"></has-error>
