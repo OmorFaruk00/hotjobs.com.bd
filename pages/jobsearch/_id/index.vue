@@ -179,8 +179,9 @@
       fetchJobDetails(id){
 
         var id = id;
-        let route = this.$router.resolve(`/job-details/${id}`);
-        window.open(route.href, '_blank');
+        this.$router.push(`/job-details/${id}`)
+        // let route = this.$router.resolve(`/job-details/${id}`);
+        // window.open(route.href, '_blank');
 
       }
 

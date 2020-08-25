@@ -203,7 +203,6 @@
 
       fetchJob(id){
         var id = id;
-
         this.$router.push(`/jobsearch/${id}`)
 
       }
