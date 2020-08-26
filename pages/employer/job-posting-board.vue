@@ -231,8 +231,7 @@
                           <div class="col-md-10">
 
                             <no-ssr>
-                              <datepicker v-model="primary_job_information.application_deadline"
-                                          placeholder="Select Date"
+                              <datepicker placeholder="select date" v-model="primary_job_information.application_deadline"
                                           :class="{ 'is-invalid': primary_job_information.errors.has('application_deadline') }"></datepicker>
                             </no-ssr>
                             <small v-if="errors.application_deadline" class="text-danger with-errors"

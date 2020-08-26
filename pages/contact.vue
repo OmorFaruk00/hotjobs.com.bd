@@ -15,11 +15,11 @@
 
                 <hr>
 
-                <h2 class="card-title"><i class="bx bx-phone-call"></i> Dial 16479 from any number.</h2>
+                <h2 class="card-title"><i class="bx bx-phone-call"></i> Dial <strong>000000</strong> from any number.</h2>
 
                 <hr>
-                <p class="card-title">IP phone: +88 09612444888 from any number.</p>
-                <p class="card-title">T&T Phone : 55012152, 55012154, 55012120 & 55012122 .</p>
+                <p class="card-title">IP phone: +88 0000000 from any number.</p>
+                <p class="card-title">T&T Phone : 0000000, 0000000, 0000000 .</p>
 
                 <br>
 
@@ -28,19 +28,20 @@
                   <table class="table table-bordered">
                     <thead>
                     <tr>
-                      <td colspan="2">➤   For any sales query (for the clients outside Dhaka):</td>
+                      <td colspan="2"><i class="bx bxs-right-arrow-square"></i> For any sales query (for the clients outside Dhaka):</td>
                     </tr>
                     </thead>
 
                     <tbody>
                     <tr>
-                      <td>Chittagong:01811410851	</td>
-                      <td>Narayanganj:01847213992	</td>
+                      <td>Rangpur:013XXXXXXXX</td>
+                      <td>Bogra:013XXXXXXXX</td>
                     </tr>
                     <tr>
-                      <td>Chittagong:01811410851	</td>
-                      <td>Narayanganj:01847213992	</td>
+                      <td>Chittagong:013XXXXXXXX</td>
+                      <td>Narayanganj:013XXXXXXXX</td>
                     </tr>
+
                     </tbody>
                   </table>
                 </div>
@@ -65,8 +66,8 @@ export default {
 </script>
 
 <style scoped>
-.contact{
-  color: #ddd;
+.contact p {
+  color: #000;
 }
 
 </style>
