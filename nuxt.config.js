@@ -80,6 +80,10 @@ export default {
     'cookie-universal-nuxt',
     'nuxt-moment',
     'nuxt-vue-multiselect',
+    ['nuxt-gmaps', {
+      key: 'AIzaSyBU8GPGJ8ihYBpfMRnbCOsVZJlyvWafPq4',
+      //you can use libraries: ['places']
+    }]
   ],
 
   axios: {
