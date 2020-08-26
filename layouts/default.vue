@@ -70,4 +70,6 @@
     !*background: url('https://hotjobs.com.bd/loading.gif') center no-repeat white;*!
   }*/
 
+
+
 </style>

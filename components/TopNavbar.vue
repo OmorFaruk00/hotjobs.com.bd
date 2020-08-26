@@ -32,7 +32,7 @@
               </li>
 
               <li class="nav-item dropdown">
-                <nuxt-link class="nav-link dropdown-toggle arrow-none" to="/">Contact Us</nuxt-link>
+                <nuxt-link class="nav-link dropdown-toggle arrow-none" to="/contact">Contact Us</nuxt-link>
               </li>
 
 

@@ -1434,7 +1434,7 @@
                     <label>Date Of Birth</label>
                     <no-ssr>
 
-                      <datepicker v-model="form.date_of_birth"
+                      <datepicker placeholder="select date" v-model="form.date_of_birth"
                                   :class="{ 'is-invalid': form.errors.has('date_of_birth') }"></datepicker>
                     </no-ssr>
 
@@ -1512,7 +1512,7 @@
                     <label>Passport Issue Date</label>
                     <no-ssr>
 
-                      <datepicker v-model="form.passport_issue_date"
+                      <datepicker placeholder="select date" v-model="form.passport_issue_date"
                                   :class="{ 'is-invalid': form.errors.has('passport_issue_date') }"></datepicker>
                     </no-ssr>
 
@@ -2297,7 +2297,7 @@
 
                     <no-ssr>
 
-                      <datepicker v-model="certificate.from_duration"
+                      <datepicker placeholder="select date" v-model="certificate.from_duration"
                                   :class="{ 'is-invalid': certificate.errors.has('from_duration') }"></datepicker>
                     </no-ssr>
 
@@ -2308,7 +2308,7 @@
                     <label>To Duration</label>
                     <no-ssr>
 
-                      <datepicker v-model="certificate.to_duration"
+                      <datepicker placeholder="select date" v-model="certificate.to_duration"
                                   :class="{ 'is-invalid': certificate.errors.has('to_duration') }"></datepicker>
                     </no-ssr>
 
@@ -2431,7 +2431,7 @@
 
                     <no-ssr>
 
-                      <datepicker v-model="experience.from_date"
+                      <datepicker placeholder="select date" v-model="experience.from_date"
                                   :class="{ 'is-invalid': experience.errors.has('from_date') }"></datepicker>
                     </no-ssr>
 
@@ -2441,10 +2441,10 @@
                   <div class="form-group">
                     <label>To Date</label>
 
-                    <input type="text" value="Continuing" v-if="experience.currently_working == 1" readonly>
+                    <input placeholder="select date"  type="text" value="Continuing" v-if="experience.currently_working == 1" readonly>
 
                     <no-ssr>
-                      <datepicker v-if="experience.currently_working != 1" v-model="experience.to_date"
+                      <datepicker placeholder="select date" v-if="experience.currently_working != 1" v-model="experience.to_date"
                                   :class="{ 'is-invalid': experience.errors.has('to_date') }" required></datepicker>
 
                     </no-ssr>
@@ -2557,7 +2557,7 @@
                     <no-ssr>
 
 
-                      <datepicker v-model="experience_army.date_of_commission"
+                      <datepicker placeholder="select date" v-model="experience_army.date_of_commission"
                                   :class="{ 'is-invalid': experience_army.errors.has('date_of_commission') }"
                                   required></datepicker>
                     </no-ssr>
@@ -2637,7 +2637,7 @@
                   <div class="form-group">
                     <label>Date Of Retirement</label>
                     <no-ssr>
-                      <datepicker v-model="experience_army.date_of_retirement"
+                      <datepicker placeholder="select date" v-model="experience_army.date_of_retirement"
                                   :class="{ 'is-invalid': experience_army.errors.has('date_of_retirement') }"
                                   required></datepicker>
                     </no-ssr>
@@ -2685,7 +2685,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
 
                   <div class="form-group">
-                    <label>language</label>
+                    <label>Language</label>
                     <input v-model="language.language" type="text" name="language"
                            placeholder="Enter language"
                            class="form-control"
@@ -2809,7 +2809,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label>email</label>
+                    <label>Email</label>
                     <input v-model="reference.email" type="email" name="email"
                            placeholder="Enter email"
                            class="form-control"
@@ -3262,10 +3262,9 @@
                     Hide Marks/CGPA
                   </b-form-checkbox>
 
-                  <div class="form-group">
+                  <div class="form-group" v-if="education.result == 'First Division/Class' || education.result == 'Second  Division/Class' || education.result == 'Third Division/Class'">
                     <label>Marks (%)</label>
                     <input v-model="education.marks"
-                           v-if="education.result == 'First Division/Class' || education.result == 'Second  Division/Class' || education.result == 'Third Division/Class'"
                            type="text" name="marks"
                            placeholder="Enter marks"
                            class="form-control"
@@ -3374,6 +3373,11 @@
   export default {
     middleware: 'employeeAuthenticated',
     name: "edit-resume",
+    head: {
+      link: [
+        { rel: 'stylesheet', href: '/css/form.css' },
+      ],
+    },
 
     data() {
       return {
