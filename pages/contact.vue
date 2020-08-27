@@ -70,7 +70,7 @@
                     v-for="location in locations"
                     :key="location.id"
                     :position="{lat: location.lat, lng: location.lng}"
-                    :options="{icon: location === currentLocation ? pins.selected : pins.notSelected}"
+                    :options="{icon: location === maya ? pins.selected : pins.notSelected}"
                     @click="currentLocation = location"
                   >
                     <GMapInfoWindow :options="{maxWidth: 200}">

@@ -266,12 +266,12 @@ button:focus {
 /*-- End Navbar --*/
 /*-- Banner --*/
 .banner-img-one {
-  background-image: url("../images/banner.jpg");
+  background-image: url("../images/banner.png");
   opacity: 0.9;
 }
 
 .banner-area {
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
   height: 550px;
@@ -1966,7 +1966,7 @@ button:focus {
 /*----- Home Page 2 -----*/
 /*-- Banner --*/
 .banner-img-two {
-  background-image: url("../img/home-2/banner.jpg");
+  background-image: url("../img/home-2/banner.png");
 }
 
 .banner-area-two {
@@ -4739,13 +4739,13 @@ button:focus {
 /*employability_help*/
 
 .employability-help-img {
-  background-image: url("../images/banner.jpg");
+  background-image: url("../images/banner.png");
   background-size: 100% 100%;
   opacity: 0.9;
 }
 
 .employability-help {
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
   height: 350px;
