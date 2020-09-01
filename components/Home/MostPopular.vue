@@ -6,12 +6,12 @@
         <div class="popular-item">
           <div class="row align-items-center">
             <div class="col-lg-7">
-              <img src="../../static/images/3.jpg" alt="Popular">
+              <img src="../../static/images/3.png" alt="Popular">
             </div>
             <div class="col-lg-5">
               <div class="practice-inner">
-                <img src="../../static/images/4.jpg" alt="Popular">
-                <img src="../../static/images/5.jpg" alt="Popular">
+                <img src="../../static/images/4.png" alt="Popular">
+                <img src="../../static/images/5.png" alt="Popular">
               </div>
             </div>
           </div>
