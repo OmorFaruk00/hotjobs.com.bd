@@ -20,7 +20,7 @@
             <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL"
                    required autocomplete="off">
 
-            <button class="btn subscribe-btn" type="submit">
+            <button class="btn subscribe-btn" type="button">
               Subscribe
             </button>
 
@@ -39,9 +39,10 @@
               </a>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua. </p>
-              <ul>
+
+              <!--<ul>
                 <li>
-                  <a href="https://www.youtube.com/" target="_blank">
+                  <a href="javaScript:void(0)" target="_blank">
                     <i class="icofont-youtube-play"></i>
                   </a>
                 </li>
@@ -60,7 +61,8 @@
                     <i class="icofont-twitter"></i>
                   </a>
                 </li>
-              </ul>
+              </ul>-->
+
             </div>
           </div>
         </div>
@@ -70,31 +72,31 @@
               <h3>Category</h3>
               <ul>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Development
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Business
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Tech & IT
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Finance
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Networking
                   </a>
@@ -109,31 +111,31 @@
               <h3>Quick Links</h3>
               <ul>
                 <li>
-                  <a href="index.html">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="about.html">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="blog.html">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Blogs
                   </a>
                 </li>
                 <li>
-                  <a href="company-list.html">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Companies
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javaScript:void(0)">
                     <i class="icofont-simple-right"></i>
                     Testimonials
                   </a>
@@ -149,7 +151,7 @@
               <ul>
                 <li>
                   <i class="icofont-location-pin"></i>
-                  28/A Street, New York City
+                  House # 4, Road # 1, Block - F, Banani, Dhaka-1213, Bangladesh.
                 </li>
                 <li>
                   <i class="icofont-ui-call"></i>
@@ -159,7 +161,7 @@
                 </li>
                 <li>
                   <i class="icofont-ui-email"></i>
-                  <a href="mailto:hello@gable.com">
+                  <a href="mailto:info@hotjobs.com.bd">
                     info@hotjobs.com.bd
                   </a>
                 </li>
@@ -172,7 +174,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="copyright-item">
-              <p>Copyright @{{ date }} HotJobs. Designed by: <a href="javaScript:void(0)" target="_blank">IT-TEAM,
+              <p>Copyright @{{ date }} HotJobs. Designed by: <a href="http://it.diu.ac" target="_blank">IT-TEAM,
                 DIU</a></p>
             </div>
           </div>
@@ -180,13 +182,13 @@
             <div class="copyright-item copyright-right">
               <ul>
                 <li>
-                  <a href="terms-and-conditions.html" target="_blank">Terms & Conditions</a>
+                  <a href="javaScript:void(0)" target="_blank">Terms & Conditions</a>
                 </li>
                 <li>
                   <span>-</span>
                 </li>
                 <li>
-                  <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                  <a href="javaScript:void(0)" target="_blank">Privacy Policy</a>
                 </li>
               </ul>
             </div>
