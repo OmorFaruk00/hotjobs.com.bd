@@ -15,15 +15,20 @@ export default {
   */
   head: {
 
-    title: 'Hot Jobs BD',
+    title: 'Hot Jobs BD | Search & Post Jobs Free',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {hid: 'description', name: 'description', content: 'Hot Jobs BD'},
+      {name: 'keywords', content: 'Hot Jobs BD'},
+      {name: 'author', content: 'Hot Jobs BD'},
     ],
 
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'},
+      {rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.png'},
+      {rel: 'apple-touch-icon',sizes:'120x120', href: '/favicon.png'},
+      {rel: 'apple-touch-icon',sizes:'152x152', href: '/favicon.png'},
       {rel: 'stylesheet', id: 'bootstrap-style', href: '/css/bootstrap.min.css'},
       {rel: 'stylesheet', href: '/css/icons.min.css'},
       {rel: 'stylesheet', href: '/css/app.min.css'},
@@ -91,8 +96,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    // baseURL: 'http://localhost:8000/',
-    baseURL: 'https://api.hotjobs.com.bd/'
+    baseURL: 'http://localhost:8000/',
+    // baseURL: 'https://api.hotjobs.com.bd/'
   },
 
   /*
