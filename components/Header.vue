@@ -128,16 +128,16 @@
 
         <div class="dropdown d-inline-block">
 
-          <a href="javaScript:void(0)">
-            <i class="bx bxl-facebook-circle" style="font-size: 40px;"></i>
+          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Hot Jobs BD">
+            <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
           <a href="javaScript:void(0)">
-            <i class="bx bxl-youtube" style="font-size: 40px;"></i>
+            <i class="bx bxl-youtube" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
           <a href="javaScript:void(0)">
-            <i class="bx bxl-linkedin-square" style="font-size: 40px;"></i>
+            <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
         </div>
