@@ -38,8 +38,10 @@ export default {
       {rel: 'stylesheet', href: '/css/app.min.css'},
       {rel: 'stylesheet', href: '/css/app.min.css'},
       {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
-      {rel: 'stylesheet', href: '/css/style.css'},
-      {rel: 'stylesheet', href: '/css/responsive.css'},
+      // {rel: 'stylesheet', href: '/css/style.css'},
+      {rel: 'stylesheet', href: '/css/min_style.css'},
+      // {rel: 'stylesheet', href: '/css/responsive.css'},
+      {rel: 'stylesheet', href: '/css/min_responsive.css'},
     ],
 
     script: [
