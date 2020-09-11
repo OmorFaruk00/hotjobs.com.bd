@@ -15,11 +15,15 @@ export default {
   */
   head: {
 
+    htmlAttrs: {
+      lang: 'en',
+    },
+
     title: 'Hot Jobs BD | Search & Post Jobs Free',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'Hot Jobs BD'},
+      {hid: 'description', name: 'description', content: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training'},
       {name: 'keywords', content: 'Hot Jobs BD'},
       {name: 'author', content: 'Hot Jobs BD'},
     ],
@@ -96,8 +100,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/'
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/'
   },
 
   /*
