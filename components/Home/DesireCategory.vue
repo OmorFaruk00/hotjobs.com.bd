@@ -40,7 +40,7 @@
           <div v-for="row in industials" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
-                <a href="javaScript:void(0)">{{ row.name }}
+                <a href="javaScript:void(0)" @click="fetchIndustryJob(row.id)">{{ row.name }}
                   (
                   <countTo :startVal='0' :endVal='row.current_job_posts.length' :duration='5000'></countTo>
                   )
@@ -204,6 +204,12 @@
       fetchJob(id){
         var id = id;
         this.$router.push(`/jobsearch/${id}`)
+
+      },
+
+      fetchIndustryJob(id){
+        var id = id;
+        this.$router.push(`/industry-jobsearch/${id}`)
 
       }
 
