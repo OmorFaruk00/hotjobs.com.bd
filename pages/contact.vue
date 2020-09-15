@@ -64,7 +64,7 @@
                   :cluster="{options: {styles: clusterStyle}}"
                   :center="{lat: locations[0].lat, lng: locations[0].lng}"
                   :options="{fullscreenControl: false, styles: mapStyle}"
-                  :zoom="18"
+                  :zoom="20"
                 >
                   <GMapMarker
                     v-for="location in locations"
@@ -103,9 +103,9 @@ export default {
   data() {
     return {
       currentLocation: {
-        lat: 23.7878921,
-        lng: 90.4009322,
-        name: "Dhaka International University"
+        lat: 23.821159,
+        lng: 90.423213,
+        name: "Al-Hera Tower"
       },
       /*circleOptions: {
         ...
@@ -118,15 +118,15 @@ export default {
       ],*/
       locations: [
         {
-          lat: 23.7878921,
-          lng: 90.4009322,
-          name: "Dhaka International University"
+          lat: 23.821159,
+          lng: 90.423213,
+          name: "Al-Hera Tower"
         },
 
         {
-          lat: 23.7869881,
-          lng: 90.4012536,
-          name: "AMECON"
+          lat: 23.8208515,
+          lng: 90.4218548,
+          name: "Mullar Tex Ltd"
         },
       ],
       pins: {

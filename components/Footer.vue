@@ -37,31 +37,24 @@
               <a href="#">
                 <img src="../static/images/logo.png" alt="HotJobs">
               </a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. </p>
 
-              <!--<ul>
+              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. </p>-->
+
+              <ul>
+                <li>
+                  <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank">
+                    <i class="bx bxl-facebook-circle"></i>
+                  </a>
+                </li>
+
                 <li>
                   <a href="javaScript:void(0)" target="_blank">
-                    <i class="icofont-youtube-play"></i>
+                    <i class="bx bxl-youtube"></i>
                   </a>
                 </li>
-                <li>
-                  <a href="https://www.facebook.com/" target="_blank">
-                    <i class="icofont-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/" target="_blank">
-                    <i class="icofont-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.twitter.com/" target="_blank">
-                    <i class="icofont-twitter"></i>
-                  </a>
-                </li>
-              </ul>-->
+
+              </ul>
 
             </div>
           </div>
@@ -84,7 +77,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="javaScript:void(0)">
+                  <a href="http://it.diu.ac" target="_blank">
                     <i class="icofont-simple-right"></i>
                     Tech & IT
                   </a>
@@ -111,33 +104,21 @@
               <h3>Quick Links</h3>
               <ul>
                 <li>
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/">
                     <i class="icofont-simple-right"></i>
                     Home
-                  </a>
+                  </nuxt-link>
                 </li>
                 <li>
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/contact">
                     <i class="icofont-simple-right"></i>
-                    About Us
-                  </a>
+                    Contact Us
+                  </nuxt-link>
                 </li>
                 <li>
-                  <a href="javaScript:void(0)">
+                  <a href="https://hotjobs.com.bd/blog/" target="_blank">
                     <i class="icofont-simple-right"></i>
                     Blogs
-                  </a>
-                </li>
-                <li>
-                  <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Companies
-                  </a>
-                </li>
-                <li>
-                  <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Testimonials
                   </a>
                 </li>
               </ul>
@@ -151,12 +132,16 @@
               <ul>
                 <li>
                   <i class="icofont-location-pin"></i>
-                  House # 4, Road # 1, Block - F, Banani, Dhaka-1213, Bangladesh.
+                  Al-Hera Tower. Ka-86/1/A, Kuratoli Bazar, Dhaka-1229. Dhaka, Bangladesh.
                 </li>
                 <li>
                   <i class="icofont-ui-call"></i>
-                  <a href="tel:+880123456789">
-                    +88 0123 456 789
+                  <a href="tel:+8801726893448">
+                    +88 017 2689 3448
+                  </a>
+
+                  <a href="javaScript:void(0)">
+                    +880255040889 (Extension: 221)
                   </a>
                 </li>
                 <li>
@@ -259,7 +244,7 @@
   .footer-item .footer-logo ul li a {
     display: block;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 30px;
     margin-bottom: 0;
   }
 
