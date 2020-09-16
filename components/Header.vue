@@ -132,12 +132,16 @@
             <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="javaScript:void(0)">
-            <i class="bx bxl-youtube" style="font-size: 40px;color: #423A3D;"></i>
+          <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank">
+            <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="javaScript:void(0)">
-            <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
+          <a href="https://www.instagram.com/bdhotjobs/" target="_blank">
+            <i class="bx bxl-instagram-alt" style="font-size: 40px;color: #423A3D;"></i>
+          </a>
+
+          <a href="https://twitter.com/bdhotjobs" target="_blank">
+            <i class="bx bxl-twitter"  style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
         </div>

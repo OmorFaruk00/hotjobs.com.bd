@@ -49,10 +49,23 @@
                 </li>
 
                 <li>
-                  <a href="javaScript:void(0)" target="_blank">
-                    <i class="bx bxl-youtube"></i>
+                  <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank">
+                    <i class="bx bxl-linkedin-square"></i>
                   </a>
                 </li>
+
+                <li>
+                  <a href="https://www.instagram.com/bdhotjobs/" target="_blank">
+                    <i class="bx bxl-instagram-alt"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://twitter.com/bdhotjobs" target="_blank">
+                    <i class="bx bxl-twitter"></i>
+                  </a>
+                </li>
+
 
               </ul>
 
@@ -167,19 +180,20 @@
             <div class="copyright-item copyright-right">
               <ul>
                 <li>
-                  <a href="javaScript:void(0)" target="_blank">Terms & Conditions</a>
+                  <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a>
                 </li>
                 <li>
                   <span>-</span>
                 </li>
                 <li>
-                  <a href="javaScript:void(0)" target="_blank">Privacy Policy</a>
+                  <a href="/privacy-policy" target="_blank">Privacy Policy</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </footer>
   <!-- End Footer -->
@@ -193,6 +207,10 @@
         date: this.$moment().format('Y')
       }
     },
+
+    methods:{
+
+    }
   }
 </script>
 
