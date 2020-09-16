@@ -40,6 +40,21 @@
       TopNavbar,
       myFooter,
     },
+
+    methods: {
+      addCookies() {
+
+        window.$nuxt.$cookies.set('time', {
+          path: '/',
+          maxAge: 3600
+        });
+
+      }
+    },
+
+    mounted: function () {
+      this.addCookies();
+    }
   }
 </script>
 
