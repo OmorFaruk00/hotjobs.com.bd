@@ -41,28 +41,29 @@
               <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua. </p>-->
 
+
               <ul>
                 <li>
-                  <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank">
-                    <i class="bx bxl-facebook-circle"></i>
+                  <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Facebook">
+                    <i class="bx bxl-facebook-circle"></i> Facebook
                   </a>
                 </li>
 
                 <li>
-                  <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank">
-                    <i class="bx bxl-linkedin-square"></i>
+                  <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank" title="Linkedin">
+                    <i class="bx bxl-linkedin-square"></i> Linkedin
                   </a>
                 </li>
 
                 <li>
-                  <a href="https://www.instagram.com/bdhotjobs/" target="_blank">
-                    <i class="bx bxl-instagram-alt"></i>
+                  <a href="https://www.instagram.com/bdhotjobs/" target="_blank" title="Instagram">
+                    <i class="bx bxl-instagram-alt"></i> Instagram
                   </a>
                 </li>
 
                 <li>
-                  <a href="https://twitter.com/bdhotjobs" target="_blank">
-                    <i class="bx bxl-twitter"></i>
+                  <a href="https://twitter.com/bdhotjobs" target="_blank" title="Twitter">
+                    <i class="bx bxl-twitter"></i> Twitter
                   </a>
                 </li>
 
@@ -143,12 +144,11 @@
             <div class="footer-find">
               <h3>Find Us</h3>
               <ul>
-                <li>
-                  <i class="icofont-location-pin"></i>
-                  Al-Hera Tower. Ka-86/1/A, Kuratoli Bazar, Dhaka-1229. Dhaka, Bangladesh.
+                <li>Al-Hera Tower, Ka-86/1/A
+                  Kuratoli Bazar, Dhaka-1229
+                  Bangladesh.
                 </li>
                 <li>
-                  <i class="icofont-ui-call"></i>
                   <a href="tel:+8801726893448">
                     +88 017 2689 3448
                   </a>
@@ -158,7 +158,6 @@
                   </a>
                 </li>
                 <li>
-                  <i class="icofont-ui-email"></i>
                   <a href="mailto:info@hotjobs.com.bd">
                     info@hotjobs.com.bd
                   </a>
@@ -172,8 +171,9 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="copyright-item">
-              <p>Copyright @{{ date }} HotJobs. Designed by: <a href="http://it.diu.ac" target="_blank">IT-TEAM,
-                DIU</a></p>
+              <p>
+                Copyright @{{ date }} HotJobs. Technical Team: <a href="http://it.diu.ac" target="_blank">Hotjobs</a>
+              </p>
             </div>
           </div>
           <div class="col-lg-6">
@@ -251,7 +251,7 @@
 
   .footer-item .footer-logo ul li {
     list-style-type: none;
-    display: inline-block;
+    /*display: inline-block;*/
     margin-right: 15px;
   }
 
@@ -261,9 +261,10 @@
 
   .footer-item .footer-logo ul li a {
     display: block;
-    color: #ffffff;
-    font-size: 30px;
+    color: #423A3D;
+    font-size: 15px;
     margin-bottom: 0;
+    padding: 5px 0;
   }
 
   .footer-item .footer-logo ul li a:hover {

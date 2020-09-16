@@ -128,19 +128,19 @@
 
         <div class="dropdown d-inline-block">
 
-          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Hot Jobs BD">
+          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Facebook">
             <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank">
+          <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank" title="Linkedin">
             <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="https://www.instagram.com/bdhotjobs/" target="_blank">
+          <a href="https://www.instagram.com/bdhotjobs/" target="_blank" title="Instagram">
             <i class="bx bxl-instagram-alt" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="https://twitter.com/bdhotjobs" target="_blank">
+          <a href="https://twitter.com/bdhotjobs" target="_blank" title="Twitter">
             <i class="bx bxl-twitter"  style="font-size: 40px;color: #423A3D;"></i>
           </a>
 

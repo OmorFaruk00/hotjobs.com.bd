@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
 
-        <h1 class="card-title text-center">Special Skilled Jobs</h1>
+        <h1 class="card-title text-center">Helping Hand</h1>
 
         <div class="row">
           <div v-for="row in special_categories" class="col-lg-3 col-md-3 col-sm-12">

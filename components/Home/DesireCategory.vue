@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
 
-        <h1 class="card-title text-center">Choose Your Desire Category</h1>
+        <h1 class="card-title text-center">Category Wise Jobs</h1>
 
 
         <div class="col-12 text-right">

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
 
-        <h1 class="card-title text-center">Drem Jobs</h1>
+        <h1 class="card-title text-center">Dream Jobs</h1>
 
         <div class="row">
 
