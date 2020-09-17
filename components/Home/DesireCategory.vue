@@ -22,7 +22,7 @@
 
 
         <div class="row" v-if="general_category_step">
-          <div v-for="row in general_categories" class="col-lg-3 col-md-3 col-sm-12">
+          <div v-for="(row,key) in general_categories" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
                 <a href="javaScript:void(0)" @click="fetchJob(row.id)">{{ row.name }}
@@ -37,7 +37,7 @@
         </div>
 
         <div class="row" v-if="industials_step">
-          <div v-for="row in industials" class="col-lg-3 col-md-3 col-sm-12">
+          <div v-for="(row,key) in industials" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
                 <a href="javaScript:void(0)" @click="fetchIndustryJob(row.id)">{{ row.name }}
