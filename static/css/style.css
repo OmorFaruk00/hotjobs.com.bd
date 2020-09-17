@@ -2002,7 +2002,7 @@ button:focus {
 
 .jobseeker-item .jobseeker-icon {
   position: absolute;
-  top: 55px;
+  /*top: 55px;*/
   left: 34px;
 }
 
@@ -2038,12 +2038,11 @@ button:focus {
   color: #ffffff;
   position: absolute;
   top: 65px;
-  right: 35px;
 }
 
-.jobseeker-item a:hover {
-  color: #333333;
-}
+/*.jobseeker-item a:hover {
+  color: #ffffff;
+}*/
 
 .job-wrap {
   margin-top: -110px;
