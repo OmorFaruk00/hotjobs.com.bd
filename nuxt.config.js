@@ -23,7 +23,11 @@ export default {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training'},
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training'
+      },
       {name: 'keywords', content: 'Hot Jobs BD'},
       {name: 'author', content: 'Hot Jobs BD'},
     ],
@@ -31,12 +35,12 @@ export default {
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'},
       {rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.png'},
-      {rel: 'apple-touch-icon',sizes:'120x120', href: '/favicon.png'},
-      {rel: 'apple-touch-icon',sizes:'152x152', href: '/favicon.png'},
+      {rel: 'apple-touch-icon', sizes: '120x120', href: '/favicon.png'},
+      {rel: 'apple-touch-icon', sizes: '152x152', href: '/favicon.png'},
       {rel: 'stylesheet', id: 'bootstrap-style', href: '/css/bootstrap.min.css'},
       {rel: 'stylesheet', href: '/css/icons.min.css'},
       {rel: 'stylesheet', href: '/css/app.min.css'},
-      {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
+      // {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
       {rel: 'stylesheet', href: '/css/style.css'},
       // {rel: 'stylesheet', href: '/css/min_style.css'},
       // {rel: 'stylesheet', href: '/css/responsive.css'},
@@ -47,7 +51,7 @@ export default {
       {src: '/libs/jquery/jquery.min.js'},
       {src: '/libs/bootstrap/js/bootstrap.bundle.min.js'},
       {src: '/js/facebook.js'},
-      {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
+      // {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
       {src: '/libs/metismenu/metisMenu.min.js'},
       {src: '/libs/simplebar/simplebar.min.js'},
       {src: '/libs/node-waves/waves.min.js'},
@@ -60,17 +64,17 @@ export default {
   */
   css: ['@/assets/style/style.css'],
 
-  transition:{
+  transition: {
     name: 'fade',
-    mode:'out-in',
+    mode: 'out-in',
   },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    {src:'@/plugins/datepicker.js', ssr:false},
-    {src:'@/plugins/owl.js', ssr:false},
+    {src: '@/plugins/datepicker.js', ssr: false},
+    {src: '@/plugins/owl.js', ssr: false},
     {src: '@/plugins/vueBootstrap.js'},
     {src: '@/plugins/scrollTo.js'},
   ],
@@ -90,20 +94,42 @@ export default {
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
     'nuxt-moment',
-    'nuxt-vue-multiselect',
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
     ['nuxt-gmaps', {
       key: 'AIzaSyBU8GPGJ8ihYBpfMRnbCOsVZJlyvWafPq4',
       //you can use libraries: ['places']
-    }]
+    }],
+    ['nuxt-imagemin', {
+      optipng: {optimizationLevel: 5},
+      gifsicle: {optimizationLevel: 2}
+    }],
   ],
 
+  // sitemap
+  sitemap: {
+    hostname: "https://hotjobs.com.bd/",
+    gzip: true,
+    // exclude: ["/secret", "/admin/**"]
+  },
+
+  // https://github.com/nuxt-community/robots-module
+  robots: {
+    UserAgent: "*",
+    Disallow: "/"
+  },
+
+  // axios
   axios: {
     init(axios, context) {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
     baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/'
+    // baseURL: 'https://api.hotjobs.com.bd/',
+    proxyHeaders: false,
+    credentials: false,
   },
 
   /*

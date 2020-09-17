@@ -767,7 +767,7 @@
                             <div class="col-md-10">
 
                               <select v-model="primary_job_information.institution_id" name="institution_id"
-                                      class="form-control bSelect" multiple>
+                                      class="form-control" multiple size="5">
 
                                 <option v-for="(row,key) in institutes" :value="row.id">{{ row.name }}</option>
                               </select>
