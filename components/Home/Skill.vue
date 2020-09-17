@@ -6,7 +6,7 @@
         <h1 class="card-title text-center">Helping Hand</h1>
 
         <div class="row">
-          <div v-for="row in special_categories" class="col-lg-3 col-md-3 col-sm-12">
+          <div v-for="(row,key) in special_categories" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
                 <a href="javaScript:void(0)" @click="fetchJob(row.id)">{{ row.name }}
