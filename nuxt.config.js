@@ -1,3 +1,4 @@
+const https = require('https');
 export default {
   /*
   ** Nuxt rendering mode
@@ -54,8 +55,8 @@ export default {
       // {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
       {src: '/libs/metismenu/metisMenu.min.js'},
       {src: '/libs/simplebar/simplebar.min.js'},
-      {src: '/libs/node-waves/waves.min.js'},
-      {src: '/js/pages/dashboard.init.js'},
+      // {src: '/libs/node-waves/waves.min.js'},
+      // {src: '/js/pages/dashboard.init.js'},
       {src: '/js/app.js'},
     ],
   },
