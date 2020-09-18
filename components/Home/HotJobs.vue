@@ -10,7 +10,7 @@
           <div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
             <div class="job-item scrollbar scroll_style">
 
-              <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" alt="Hot jobs">
+              <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
               <img v-else src="../../static/images/box/1.png" alt="Job">
 
               <div class="job-inner align-items-center">

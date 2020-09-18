@@ -13,17 +13,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <h1 class="text-center">{{ employer.company_name }}</h1>
 
-                  <span v-for="row in dream_job_items">
-
-                    <h3 :class="row.header_position">{{ row.header }}</h3>
-
-                    <p v-if="row.body_type == 'paragraph'">{{ row.body_content }}</p>
-
-                    <ul v-else>
-                      <li v-for="inner_row in row.dream_job_item_lists">{{ inner_row.item }}</li>
-                    </ul>
-
-                  </span>
+                  <span v-html="job_details.text"></span>
 
                   <hr>
 
