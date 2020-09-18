@@ -9,7 +9,7 @@
           <div class="row">
 
             <div class="col-lg-4 mix web ui" v-for="row in employer_tender_jobs">
-              <div class="job-item">
+              <div class="job-item scrollbar scroll_style">
 
                 <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" alt="Hot jobs">
                 <img v-else src="../../static/images/box/1.png" alt="Job">
@@ -37,7 +37,11 @@
 // tender-job
 export default {
   name: "Tender",
-
+  head: {
+    link: [
+      { rel: 'stylesheet', href: '/css/custom_scroll.css'},
+    ],
+  },
   data() {
     return {
       employer_tender_jobs: '',

@@ -8,7 +8,7 @@
         <div class="row">
 
           <div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
-            <div class="job-item">
+            <div class="job-item scrollbar scroll_style">
 
               <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" alt="Hot jobs">
               <img v-else src="../../static/images/box/1.png" alt="Job">
@@ -17,7 +17,10 @@
                 <div class="job-inner-left">
                   <h4>{{ row.company_name }}</h4>
 
-                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id)">{{ inner_row.title ? inner_row.title : 'Not specified' }}</a>
+                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
+                     @click="fetchJobDetails(inner_row.id)">{{
+                      inner_row.title ? inner_row.title : 'Not specified'
+                    }}</a>
 
 
                 </div>
@@ -36,14 +39,20 @@
 export default {
   name: "HotJobs",
 
+  head: {
+    link: [
+      { rel: 'stylesheet', href: '/css/custom_scroll.css' },
+    ],
+  },
+
   data() {
     return {
-      employer_hotjobs:'',
+      employer_hotjobs: '',
       url: this.$axios.defaults.baseURL,
     }
   },
 
-  methods:{
+  methods: {
 
     fetchDreamJob() {
       var vm = this;
@@ -66,7 +75,7 @@ export default {
       return image_url;
     },
 
-    fetchJobDetails(id){
+    fetchJobDetails(id) {
 
       var id = id;
       this.$router.push(`/dream-job-details/${id}`)
@@ -87,7 +96,8 @@ export default {
 h1 {
   font-size: 35px;
 }
-.job-item img{
+
+.job-item img {
   width: 50px;
 }
 </style>
