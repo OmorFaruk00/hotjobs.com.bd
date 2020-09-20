@@ -15,7 +15,7 @@
 
       </div>
 
-      <div class="row" >
+      <div class="row">
         <div class="col-lg-10" v-if="current_jobs.length > 0">
           <div class="card">
             <div class="card-body">
@@ -26,25 +26,30 @@
                   <h4 class="card-title">{{ row.job_title }}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">
 
-                  <span v-if="row.company_info_visibility.company_name_show_status == 1">
+
+                    <span v-if="row.company_info_visibility">
+                      <span v-if="row.company_info_visibility.company_name_show_status == 1">
                       {{ row.employer.company_name }}
                   </span>
-
                     <span v-else>{{ row.company_info_visibility.company_name }}</span>
+                    </span>
+
 
                   </h6>
 
                   <ul class="job-preview-list">
-                    <li>
+                    <li v-if="row.more_job_inforamtion">
                       <i class="bx bx-map"></i>
 
                       <span
                         v-html="row.more_job_inforamtion.job_location_type == '0' ? 'Inside Bangladesh' : 'Outside Bangladesh'"></span>,
                       <span>{{ row.more_job_inforamtion.job_location_address }}</span>
 
+
                     </li>
 
-                    <li v-if="row.candidate_requirement.candidate_requirement_degree.length > 0">
+                    <span v-if="row.candidate_requirement">
+                      <li v-if="row.candidate_requirement.candidate_requirement_degree.length > 0">
                       <i class="bx bxs-graduation"></i>
 
                       <span v-for="(inner_row,index) in row.candidate_requirement.candidate_requirement_degree">
@@ -54,7 +59,11 @@
 
                     </li>
 
-                    <li><i class="bx bx-briefcase"></i> 0-5 years</li>
+                      <li v-if="row.candidate_requirement.experience_type == 0"><i class="bx bx-briefcase"></i> No Experience</li>
+                      <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{ row.candidate_requirement.minimum_year_of_experience }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
+                    </span>
+                    
+
                   </ul>
 
                   <ul class="job-preview-list text-right" v-if="row.application_deadline !=''">
@@ -90,126 +99,137 @@
         </div>
       </div>
 
+
+      <!--<div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center">Data not found</h4>
+          </div>
+        </div>
+      </div>-->
+
     </div>
 
   </div>
 </template>
 
 <script>
-  export default {
-    name: "index",
-    validate({params}) {
-      // Must be a number
-      return /^\d+$/.test(params.id)
+export default {
+  name: "index",
+  validate({params}) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  },
+  data() {
+    return {
+      id: this.$route.params.id,
+      current_jobs: '',
+      without_filter_degrees: '',
+    }
+  },
+
+  methods: {
+
+    dateFormat(date) {
+      return this.$moment(date).format('MMMM D,YYYY');
     },
-    data() {
-      return {
-        id: this.$route.params.id,
-        current_jobs: '',
-        without_filter_degrees: '',
-      }
-    },
 
-    methods: {
+    async fetchDegrees() {
+      return await this.$axios.get('fetch-level-of-degree')
+        .then((response) => {
 
-      dateFormat(date) {
-        return this.$moment(date).format('MMMM D,YYYY');
-      },
+          this.without_filter_degrees = response.data;
 
-      async fetchDegrees() {
-        return await this.$axios.get('fetch-level-of-degree')
-          .then((response) => {
+        })
 
-            this.without_filter_degrees = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      generalCategoryJob() {
-        var vm = this;
-
-        var slug = vm.id;
-
-        this.$axios.get('general-category-wise-job/' + slug).then(function (response) {
-
-          vm.current_jobs = response.data;
-
-        }).catch(function (error) {
+        .catch((error) => {
 
           Toast.fire({
             icon: 'warning',
             title: 'There was something wrong'
           });
 
+        })
+    },
+
+    generalCategoryJob() {
+      var vm = this;
+
+      var slug = vm.id;
+
+      this.$axios.get('general-category-wise-job/' + slug).then(function (response) {
+
+        vm.current_jobs = response.data;
+
+      }).catch(function (error) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
         });
-      },
 
-      degreeName: function (id) {
+      });
+    },
 
-        var items = this.without_filter_degrees;
-        var degree_id = id;
+    degreeName: function (id) {
 
-        let level_of_education = [];
-        for (let i = 0; i < items.length; i++) {
-          if (items[i].id == degree_id) {
-            level_of_education.push(items[i].name);
-          }
+      var items = this.without_filter_degrees;
+      var degree_id = id;
+
+      let level_of_education = [];
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id == degree_id) {
+          level_of_education.push(items[i].name);
         }
-
-        let separator = "";
-        let strOptions = "";
-        level_of_education.forEach(word => {
-          strOptions += separator + word;
-          separator = " [] ";
-        });
-
-        return strOptions;
-
-      },
-
-      fetchJobDetails(id){
-
-        var id = id;
-        this.$router.push(`/job-details/${id}`)
-        // let route = this.$router.resolve(`/job-details/${id}`);
-        // window.open(route.href, '_blank');
-
       }
 
+      let separator = "";
+      let strOptions = "";
+      level_of_education.forEach(word => {
+        strOptions += separator + word;
+        separator = " [] ";
+      });
+
+      return strOptions;
+
     },
-    beforeMount() {
-      this.generalCategoryJob();
-      this.fetchDegrees();
+
+    fetchJobDetails(id) {
+
+      var id = id;
+      this.$router.push(`/job-details/${id}`)
+      // let route = this.$router.resolve(`/job-details/${id}`);
+      // window.open(route.href, '_blank');
+
     }
+
+  },
+  beforeMount() {
+    this.generalCategoryJob();
+    this.fetchDegrees();
   }
+}
 </script>
 
 <style scoped>
-  .job-preview-list {
-    list-style: none;
-  }
-  .job-preview-list li{
-    color: #423A3D;
-  }
+.job-preview-list {
+  list-style: none;
+}
 
-  .job-short-box:hover {
-    box-shadow: 0px 1px 6px #000;
-  }
-  .job-short-box h4{
-    color: #EC1A3A!important;
-    font-size: 25px;
-  }
+.job-preview-list li {
+  color: #423A3D;
+}
 
-  .job-short-box h4:hover{
-    text-decoration: underline;
-  }
+.job-short-box:hover {
+  box-shadow: 0px 1px 6px #000;
+}
+
+.job-short-box h4 {
+  color: #EC1A3A !important;
+  font-size: 25px;
+}
+
+.job-short-box h4:hover {
+  text-decoration: underline;
+}
 </style>
