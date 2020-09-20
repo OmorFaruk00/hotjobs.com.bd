@@ -62,6 +62,7 @@
                       <li v-if="row.candidate_requirement.experience_type == 0"><i class="bx bx-briefcase"></i> No Experience</li>
                       <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{ row.candidate_requirement.minimum_year_of_experience }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
                     </span>
+
                     
 
                   </ul>
