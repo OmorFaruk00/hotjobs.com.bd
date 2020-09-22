@@ -17,11 +17,9 @@
                 <div class="job-inner-left">
                   <h4>{{ row.company_name }}</h4>
 
-                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
-                     @click="fetchJobDetails(inner_row.id)">{{
-                      inner_row.title ? inner_row.title : 'Not specified'
-                    }}</a>
+                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id)">
 
+                    <i class="bx bxs-right-arrow-square"></i> {{ inner_row.title ? inner_row.title : 'Not specified' }}</a>
 
                 </div>
               </div>
@@ -41,7 +39,7 @@ export default {
 
   head: {
     link: [
-      { rel: 'stylesheet', href: '/css/custom_scroll.css' },
+      {rel: 'stylesheet', href: '/css/custom_scroll.css'},
     ],
   },
 
