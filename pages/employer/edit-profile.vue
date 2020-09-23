@@ -405,7 +405,7 @@
           company_address_bangla: '',
           industry_category_id: '',
           industry_type_keyword: '',
-          industry_types: '',
+          industry_types: [],
           business_description: '',
           license_no: '',
           rl_no: '',
@@ -635,14 +635,13 @@
           vm.form.company_address_bangla = employee.company_address_bangla;
           vm.form.industry_category_id = employee.industry_category_id;
           vm.form.industry_type_keyword = employee.industry_type_keyword;
-          vm.form.industry_types = employee.industry_types;
+          // vm.form.industry_types = employee.industry_types;
           vm.form.business_description = employee.business_description;
           vm.form.license_no = employee.license_no;
           vm.form.rl_no = employee.rl_no;
           vm.form.website_url = employee.website_url;
           vm.form.company_logo = employee.company_logo;
           vm.form.contact_people_id = employee.contact_people_id;
-
 
           vm.contact_persons = employee.company_contact_peoples;
 
@@ -659,6 +658,12 @@
               vm.form.billing_contact_email = billing_information.billing_contact_email;
 
           }
+
+          const employer_industry_types = employee.employer_industry_types;
+
+          for (const value of employer_industry_types) {
+            vm.form.industry_types.push(value.industry_types_id);
+          };
 
           // var test = employee.employer_industry_types;
 
@@ -846,8 +851,7 @@
       this.oldFetchIndustryCategory();
 
 
-    }
-    ,
+    },
 
     created() {
       this.findEmployer();

@@ -17,6 +17,7 @@
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.15.0",
     "cookie-universal-nuxt": "^2.1.4",
+    "jquery": "^3.5.1",
     "loader": "^2.1.1",
     "nuxt": "^2.13.0",
     "nuxt-gmaps": "^1.2.5",

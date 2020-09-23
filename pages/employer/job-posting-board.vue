@@ -2841,7 +2841,7 @@
     },
 
     updated() {
-      $('.bSelect').selectpicker('refresh');
+      // $('.bSelect').selectpicker('refresh');
     }
 
   }
