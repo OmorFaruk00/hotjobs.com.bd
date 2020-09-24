@@ -719,7 +719,7 @@
       },
 
       getPhoto() {
-        let image_url = this.url + this.authUser.image_url;
+        let image_url = this.url + this.authUser.company_logo;
         return image_url;
       },
 

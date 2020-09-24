@@ -53,4 +53,14 @@ input[placeholder="select date"]{
   border: 1px solid #ddd!important;
 }
 
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #423A3D;
+
+}
+.page-link{
+  border-color: #EC1A3A!important;
+  color: #EC1A3A;
+}
 
