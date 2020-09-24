@@ -87,7 +87,9 @@ export default {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [],
+  buildModules: [
+  ],
+
   /*
   ** Nuxt.js modules
   */
