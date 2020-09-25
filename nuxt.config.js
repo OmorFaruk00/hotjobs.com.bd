@@ -20,7 +20,7 @@ export default {
       lang: 'en',
     },
 
-    title: 'Hot Jobs BD | Search & Post Jobs Free',
+    title: 'Hot Jobs BD | Free jobs site in Bangladesh. Search & Post Jobs Free',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -129,8 +129,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },

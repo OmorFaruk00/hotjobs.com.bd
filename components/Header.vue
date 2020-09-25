@@ -132,7 +132,7 @@
             <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
-          <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank" title="Linkedin">
+          <a href="https://www.linkedin.com/company/hotjobs-com-bd" target="_blank" title="Linkedin">
             <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 

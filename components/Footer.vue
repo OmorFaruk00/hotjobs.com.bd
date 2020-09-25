@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                  <a href="https://www.linkedin.com/in/hotjobs-com-bd-1466321a4/" target="_blank" title="Linkedin">
+                  <a href="https://www.linkedin.com/company/hotjobs-com-bd" target="_blank" title="Linkedin">
                     <i class="bx bxl-linkedin-square"></i> Linkedin
                   </a>
                 </li>
