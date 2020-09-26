@@ -128,6 +128,7 @@
       fetchIndustryJob(id){
         var id = id;
         this.$router.push(`/industry-jobsearch/${id}`)
+        // this.$router.push(`/jobsearch/${id}`)
 
       }
 
