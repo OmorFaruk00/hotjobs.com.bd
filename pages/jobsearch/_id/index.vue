@@ -22,7 +22,7 @@
 
               <div v-for="row in current_jobs" class="card-body border mb-2 job-short-box">
 
-                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id)">
+                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">
                   <h4 class="card-title">{{ row.job_title }}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">
 
@@ -99,15 +99,6 @@
           </div>
         </div>
       </div>
-
-
-      <!--<div class="col-lg-10">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title text-center">Data not found</h4>
-          </div>
-        </div>
-      </div>-->
 
     </div>
 
@@ -195,10 +186,12 @@ export default {
 
     },
 
-    fetchJobDetails(id) {
+    fetchJobDetails(job_id,company_name,title,) {
 
-      var id = id;
-      this.$router.push(`/job-details/${id}`)
+      var job_id = job_id;
+      var company_name = company_name;
+      var title = title;
+      this.$router.push(`/${job_id}/${company_name}/${title}`)
       // let route = this.$router.resolve(`/job-details/${id}`);
       // window.open(route.href, '_blank');
 

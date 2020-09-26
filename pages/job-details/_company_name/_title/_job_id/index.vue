@@ -310,13 +310,17 @@
 <script>
 export default {
   name: "index",
-  validate({params}) {
+/*  validate({params}) {
     // Must be a number
     return /^\d+$/.test(params.id)
-  },
+  },*/
+
   data() {
     return {
-      id: this.$route.params.id,
+      company_name: this.$route.params.company_name,
+      title: this.$route.params.title,
+      job_id: this.$route.params.job_id,
+
       job_details: '',
       skills: '',
       company_info_visibility: '',
@@ -342,7 +346,9 @@ export default {
 
     fetchJobDetails() {
       var vm = this;
-      var slug = vm.id;
+      var company_name = vm.company_name;
+      var title = vm.title;
+      var job_id = vm.job_id;
 
       this.$axios.get('fetch-job-pos-details/' + slug).then(function (response) {
 
@@ -495,10 +501,10 @@ export default {
   },
 
   beforeMount() {
-    this.fetchJobDetails();
+    /*this.fetchJobDetails();
     this.fetchLevelOfEducation();
     this.fetchDegrees();
-    this.fetchInstitutes();
+    this.fetchInstitutes();*/
   }
 }
 </script>
