@@ -20,6 +20,12 @@
           </div>
         </div>
 
+        <div class="row" v-if="loading">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+          </div>
+        </div>
+
 
         <div class="row" v-if="general_category_step">
           <div v-for="(row,key) in general_categories" class="col-lg-3 col-md-3 col-sm-12">
@@ -68,6 +74,7 @@
 
     data() {
       return {
+        loading:true,
         general_category_step: true,
         industials_step: false,
         url: this.$axios.defaults.baseURL,
@@ -82,6 +89,7 @@
         this.$axios.get('skill-general-category').then(function (response) {
 
           vm.general_categories = response.data;
+          vm.loading =false;
 
         }).catch(function (error) {
 
@@ -95,10 +103,11 @@
 
       fetchIndustryCategory() {
         var vm = this;
+        vm.loading =true;
         this.$axios.get('industry-category-lists').then(function (response) {
 
           vm.industials = response.data;
-
+          vm.loading =false;
         }).catch(function (error) {
 
           Toast.fire({
