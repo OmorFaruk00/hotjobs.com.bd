@@ -115,6 +115,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      slug: this.$route.params.slug,
       current_jobs: '',
       without_filter_degrees: '',
     }
@@ -147,9 +148,10 @@ export default {
     generalCategoryJob() {
       var vm = this;
 
-      var slug = vm.id;
+      var id = vm.id;
+      var slug = vm.slug;
 
-      this.$axios.get('general-category-wise-job/' + slug).then(function (response) {
+      this.$axios.get('general-category-wise-job/' + id + '/' + slug).then(function (response) {
 
         vm.current_jobs = response.data;
 

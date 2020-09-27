@@ -16,10 +16,10 @@
           </div>
 
           <!--Desire Category-->
-          <homeDesireCategory/>
+          <homeCategoryWiseJobs/>
 
           <!--Skilled jobs-->
-          <homeSkill/>
+          <homeHelpingHand/>
 
           <!--dream Jobs-->
           <homeDreamJobs/>
@@ -65,10 +65,9 @@
 </template>
 
 <script>
-
   import homeBanner from "~/components/Home/Banner";
-  import homeDesireCategory from "~/components/Home/DesireCategory";
-  import homeSkill from "~/components/Home/Skill";
+  import homeCategoryWiseJobs from "~/components/Home/CategoryWiseJobs";
+  import homeHelpingHand from "~/components/Home/HelpingHand";
   import homeDreamJobs from "~/components/Home/DreamJobs";
   import homeTender from "~/components/Home/Tender";
   import homeCounter from "~/components/Home/Counter";
@@ -76,13 +75,12 @@
   import homePopularCompanies from "~/components/Home/PopularCompanies";
   import homePayOnlineForTraining from "~/components/Home/PayOnlineForTraining";
 
-
   export default {
     name: "index",
     components: {
       homeBanner,
-      homeDesireCategory,
-      homeSkill,
+      homeCategoryWiseJobs,
+      homeHelpingHand,
       homeDreamJobs,
       homeTender,
       homeCounter,

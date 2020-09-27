@@ -25,7 +25,7 @@
           <div v-for="(row,key) in general_categories" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
-                <a href="javaScript:void(0)" @click="fetchJob(row.id)">{{ row.name }}
+                <a href="javaScript:void(0)" @click="fetchJob(row.id,row.slug)">{{ row.name }}
                   (
                   <countTo :startVal='0' :endVal='row.current_job_posts.length'
                            :duration='5000'></countTo>
@@ -61,7 +61,7 @@
   import countTo from 'vue-count-to';
 
   export default {
-    name: "DesireCategory",
+    name: "CategoryWiseJobs",
     components: {
       countTo,
     },
@@ -119,9 +119,10 @@
         this.general_category_step = false;
       },
 
-      fetchJob(id){
+      fetchJob(id,slug){
         var id = id;
-        this.$router.push(`/jobsearch/${id}`)
+        var slug = slug;
+        this.$router.push(`/job-search/${id}/${slug}`)
 
       },
 
