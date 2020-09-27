@@ -5,7 +5,13 @@
 
         <h1 class="card-title text-center">Helping Hand</h1>
 
-        <div class="row">
+        <div class="row" v-if="loading">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+          </div>
+        </div>
+
+        <div class="row" v-if="!loading">
           <div v-for="(row,key) in special_categories" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box">
               <h3>
@@ -36,6 +42,7 @@ export default {
   },
   data() {
     return {
+      loading:true,
       url: this.$axios.defaults.baseURL,
       special_categories: '',
     }
@@ -47,6 +54,7 @@ export default {
       this.$axios.get('skill-special-category').then(function (response) {
 
         vm.special_categories = response.data;
+        vm.loading =false;
 
       }).catch(function (error) {
 
@@ -67,7 +75,7 @@ export default {
 
   },
 
-  beforeMount() {
+  created() {
     this.fetchSpecialCategory();
   }
 }

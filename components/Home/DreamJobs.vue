@@ -85,7 +85,7 @@ export default {
     }
 
   },
-  beforeMount() {
+  created() {
     this.fetchDreamJob();
   }
 
