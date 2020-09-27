@@ -15,7 +15,25 @@
 
       </div>
 
-      <div class="row">
+      <div class="row" v-if="loading">
+
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                  <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" v-if="current_jobs">
         <div class="col-lg-10" v-if="current_jobs.length > 0">
           <div class="card">
             <div class="card-body">
@@ -110,6 +128,7 @@ export default {
   },
   data() {
     return {
+      loading:true,
       id: this.$route.params.id,
       slug: this.$route.params.slug,
       current_jobs: '',
@@ -150,6 +169,7 @@ export default {
       this.$axios.get('industry-wise-job/'+ id + '/' + slug).then(function (response) {
 
         vm.current_jobs = response.data;
+        vm.loading = false;
 
       }).catch(function (error) {
 
@@ -194,7 +214,7 @@ export default {
     }
 
   },
-  beforeMount() {
+  created() {
     this.industryJob();
     this.fetchDegrees();
   }

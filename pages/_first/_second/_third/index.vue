@@ -533,7 +533,7 @@ export default {
     },
   },
 
-  beforeMount() {
+  created() {
     this.fetchJobDetails();
     this.fetchLevelOfEducation();
     this.fetchDegrees();

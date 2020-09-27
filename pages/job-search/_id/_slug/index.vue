@@ -220,7 +220,7 @@ export default {
     }
 
   },
-  beforeMount() {
+  created() {
     this.generalCategoryJob();
     this.fetchDegrees();
   }

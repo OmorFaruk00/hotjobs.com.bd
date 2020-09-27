@@ -4,8 +4,22 @@
     <div class="container-fluid">
 
       <div class="row">
+        <div class="offset-lg-1 col-lg-10" v-if="loading">
+          <div class="card">
+            <div class="card-body box">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                  <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div class="offset-lg-1 col-lg-10">
+      <div class="row" v-if="!loading">
+
+        <div class="offset-lg-1 col-lg-10" v-if="employer">
           <div class="card">
             <div class="card-body box">
               <div class="row">
@@ -30,6 +44,23 @@
           </div>
         </div>
 
+        <div class="offset-lg-1 col-lg-10" v-if="!employer">
+          <div class="card">
+            <div class="card-body box">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                  <strong>Data Not Found</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
       </div>
 
     </div>
@@ -46,6 +77,7 @@ export default {
   },
   data() {
     return {
+      loading:true,
       id: this.$route.params.id,
       company_name: this.$route.params.company_name,
       slug: this.$route.params.slug,
@@ -68,6 +100,7 @@ export default {
         vm.job_details = response.data;
         vm.employer = response.data.employer;
         vm.dream_job_items = response.data.dream_job_item;
+        vm.loading=false;
 
       }).catch(function (error) {
 
@@ -81,7 +114,7 @@ export default {
 
   },
 
-  beforeMount() {
+  created() {
     this.fetchDreamJobDetails();
   }
 }
