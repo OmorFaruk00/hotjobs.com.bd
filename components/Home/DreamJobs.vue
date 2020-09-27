@@ -5,7 +5,13 @@
 
         <h1 class="card-title text-center">Dream Jobs</h1>
 
-        <div class="row">
+        <div class="row" v-if="loading">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+          </div>
+        </div>
+
+        <div class="row" v-else>
 
           <div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
             <div class="job-item scrollbar scroll_style">
@@ -45,6 +51,7 @@ export default {
 
   data() {
     return {
+      loading:true,
       employer_hotjobs: '',
       url: this.$axios.defaults.baseURL,
     }
@@ -57,6 +64,7 @@ export default {
       this.$axios.get('dream-job').then(function (response) {
 
         vm.employer_hotjobs = response.data;
+        vm.loading=false;
 
       }).catch(function (error) {
 
