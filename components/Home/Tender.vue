@@ -6,7 +6,13 @@
         <h1 class="card-title text-center">TENDER / EOI</h1>
 
         <div class="tender_body">
-          <div class="row">
+          <div class="row" v-if="loading">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+              <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+            </div>
+          </div>
+
+          <div class="row" v-if="!loading">
 
             <div class="col-lg-4 mix web ui" v-for="row in employer_tender_jobs">
               <div class="job-item scrollbar scroll_style">
@@ -18,8 +24,11 @@
                   <div class="job-inner-left">
                     <h4>{{ row.company_name }}</h4>
 
-                    <a v-for="inner_row in row.tender_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
-                      <i class="bx bxs-right-arrow-square"></i> {{ inner_row.title ? inner_row.title : 'Not specified' }}
+                    <a v-for="inner_row in row.tender_jobs" href="javaScript:void(0)"
+                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
+                      <i class="bx bxs-right-arrow-square"></i> {{
+                        inner_row.title ? inner_row.title : 'Not specified'
+                      }}
                     </a>
 
                   </div>
@@ -41,24 +50,25 @@ export default {
   name: "Tender",
   head: {
     link: [
-      { rel: 'stylesheet', href: '/css/custom_scroll.css'},
+      {rel: 'stylesheet', href: '/css/custom_scroll.css'},
     ],
   },
   data() {
     return {
+      loading: true,
       employer_tender_jobs: '',
       url: this.$axios.defaults.baseURL,
     }
   },
 
-  methods:{
+  methods: {
 
     fetchRenderJob() {
       var vm = this;
       this.$axios.get('tender-job').then(function (response) {
 
         vm.employer_tender_jobs = response.data;
-
+        vm.loading = false;
       }).catch(function (error) {
 
         Toast.fire({
@@ -74,7 +84,7 @@ export default {
       return image_url;
     },
 
-    fetchJobDetails(id,company_slug,slug){
+    fetchJobDetails(id, company_slug, slug) {
 
       var id = id;
       var company_slug = company_slug;
@@ -86,7 +96,7 @@ export default {
     }
 
   },
-  beforeMount() {
+  created() {
     this.fetchRenderJob();
   }
 
@@ -97,7 +107,8 @@ export default {
 h1 {
   font-size: 35px;
 }
-.job-item img{
+
+.job-item img {
   width: 50px;
 }
 </style>
