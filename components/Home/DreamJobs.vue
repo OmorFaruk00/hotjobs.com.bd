@@ -17,7 +17,7 @@
                 <div class="job-inner-left">
                   <h4>{{ row.company_name }}</h4>
 
-                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,inner_row.slug)">
+                  <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
 
                     <i class="bx bxs-right-arrow-square"></i> {{ inner_row.title ? inner_row.title : 'Not specified' }}</a>
 
@@ -73,11 +73,12 @@ export default {
       return image_url;
     },
 
-    fetchJobDetails(id,slug) {
+    fetchJobDetails(id,company_name,slug) {
 
       var id = id;
+      var company_name = company_name;
       var slug = slug;
-      this.$router.push(`/d/${id}/${slug}`)
+      this.$router.push(`/d/${id}/${company_name}/${slug}`)
       // let route = this.$router.resolve(`/job-details/${id}`);
       // window.open(route.href, '_blank');
 

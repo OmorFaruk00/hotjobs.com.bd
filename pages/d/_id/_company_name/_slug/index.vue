@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      company_name: this.$route.params.company_name,
       slug: this.$route.params.slug,
       job_details: '',
       employer: '',
@@ -60,8 +61,9 @@ export default {
       var vm = this;
       var id = vm.id;
       var slug = vm.slug;
+      var company_name = vm.company_name;
 
-      this.$axios.get('dream-job-details/' + id + '/' + slug).then(function (response) {
+      this.$axios.get('dream-job-details/' + id + '/' + company_name + '/' + slug).then(function (response) {
 
         vm.job_details = response.data;
         vm.employer = response.data.employer;
