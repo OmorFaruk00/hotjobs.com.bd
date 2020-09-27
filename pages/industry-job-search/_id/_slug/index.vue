@@ -111,6 +111,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      slug: this.$route.params.slug,
       current_jobs: '',
       without_filter_degrees: '',
     }
@@ -143,9 +144,10 @@ export default {
     industryJob() {
       var vm = this;
 
-      var slug = vm.id;
+      var id = vm.id;
+      var slug = vm.slug;
 
-      this.$axios.get('industry-wise-job/' + slug).then(function (response) {
+      this.$axios.get('industry-wise-job/'+ id + '/' + slug).then(function (response) {
 
         vm.current_jobs = response.data;
 
