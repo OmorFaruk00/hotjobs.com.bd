@@ -144,6 +144,10 @@
             <i class="bx bxl-twitter"  style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
+          <a href="https://youtube.com/channel/UC-n5t2attDAAlT3oFYQalWg" target="_blank" title="Youtube">
+            <i class="bx bxl-youtube"  style="font-size: 40px;color: #423A3D;"></i>
+          </a>
+
         </div>
 
 

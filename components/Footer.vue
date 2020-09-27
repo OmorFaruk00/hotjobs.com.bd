@@ -67,6 +67,12 @@
                   </a>
                 </li>
 
+                <li>
+                  <a href="https://youtube.com/channel/UC-n5t2attDAAlT3oFYQalWg" target="_blank" title="Youtube">
+                    <i class="bx bxl-youtube"></i> Youtube
+                  </a>
+                </li>
+
 
               </ul>
 
