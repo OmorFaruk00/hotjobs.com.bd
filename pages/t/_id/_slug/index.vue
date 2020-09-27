@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      slug: this.$route.params.slug,
       job_details: '',
       employer: '',
     }
@@ -58,9 +59,10 @@ export default {
     fetchTenderJobDetails() {
 
       var vm = this;
-      var slug = vm.id;
+      var id = vm.id;
+      var slug = vm.slug;
 
-      this.$axios.get('tender-job-details/' + slug).then(function (response) {
+      this.$axios.get('tender-job-details/' + id + '/' + slug).then(function (response) {
 
         vm.job_details = response.data;
         vm.employer = response.data.employer;
