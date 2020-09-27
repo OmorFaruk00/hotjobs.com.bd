@@ -21,8 +21,8 @@
           <!--Skilled jobs-->
           <homeSkill/>
 
-          <!--Hot Jobs-->
-          <homeHotJobs/>
+          <!--dream Jobs-->
+          <homeDreamJobs/>
 
           <!--TENDER / EOI-->
           <homeTender/>
@@ -69,7 +69,7 @@
   import homeBanner from "~/components/Home/Banner";
   import homeDesireCategory from "~/components/Home/DesireCategory";
   import homeSkill from "~/components/Home/Skill";
-  import homeHotJobs from "~/components/Home/HotJobs";
+  import homeDreamJobs from "~/components/Home/DreamJobs";
   import homeTender from "~/components/Home/Tender";
   import homeCounter from "~/components/Home/Counter";
   import homeMostPopular from "~/components/Home/MostPopular";
@@ -83,7 +83,7 @@
       homeBanner,
       homeDesireCategory,
       homeSkill,
-      homeHotJobs,
+      homeDreamJobs,
       homeTender,
       homeCounter,
       homeMostPopular,
