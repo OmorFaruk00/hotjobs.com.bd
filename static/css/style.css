@@ -274,7 +274,7 @@ button:focus {
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 495px;
   position: relative;
 }
 
@@ -1180,7 +1180,7 @@ button:focus {
 .companies-item {
   text-align: center;
   background-color: #fff;
-  padding: 35px 20px;
+  /*padding: 35px 20px;*/
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   margin-left: 15px;
@@ -1206,7 +1206,9 @@ button:focus {
 }
 
 .companies-item h3 {
-  margin-bottom: 16px;
+  max-width: 85%;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 
 .companies-item h3 a {

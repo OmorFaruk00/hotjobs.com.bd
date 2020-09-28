@@ -13,7 +13,7 @@
 
         <div class="row" v-if="!loading">
           <div v-for="(row,key) in special_categories" class="col-lg-3 col-md-3 col-sm-12">
-            <div class="companies-item category-item-box">
+            <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
                 <a href="javaScript:void(0)" @click="fetchJob(row.id,row.slug)">{{ row.name }}
                   (
@@ -37,6 +37,11 @@ import countTo from 'vue-count-to';
 
 export default {
   name: "HelpingHand",
+  head: {
+    link: [
+      {rel: 'stylesheet', href: '/css/custom_scroll.css'},
+    ],
+  },
   components: {
     countTo,
   },
