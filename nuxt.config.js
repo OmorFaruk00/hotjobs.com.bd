@@ -120,7 +120,8 @@ export default {
   // https://github.com/nuxt-community/robots-module
   robots: {
     UserAgent: "*",
-    Disallow: "/"
+    Allow: "/",
+    Sitemap:"https://hotjobs.com.bd/sitemap.xml"
   },
 
   // axios

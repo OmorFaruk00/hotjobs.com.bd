@@ -6,17 +6,19 @@
         <h1 class="card-title text-center">Category Wise Jobs</h1>
 
 
-        <div class="col-12 text-right">
-          <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="row text-right">
+          <div class="col-12">
+            <div class="btn-group" role="group" aria-label="Basic example">
 
-            <button @click="generalCategoryStep" type="button" class="btn btn-outline-info"
-                    :class="general_category_step ? 'active' : ''">Functional
-            </button>
+              <button @click="generalCategoryStep" type="button" class="btn btn-outline-info"
+                      :class="general_category_step ? 'active' : ''">Functional
+              </button>
 
-            <button @click="industialsStep" type="button" class="btn btn-outline-secondary"
-                    :class="industials_step ? 'active' : ''">Industrial
-            </button>
+              <button @click="industialsStep" type="button" class="btn btn-outline-secondary"
+                      :class="industials_step ? 'active' : ''">Industrial
+              </button>
 
+            </div>
           </div>
         </div>
 
