@@ -242,22 +242,56 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><strong>Apply
-                      Procedure </strong></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center" v-if="job_details.enclose_photograph">
+                      <strong style="border-bottom: 2px solid #423A3D;">Read Before Apply</strong>
+
+                      <h4><span class="text-danger">*Photograph</span> must be enclosed with the resume.</h4>
+                    </div>
 
                     <br>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                      <strong style="border-bottom: 2px solid #423A3D;">Apply Procedure </strong>
+                    </div>
                     <br>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
 
-                      <strong v-if="job_details.resume_receiving_option_type == 1">Email</strong>
-                      <strong v-if="job_details.resume_receiving_option_type == 2">Hard Copy</strong>
-                      <strong v-if="job_details.resume_receiving_option_type == 3">Walk in Interview</strong>
+                      <span v-if="job_details.resume_receiving_option_online">
+                        <button class="btn btn-danger my-2" type="button" @click="applyModal">Apply Online</button>
 
-                      <br>
+                        <hr>
 
+                      </span>
 
-                      <button class="btn btn-danger my-2">Apply Online</button>
+                      <span v-else>
+
+                        <span v-if="job_details.resume_receiving_option_type == 1">
+                            <strong>Email</strong>
+                          <br>
+                            <strong>Send your CV to <a :href="`mailto:${job_details.contact_email}`">{{
+                                job_details.contact_email
+                              }}</a> </strong>
+
+                        </span>
+
+                        <span v-if="job_details.resume_receiving_option_type == 2">
+                            <strong>Hard Copy</strong>
+                          <br>
+                            <strong>{{ job_details.hard_copy }}</strong>
+
+                        </span>
+
+                        <span v-if="job_details.resume_receiving_option_type == 3">
+                            <strong>Walk in Interview</strong>
+                          <br>
+                            <strong>{{ job_details.walk_in_interview }}</strong>
+
+                        </span>
+
+                      </span>
+
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">Application Deadline:
@@ -334,16 +368,79 @@
 
     </div>
 
+    <div class="modal fade bs-example-modal-center" id="warningApply" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title mt-0">Warning Message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p>
+              Cras mattis consectetur purus sit amet fermentum.
+              Cras justo odio, dapibus ac facilisis in,
+              egestas eget quam. Morbi leo risus, porta ac
+              consectetur ac, vestibulum at eros.
+            </p>
+
+            <div>
+              <b-form-checkbox
+                id="status"
+                v-model="form.status"
+                name="status"
+                value="1"
+                unchecked-value="0"
+              >
+                I have read the above warning message.
+              </b-form-checkbox>
+
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" :disabled="form.status != '1'" @click="applyButton" class="btn btn-success">Apply
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 export default {
   name: "index",
-  /*  validate({params}) {
-      // Must be a number
-      return /^\d+$/.test(params.id)
-    },*/
+  validate({params}) {
+    // Must be a number
+    return /^\d+$/.test(params.first)
+  },
 
   data() {
     return {
@@ -364,6 +461,10 @@ export default {
       without_filter_degrees: '',
       candidate_requirement_institutes: '',
       institutes: '',
+      form: new Form({
+        id: '',
+        status: '0'
+      }),
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -531,6 +632,65 @@ export default {
     dateFormat(date) {
       return this.$moment(date).format('MMMM D,YYYY');
     },
+
+    applyModal() {
+
+      this.form.reset();
+      $('#warningApply').modal('show');
+
+    },
+
+    applyButton() {
+
+      var user = window.$nuxt.$cookies.get('user');
+
+      if (user) {
+
+        var vm = this;
+
+        if (user.type != 'employee') {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'Please login as a employee'
+          });
+
+        }
+
+        window.$nuxt.$cookies.remove('apply');
+
+        if (vm.company_info_visibility.company_name_show_status == 1) {
+          var company_name = vm.employer.company_name;
+        } else {
+          var company_name = vm.company_info_visibility.company_name;
+        }
+
+        const cookieValObject = {
+          job_title: vm.job_details.job_title,
+          company_name: company_name,
+          employee_id: user.id,
+          employee_name: user.name,
+          job_id: vm.job_details.id,
+        }
+
+        window.$nuxt.$cookies.set('apply', cookieValObject, {
+          path: '/',
+          maxAge: 1800
+        })
+
+        this.$router.push(`/my-jobs/job-online-apply`);
+
+      } else {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please login as a employee'
+        });
+
+      }
+      $('#warningApply').modal('hide');
+
+    }
   },
 
   created() {
