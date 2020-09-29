@@ -381,10 +381,9 @@
 
           <div class="modal-body">
             <p>
-              Cras mattis consectetur purus sit amet fermentum.
-              Cras justo odio, dapibus ac facilisis in,
-              egestas eget quam. Morbi leo risus, porta ac
-              consectetur ac, vestibulum at eros.
+              hotjobs.com.bd only works as a mean of communication between employers and job-seekers. hotjobs.com.bd Limited will
+              not be responsible for any financial transaction or irregularity/ fraud by the company after applying
+              through the hotjobs.com.bd website.
             </p>
 
             <div>
