@@ -147,7 +147,7 @@
 
     },
 
-    created() {
+    beforeMount() {
 
       this.fetchGeneralCategory();
       this.fetchIndustryCategory();

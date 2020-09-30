@@ -30,6 +30,18 @@
 
                 </template>
 
+                <template v-slot:cell(applicant)="data">
+
+                  <span>{{ data.value.length }}</span>
+
+
+                    <!--<button type="button" @click="editModal(data.item)" class="btn btn-info btn-sm"><i
+                      class="fas fa-edit"></i></button>-->
+
+                  <a v-if="data.value.length > 0" @click="fetchApplicant(data.item.slug,data.item.id)" class="btn btn-info btn-sm text-light"><i class="bx bx-list-ol"></i> Lists</a>
+
+                </template>
+
               </b-table>
 
 
@@ -76,6 +88,7 @@ export default {
         'application_deadline',
         'type',
         'status',
+        'applicant',
         'action',
       ],
       post_job: '',
@@ -136,6 +149,10 @@ export default {
     dateFormat(date) {
       return this.$moment(date).format('D MMM ,YYYY');
     },
+
+    fetchApplicant(job_title,job_id){
+      this.$router.push(`/employer/applicant/${job_id}/${job_title}`)
+    }
 
   },
 
