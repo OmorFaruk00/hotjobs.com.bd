@@ -66,106 +66,118 @@
 </template>
 
 <script>
-  import countTo from 'vue-count-to';
+import countTo from 'vue-count-to';
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
-  export default {
-    name: "CategoryWiseJobs",
-    components: {
-      countTo,
-    },
+export default {
+  name: "CategoryWiseJobs",
+  components: {
+    countTo,
+  },
 
-    data() {
-      return {
-        loading:true,
-        general_category_step: true,
-        industials_step: false,
-        url: this.$axios.defaults.baseURL,
-        general_categories: '',
-        industials: '',
-      }
-    },
+  data() {
+    return {
+      loading: true,
+      general_category_step: true,
+      industials_step: false,
+      url: this.$axios.defaults.baseURL,
+      general_categories: '',
+      industials: '',
+    }
+  },
 
-    methods: {
-      fetchGeneralCategory() {
-        var vm = this;
-        this.$axios.get('skill-general-category').then(function (response) {
+  methods: {
+    fetchGeneralCategory() {
+      var vm = this;
+      this.$axios.get('skill-general-category').then(function (response) {
 
-          vm.general_categories = response.data;
-          vm.loading =false;
+        vm.general_categories = response.data;
+        vm.loading = false;
 
-        }).catch(function (error) {
+      }).catch(function (error) {
 
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
-
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
         });
-      },
 
-      fetchIndustryCategory() {
-        var vm = this;
-        vm.loading =true;
-        this.$axios.get('industry-category-lists').then(function (response) {
+      });
+    },
 
-          vm.industials = response.data;
-          vm.loading =false;
-        }).catch(function (error) {
+    fetchIndustryCategory() {
+      var vm = this;
+      vm.loading = true;
+      this.$axios.get('industry-category-lists').then(function (response) {
 
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
+        vm.industials = response.data;
+        vm.loading = false;
+      }).catch(function (error) {
 
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
         });
-      },
 
-      generalCategoryStep() {
-        this.general_category_step = true;
-        this.industials_step = false;
-      },
+      });
+    },
 
-      industialsStep() {
-        this.industials_step = true;
-        this.general_category_step = false;
-      },
+    generalCategoryStep() {
+      this.general_category_step = true;
+      this.industials_step = false;
+    },
 
-      fetchJob(id,slug){
-        var id = id;
-        var slug = slug;
-        this.$router.push(`/job-search/${id}/${slug}`)
+    industialsStep() {
+      this.industials_step = true;
+      this.general_category_step = false;
+    },
 
-      },
-
-      fetchIndustryJob(id,slug){
-        var id = id;
-        var slug = slug;
-        this.$router.push(`/industry-job-search/${id}/${slug}`)
-        // this.$router.push(`/jobsearch/${id}`)
-
-      }
+    fetchJob(id, slug) {
+      var id = id;
+      var slug = slug;
+      this.$router.push(`/job-search/${id}/${slug}`)
 
     },
 
-    beforeMount() {
-
-      this.fetchGeneralCategory();
-      this.fetchIndustryCategory();
+    fetchIndustryJob(id, slug) {
+      var id = id;
+      var slug = slug;
+      this.$router.push(`/industry-job-search/${id}/${slug}`)
+      // this.$router.push(`/jobsearch/${id}`)
 
     }
+
+  },
+
+  beforeMount() {
+
+    this.fetchGeneralCategory();
+    this.fetchIndustryCategory();
+
   }
+}
 </script>
 
 <style scoped>
-  h1 {
-    font-size: 35px;
-  }
+h1 {
+  font-size: 35px;
+}
 
-  .category-item-box {
-    padding: 15px 0px 1px 0px;
-  }
+.category-item-box {
+  padding: 15px 0px 1px 0px;
+}
 
-  .category-item-box h3 a {
-    font-size: 14px;
-  }
+.category-item-box h3 a {
+  font-size: 14px;
+}
 </style>

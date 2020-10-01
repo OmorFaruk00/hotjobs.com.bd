@@ -151,4 +151,9 @@ export default {
     height: '3px'
   },
 
+  server: {
+    port: 3001,
+    host: '0.0.0.0' // default: localhost
+  }
+
 }
