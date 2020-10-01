@@ -13,7 +13,7 @@
 
 
         <carousel v-if="!loading" :autoplay="true" :nav="true"
-                  :responsive="{0:{items:1,nav:false},576:{items:1,nav:false},768:{items:2,nav:false},992:{items:3,nav:false},1200:{items:4,nav:false}}">
+                  :responsive="{0:{items:1,nav:false},576:{items:1,nav:false},768:{items:2,nav:false},992:{items:3,nav:false},1200:{items:5,nav:false}}">
 
 
           <div class="companies-item" :key="index" v-for="(row, index) in popular_companies">
@@ -21,7 +21,9 @@
             <h3>
               <a href="javaScript:void(0)">{{ row.company_name }}</a>
             </h3>
-            <a v-if="row.website_url != ''" class="companies-btn" target="_blank" :href="row.website_url">Details</a>
+
+<!--            <a v-if="row.website_url != ''" class="companies-btn" target="_blank" :href="row.website_url">Details</a>-->
+
           </div>
 
         </carousel>
