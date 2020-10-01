@@ -7,8 +7,7 @@
         <div class="counter-item">
           <img src="../../static/images/box/4.png" alt="Job">
           <h3>
-            <countTo :startVal='0' :endVal='25' :duration='5000'></countTo>
-            k+
+            <countTo :startVal='0' :endVal='data.total_job' :duration='5000'></countTo>
           </h3>
           <p>Job Available</p>
         </div>
@@ -18,8 +17,7 @@
         <div class="counter-item">
           <img src="../../static/images/box/6.png" alt="Job">
           <h3>
-            <countTo :startVal='0' :endVal='150' :duration='5000'></countTo>
-            k+
+            <countTo :startVal='0' :endVal='data.employee' :duration='5000'></countTo>
           </h3>
           <p>CV Submitted</p>
         </div>
@@ -29,8 +27,7 @@
         <div class="counter-item">
           <img src="../../static/images/box/8.png" alt="Job">
           <h3>
-            <countTo :startVal='0' :endVal='120' :duration='5000'></countTo>
-            k+
+            <countTo :startVal='0' :endVal='data.company' :duration='5000'></countTo>
           </h3>
           <p>Companies</p>
         </div>
@@ -40,8 +37,7 @@
         <div class="counter-item">
           <img src="../../static/images/box/2.png" alt="Job">
           <h3>
-            <countTo :startVal='0' :endVal='50' :duration='5000'></countTo>
-            k+
+            <countTo :startVal='0' :endVal='data.apply_job' :duration='5000'></countTo>
           </h3>
           <p>Appointed to Job</p>
         </div>
@@ -53,14 +49,70 @@
 </template>
 
 <script>
-  import countTo from 'vue-count-to';
+import countTo from 'vue-count-to';
 
-  export default {
-    name: "Counter",
-    components: {
-      countTo,
+export default {
+  name: "Counter",
+  data() {
+    return {
+      loading: true,
+      data: "",
+      url: this.$axios.defaults.baseURL,
+    }
+  },
+  components: {
+    countTo,
+  },
+
+  methods: {
+
+    async counterInfo() {
+      return await this.$axios.get('counter-details')
+        .then((response) => {
+
+          this.data = response.data;
+          console.log(response.data);
+
+          this.loading = false;
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+
+        })
     },
+
+  },
+
+  beforeMount() {
+    this.counterInfo();
   }
+}
 </script>
 
 <style scoped>
