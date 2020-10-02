@@ -30,7 +30,7 @@
                   <h6 v-if="address">Address:
 
                     <span v-if="address.present_location == 0">
-                      {{ address.present_union.name }},
+                      <span v-if="address.present_union">{{ address.present_union.name }},</span>
                       {{ address.present_thana.name }},
                       {{ address.present_district.name }}
                     </span>
@@ -316,7 +316,7 @@
                         <th>Current Location</th>
                         <td v-if="address">
                           <span v-if="address.present_location == 0">
-                            {{ address.present_union.name }},
+                            <span v-if="address.present_union">{{ address.present_union.name }},</span>
                             {{ address.present_thana.name }},
                             {{ address.present_district.name }}
                           </span>

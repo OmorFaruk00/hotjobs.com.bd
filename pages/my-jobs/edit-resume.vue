@@ -220,7 +220,7 @@
                                     <th>Present Address <br>
                                       <span>{{ employee.address.present_village }} ,</span>
                                       <span v-if="employee.address.present_location == '0'">
-                                        {{ employee.address.present_union.name }},
+                                        <span v-if="employee.address.present_union">{{ employee.address.present_union.name }},</span>
                                         {{ employee.address.present_thana.name }},
                                         {{ employee.address.present_district.name }}
                                       </span>
@@ -230,7 +230,7 @@
                                     <th v-if="employee.address.same_address == '0'">Permanent Address<br>
                                       <span>{{ employee.address.permanent_village }},</span>
                                       <span v-if="employee.address.permanent_location == '0'">
-                                        {{ employee.address.permanent_union.name }},
+                                        <span v-if="employee.address.permanent_union">{{ employee.address.permanent_union.name }},</span>
                                         {{ employee.address.permanent_thana.name }},
                                         {{ employee.address.permanent_district.name }}
                                       </span>
@@ -1669,7 +1669,7 @@
                     <label>Union</label>
                     <select v-model="address.present_union_id" name="present_union_id"
                             class="form-control" :class="{ 'is-invalid': address.errors.has('present_union_id') }"
-                            required>
+                    >
                       <option value="" selected>Select one</option>
 
                       <option v-for="row in unions" :value="row.id">{{ row.name }}</option>
@@ -1700,7 +1700,7 @@
                     <textarea v-model="address.present_village" id="present_village" cols="30" rows="2"
                               name="present_village" placeholder="Enter present village"
                               class="form-control"
-                              :class="{ 'is-invalid': address.errors.has('present_village') }"></textarea>
+                              :class="{ 'is-invalid': address.errors.has('present_village') }" required></textarea>
 
                     <has-error :form="address" field="present_village"></has-error>
                   </div>
@@ -1754,8 +1754,7 @@
                   <div class="form-group" v-if="address.permanent_location == 0">
                     <label>Union</label>
                     <select v-model="address.permanent_union_id" name="permanent_union_id"
-                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_union_id') }"
-                            required>
+                            class="form-control" :class="{ 'is-invalid': address.errors.has('permanent_union_id') }">
                       <option value="" selected>Select one</option>
 
                       <option v-for="row in permanent_unions" :value="row.id">{{ row.name }}</option>
@@ -1786,7 +1785,7 @@
                     <textarea v-model="address.permanent_village" id="" cols="30" rows="2" name="permanent_village"
                               placeholder="Enter permanent village"
                               class="form-control"
-                              :class="{ 'is-invalid': address.errors.has('permanent_village') }"></textarea>
+                              :class="{ 'is-invalid': address.errors.has('permanent_village') }" required></textarea>
 
                     <has-error :form="address" field="permanent_village"></has-error>
                   </div>
