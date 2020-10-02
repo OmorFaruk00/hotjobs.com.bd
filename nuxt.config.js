@@ -1,4 +1,5 @@
 const https = require('https');
+const axios = require('axios');
 export default {
   /*
   ** Nuxt rendering mode
@@ -109,12 +110,17 @@ export default {
       gifsicle: {optimizationLevel: 2}
     }],
   ],
-
   // sitemap
   sitemap: {
-    hostname: "https://hotjobs.com.bd/",
+    hostname:'https://hotjobs.com.bd/',
     gzip: true,
-    // exclude: ["/secret", "/admin/**"]
+
+    routes: async () => {
+      let baseURL= 'http://localhost:8000/';
+      // let baseURL= 'https://api.hotjobs.com.bd/';
+      let { data } = await axios.get(`${baseURL}/all-jobs`);
+      return  data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
+    }
   },
 
   // https://github.com/nuxt-community/robots-module
