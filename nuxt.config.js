@@ -30,8 +30,8 @@ export default {
         name: 'description',
         content: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training'
       },
-      {name: 'keywords', content: 'Hot Jobs BD'},
-      {name: 'author', content: 'Hot Jobs BD'},
+      {name: 'keywords', content: 'HotJobs'},
+      {name: 'author', content: 'HotJobs'},
     ],
 
     link: [
@@ -102,12 +102,16 @@ export default {
     '@nuxtjs/robots',
     ['nuxt-gmaps', {
       key: 'AIzaSyBU8GPGJ8ihYBpfMRnbCOsVZJlyvWafPq4',
-      //you can use libraries: ['places']
     }],
     ['nuxt-imagemin', {
       optipng: {optimizationLevel: 5},
       gifsicle: {optimizationLevel: 2}
     }],
+    ['nuxt-facebook-pixel-module', {
+      track: 'PageView',
+      pixelId: '1220812434962332',
+      disabled: false
+    }]
   ],
   // sitemap
   // sitemap: {
@@ -134,7 +138,7 @@ export default {
           let {data} = await axios.get(`${baseURL}/all-jobs`);
           return data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
         },
-        gzip: true
+        gzip: true,
       },
 
       {
@@ -169,8 +173,7 @@ export default {
       },
     ]
   },
-
-
+  
   // https://github.com/nuxt-community/robots-module
   robots: {
     UserAgent: "*",
