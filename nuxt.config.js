@@ -45,8 +45,8 @@ export default {
       // {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
       {rel: 'stylesheet', href: '/css/style.css'},
       // {rel: 'stylesheet', href: '/css/min_style.css'},
-      // {rel: 'stylesheet', href: '/css/responsive.css'},
-      {rel: 'stylesheet', href: '/css/min_responsive.css'},
+      {rel: 'stylesheet', href: '/css/responsive.css'},
+      // {rel: 'stylesheet', href: '/css/min_responsive.css'},
     ],
 
     script: [
@@ -173,7 +173,7 @@ export default {
       },
     ]
   },
-  
+
   // https://github.com/nuxt-community/robots-module
   robots: {
     UserAgent: "*",
