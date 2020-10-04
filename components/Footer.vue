@@ -16,11 +16,13 @@
           <img src="../static/images/shape/1.png" alt="Shape">
         </div>
         <div class="subscribe-item">
-          <form class="newsletter-form" data-toggle="validator">
-            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL"
-                   required autocomplete="off">
+          <form class="newsletter-form" @submit.prevent="addNewsLatter()" >
+            <input type="email" v-model="form.email" class="form-control" placeholder="Enter Your Email" name="email"
+                  required  autocomplete="off">
+            <small v-if="errors.email" class="text-danger with-errors"
+                   v-html="errors.email[0]"></small>
 
-            <button class="btn subscribe-btn" type="button">
+            <button class="btn subscribe-btn" type="submit">
               Subscribe
             </button>
 
@@ -206,227 +208,295 @@
 </template>
 
 <script>
-  export default {
-    name: "Footer",
-    data() {
-      return {
-        date: this.$moment().format('Y')
-      }
-    },
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
 
-    methods:{
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
-    }
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
+})
+export default {
+  name: "Footer",
+  data() {
+    return {
+      date: this.$moment().format('Y'),
+      form: new Form({
+        email: '',
+      }),
+      errors:'',
+      url : this.$axios.defaults.baseURL,
+    }
+  },
+
+  methods: {
+    addNewsLatter() {
+      var vm =this;
+
+      vm.form.post(this.url + 'news-latter')
+        .then((response) => {
+
+
+          Toast.fire({
+            icon: response.data.status,
+            title: response.data.message
+          });
+
+          vm.form.email = '';
+          vm.errors=[];
+
+        })
+        .catch((error) => {
+          vm.errors = error.response.data;
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+
+        })
+    },
+  }
+}
 </script>
 
 <style scoped>
-  /*-- End Subscribe --*/
-  /*-- Footer --*/
+/*-- End Subscribe --*/
+/*-- Footer --*/
 
-  #footer-section {
-    margin-top: 102px;
-  }
+#footer-section {
+  margin-top: 102px;
+}
 
-  footer {
-    background-image: url("../static/images/footer_bg.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    opacity: .9;
-  }
+footer {
+  background-image: url("../static/images/footer_bg.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: .9;
+}
 
-  .footer-item {
-    margin-bottom: 30px;
-  }
+.footer-item {
+  margin-bottom: 30px;
+}
 
-  .footer-item .footer-logo a {
-    display: block;
-    margin-bottom: 25px;
-  }
+.footer-item .footer-logo a {
+  display: block;
+  margin-bottom: 25px;
+}
 
-  .footer-item .footer-logo p {
-    margin-bottom: 20px;
-    font-size: 15px;
-  }
+.footer-item .footer-logo p {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
 
-  .footer-item .footer-logo ul {
-    margin: 0;
-    padding: 0;
-  }
+.footer-item .footer-logo ul {
+  margin: 0;
+  padding: 0;
+}
 
-  .footer-item .footer-logo ul li {
-    list-style-type: none;
-    /*display: inline-block;*/
-    margin-right: 15px;
-  }
+.footer-item .footer-logo ul li {
+  list-style-type: none;
+  /*display: inline-block;*/
+  margin-right: 15px;
+}
 
-  .footer-item .footer-logo ul li:last-child {
-    margin-right: 0;
-  }
+.footer-item .footer-logo ul li:last-child {
+  margin-right: 0;
+}
 
-  .footer-item .footer-logo ul li a {
-    display: block;
-    color: #423A3D;
-    font-size: 15px;
-    margin-bottom: 0;
-    padding: 5px 0;
-  }
+.footer-item .footer-logo ul li a {
+  display: block;
+  color: #423A3D;
+  font-size: 15px;
+  margin-bottom: 0;
+  padding: 5px 0;
+}
 
-  .footer-item .footer-logo ul li a:hover {
-    color: #333333;
-  }
+.footer-item .footer-logo ul li a:hover {
+  color: #333333;
+}
 
-  .footer-item .footer-category h3 {
-    margin-bottom: 30px;
-    color: #423A3D;
-    font-weight: 600;
-    font-size: 22px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #EE324F;
-    position: relative;
-  }
+.footer-item .footer-category h3 {
+  margin-bottom: 30px;
+  color: #423A3D;
+  font-weight: 600;
+  font-size: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #EE324F;
+  position: relative;
+}
 
-  .footer-item .footer-category h3:before {
-    position: absolute;
-    content: '';
-    width: 50px;
-    height: 3px;
-    bottom: -2px;
-    left: 0;
-    background-color: #423A3D;
-  }
+.footer-item .footer-category h3:before {
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 3px;
+  bottom: -2px;
+  left: 0;
+  background-color: #423A3D;
+}
 
-  .footer-item .footer-category ul {
-    margin: 0;
-    padding: 0;
-  }
+.footer-item .footer-category ul {
+  margin: 0;
+  padding: 0;
+}
 
-  .footer-item .footer-category ul li {
-    list-style-type: none;
-    display: block;
-    margin-bottom: 15px;
-  }
+.footer-item .footer-category ul li {
+  list-style-type: none;
+  display: block;
+  margin-bottom: 15px;
+}
 
-  .footer-item .footer-category ul li:last-child {
-    margin-bottom: 0;
-  }
+.footer-item .footer-category ul li:last-child {
+  margin-bottom: 0;
+}
 
-  .footer-item .footer-category ul li a {
-    color: #423A3D;
-    display: block;
-    font-size: 15px;
-  }
+.footer-item .footer-category ul li a {
+  color: #423A3D;
+  display: block;
+  font-size: 15px;
+}
 
-  .footer-logo ul li a i {
-    color: #423A3D !important;
-  }
+.footer-logo ul li a i {
+  color: #423A3D !important;
+}
 
-  .footer-item .footer-category ul li a:hover {
-    color: #333333;
-  }
+.footer-item .footer-category ul li a:hover {
+  color: #333333;
+}
 
-  .footer-item .footer-find h3 {
-    margin-bottom: 30px;
-    color: #423A3D;
-    font-weight: 600;
-    font-size: 22px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #423A3D;
-    position: relative;
-  }
+.footer-item .footer-find h3 {
+  margin-bottom: 30px;
+  color: #423A3D;
+  font-weight: 600;
+  font-size: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #423A3D;
+  position: relative;
+}
 
-  .footer-item .footer-find h3:before {
-    position: absolute;
-    content: '';
-    width: 50px;
-    height: 3px;
-    bottom: -2px;
-    left: 0;
-    background-color: #423A3D;
-  }
+.footer-item .footer-find h3:before {
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 3px;
+  bottom: -2px;
+  left: 0;
+  background-color: #423A3D;
+}
 
-  .footer-item .footer-find ul {
-    margin: 0;
-    padding: 0;
-  }
+.footer-item .footer-find ul {
+  margin: 0;
+  padding: 0;
+}
 
-  .footer-item .footer-find ul li {
-    list-style-type: none;
-    display: block;
-    margin-bottom: 15px;
-  }
+.footer-item .footer-find ul li {
+  list-style-type: none;
+  display: block;
+  margin-bottom: 15px;
+}
 
-  .footer-item .footer-find ul li i {
-    font-size: 18px;
-    display: inline-block;
-    position: relative;
-    top: 1px;
-    margin-right: 2px;
-  }
+.footer-item .footer-find ul li i {
+  font-size: 18px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  margin-right: 2px;
+}
 
-  .footer-item .footer-find ul li:last-child {
-    margin-bottom: 0;
-  }
+.footer-item .footer-find ul li:last-child {
+  margin-bottom: 0;
+}
 
-  .footer-item .footer-find ul li a {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 15px;
-  }
+.footer-item .footer-find ul li a {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 15px;
+}
 
-  .footer-find ul li a {
-    color: #423A3D !important;
-  }
+.footer-find ul li a {
+  color: #423A3D !important;
+}
 
-  .copyright-area {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-top: 1px solid #6bbf75;
-    margin-top: 70px;
-  }
+.copyright-area {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-top: 1px solid #6bbf75;
+  margin-top: 70px;
+}
 
-  .copyright-item p {
-    margin-bottom: 0;
-  }
+.copyright-item p {
+  margin-bottom: 0;
+}
 
-  .copyright-item p a {
-    display: inline-block;
-    color: #423A3D;
-  }
+.copyright-item p a {
+  display: inline-block;
+  color: #423A3D;
+}
 
-  .copyright-item p a:hover {
-    color: #EC1A3A;
-  }
+.copyright-item p a:hover {
+  color: #EC1A3A;
+}
 
-  .copyright-item ul {
-    margin: 0;
-    padding: 0;
-  }
+.copyright-item ul {
+  margin: 0;
+  padding: 0;
+}
 
-  .copyright-item ul li {
-    list-style-type: none;
-    display: inline-block;
-  }
+.copyright-item ul li {
+  list-style-type: none;
+  display: inline-block;
+}
 
-  .copyright-item ul li span {
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
+.copyright-item ul li span {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
-  .copyright-item ul li a {
-    color: #423A3D;
-    display: block;
-  }
+.copyright-item ul li a {
+  color: #423A3D;
+  display: block;
+}
 
-  .copyright-item ul li a:hover {
-    color: #EC1A3A;
-  }
+.copyright-item ul li a:hover {
+  color: #EC1A3A;
+}
 
-  .copyright-right {
-    text-align: right;
-  }
+.copyright-right {
+  text-align: right;
+}
 
-  /*-- End Footer --*/
+/*-- End Footer --*/
 </style>
