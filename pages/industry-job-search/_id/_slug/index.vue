@@ -38,6 +38,18 @@
           <div class="card">
             <div class="card-body">
 
+              <div class="mb-2">
+                <div class="row">
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <select v-model="perPage" class="form-control">
+                      <option value="20">20</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div v-for="row in current_jobs" class="card-body border mb-2 job-short-box">
 
                 <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">
@@ -93,6 +105,14 @@
 
               </div>
 
+              <div style="float: right;">
+                <b-pagination
+                  :total-rows="totalRows"
+                  v-model="currentPage"
+                  :per-page="perPage"
+                />
+              </div>
+
             </div>
           </div>
         </div>
@@ -128,6 +148,8 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
+      perPage: '20',
       loading:true,
       id: this.$route.params.id,
       slug: this.$route.params.slug,
@@ -217,6 +239,20 @@ export default {
   created() {
     this.industryJob();
     this.fetchDegrees();
+  },
+  computed: {
+    lists () {
+      const items = this.current_jobs
+      // Return just page of items needed
+      return items.slice(
+        (this.currentPage - 1) * this.perPage,
+        this.currentPage * this.perPage
+      )
+    },
+    totalRows () {
+      return this.current_jobs.length
+    }
+
   }
 }
 </script>
