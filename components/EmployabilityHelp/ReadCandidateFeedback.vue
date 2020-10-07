@@ -170,4 +170,7 @@
   h1 {
     font-size: 35px;
   }
+  .companies-item {
+    box-shadow: none;
+  }
 </style>

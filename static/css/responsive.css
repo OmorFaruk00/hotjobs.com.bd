@@ -1,4 +1,19 @@
 @media only screen and (max-width: 767px) {
+  .bg-dark{
+    background-color: #fff!important;
+  }
+  .employability-help{
+    margin-top: 72px!important;
+  }
+  .employability-text h1 {
+    font-size: 25px;
+  }
+  .employability-text p {
+    font-size: 15px;
+  }
+  .employability-text{
+    margin-top: 15px;
+  }
   .middle-header{
     display: none!important;
   }
@@ -1281,6 +1296,12 @@
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   body {
     font-size: 14px;
+  }
+  .bg-dark{
+    background-color: #fff!important;
+  }
+  .employability-help{
+    margin-top: 72px!important;
   }
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.4;

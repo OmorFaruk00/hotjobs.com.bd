@@ -27,13 +27,14 @@
 
 
           <div class="login-sign-in">
-            <a href="javaScript:void(0)">Forgot Password?</a>
-            <ul>
+            <nuxt-link to="/my-jobs/reset-password">Forgot Password?</nuxt-link>
+
+            <!--<ul>
               <li>Don’t Have Account ?</li>
               <li>
                 <a href="javaScript:void(0)">Sign Up Here</a>
               </li>
-            </ul>
+            </ul>-->
 
             <div class="text-center">
               <button type="submit" class="btn login-btn">Sign In</button>
