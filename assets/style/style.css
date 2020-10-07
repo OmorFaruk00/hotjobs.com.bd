@@ -64,3 +64,8 @@ input[placeholder="select date"]{
   color: #EC1A3A;
 }
 
+thead[role="rowgroup"]{
+  background-color: #423A3D;
+  color: #fff;
+}
+
