@@ -18,13 +18,13 @@
               <div class="job-item scrollbar scroll_style">
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                     <img class="img-fluid" v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
 
                     <img v-else src="../../static/images/box/1.png" alt="Job">
                   </div>
 
-                  <div class="col-lg-9 col-md-9 col-sm-12">
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                     <div class="job-inner align-items-center">
                       <div class="job-inner-left">
                         <h4>{{ row.company_name }}</h4>
@@ -40,9 +40,6 @@
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
 
@@ -128,6 +125,10 @@ export default {
 <style scoped>
 h1 {
   font-size: 35px;
+}
+
+.job-item img {
+  max-height: 80px;
 }
 
 </style>
