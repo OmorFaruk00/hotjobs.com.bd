@@ -17,22 +17,32 @@
             <div class="col-lg-4 mix web ui" v-for="row in employer_tender_jobs">
               <div class="job-item scrollbar scroll_style">
 
-                <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
-                <img v-else src="../../static/images/box/1.png" alt="Job">
+                <div class="row">
+                  <div class="col-lg-3 col-md-3 col-sm-12">
+                    <img class="img-fluid" v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
 
-                <div class="job-inner align-items-center">
-                  <div class="job-inner-left">
-                    <h4>{{ row.company_name }}</h4>
+                    <img v-else src="../../static/images/box/1.png" alt="Job">
+                  </div>
 
-                    <a v-for="inner_row in row.tender_jobs" href="javaScript:void(0)"
-                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
-                      <i class="bx bxs-right-arrow-square"></i> {{
-                        inner_row.title ? inner_row.title : 'Not specified'
-                      }}
-                    </a>
+                  <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div class="job-inner align-items-center">
+                      <div class="job-inner-left">
+                        <h4>{{ row.company_name }}</h4>
 
+                        <a v-for="inner_row in row.tender_jobs" href="javaScript:void(0)"
+                           @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
+                          <i class="bx bxs-right-arrow-square"></i> {{
+                            inner_row.title ? inner_row.title : 'Not specified'
+                          }}
+                        </a>
+
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+
+
               </div>
             </div>
 
@@ -120,7 +130,4 @@ h1 {
   font-size: 35px;
 }
 
-.job-item img {
-  width: 50px;
-}
 </style>
