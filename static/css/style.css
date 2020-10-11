@@ -810,7 +810,7 @@ button:focus {
 }
 
 .job-item img {
-  position: absolute;
+  /*position: absolute;*/
   /*top: 10%;*/
 }
 
@@ -820,7 +820,7 @@ button:focus {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-left: 60px;
+  /*padding-left: 60px;*/
 }
 
 .job-item .job-inner .job-inner-left {
