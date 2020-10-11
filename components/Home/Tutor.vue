@@ -75,7 +75,22 @@ export default {
 
   methods: {
 
-    fetchTutorRequest() {
+    async fetchTutorRequest() {
+      var vm = this;
+      return await this.$axios.get('frontend/tutor-job')
+        .then((response) => {
+          vm.tutor_requests = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    /*fetchTutorRequest() {
       var vm = this;
       this.$axios.get('frontend/tutor-job').then(function (response) {
 
@@ -89,7 +104,7 @@ export default {
         });
 
       });
-    },
+    },*/
 
     fetchJobDetails(id, company_slug, slug) {
 
@@ -107,7 +122,7 @@ export default {
     },
 
   },
-  created() {
+  beforeMount() {
     this.fetchTutorRequest();
   }
 

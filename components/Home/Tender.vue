@@ -82,7 +82,22 @@ export default {
 
   methods: {
 
-    fetchRenderJob() {
+    async fetchRenderJob() {
+      var vm = this;
+      return await this.$axios.get('tender-job')
+        .then((response) => {
+          vm.employer_tender_jobs = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+   /* fetchRenderJob() {
       var vm = this;
       this.$axios.get('tender-job').then(function (response) {
 
@@ -96,7 +111,7 @@ export default {
         });
 
       });
-    },
+    },*/
 
     getPhoto(row) {
       let image_url = this.url + row;
@@ -115,7 +130,7 @@ export default {
     }
 
   },
-  created() {
+  beforeMount() {
     this.fetchRenderJob();
   }
 

@@ -98,7 +98,39 @@ export default {
   },
 
   methods: {
-    fetchGeneralCategory() {
+
+    async fetchGeneralCategory() {
+      var vm = this;
+      return await this.$axios.get('skill-general-category')
+        .then((response) => {
+          vm.general_categories = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    async fetchIndustryCategory() {
+      var vm = this;
+      return await this.$axios.get('industry-category-lists')
+        .then((response) => {
+          vm.industials = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+
+    /*fetchGeneralCategory() {
       var vm = this;
       this.$axios.get('skill-general-category').then(function (response) {
 
@@ -113,9 +145,9 @@ export default {
         });
 
       });
-    },
+    },*/
 
-    fetchIndustryCategory() {
+    /*fetchIndustryCategory() {
       var vm = this;
       vm.loading = true;
       this.$axios.get('industry-category-lists').then(function (response) {
@@ -130,7 +162,7 @@ export default {
         });
 
       });
-    },
+    },*/
 
     generalCategoryStep() {
       this.general_category_step = true;
