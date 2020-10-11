@@ -24,6 +24,9 @@
           <!--dream Jobs-->
           <homeDreamJobs/>
 
+          <!--TUTOR-->
+          <homeTutor/>
+
           <!--TENDER / EOI-->
           <homeTender/>
 
@@ -69,6 +72,7 @@
   import homeCategoryWiseJobs from "~/components/Home/CategoryWiseJobs";
   import homeHelpingHand from "~/components/Home/HelpingHand";
   import homeDreamJobs from "~/components/Home/DreamJobs";
+  import homeTutor from "~/components/Home/Tutor";
   import homeTender from "~/components/Home/Tender";
   import homeCounter from "~/components/Home/Counter";
   import homeMostPopular from "~/components/Home/MostPopular";
@@ -82,6 +86,7 @@
       homeCategoryWiseJobs,
       homeHelpingHand,
       homeDreamJobs,
+      homeTutor,
       homeTender,
       homeCounter,
       homeMostPopular,
