@@ -185,7 +185,14 @@
                         <p class="mb-1">Sign in or create your My Hotjobs account to manage your profile</p>
                         <p class="mb-0">
                           <nuxt-link to="/my-jobs/login" class="btn btn-outline-primary">Sign in</nuxt-link>
-                          <nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>
+
+<!--                          <nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>-->
+
+                          <button type="button" class="btn btn-outline-info waves-effect waves-light"
+                                  @click="addGeneralEmployeeModal">
+                            Create Account
+                          </button>
+
                         </p>
                       </div>
                     </div>
@@ -624,7 +631,7 @@
                         value="1"
                         unchecked-value="0"
                       >
-                        I Have Read <a href="javaScript:void(0)" @click="pricingPolicy">Pricing Policy</a> And Accepted
+                        I Have Read <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a>And Accepted
                         It
                       </b-form-checkbox>
                     </div>
@@ -644,6 +651,154 @@
 
         </div>
 
+
+        <!--    <addGeneralEmployee/>-->
+        <div class="modal fade" id="addGeneralEmployee" tabindex="-1" role="dialog" aria-labelledby="addGeneralEmployee"
+             aria-hidden="true">
+
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h5 class="modal-title">Add Account</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form @submit.prevent="createEmployee()">
+                <div class="modal-body">
+                  <div class="row">
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input v-model="employee_form.name" type="text" name="name" placeholder="Enter name"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('name') }" required>
+                        <has-error :form="employee_form" field="name"></has-error>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        <select v-model="employee_form.gender" name="gender"
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('gender') }" required>
+                          <option value="" selected>Select one</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <has-error :form="employee_form" field="gender"></has-error>
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Select your skill from following list</label>
+
+                        <select v-model="employee_form.skill_id" name="skill_id"
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('skill_id') }" required>
+                          <option value="" selected>Select one</option>
+
+                          <option v-for="row in special_categories" :value="row.id">{{ row.name }}</option>
+                        </select>
+                        <has-error :form="employee_form" field="skill_id"></has-error>
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input v-model="employee_form.email" type="email" name="email" placeholder="Enter email"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('email') }" required>
+                        <has-error :form="employee_form" field="email"></has-error>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                      <div class="form-group">
+                        <label>Country</label>
+                        <select v-model="employee_form.country_id" name="country_id"
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('country_id') }" required>
+                          <option value="" selected>Select one</option>
+
+                          <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
+                              row.countries_isd_code
+                            }})
+                          </option>
+
+                        </select>
+
+                        <has-error :form="employee_form" field="country_id"></has-error>
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                      <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input v-model="employee_form.mobile_number" type="text" name="mobile_number"
+                               placeholder="Enter mobile number"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('mobile_number') }" required>
+                        <has-error :form="employee_form" field="mobile_number"></has-error>
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input v-model="employee_form.password" type="password" name="password" placeholder="Enter password"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('password') }" required>
+                        <has-error :form="employee_form" field="password"></has-error>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Password Confirmation</label>
+                        <input v-model="employee_form.password_confirmation" type="password" name="password_confirmation"
+                               placeholder="Enter password confirmation"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('password_confirmation') }"
+                               required>
+                        <has-error :form="employee_form" field="password_confirmation"></has-error>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                      <div class="form-group" style="margin-left: 18px">
+
+                        <input type="checkbox" name="terms_and_conditions" class="form-check-input" id="defaultCheck1"
+                               required>
+                        <label class="form-check-label" for="defaultCheck1">
+                          I agree to the Hotjobs.com Terms of use. <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a>
+                        </label>
+
+                        <has-error :form="employee_form" field="terms_and_conditions"></has-error>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -683,6 +838,7 @@
         industry_categories: '',
         industry_type_lists: '',
         country_name: '',
+        special_categories:'',
         form: new Form({
           id: '',
           username: '',
@@ -709,6 +865,19 @@
           contact_person_mobile: '',
           pricing_policy: '',
 
+        }),
+
+        employee_form: new Form({
+          id: '',
+          name: '',
+          gender: '',
+          skill_id: '',
+          email: '',
+          mobile_number: '',
+          password: '',
+          password_confirmation: '',
+          country_id: '',
+          category: ''
         }),
       }
     },
@@ -924,6 +1093,52 @@
             });
           })
       },
+
+      addGeneralEmployeeModal() {
+        this.employee_form.reset();
+        this.fetchCountryLists();
+        this.fetchSpecialCategory();
+        $('#addGeneralEmployee').modal('show');
+      },
+
+      async fetchSpecialCategory() {
+        return await this.$axios.get('skill-general-category')
+          .then((response) => {
+
+            this.special_categories = response.data;
+
+          })
+
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+          })
+      },
+
+      createEmployee() {
+        var vm = this
+        this.employee_form.post(this.url + 'employee')
+
+          .then(() => {
+            Toast.fire({
+              icon: 'success',
+              title: 'Account Created successfully.Please login '
+            });
+            $('#addGeneralEmployee').modal('hide');
+            vm.$router.push('/my-jobs/login');
+
+          })
+          .catch((error) => {
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+          })
+      }
 
     },
 

@@ -121,7 +121,8 @@
                       <option value="" selected>Select one</option>
 
                       <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
-                        row.countries_isd_code }})
+                          row.countries_isd_code
+                        }})
                       </option>
 
                     </select>
@@ -196,122 +197,122 @@
 
 <script>
 
-  import Vue from 'vue'
-  import Swal from 'sweetalert2'
-  import {Form, HasError, AlertError} from 'vform'
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
 
-  Vue.component(HasError.name, HasError)
-  Vue.component(AlertError.name, AlertError)
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    onOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+export default {
+  name: "Create",
+
+  data() {
+    return {
+      countries: '',
+      special_categories: '',
+      form: new Form({
+        id: '',
+        name: '',
+        gender: '',
+        skill_id: '',
+        email: '',
+        mobile_number: '',
+        password: '',
+        password_confirmation: '',
+        country_id: '',
+        category: ''
+      }),
+      url: this.$axios.defaults.baseURL,
     }
-  })
+  },
 
-  export default {
-    name: "Create",
-
-    data() {
-      return {
-        countries: '',
-        special_categories: '',
-        form: new Form({
-          id: '',
-          name: '',
-          gender: '',
-          skill_id: '',
-          email: '',
-          mobile_number: '',
-          password: '',
-          password_confirmation: '',
-          country_id: '',
-          category: ''
-        }),
-        url: this.$axios.defaults.baseURL,
-      }
+  methods: {
+    addGeneralEmployeeModal() {
+      this.form.reset();
+      this.fetchCountryLists();
+      this.fetchSpecialCategory();
+      $('#addGeneralEmployee').modal('show');
     },
 
-    methods: {
-      addGeneralEmployeeModal() {
-        this.form.reset();
-        this.fetchCountryLists(),
-          this.fetchSpecialCategory(),
-          $('#addGeneralEmployee').modal('show');
-      },
+    async fetchCountryLists() {
+      return await this.$axios.get('country-lists')
+        .then((response) => {
 
-      async fetchCountryLists() {
-        return await this.$axios.get('country-lists')
-          .then((response) => {
+          this.countries = response.data;
 
-            this.countries = response.data;
+        })
 
-          })
+        .catch((error) => {
 
-          .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
 
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
+        })
+    },
 
-          })
-      },
+    async fetchSpecialCategory() {
+      return await this.$axios.get('skill-general-category')
+        .then((response) => {
 
-      async fetchSpecialCategory() {
-        return await this.$axios.get('skill-general-category')
-          .then((response) => {
+          this.special_categories = response.data;
 
-            this.special_categories = response.data;
+        })
 
-          })
+        .catch((error) => {
 
-          .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
 
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
+        })
+    },
 
-          })
-      },
+    createEmployee() {
+      var vm = this
+      this.form.post(this.url + 'employee')
 
-      createEmployee() {
-        var vm =this
-        this.form.post(this.url + 'employee')
+        .then(() => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Account Created successfully.Please login '
+          });
+          $('#addGeneralEmployee').modal('hide');
+          vm.$router.push('/my-jobs/login');
 
-          .then(() => {
-            Toast.fire({
-              icon: 'success',
-              title: 'Account Created successfully.Please login '
-            });
-            $('#addGeneralEmployee').modal('hide');
-            vm.$router.push('/my-jobs/login');
-
-          })
-          .catch((error) => {
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-          })
-      }
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
     }
   }
+}
 </script>
 
 <style scoped>
-  .job-seeker-reg {
-    padding-bottom: 20px !important;
-  }
+.job-seeker-reg {
+  padding-bottom: 20px !important;
+}
 
-  .jobseeker-inner p {
-    color: #fff !important;
-  }
+.jobseeker-inner p {
+  color: #fff !important;
+}
 </style>
