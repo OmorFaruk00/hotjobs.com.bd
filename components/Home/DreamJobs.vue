@@ -79,6 +79,21 @@ export default {
 
   methods: {
 
+    async fetchDreamJobs() {
+      var vm = this;
+      return await this.$axios.get('dream-job')
+        .then((response) => {
+          vm.employer_hotjobs = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
     fetchDreamJob() {
       var vm = this;
       this.$axios.get('dream-job').then(function (response) {
@@ -113,8 +128,9 @@ export default {
     }
 
   },
-  created() {
-    this.fetchDreamJob();
+  beforeMount() {
+    // this.fetchDreamJob();
+    this.fetchDreamJobs();
   }
 
 }

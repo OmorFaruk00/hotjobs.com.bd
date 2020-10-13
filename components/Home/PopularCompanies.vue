@@ -58,6 +58,8 @@ export default {
 
         .catch((error) => {
 
+          console.log(error.response);
+
           Toast.fire({
             icon: 'warning',
             title: 'There was something wrong'

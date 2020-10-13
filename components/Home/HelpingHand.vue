@@ -66,7 +66,23 @@ export default {
   },
 
   methods: {
-    fetchSpecialCategory() {
+
+    async fetchSpecialCategory() {
+      var vm = this;
+      return await this.$axios.get('skill-special-category')
+        .then((response) => {
+          vm.special_categories = response.data;
+          vm.loading =false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    /*fetchSpecialCategory() {
       var vm = this;
       this.$axios.get('skill-special-category').then(function (response) {
 
@@ -81,7 +97,7 @@ export default {
         });
 
       });
-    },
+    },*/
 
     fetchJob(id, slug) {
       var id = id;
