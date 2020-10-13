@@ -68,7 +68,7 @@
 
                     <template class="text-right" v-slot:footer>
 
-                      <a href="javaScript:void(0)" class="btn btn-info">Apply</a>
+                      <a href="javaScript:void(0)" class="btn btn-info" @click="applyModal">Apply</a>
 
                     </template>
                   </b-card>
@@ -84,6 +84,58 @@
 
     </div>
 
+    <div class="modal fade bs-example-modal-center" id="warningApply" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title mt-0">Warning Message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p>
+
+              You are applying to teach a <strong>{{ tutor_request_details.student_gender }}
+            </strong>
+
+              <strong>
+              <span class="badge badge-secondary mx-1" v-for="inner_row in tutor_request_subjects">{{ inner_row.subject.title }}</span>
+
+              </strong> student.
+
+              You have to teach <strong v-if="tuition_days_week">{{ tuition_days_week.title }}</strong> <strong v-if="!tuition_days_week"> N/A </strong> and you'll be paid <strong v-text="tutor_request_details.salary_negotiable_status == '1' ? 'Negotiable': tutor_request_details.salary + ' ' +'BDT' "></strong> per month.
+            </p>
+
+            <p class="text-center">Are you sure to apply for this job?</p>
+
+            <div>
+              <b-form-checkbox
+                id="status"
+                v-model="form.status"
+                name="status"
+                value="1"
+                unchecked-value="0"
+              >
+                I have read the above warning message.
+              </b-form-checkbox>
+
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" :disabled="form.status != '1'" @click="applyButton" class="btn btn-success">Apply
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -107,6 +159,7 @@ const Toast = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
 })
+
 export default {
   name: "index",
   validate({params}) {
@@ -128,11 +181,88 @@ export default {
       thana: '',
       union: '',
       tutor_request_subjects: [],
+      form: new Form({
+        id: '',
+        status: '0'
+      }),
       url: this.$axios.defaults.baseURL,
     }
   },
 
   methods: {
+
+    applyModal() {
+      this.form.status = 0;
+      $('#warningApply').modal('show');
+    },
+
+    applyButton(){
+      var user = window.$nuxt.$cookies.get('user');
+
+      if (user) {
+
+        var vm = this;
+
+        if (user.type != 'employee') {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'Please login as a employee'
+          });
+
+        }
+
+        var token = window.$nuxt.$cookies.get('token');
+        this.form.post(this.url + 'apply-tutor-request?token=' + token)
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message
+            });
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Problem'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
+              });
+            }
+
+            if (error.response.status == 403) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Unauthorized access'
+              });
+            }
+
+          })
+
+      } else {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please login as a employee'
+        });
+
+      }
+
+      $('#warningApply').modal('hide');
+    },
 
     dateFormat(date) {
       return this.$moment(date).format('MMMM D,YYYY');
@@ -171,6 +301,10 @@ export default {
 
   created() {
     this.fetchTutorRequestDetails();
+
+    this.form.fill({
+      id: this.$route.params.id
+    })
   }
 }
 </script>
