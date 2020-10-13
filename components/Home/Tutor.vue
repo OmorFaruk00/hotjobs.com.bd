@@ -17,7 +17,7 @@
             <div v-for="row in tutor_requests" class="col-lg-4 col-md-4 col-sm-6">
               <b-card class="tutor-card" border-variant="primary" bg-variant="default" text-variant="dark">
                 <blockquote class="card-blockquote">
-                  <h5>Need {{ row.tuition_type.title }} Tutor For {{ row.tuition_class.title }} Student
+                  <h5>Need {{ row.tuition_category.title }} Tutor For {{ row.tuition_class.title }} Student
 
                     <span v-if="row.tuition_days_week">- {{ row.tuition_days_week.title}}</span>
                   </h5>
@@ -26,14 +26,16 @@
                 </blockquote>
 
                 <b-card-text>
-                  <h6>Tuition Type : {{ row.tuition_category.title }}</h6>
-                  <h6>Location : {{ row.district.name }}, {{  row.thana.name }} <span v-if="row.union">. {{ row.union.name}}</span></h6>
+                  <h6>Tuition Type : {{ row.tuition_type.title }}</h6>
+                  <h6>Location : {{ row.district.name }}, {{  row.thana.name }} <span v-if="row.union">, {{ row.union.name}}</span></h6>
                   <h6>Salary : <span v-text="row.salary_negotiable_status == '1' ? 'Negotiable': row.salary + ' ' +'BDT' "></span></h6>
-                  <h6>Subjects : <span class="badge badge-secondary" v-for="innter_row in row.tutor_request_subjects">{{ innter_row.subject.title }}</span></h6>
+                  <h6>Subjects : <span class="badge badge-secondary mx-1" v-for="innter_row in row.tutor_request_subjects">{{ innter_row.subject.title }}</span></h6>
                 </b-card-text>
 
                 <template class="text-right" v-slot:footer>
-                  <b-button href="javaScript:void(0)" variant="primary" size="sm">View Details</b-button>
+
+                  <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.id,row.employer.slug)">View Details</a>
+
                 </template>
               </b-card>
             </div>
@@ -90,30 +92,12 @@ export default {
         })
     },
 
-    /*fetchTutorRequest() {
-      var vm = this;
-      this.$axios.get('frontend/tutor-job').then(function (response) {
 
-        vm.tutor_requests = response.data;
-        vm.loading = false;
-      }).catch(function (error) {
-
-        Toast.fire({
-          icon: 'warning',
-          title: 'There was something wrong'
-        });
-
-      });
-    },*/
-
-    fetchJobDetails(id, company_slug, slug) {
+    fetchTutorRequestDetails(id, slug) {
 
       var id = id;
-      var company_slug = company_slug;
-      var slug = slug;
-      this.$router.push(`/t/${id}/${company_slug}/${slug}`)
-      /*let route = this.$router.resolve(`/t/${id}/${company_slug}/${slug}`);
-      window.open(route.href, '_blank');*/
+      var username = slug;
+      this.$router.push(`/tutor/${id}/${username}`)
 
     },
 
