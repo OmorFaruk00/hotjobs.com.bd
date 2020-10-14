@@ -167,11 +167,15 @@ export default {
     generalCategoryStep() {
       this.general_category_step = true;
       this.industials_step = false;
+      this.general_categories='';
+      this.industials='';
+      this.fetchGeneralCategory();
     },
 
     industialsStep() {
       this.industials_step = true;
       this.general_category_step = false;
+      this.fetchIndustryCategory();
     },
 
     fetchJob(id, slug) {
@@ -192,10 +196,7 @@ export default {
   },
 
   beforeMount() {
-
     this.fetchGeneralCategory();
-    this.fetchIndustryCategory();
-
   }
 }
 </script>

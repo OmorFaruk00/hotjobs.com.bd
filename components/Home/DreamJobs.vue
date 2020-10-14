@@ -197,18 +197,21 @@ export default {
 h1 {
   font-size: 35px;
 }
-
-.inner-dream-box a {
+h4{
   color: #EC1A3A;
 }
 
+.inner-dream-box a {
+  color: #333333;
+}
+
 .inner-dream-box a:hover {
-  color: #423A3D;
+  color: #EC1A3A;
 }
 
 .dream-box {
-  border: 3px solid transparent;
-  border-image: linear-gradient(45deg, #EE453B, #6F323D, #ffff00, #6F323D);
+  border: 1px solid transparent;
+  border-image: linear-gradient(45deg, #307BF7, #55FF00);
   border-image-slice: 1;
 }
 
