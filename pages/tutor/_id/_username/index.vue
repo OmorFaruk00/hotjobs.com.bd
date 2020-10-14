@@ -32,7 +32,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                           <h5><strong>Tuition Type </strong> <br> {{ tuition_type.title }}</h5>
-                          <h5 v-if="tutor_request_details.tutoring_time"><strong>Tutoring Time </strong> <br> {{ tutor_request_details.tutoring_time }}</h5>
+                          <h5 v-if="tutor_request_details.tutoring_time"><strong>Tutoring Time </strong> <br> {{ timeFormat(tutor_request_details.tutoring_time) }}</h5>
                           <h5 v-if="!tutor_request_details.tutoring_time"><strong>Tutoring Time </strong> <br> N/A</h5>
                           <h5><strong>Salary </strong> <br> <span
                             v-text="tutor_request_details.salary_negotiable_status == '1' ? 'Negotiable': tutor_request_details.salary + ' ' +'BDT' "></span>
@@ -266,6 +266,10 @@ export default {
 
     dateFormat(date) {
       return this.$moment(date).format('MMMM D,YYYY');
+    },
+
+    timeFormat(time) {
+      return  this.$moment.utc(time, "HH:mm").format("h:mm a");
     },
 
     fetchTutorRequestDetails() {
