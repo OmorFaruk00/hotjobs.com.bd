@@ -49,7 +49,7 @@
                 <b-col md="3" class='text-center'>
 
                   <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
-                              class="rounded-0" style="width:115px;padding:10px 0"></b-card-img>
+                              class="rounded-0" style="width:65px;padding:10px 0"></b-card-img>
                   <b-card-img v-else :src="getPhoto(row.company_logo)" src="../../static/images/box/1.png" alt="Job"
                               style="width:115px;padding:10px 0"></b-card-img>
                 </b-col>
@@ -202,7 +202,8 @@ h4{
 }
 
 .inner-dream-box a {
-  color: #333333;
+  color: #525257;
+  font-size: 14px;
 }
 
 .inner-dream-box a:hover {

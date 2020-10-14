@@ -114,6 +114,10 @@ export default {
     }]
   ],
 
+  pwa: {
+    icon: false // disables the icon module
+  },
+
   // sitemap
   // sitemap: {
     // hostname: 'https://hotjobs.com.bd/',
@@ -214,7 +218,7 @@ export default {
   },
 
   generate: {
-    fallback: true, // if you want to use '404.html' instead of the default '200.html'
+    fallback: false, // if you want to use '404.html' instead of the default '200.html'
   }
 
 }

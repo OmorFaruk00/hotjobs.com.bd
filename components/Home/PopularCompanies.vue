@@ -22,7 +22,7 @@
               <a href="javaScript:void(0)">{{ row.company_name }}</a>
             </h3>
 
-<!--            <a v-if="row.website_url != ''" class="companies-btn" target="_blank" :href="row.website_url">Details</a>-->
+            <!--            <a v-if="row.website_url != ''" class="companies-btn" target="_blank" :href="row.website_url">Details</a>-->
 
           </div>
 
@@ -35,14 +35,26 @@
 
 <script>
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export default {
   name: "PopularCompanies",
   data() {
     return {
       loading: true,
-      popular_companies: "",
+      popular_companies: [],
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -58,40 +70,19 @@ export default {
 
         .catch((error) => {
 
-          console.log(error.response);
+          /*console.log(error);
 
           Toast.fire({
             icon: 'warning',
-            title: 'There was something wrong'
-          });
-
-          if (error.response.status == 422) {
-            Toast.fire({
-              icon: 'warning',
-              title: 'Validation Problem'
-            });
-          }
-
-          if (error.response.status == 401) {
-            Toast.fire({
-              icon: 'warning',
-              title: error.response.data.error
-            });
-          }
-
-          if (error.response.status == 403) {
-            Toast.fire({
-              icon: 'warning',
-              title: 'Unauthorized access'
-            });
-          }
+            title: error
+          });*/
 
         })
     },
 
   },
 
-  beforeMount() {
+  created() {
     this.popularCompanies();
   }
 }
@@ -100,6 +91,13 @@ export default {
 <style scoped>
 h1 {
   font-size: 35px;
+}
+.popular-company h3 {
+  font-size: 15px;
+}
+
+.popular-company a{
+  color: #6F323D;
 }
 
 .popular-company {
@@ -110,7 +108,7 @@ h1 {
   margin: 20px 5px;
   height: 250px;
   border: 1px solid transparent;
-  border-image: linear-gradient(45deg,#EE453B,#6F323D, #ffff00,#6F323D);
+  border-image: linear-gradient(45deg, #EE453B, #6F323D, #ffff00, #6F323D);
   border-image-slice: 1;
   border-radius: 5px;
   /*box-shadow: 0px 0px 20px 0px #000;*/
