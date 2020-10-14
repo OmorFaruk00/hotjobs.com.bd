@@ -114,11 +114,6 @@ export default {
     }]
   ],
 
-  moment: {
-    timezone: true
-  },
-
-
   // sitemap
   // sitemap: {
     // hostname: 'https://hotjobs.com.bd/',

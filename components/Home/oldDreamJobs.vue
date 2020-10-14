@@ -11,9 +11,9 @@
           </div>
         </div>
 
-        <div v-else>
+        <div class="row" v-else>
 
-          <!--<div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
+          <div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
             <div class="job-item scrollbar scroll_style">
               <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
@@ -38,43 +38,9 @@
                 </div>
               </div>
             </div>
-          </div>-->
+          </div>
 
-
-          <b-card-group columns>
-
-            <b-card v-for="row in employer_hotjobs" no-body class="overflow-hidden">
-              <b-row no-gutters class="dream-box">
-
-                <b-col md="3" class='text-center'>
-
-                  <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
-                              class="rounded-0" style="width:115px;padding:10px 0"></b-card-img>
-                  <b-card-img v-else :src="getPhoto(row.company_logo)" src="../../static/images/box/1.png" alt="Job"
-                              style="width:115px;padding:10px 0"></b-card-img>
-                </b-col>
-
-                <b-col md="9">
-
-                  <b-card-body class="inner-dream-box" :title="row.company_name">
-
-                    <a style="display: inherit" v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
-                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
-
-                      <i class="bx bxs-right-arrow-square"></i> {{
-                        inner_row.title ? inner_row.title : 'Not specified'
-                      }}</a>
-
-
-
-                  </b-card-body>
-                </b-col>
-              </b-row>
-            </b-card>
-
-          </b-card-group>
-
-
+          
         </div>
 
       </div>
@@ -177,27 +143,7 @@ h1 {
   font-size: 35px;
 }
 
-.inner-dream-box a{
-  color: #EC1A3A;
-}
-
-.inner-dream-box a:hover{
-  color: #423A3D;
-}
-
-.dream-box{
-  border: 3px solid transparent;
-  border-image: linear-gradient(45deg,#EE453B,#6F323D, #ffff00,#6F323D);
-  border-image-slice: 1;
-}
-
 .job-item img {
   max-height: 80px;
-}
-.card-columns{
-  column-gap:10px!important;
-}
-.card-columns .card {
-  margin-bottom: 5px!important;
 }
 </style>
