@@ -66,13 +66,17 @@
                       }}</a>
 
 
-
                   </b-card-body>
                 </b-col>
               </b-row>
             </b-card>
 
           </b-card-group>
+
+
+          <div class="text-center" v-if="see_more">
+            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>
+          </div>
 
 
         </div>
@@ -108,6 +112,7 @@ export default {
   data() {
     return {
       loading: true,
+      see_more: true,
       employer_hotjobs: '',
       url: this.$axios.defaults.baseURL,
     }
@@ -117,7 +122,7 @@ export default {
 
     async fetchDreamJobs() {
       var vm = this;
-      return await this.$axios.get('dream-job')
+      return await this.$axios.get('frontend/dream-job')
         .then((response) => {
           vm.employer_hotjobs = response.data;
           vm.loading = false;
@@ -161,6 +166,22 @@ export default {
       // let route = this.$router.resolve(`/job-details/${id}`);
       // window.open(route.href, '_blank');
 
+    },
+
+    async dreamJobSeeMore() {
+      var vm = this;
+      return await this.$axios.get('frontend/all-dream-job')
+        .then((response) => {
+          vm.employer_hotjobs = '';
+          vm.employer_hotjobs = response.data;
+          vm.see_more = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
     }
 
   },
@@ -177,27 +198,29 @@ h1 {
   font-size: 35px;
 }
 
-.inner-dream-box a{
+.inner-dream-box a {
   color: #EC1A3A;
 }
 
-.inner-dream-box a:hover{
+.inner-dream-box a:hover {
   color: #423A3D;
 }
 
-.dream-box{
+.dream-box {
   border: 3px solid transparent;
-  border-image: linear-gradient(45deg,#EE453B,#6F323D, #ffff00,#6F323D);
+  border-image: linear-gradient(45deg, #EE453B, #6F323D, #ffff00, #6F323D);
   border-image-slice: 1;
 }
 
 .job-item img {
   max-height: 80px;
 }
-.card-columns{
-  column-gap:10px!important;
+
+.card-columns {
+  column-gap: 10px !important;
 }
+
 .card-columns .card {
-  margin-bottom: 5px!important;
+  margin-bottom: 5px !important;
 }
 </style>
