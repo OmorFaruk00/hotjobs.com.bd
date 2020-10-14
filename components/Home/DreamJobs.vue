@@ -74,7 +74,7 @@
           </b-card-group>
 
 
-          <div class="text-center" v-if="see_more">
+          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
             <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>
           </div>
 

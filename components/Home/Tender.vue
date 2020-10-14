@@ -19,7 +19,8 @@
 
                 <div class="row">
                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                    <img class="img-fluid" v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
+                    <img class="img-fluid" v-if="row.company_logo" :src="getPhoto(row.company_logo)"
+                         :alt="row.company_name">
 
                     <img v-else src="../../static/images/box/1.png" alt="Job">
                   </div>
@@ -43,6 +44,14 @@
               </div>
             </div>
 
+
+            <div class="col-12">
+              <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
+                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -54,6 +63,7 @@
 <script>
 // tender-job
 import Swal from 'sweetalert2'
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -75,6 +85,7 @@ export default {
   data() {
     return {
       loading: true,
+      see_more: true,
       employer_tender_jobs: '',
       url: this.$axios.defaults.baseURL,
     }
@@ -82,9 +93,9 @@ export default {
 
   methods: {
 
-    async fetchRenderJob() {
+    async fetchTenderJob() {
       var vm = this;
-      return await this.$axios.get('tender-job')
+      return await this.$axios.get('frontend/tender-job')
         .then((response) => {
           vm.employer_tender_jobs = response.data;
           vm.loading = false;
@@ -97,21 +108,21 @@ export default {
         })
     },
 
-   /* fetchRenderJob() {
-      var vm = this;
-      this.$axios.get('tender-job').then(function (response) {
+    /* fetchRenderJob() {
+       var vm = this;
+       this.$axios.get('tender-job').then(function (response) {
 
-        vm.employer_tender_jobs = response.data;
-        vm.loading = false;
-      }).catch(function (error) {
+         vm.employer_tender_jobs = response.data;
+         vm.loading = false;
+       }).catch(function (error) {
 
-        Toast.fire({
-          icon: 'warning',
-          title: 'There was something wrong'
-        });
+         Toast.fire({
+           icon: 'warning',
+           title: 'There was something wrong'
+         });
 
-      });
-    },*/
+       });
+     },*/
 
     getPhoto(row) {
       let image_url = this.url + row;
@@ -127,11 +138,27 @@ export default {
       // let route = this.$router.resolve(`/job-details/${id}`);
       // window.open(route.href, '_blank');
 
+    },
+
+    async tenderJobSeeMore() {
+      var vm = this;
+      return await this.$axios.get('frontend/all-tender-job')
+        .then((response) => {
+          vm.employer_tender_jobs = response.data;
+          vm.see_more = false;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
     }
 
   },
   beforeMount() {
-    this.fetchRenderJob();
+    this.fetchTenderJob();
   }
 
 }
