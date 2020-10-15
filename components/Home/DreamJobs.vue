@@ -13,34 +13,6 @@
 
         <div v-else>
 
-          <!--<div class="col-lg-4 mix web ui" v-for="row in employer_hotjobs">
-            <div class="job-item scrollbar scroll_style">
-              <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name">
-                  <img v-else src="../../static/images/box/1.png" alt="Job">
-                </div>
-
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                  <div class="job-inner align-items-center">
-                    <div class="job-inner-left">
-                      <h4>{{ row.company_name }}</h4>
-
-                      <a v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
-                         @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
-
-                        <i class="bx bxs-right-arrow-square"></i> {{
-                          inner_row.title ? inner_row.title : 'Not specified'
-                        }}</a>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>-->
-
-
           <b-card-group columns>
 
             <b-card v-for="row in employer_hotjobs" no-body class="overflow-hidden">
@@ -50,7 +22,7 @@
 
                   <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
                               class="rounded-0" style="width:65px;padding:10px 0"></b-card-img>
-                  <b-card-img v-else :src="getPhoto(row.company_logo)" src="../../static/images/box/1.png" alt="Job"
+                  <b-card-img v-else src="../../static/images/box/1.png" :alt="row.company_name"
                               style="width:115px;padding:10px 0"></b-card-img>
                 </b-col>
 
