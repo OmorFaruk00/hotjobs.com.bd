@@ -52,8 +52,7 @@
                     <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
                                 class="rounded-0" style="width:65px;padding:10px 0"></b-card-img>
 
-                    <b-card-img v-else src="../../static/images/box/1.png" alt="Job"
-                                style="width:115px;padding:10px 0"></b-card-img>
+                    <img v-else src="~/static/favicon.png" alt="Hot Jobs" style="width:80px;padding:10px 0">
                   </b-col>
 
                   <b-col md="9">

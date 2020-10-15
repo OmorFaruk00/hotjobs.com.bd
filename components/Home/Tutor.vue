@@ -19,7 +19,7 @@
                 <blockquote class="card-blockquote">
                   <h5>Need {{ row.tuition_category.title }} Tutor For {{ row.tuition_class.title }} Student
 
-                    <span v-if="row.tuition_days_week">- {{ row.tuition_days_week.title}}</span>
+                    <span v-if="row.tuition_days_week">- {{ row.tuition_days_week.title }}</span>
                   </h5>
 
                   <h6>Hire Date : {{ dateFormat(row.hire_date) }}</h6>
@@ -27,21 +27,30 @@
 
                 <b-card-text>
                   <h6>Tuition Type : {{ row.tuition_type.title }}</h6>
-                  <h6>Location : {{ row.district.name }}, {{  row.thana.name }} <span v-if="row.union">, {{ row.union.name}}</span></h6>
-                  <h6>Salary : <span v-text="row.salary_negotiable_status == '1' ? 'Negotiable': row.salary + ' ' +'BDT' "></span></h6>
-                  <h6>Subjects : <span class="badge badge-secondary mx-1" v-for="innter_row in row.tutor_request_subjects">{{ innter_row.subject.title }}</span></h6>
+                  <h6>Location : {{ row.district.name }}, {{ row.thana.name }} <span
+                    v-if="row.union">, {{ row.union.name }}</span></h6>
+                  <h6>Salary : <span
+                    v-text="row.salary_negotiable_status == '1' ? 'Negotiable': row.salary + ' ' +'BDT' "></span></h6>
+                  <h6>Subjects : <span class="badge badge-secondary mx-1"
+                                       v-for="innter_row in row.tutor_request_subjects">{{
+                      innter_row.subject.title
+                    }}</span></h6>
                 </b-card-text>
 
                 <template class="text-right" v-slot:footer>
 
-                  <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.id,row.employer.slug)">View Details</a>
+                  <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.id,row.employer.slug)">View
+                    Details</a>
 
                 </template>
               </b-card>
             </div>
 
+          </div>
 
-
+          <div class="col-12 text-center" v-if="see_more && tutor_requests.length >= 9">
+            <button type="button" @click="tutorRequestSeeMore" class="btn btn-outline-info active">See more.....
+            </button>
           </div>
         </div>
 
@@ -71,6 +80,7 @@ export default {
     return {
       loading: true,
       tutor_requests: [],
+      see_more: true,
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -93,6 +103,24 @@ export default {
     },
 
 
+    async tutorRequestSeeMore() {
+
+      var vm = this;
+      return await this.$axios.get('frontend/all-tutor-job')
+        .then((response) => {
+          vm.tutor_requests = '';
+          vm.tutor_requests = response.data;
+          vm.see_more = false;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+
+    },
     fetchTutorRequestDetails(id, slug) {
 
       var id = id;
@@ -106,6 +134,7 @@ export default {
     },
 
   },
+
   beforeMount() {
     this.fetchTutorRequest();
   }
@@ -117,14 +146,20 @@ export default {
 h1 {
   font-size: 35px;
 }
+a{
+  color: #EC1A3A;
+}
+a:hover{
+  color: #423A3D;
+}
 
-.card-footer{
+.card-footer {
   text-align: right;
-  background-color:#fff;
+  background-color: #fff;
   padding: 2px 10px;
 }
 
-.tutor-card:before{
+.tutor-card:before {
   content: '';
   position: absolute;
   /*background-color: #000;*/
@@ -133,29 +168,30 @@ h1 {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  transform: skew(1deg,1deg);
+  transform: skew(1deg, 1deg);
   z-index: -1;
 }
 
-.tutor-card:after{
+.tutor-card:after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 50%;
   height: 100%;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   pointer-events: none;
 
 }
 
-.tutor-card{
+.tutor-card {
   position: relative;
   z-index: 1;
   background-color: #fff;
 
 }
-.card-body{
+
+.card-body {
   background-color: #fff;
   padding: 1rem;
 }
