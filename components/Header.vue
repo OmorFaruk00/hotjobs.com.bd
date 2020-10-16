@@ -141,11 +141,11 @@
           </a>
 
           <a href="https://twitter.com/bdhotjobs" target="_blank" title="Twitter">
-            <i class="bx bxl-twitter"  style="font-size: 40px;color: #423A3D;"></i>
+            <i class="bx bxl-twitter" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
           <a href="https://youtube.com/channel/UC-n5t2attDAAlT3oFYQalWg" target="_blank" title="Youtube">
-            <i class="bx bxl-youtube"  style="font-size: 40px;color: #423A3D;"></i>
+            <i class="bx bxl-youtube" style="font-size: 40px;color: #423A3D;"></i>
           </a>
 
         </div>
@@ -180,13 +180,13 @@
                     </div>
 
                     <div class="media-body">
-                      <h6 class="mt-0 mb-1">My Hotjobs</h6>
+                      <h6 class="mt-0 mb-1">Employee</h6>
                       <div class="font-size-12 text-muted">
-                        <p class="mb-1">Sign in or create your My Hotjobs account to manage your profile</p>
+                        <p class="mb-1">Sign in or create your Employee account to manage your profile</p>
                         <p class="mb-0">
                           <nuxt-link to="/my-jobs/login" class="btn btn-outline-primary">Sign in</nuxt-link>
 
-<!--                          <nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>-->
+                          <!--                          <nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>-->
 
                           <button type="button" class="btn btn-outline-info waves-effect waves-light"
                                   @click="addGeneralEmployeeModal">
@@ -215,9 +215,9 @@
                     </div>
 
                     <div class="media-body">
-                      <h6 class="mt-0 mb-1">Employers</h6>
+                      <h6 class="mt-0 mb-1">Employer</h6>
                       <div class="font-size-12 text-muted">
-                        <p class="mb-1">Lorem ipsum dolor sit amet.</p>
+                        <p class="mb-1">Sign in or create your Employer account to manage your profile</p>
 
                         <p class="mb-0">
                           <nuxt-link to="/employer/login" class="btn btn-outline-primary">Sign in</nuxt-link>
@@ -249,7 +249,7 @@
 
             <img class="rounded-circle header-profile-user" v-else src="~/static/images/logo.png" alt="">
 
-            <span class="d-none d-xl-inline-block ml-1">{{ authUser.email}}</span>
+            <span class="d-none d-xl-inline-block ml-1">{{ authUser.email }}</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </button>
 
@@ -492,7 +492,8 @@
 
                         </select>
 
-                        <has-error :form="form" field="industry_type_id"></has-error>
+                        <small v-if="errors.industry_category_id" class="text-danger with-errors"
+                               v-html="errors.industry_category_id[0]"></small>
                       </div>
                     </div>
 
@@ -504,7 +505,7 @@
                                name="industry_type_keyword" placeholder="Search Industry Type"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('industry_type_keyword') }"
                                @blur="filterIndustryType()">
-                        <has-error :form="form" field="industry_type_keyword"></has-error>
+
                       </div>
                     </div>
 
@@ -531,7 +532,8 @@
 
                       </div>
 
-<!--                      <div class="mt-3">Selected: <strong>{{ form.industry_types }}</strong></div>-->
+                      <small v-if="errors.industry_types" class="text-danger with-errors"
+                             v-html="errors.industry_types[0]"></small>
 
                     </div>
 
@@ -631,7 +633,7 @@
                         value="1"
                         unchecked-value="0"
                       >
-                        I Have Read <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a>And Accepted
+                        I Have Read <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a> And Accepted
                         It
                       </b-form-checkbox>
                     </div>
@@ -641,8 +643,11 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button type="submit" v-if="form.pricing_policy == 1" :disabled="form.busy" class="btn btn-success">Submit</button>
-                  <button type="submit" v-else  class="btn btn-success" style="cursor: not-allowed" disabled>Submit</button>
+                  <button type="submit" v-if="form.pricing_policy == 1" :disabled="form.busy" class="btn btn-success">
+                    Submit
+                  </button>
+                  <button type="submit" v-else class="btn btn-success" style="cursor: not-allowed" disabled>Submit
+                  </button>
                 </div>
               </form>
 
@@ -676,7 +681,8 @@
                       <div class="form-group">
                         <label>Name</label>
                         <input v-model="employee_form.name" type="text" name="name" placeholder="Enter name"
-                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('name') }" required>
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('name') }"
+                               required>
                         <has-error :form="employee_form" field="name"></has-error>
                       </div>
                     </div>
@@ -685,7 +691,8 @@
                       <div class="form-group">
                         <label>Gender</label>
                         <select v-model="employee_form.gender" name="gender"
-                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('gender') }" required>
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('gender') }"
+                                required>
                           <option value="" selected>Select one</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -701,7 +708,8 @@
                         <label>Select your skill from following list</label>
 
                         <select v-model="employee_form.skill_id" name="skill_id"
-                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('skill_id') }" required>
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('skill_id') }"
+                                required>
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in special_categories" :value="row.id">{{ row.name }}</option>
@@ -715,7 +723,8 @@
                       <div class="form-group">
                         <label>Email</label>
                         <input v-model="employee_form.email" type="email" name="email" placeholder="Enter email"
-                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('email') }" required>
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('email') }"
+                               required>
                         <has-error :form="employee_form" field="email"></has-error>
                       </div>
                     </div>
@@ -725,7 +734,8 @@
                       <div class="form-group">
                         <label>Country</label>
                         <select v-model="employee_form.country_id" name="country_id"
-                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('country_id') }" required>
+                                class="form-control" :class="{ 'is-invalid': employee_form.errors.has('country_id') }"
+                                required>
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in countries" :value="row.id">{{ row.countries_name }} ({{
@@ -746,7 +756,8 @@
                         <label>Mobile Number</label>
                         <input v-model="employee_form.mobile_number" type="text" name="mobile_number"
                                placeholder="Enter mobile number"
-                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('mobile_number') }" required>
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('mobile_number') }"
+                               required>
                         <has-error :form="employee_form" field="mobile_number"></has-error>
                       </div>
 
@@ -755,8 +766,10 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Password</label>
-                        <input v-model="employee_form.password" type="password" name="password" placeholder="Enter password"
-                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('password') }" required>
+                        <input v-model="employee_form.password" type="password" name="password"
+                               placeholder="Enter password"
+                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('password') }"
+                               required>
                         <has-error :form="employee_form" field="password"></has-error>
                       </div>
                     </div>
@@ -764,9 +777,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Password Confirmation</label>
-                        <input v-model="employee_form.password_confirmation" type="password" name="password_confirmation"
+                        <input v-model="employee_form.password_confirmation" type="password"
+                               name="password_confirmation"
                                placeholder="Enter password confirmation"
-                               class="form-control" :class="{ 'is-invalid': employee_form.errors.has('password_confirmation') }"
+                               class="form-control"
+                               :class="{ 'is-invalid': employee_form.errors.has('password_confirmation') }"
                                required>
                         <has-error :form="employee_form" field="password_confirmation"></has-error>
                       </div>
@@ -779,7 +794,8 @@
                         <input type="checkbox" name="terms_and_conditions" class="form-check-input" id="defaultCheck1"
                                required>
                         <label class="form-check-label" for="defaultCheck1">
-                          I agree to the Hotjobs.com Terms of use. <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a>
+                          I agree to the Hotjobs.com Terms of use. <a href="/terms-and-conditions" target="_blank">Terms
+                          & Conditions</a>
                         </label>
 
                         <has-error :form="employee_form" field="terms_and_conditions"></has-error>
@@ -791,7 +807,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-success">Submit</button>
+                  <button type="submit" :disabled="employee_form.busy" class="btn btn-success">Submit</button>
                 </div>
               </form>
 
@@ -806,375 +822,379 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Swal from 'sweetalert2'
-  import {Form, HasError, AlertError} from 'vform'
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
 
-  Vue.component(HasError.name, HasError)
-  Vue.component(AlertError.name, AlertError)
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    onOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+export default {
+  name: "Header",
+
+  data() {
+    return {
+      authUser: '',
+      url: this.$axios.defaults.baseURL,
+      countries: '',
+      districts: '',
+      thanas: '',
+      industry_categories: '',
+      industry_type_lists: '',
+      country_name: '',
+      special_categories: '',
+      form: new Form({
+        id: '',
+        username: '',
+        password: '',
+        password_confirmation: '',
+        company_name: '',
+        company_name_bangla: '',
+        country_id: '',
+        district_id: '',
+        thana_id: '',
+        city: '',
+        company_address: '',
+        company_address_bangla: '',
+        industry_category_id: '',
+        industry_type_keyword: '',
+        industry_types: '',
+        business_description: '',
+        license_no: '',
+        rl_no: '',
+        website_url: '',
+        contact_person_name: '',
+        contact_person_email: '',
+        contact_person_designation: '',
+        contact_person_mobile: '',
+        pricing_policy: '',
+
+      }),
+
+      employee_form: new Form({
+        id: '',
+        name: '',
+        gender: '',
+        skill_id: '',
+        email: '',
+        mobile_number: '',
+        password: '',
+        password_confirmation: '',
+        country_id: '',
+        category: ''
+      }),
+
+      errors:'',
     }
-  })
+  },
 
-  export default {
-    name: "Header",
+  methods: {
 
-    data() {
-      return {
-        authUser: '',
-        url: this.$axios.defaults.baseURL,
-        countries: '',
-        districts: '',
-        thanas: '',
-        industry_categories: '',
-        industry_type_lists: '',
-        country_name: '',
-        special_categories:'',
-        form: new Form({
-          id: '',
-          username: '',
-          password: '',
-          password_confirmation: '',
-          company_name: '',
-          company_name_bangla: '',
-          country_id: '',
-          district_id: '',
-          thana_id: '',
-          city: '',
-          company_address: '',
-          company_address_bangla: '',
-          industry_category_id: '',
-          industry_type_keyword: '',
-          industry_types: '',
-          business_description: '',
-          license_no: '',
-          rl_no: '',
-          website_url: '',
-          contact_person_name: '',
-          contact_person_email: '',
-          contact_person_designation: '',
-          contact_person_mobile: '',
-          pricing_policy: '',
-
-        }),
-
-        employee_form: new Form({
-          id: '',
-          name: '',
-          gender: '',
-          skill_id: '',
-          email: '',
-          mobile_number: '',
-          password: '',
-          password_confirmation: '',
-          country_id: '',
-          category: ''
-        }),
-      }
+    logout() {
+      window.$nuxt.$cookies.remove('token');
+      window.$nuxt.$cookies.remove('user');
+      // this.$router.push('/');
+      window.location.href = "/";
     },
 
-    methods: {
-
-      logout() {
-        window.$nuxt.$cookies.remove('token');
-        window.$nuxt.$cookies.remove('user');
-        // this.$router.push('/');
-        window.location.href = "/";
-      },
-
-      getPhoto() {
-        let image_url = this.url + this.authUser.company_logo;
-        return image_url;
-      },
-
-      pricingPolicy() {
-
-        alert('working');
-        return false;
-
-      },
-
-      addEmployerModal() {
-        this.form.reset();
-        this.$emit('FetchData');
-        $('#addEmployer').modal('show');
-      },
-
-      async fetchCountryLists() {
-        return await this.$axios.get('country-lists')
-          .then((response) => {
-
-            this.countries = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      async fetchIndustryCategoryLists() {
-        return await this.$axios.get('industry-category-lists')
-          .then((response) => {
-
-            this.industry_categories = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      async fetchIndustryTypeLists() {
-        return await this.$axios.get('industry-type-lists')
-          .then((response) => {
-
-            this.industry_type_lists = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      async fetchDistrictLists() {
-        return await this.$axios.get('district-lists')
-          .then((response) => {
-
-            this.districts = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      FetchThana() {
-
-        var vm = this;
-
-        var district_id = this.form.district_id;
-
-        this.$axios.get('fetch-thana-lists/' + district_id).then(function (response) {
-
-          vm.thanas = response.data;
-
-        }).catch(function (error) {
-
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
-
-        });
-
-      },
-
-      countryName() {
-
-        var vm = this;
-        var country_id = vm.form.country_id;
-
-        this.$axios.get('country-name/' + country_id).then(function (response) {
-
-          vm.country_name = response.data.countries_name;
-
-        }).catch(function (error) {
-
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
-
-        });
-
-      },
-
-      fetchIndustryCategory() {
-
-        var vm = this;
-        vm.form.industry_types = [];
-        var industry_category_id = vm.form.industry_category_id;
-
-        this.$axios.get('fetch-industry-type-lists/' + industry_category_id).then(function (response) {
-
-          vm.industry_type_lists = response.data;
-
-        }).catch(function (error) {
-
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
-
-        });
-      },
-
-      filterIndustryType() {
-
-        var vm = this;
-        var industry_category_id = vm.form.industry_category_id;
-
-
-        var industry_type_keyword = vm.form.industry_type_keyword;
-
-        this.$axios.get('fetch-keyword-industry-type-lists/' + industry_category_id + '/' + industry_type_keyword).then(function (response) {
-
-          vm.industry_type_lists = response.data;
-
-          // console.log(response.data);
-
-
-        }).catch(function (error) {
-
-          Toast.fire({
-            icon: 'warning',
-            title: 'There was something wrong'
-          });
-
-        });
-
-
-      },
-
-      createEmployer() {
-
-        var vm = this;
-
-        this.form.post(this.url + 'employer')
-          .then(() => {
-
-            Toast.fire({
-              icon: 'success',
-              title: 'Account Created successfully.Please login with valid email and password'
-            });
-            $('#addEmployer').modal('hide');
-
-            vm.$router.push('/employer/login')
-
-          })
-
-          .catch((error) => {
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-          })
-      },
-
-      addGeneralEmployeeModal() {
-        this.employee_form.reset();
-        this.fetchCountryLists();
-        this.fetchSpecialCategory();
-        $('#addGeneralEmployee').modal('show');
-      },
-
-      async fetchSpecialCategory() {
-        return await this.$axios.get('skill-general-category')
-          .then((response) => {
-
-            this.special_categories = response.data;
-
-          })
-
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-          })
-      },
-
-      createEmployee() {
-        var vm = this
-        this.employee_form.post(this.url + 'employee')
-
-          .then(() => {
-            Toast.fire({
-              icon: 'success',
-              title: 'Account Created successfully.Please login '
-            });
-            $('#addGeneralEmployee').modal('hide');
-            vm.$router.push('/my-jobs/login');
-
-          })
-          .catch((error) => {
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-          })
-      }
+    getPhoto() {
+      let image_url = this.url + this.authUser.company_logo;
+      return image_url;
+    },
+
+    pricingPolicy() {
+
+      alert('working');
+      return false;
 
     },
 
-    mounted: function () {
-
-      this.authUser = window.$nuxt.$cookies.get('user');
-
+    addEmployerModal() {
+      this.form.reset();
+      this.$emit('FetchData');
+      $('#addEmployer').modal('show');
     },
 
-    created() {
+    async fetchCountryLists() {
+      return await this.$axios.get('country-lists')
+        .then((response) => {
 
-      this.$on('FetchData', () => {
-        this.fetchCountryLists();
-        this.fetchDistrictLists();
-        this.fetchIndustryCategoryLists();
-        // this.fetchIndustryTypeLists();
+          this.countries = response.data;
+
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        })
+    },
+
+    async fetchIndustryCategoryLists() {
+      return await this.$axios.get('industry-category-lists')
+        .then((response) => {
+
+          this.industry_categories = response.data;
+
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        })
+    },
+
+    async fetchIndustryTypeLists() {
+      return await this.$axios.get('industry-type-lists')
+        .then((response) => {
+
+          this.industry_type_lists = response.data;
+
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        })
+    },
+
+    async fetchDistrictLists() {
+      return await this.$axios.get('district-lists')
+        .then((response) => {
+
+          this.districts = response.data;
+
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        })
+    },
+
+    FetchThana() {
+
+      var vm = this;
+
+      var district_id = this.form.district_id;
+
+      this.$axios.get('fetch-thana-lists/' + district_id).then(function (response) {
+
+        vm.thanas = response.data;
+
+      }).catch(function (error) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
+        });
+
       });
 
     },
 
-  }
+    countryName() {
+
+      var vm = this;
+      var country_id = vm.form.country_id;
+
+      this.$axios.get('country-name/' + country_id).then(function (response) {
+
+        vm.country_name = response.data.countries_name;
+
+      }).catch(function (error) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
+        });
+
+      });
+
+    },
+
+    fetchIndustryCategory() {
+
+      var vm = this;
+      vm.form.industry_types = [];
+      var industry_category_id = vm.form.industry_category_id;
+
+      this.$axios.get('fetch-industry-type-lists/' + industry_category_id).then(function (response) {
+
+        vm.industry_type_lists = response.data;
+
+      }).catch(function (error) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
+        });
+
+      });
+    },
+
+    filterIndustryType() {
+
+      var vm = this;
+      var industry_category_id = vm.form.industry_category_id;
+
+
+      var industry_type_keyword = vm.form.industry_type_keyword;
+
+      this.$axios.get('fetch-keyword-industry-type-lists/' + industry_category_id + '/' + industry_type_keyword).then(function (response) {
+
+        vm.industry_type_lists = response.data;
+
+        // console.log(response.data);
+
+
+      }).catch(function (error) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'There was something wrong'
+        });
+
+      });
+
+
+    },
+
+    createEmployer() {
+
+      var vm = this;
+
+      this.form.post(this.url + 'employer')
+        .then(() => {
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Account Created successfully.Please login with valid email and password'
+          });
+          $('#addEmployer').modal('hide');
+
+          vm.$router.push('/employer/login')
+
+        })
+
+        .catch((error) => {
+          vm.errors = error.response.data;
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    addGeneralEmployeeModal() {
+      this.employee_form.reset();
+      this.fetchCountryLists();
+      this.fetchSpecialCategory();
+      $('#addGeneralEmployee').modal('show');
+    },
+
+    async fetchSpecialCategory() {
+      return await this.$axios.get('skill-general-category')
+        .then((response) => {
+
+          this.special_categories = response.data;
+
+        })
+
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+        })
+    },
+
+    createEmployee() {
+      var vm = this
+      this.employee_form.post(this.url + 'employee')
+
+        .then(() => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Account Created successfully.Please login '
+          });
+          $('#addGeneralEmployee').modal('hide');
+          vm.$router.push('/my-jobs/login');
+
+        })
+        .catch((error) => {
+          vm.errors = error.response.data;
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    }
+
+  },
+
+  mounted: function () {
+
+    this.authUser = window.$nuxt.$cookies.get('user');
+
+  },
+
+  created() {
+
+    this.$on('FetchData', () => {
+      this.fetchCountryLists();
+      this.fetchDistrictLists();
+      this.fetchIndustryCategoryLists();
+      // this.fetchIndustryTypeLists();
+    });
+
+  },
+
+}
 </script>
 
 <style scoped>
-  h3 {
-    color: #EC1A3A;
-  }
+h3 {
+  color: #EC1A3A;
+}
 
-  .type-box {
-    max-height: 225px;
-    overflow-y: scroll;
-    border: 1px solid #ddd;
-  }
+.type-box {
+  max-height: 225px;
+  overflow-y: scroll;
+  border: 1px solid #ddd;
+}
 
-  .mt-8 {
-    margin-top: 8px;
-  }
+.mt-8 {
+  margin-top: 8px;
+}
 
 </style>
