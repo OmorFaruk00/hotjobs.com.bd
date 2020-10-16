@@ -35,7 +35,7 @@
               <h3>
                 <a href="javaScript:void(0)" @click="fetchJob(row.id,row.slug)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='row.current_job_posts.length'
+                  <countTo :startVal='0' :endVal='row.current_job_posts_count'
                            :duration='5000'></countTo>
                   )
                 </a>
@@ -50,7 +50,7 @@
               <h3>
                 <a href="javaScript:void(0)" @click="fetchIndustryJob(row.id,row.slug)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='row.current_job_posts.length' :duration='5000'></countTo>
+                  <countTo :startVal='0' :endVal='row.current_job_posts_count' :duration='5000'></countTo>
                   )
                 </a>
               </h3>
@@ -128,41 +128,6 @@ export default {
           });
         })
     },
-
-
-    /*fetchGeneralCategory() {
-      var vm = this;
-      this.$axios.get('skill-general-category').then(function (response) {
-
-        vm.general_categories = response.data;
-        vm.loading = false;
-
-      }).catch(function (error) {
-
-        Toast.fire({
-          icon: 'warning',
-          title: 'There was something wrong'
-        });
-
-      });
-    },*/
-
-    /*fetchIndustryCategory() {
-      var vm = this;
-      vm.loading = true;
-      this.$axios.get('industry-category-lists').then(function (response) {
-
-        vm.industials = response.data;
-        vm.loading = false;
-      }).catch(function (error) {
-
-        Toast.fire({
-          icon: 'warning',
-          title: 'There was something wrong'
-        });
-
-      });
-    },*/
 
     generalCategoryStep() {
       this.general_category_step = true;

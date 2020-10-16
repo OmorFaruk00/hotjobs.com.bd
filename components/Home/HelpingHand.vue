@@ -17,7 +17,7 @@
               <h3>
                 <a href="javaScript:void(0)" @click="fetchJob(row.id,row.slug)">{{ row.name }}
                   (
-                  <countTo :startVal='0' :endVal='row.current_job_posts.length'
+                  <countTo :startVal='0' :endVal='row.current_job_posts_count'
                            :duration='5000'></countTo>
                   )
                 </a>
