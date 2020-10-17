@@ -712,7 +712,7 @@
                                 required>
                           <option value="" selected>Select one</option>
 
-                          <option v-for="row in special_categories" :value="row.id">{{ row.name }}</option>
+                          <option v-for="row in all_categories" :value="row.id">{{ row.name }}</option>
                         </select>
                         <has-error :form="employee_form" field="skill_id"></has-error>
 
@@ -854,7 +854,7 @@ export default {
       industry_categories: '',
       industry_type_lists: '',
       country_name: '',
-      special_categories: '',
+      all_categories: '',
       form: new Form({
         id: '',
         username: '',
@@ -1116,15 +1116,15 @@ export default {
     addGeneralEmployeeModal() {
       this.employee_form.reset();
       this.fetchCountryLists();
-      this.fetchSpecialCategory();
+      this.fetchAllCategory();
       $('#addGeneralEmployee').modal('show');
     },
 
-    async fetchSpecialCategory() {
-      return await this.$axios.get('skill-general-category')
+    async fetchAllCategory() {
+      return await this.$axios.get('skill-all-category')
         .then((response) => {
 
-          this.special_categories = response.data;
+          this.all_categories = response.data;
 
         })
 

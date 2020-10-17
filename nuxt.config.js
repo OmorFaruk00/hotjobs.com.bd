@@ -135,8 +135,8 @@ export default {
   // },
 
   sitemap: {
-    hostname: 'http://127.0.0.1:3001/',
-    // hostname: 'https://hotjobs.com.bd/',
+    // hostname: 'http://127.0.0.1:3001/',
+    hostname: 'https://hotjobs.com.bd/',
     sitemaps: [
       {
         path: '/category-wise-job-details.xml',
@@ -152,8 +152,8 @@ export default {
       {
         path: '/category-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-jobs`);
           return data.map(v => `/job-search/${v.skill.id}/${v.skill.slug}`);
         },
@@ -162,8 +162,8 @@ export default {
       {
         path: '/dream-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-dream-jobs`);
           return data.map(v => `/d/${v.id}/${v.employer.slug}/${v.slug}`);
         },
@@ -172,8 +172,8 @@ export default {
       {
         path: '/tender-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-tender-jobs`);
           return data.map(v => `/t/${v.id}/${v.employer.slug}/${v.slug}`);
         },
@@ -196,7 +196,6 @@ export default {
     headers: {'Access-Control-Allow-Origin': '*'},
     baseURL: 'http://localhost:8000/',
     // baseURL: 'https://api.hotjobs.com.bd/',
-    // baseURL: 'http://lmn.artico.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },

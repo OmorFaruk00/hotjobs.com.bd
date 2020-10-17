@@ -70,12 +70,10 @@ export default {
 
         .catch((error) => {
 
-          /*console.log(error);
-
           Toast.fire({
             icon: 'warning',
-            title: error
-          });*/
+            title: 'There was something wrong'
+          });
 
         })
     },
