@@ -49,8 +49,8 @@
           </div>
 
           <div class="col-12 text-center" v-if="see_more && tutor_requests.length >= 9">
-            <button type="button" @click="tutorRequestSeeMore" class="btn btn-outline-info active">See more.....
-            </button>
+<!--            <button type="button" @click="tutorRequestSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+            <a href="javaScript:void(0)" @click="tutorRequestSeeMore" class="tcb-animate-e tcb-info">See more...</a>
           </div>
         </div>
 

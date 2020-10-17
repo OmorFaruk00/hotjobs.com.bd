@@ -49,7 +49,9 @@
 
 
           <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
-            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>
+<!--            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+
+            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more...</a>
           </div>
 
 

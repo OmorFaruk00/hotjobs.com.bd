@@ -76,8 +76,8 @@
 
             <div class="col-12">
               <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
-                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....
-                </button>
+<!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more...</a>
               </div>
             </div>
 
