@@ -96,7 +96,7 @@
                             class="form-control" :class="{ 'is-invalid': employee.errors.has('skill_id') }" required>
                       <option value="" selected>Select one</option>
 
-                      <option v-for="row in special_categories" :value="row.id">{{ row.name }}</option>
+                      <option v-for="row in all_categories" :value="row.id">{{ row.name }}</option>
                     </select>
                     <has-error :form="employee" field="skill_id"></has-error>
 
@@ -193,6 +193,7 @@
       </div>
 
     </div>
+
     <!--    addEmployerSecondOption-->
     <div class="modal fade" id="addEmployerSecondOption" tabindex="-1" role="dialog"
          aria-labelledby="addEmployerSecondOption"
@@ -553,7 +554,7 @@ export default {
   data() {
     return {
       countries: '',
-      special_categories: '',
+      all_categories: '',
       districts: '',
       thanas: '',
       industry_categories: '',
@@ -609,10 +610,10 @@ export default {
   methods: {
     addEmployeeModal() {
       this.countries = '';
-      this.special_categories = '';
+      this.all_categories = '';
       this.employee.reset();
       this.fetchCountryLists();
-      this.fetchSpecialCategory();
+      this.fetchAllCategory();
       $('#addEmployee').modal('show');
     },
 
@@ -634,11 +635,11 @@ export default {
         })
     },
 
-    async fetchSpecialCategory() {
-      return await this.$axios.get('skill-general-category')
+    async fetchAllCategory() {
+      return await this.$axios.get('skill-all-category')
         .then((response) => {
 
-          this.special_categories = response.data;
+          this.all_categories = response.data;
 
         })
 
@@ -820,7 +821,7 @@ export default {
 
       this.errors = '';
       this.countries = '';
-      this.special_categories = '';
+      this.all_categories = '';
       this.districts = '';
       this.thanas = '';
       this.industry_categories = '';
