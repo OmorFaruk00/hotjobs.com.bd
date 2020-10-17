@@ -1,0 +1,46 @@
+/*button*/
+
+/*----------------------------
+    Button Common Styles
+------------------------------*/
+[class*="tcb-"] {min-width: 95px;padding: 11px 15px;display: inline-block;position: relative;font-size: 12px;font-weight: 400;line-height: 1;white-space: nowrap;vertical-align: middle;cursor: pointer;text-decoration: none !important;text-align: center;}
+.tcb-large {padding: 13px 20px;font-size: 14px;}
+.tcb-small {padding: 9px 12px;font-size: 11px;}
+.tcb-pill {-webkit-border-radius: 40px;border-radius: 40px;}
+.tcb-round {-webkit-border-radius: 5px;border-radius: 5px;}
+.tcb-fullwidth {width: 100%;-webkit-box-sizing: border-box;box-sizing: border-box;}
+
+
+/*------------------------------
+    Animate E
+--------------------------------*/
+.tcb-animate-e {border: 1px solid;position: relative;overflow: hidden;z-index: 1;-webkit-transition: .2s cubic-bezier(0.19, 0.4, 0.9, 0.76) background;transition: .2s cubic-bezier(0.19, 0.4, 0.9, 0.76) background;}
+.tcb-animate-e:after {content: '';position: absolute;width: 100%;height: 0;top: 50%;left: 50%;opacity: 0;-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);transform: translateX(-50%) translateY(-50%) rotate(45deg);-webkit-transition: all 0.4s cubic-bezier(0, 0, 0, 0.3);transition: all 0.4s cubic-bezier(0, 0, 0, 0.3);}
+.tcb-animate-e:not(.tcb-default):after {background: rgba(255,255,255,0.15);}
+.tcb-animate-e:not(.tcb-default):hover,
+.tcb-animate-e:not(.tcb-default):active {color: #fff;}
+.tcb-animate-e:hover:after,
+.tcb-animate-e:active:after {height: 100%;opacity: 1;}
+
+.tcb-animate-e.tcb-default {border-color: #eee;color: #444;}
+.tcb-animate-e.tcb-default {border-color: rgba(0,0,0,0.05);}
+.tcb-animate-e.tcb-default:after {background: rgba(0,0,0,0.05);}
+
+.tcb-animate-e.tcb-primary {border-color: #337ab7;color: #337ab7;}
+.tcb-animate-e.tcb-success {border-color: #5cb85c;color: #5cb85c;}
+.tcb-animate-e.tcb-info {border: 1px solid transparent;border-image: linear-gradient(45deg,#55FF00,#307BF7);border-image-slice: 1;color: #525257}
+.tcb-animate-e.tcb-warning {border-color: #f0ad4e;color: #f0ad4e;}
+.tcb-animate-e.tcb-danger {border-color: #d9534f;color: #d9534f;}
+.tcb-animate-e.tcb-black {border-color: #28373b;color: #28373b;}
+.tcb-animate-e.tcb-pink {border-color: #9d5db8;color: #9d5db8;}
+.tcb-animate-e.tcb-turquoise {border-color: #1abc9c;color: #1abc9c;}
+
+.tcb-animate-e.tcb-default:hover {background-color: #eee;color: #666;}
+.tcb-animate-e.tcb-primary:hover {background-color: #337ab7;}
+.tcb-animate-e.tcb-success:hover {background-color: #5cb85c;}
+.tcb-animate-e.tcb-info:hover {background-color: #525257;}
+.tcb-animate-e.tcb-warning:hover {background-color: #f0ad4e;}
+.tcb-animate-e.tcb-danger:hover {background-color: #d9534f;}
+.tcb-animate-e.tcb-black:hover {background-color: #28373b;}
+.tcb-animate-e.tcb-pink:hover {background-color: #9d5db8;}
+.tcb-animate-e.tcb-turquoise:hover {background-color: #1abc9c;}

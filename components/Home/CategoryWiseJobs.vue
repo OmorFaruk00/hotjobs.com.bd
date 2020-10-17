@@ -10,7 +10,7 @@
           <div class="col-12">
             <div class="btn-group" role="group" aria-label="Basic example">
 
-              <button @click="generalCategoryStep" type="button" class="btn btn-outline-info"
+              <!--<button @click="generalCategoryStep" type="button" class="btn btn-outline-info"
                       :class="general_category_step ? 'active' : ''">Functional
               </button>
 
@@ -18,11 +18,25 @@
                       :class="industials_step ? 'active' : ''">Industrial
               </button>
 
+              <br>-->
+
+              <a href="javaScript:void(0)" @click="generalCategoryStep" class="tcb-animate-e tcb-info">Functional <span v-if="general_category_step"><i class="bx bx-check-circle"></i></span></a>
+              <a href="javaScript:void(0)" @click="industialsStep" class="tcb-animate-e tcb-info">Industrial <span v-if="industials_step"><i class="bx bx-check-circle"></i></span></a>
+
+
+
+
             </div>
           </div>
         </div>
 
-        <div class="row" v-if="loading">
+        <div class="row" v-if="general_category_loading">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+          </div>
+        </div>
+
+        <div class="row" v-if="industials_loading">
           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
             <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
           </div>
@@ -91,6 +105,8 @@ export default {
       loading: true,
       general_category_step: true,
       industials_step: false,
+      general_category_loading:true,
+      industials_loading:false,
       url: this.$axios.defaults.baseURL,
       general_categories: '',
       industials: '',
@@ -101,10 +117,11 @@ export default {
 
     async fetchGeneralCategory() {
       var vm = this;
+      vm.general_category_loading=true;
       return await this.$axios.get('skill-general-category')
         .then((response) => {
           vm.general_categories = response.data;
-          vm.loading = false;
+          vm.general_category_loading = false;
         })
         .catch((error) => {
           Toast.fire({
@@ -116,10 +133,11 @@ export default {
 
     async fetchIndustryCategory() {
       var vm = this;
+      vm.industials_loading = true;
       return await this.$axios.get('industry-category-lists')
         .then((response) => {
           vm.industials = response.data;
-          vm.loading = false;
+          vm.industials_loading = false;
         })
         .catch((error) => {
           Toast.fire({
@@ -178,4 +196,5 @@ h1 {
 .category-item-box h3 a {
   font-size: 14px;
 }
+
 </style>
