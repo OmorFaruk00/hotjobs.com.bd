@@ -15,36 +15,13 @@
 
                 <hr>
 
-                <h2 class="card-title"><i class="bx bx-phone-call"></i> Dial <strong>000000</strong> from any number.</h2>
+                <h2 class="card-title"><i class="bx bx-phone-call"></i> Dial <a href="tel:+8801726893448">
+                  +88 017 2689 3448
+                </a> from any number.</h2>
 
                 <hr>
-                <p class="card-title">IP phone: +88 0000000 from any number.</p>
-                <p class="card-title">T&T Phone : 0000000, 0000000, 0000000 .</p>
+                <p class="card-title">+880255040889 (Extension: 221)</p>
 
-                <br>
-
-
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                      <td colspan="2"><i class="bx bxs-right-arrow-square"></i> For any sales query (for the clients outside Dhaka):</td>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                      <td>Rangpur:013XXXXXXXX</td>
-                      <td>Bogra:013XXXXXXXX</td>
-                    </tr>
-                    <tr>
-                      <td>Chittagong:013XXXXXXXX</td>
-                      <td>Narayanganj:013XXXXXXXX</td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-                </div>
 
               </div>
             </div>
@@ -63,14 +40,13 @@
                   language="en"
                   :cluster="{options: {styles: clusterStyle}}"
                   :center="{lat: locations[0].lat, lng: locations[0].lng}"
-                  :options="{fullscreenControl: false, styles: mapStyle}"
-                  :zoom="20"
+                  :options="{fullscreenControl: true, styles: mapStyle}"
+                  :zoom="18"
                 >
                   <GMapMarker
                     v-for="location in locations"
                     :key="location.id"
                     :position="{lat: location.lat, lng: location.lng}"
-                    :options="{icon: location === maya ? pins.selected : pins.notSelected}"
                     @click="currentLocation = location"
                   >
                     <GMapInfoWindow :options="{maxWidth: 200}">
@@ -80,7 +56,7 @@
                       </code>
                     </GMapInfoWindow>
                   </GMapMarker>
-                  <GMapCircle :options="circleOptions"/>
+<!--                  <GMapCircle :options="circleOptions"/>-->
                 </GMap>
 
 
@@ -102,11 +78,7 @@ export default {
   name: "contact",
   data() {
     return {
-      currentLocation: {
-        lat: 23.821159,
-        lng: 90.423213,
-        name: "Al-Hera Tower"
-      },
+
       /*circleOptions: {
         ...
       },*/
@@ -118,15 +90,9 @@ export default {
       ],*/
       locations: [
         {
-          lat: 23.821159,
-          lng: 90.423213,
+          lat: 23.821214,
+          lng: 90.423087,
           name: "Al-Hera Tower"
-        },
-
-        {
-          lat: 23.8208515,
-          lng: 90.4218548,
-          name: "Mullar Tex Ltd"
         },
       ],
       pins: {
