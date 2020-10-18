@@ -20,8 +20,8 @@
 
               <br>-->
 
-              <a href="javaScript:void(0)" @click="generalCategoryStep" class="tcb-animate-e tcb-info">Functional <span v-if="general_category_step"><i class="bx bx-check-circle"></i></span></a>
-              <a href="javaScript:void(0)" @click="industialsStep" class="tcb-animate-e tcb-info">Industrial <span v-if="industials_step"><i class="bx bx-check-circle"></i></span></a>
+              <button type="button" @click="generalCategoryStep" class="tcb-animate-e tcb-info" :disabled="general_category_step">Functional <span v-if="general_category_step"><i class="bx bx-check-circle"></i></span></button>
+              <button type="button" @click="industialsStep" class="tcb-animate-e tcb-info" :disabled="industials_step">Industrial <span v-if="industials_step"><i class="bx bx-check-circle"></i></span></button>
 
 
 
