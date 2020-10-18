@@ -124,6 +124,6 @@ h1 {
 }
 
 .category-item-box h3 a {
-  font-size: 14px;
+  font-size: 13px;
 }
 </style>
