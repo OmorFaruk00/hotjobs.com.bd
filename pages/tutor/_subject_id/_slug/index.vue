@@ -108,7 +108,7 @@
 
                       <template class="text-right" v-slot:footer>
 
-                        <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.tutor_request_detail.id,row.tutor_request_detail.employer.slug)">View
+                        <a class="tcb-animate-e tcb-info" href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.tutor_request_detail.id,row.tutor_request_detail.employer.slug)">View
                           Details</a>
 
                       </template>
