@@ -3,56 +3,30 @@
     <div class="card">
       <div class="card-body">
 
-        <h1 class="card-title text-center">TUTOR</h1>
+        <h1 class="card-title text-center">Tutor / Home Tuition</h1>
 
-        <div class="tender_body">
-          <div class="row" v-if="loading">
-            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-              <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
-            </div>
-          </div>
-
-          <div class="row" v-if="!loading">
-
-            <div v-for="row in tutor_requests" class="col-lg-4 col-md-4 col-sm-6">
-              <b-card class="tutor-card" border-variant="primary" bg-variant="default" text-variant="dark">
-                <blockquote class="card-blockquote">
-                  <h5>Need {{ row.tuition_category.title }} Tutor For {{ row.tuition_class.title }} Student
-
-                    <span v-if="row.tuition_days_week">- {{ row.tuition_days_week.title }}</span>
-                  </h5>
-
-                  <h6>Hire Date : {{ dateFormat(row.hire_date) }}</h6>
-                </blockquote>
-
-                <b-card-text>
-                  <h6>Tuition Type : {{ row.tuition_type.title }}</h6>
-                  <h6>Location : {{ row.district.name }}, {{ row.thana.name }} <span
-                    v-if="row.union">, {{ row.union.name }}</span></h6>
-                  <h6>Salary : <span
-                    v-text="row.salary_negotiable_status == '1' ? 'Negotiable': row.salary + ' ' +'BDT' "></span></h6>
-                  <h6>Subjects : <span class="badge badge-secondary mx-1"
-                                       v-for="innter_row in row.tutor_request_subjects">{{
-                      innter_row.subject.title
-                    }}</span></h6>
-                </b-card-text>
-
-                <template class="text-right" v-slot:footer>
-
-                  <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.id,row.employer.slug)">View
-                    Details</a>
-
-                </template>
-              </b-card>
-            </div>
-
-          </div>
-
-          <div class="col-12 text-center" v-if="see_more && tutor_requests.length >= 9">
-<!--            <button type="button" @click="tutorRequestSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-            <a href="javaScript:void(0)" @click="tutorRequestSeeMore" class="tcb-animate-e tcb-info">See more...</a>
+        <div class="row" v-if="loading">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
           </div>
         </div>
+
+        <div class="row" v-if="!loading">
+          <div v-for="(row,key) in all_subject" class="col-lg-3 col-md-3 col-sm-12">
+            <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
+              <h3>
+                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">{{ row.title }}
+                  (
+                  <countTo :startVal='0' :endVal='row.all_tuition_count'
+                           :duration='5000'></countTo>
+                  )
+                </a>
+              </h3>
+            </div>
+          </div>
+
+        </div>
+
 
       </div>
     </div>
@@ -62,6 +36,7 @@
 <script>
 // tender-job
 import Swal from 'sweetalert2'
+import countTo from "vue-count-to";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -76,10 +51,18 @@ const Toast = Swal.mixin({
 })
 export default {
   name: "Tutor",
+  head: {
+    link: [
+      {rel: 'stylesheet', href: '/css/custom_scroll.css'},
+    ],
+  },
+  components: {
+    countTo,
+  },
   data() {
     return {
       loading: true,
-      tutor_requests: [],
+      all_subject: [],
       see_more: true,
       url: this.$axios.defaults.baseURL,
     }
@@ -121,11 +104,12 @@ export default {
         })
 
     },
-    fetchTutorRequestDetails(id, slug) {
 
-      var id = id;
-      var username = slug;
-      this.$router.push(`/tutor/${id}/${username}`)
+    fetchSubjectWiseJob(id, slug) {
+
+      var subject_id = id;
+      var slug = slug;
+      this.$router.push(`/tutor/${subject_id}/${slug}`)
 
     },
 
@@ -133,10 +117,25 @@ export default {
       return this.$moment(date).format('MMMM D,YYYY');
     },
 
+    async fetchSubject() {
+      var vm = this;
+      return await this.$axios.get('frontend/all-subject')
+        .then((response) => {
+          vm.all_subject = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
   },
 
   beforeMount() {
-    this.fetchTutorRequest();
+    this.fetchSubject();
   }
 
 }
@@ -146,53 +145,12 @@ export default {
 h1 {
   font-size: 35px;
 }
-a{
-  color: #EC1A3A;
-}
-a:hover{
-  color: #423A3D;
+
+.category-item-box {
+  padding: 15px 0px 1px 0px;
 }
 
-.card-footer {
-  text-align: right;
-  background-color: #fff;
-  padding: 2px 10px;
-}
-
-.tutor-card:before {
-  content: '';
-  position: absolute;
-  /*background-color: #000;*/
-  background: linear-gradient(90deg, #EC1A3A, #423A3D);
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  transform: skew(1deg, 1deg);
-  z-index: -1;
-}
-
-.tutor-card:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-
-}
-
-.tutor-card {
-  position: relative;
-  z-index: 1;
-  background-color: #fff;
-
-}
-
-.card-body {
-  background-color: #fff;
-  padding: 1rem;
+.category-item-box h3 a {
+  font-size: 13px;
 }
 </style>

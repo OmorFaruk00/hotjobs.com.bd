@@ -7,9 +7,7 @@
         <div class="offset-lg-1 col-lg-10">
           <div class="card">
             <div class="card-body">
-              <div class="row">
-
-                <div class="col-lg-12 col-md-12 col-sm-12 text-center" v-if="loading">
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 text-center" v-if="loading">
                   <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
                 </div>
 
@@ -73,9 +71,56 @@
                     </template>
                   </b-card>
 
+                </div>-->
+
+                <div class="row" v-if="loading">
+                  <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
+                  </div>
                 </div>
 
-              </div>
+                <div class="row" v-if="!loading">
+
+                  <div v-for="row in subject_wise_tutor_requests" class="col-lg-4 col-md-4 col-sm-6">
+                    <b-card class="tutor-card" border-variant="primary" bg-variant="default" text-variant="dark">
+                      <blockquote class="card-blockquote">
+                        <h5>Need
+
+                          {{ row.tutor_request_detail.tuition_category.title }} Tutor For {{ row.tutor_request_detail.tuition_class.title }} Student
+
+                          <span v-if="row.tutor_request_detail.tuition_days_week">- {{ row.tutor_request_detail.tuition_days_week.title }}</span>
+                        </h5>
+
+                        <h6>Hire Date : {{ dateFormat(row.tutor_request_detail.hire_date) }}</h6>
+                      </blockquote>
+
+                      <b-card-text>
+                        <h6>Tuition Type : {{ row.tutor_request_detail.tuition_type.title }}</h6>
+                        <h6>Location : {{ row.tutor_request_detail.district.name }}, {{ row.tutor_request_detail.thana.name }} <span
+                          v-if="row.tutor_request_detail.union">, {{ row.tutor_request_detail.union.name }}</span></h6>
+                        <h6>Salary : <span
+                          v-text="row.tutor_request_detail.salary_negotiable_status == '1' ? 'Negotiable': row.tutor_request_detail.salary + ' ' +'BDT' "></span></h6>
+                        <h6>Subjects : <span class="badge badge-secondary mx-1"
+                                             v-for="innter_row in row.tutor_request_detail.tutor_request_subjects">{{
+                            innter_row.subject.title
+                          }}</span></h6>
+                      </b-card-text>
+
+                      <template class="text-right" v-slot:footer>
+
+                        <a href="javaScript:void(0)" @click="fetchTutorRequestDetails(row.tutor_request_detail.id,row.tutor_request_detail.employer.slug)">View
+                          Details</a>
+
+                      </template>
+                    </b-card>
+                  </div>
+
+                  <div class="col-12" v-if="!subject_wise_tutor_requests.length >0">
+                    <p class="text-center">No data found</p>
+                  </div>
+
+                </div>
+
             </div>
           </div>
         </div>
@@ -84,58 +129,6 @@
 
     </div>
 
-    <div class="modal fade bs-example-modal-center" id="warningApply" tabindex="-1" role="dialog"
-         aria-labelledby="mySmallModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title mt-0">Warning Message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <p>
-
-              You are applying to teach a <strong>{{ tutor_request_details.student_gender }}
-            </strong>
-
-              <strong>
-              <span class="badge badge-secondary mx-1" v-for="inner_row in tutor_request_subjects">{{ inner_row.subject.title }}</span>
-
-              </strong> student.
-
-              You have to teach <strong v-if="tuition_days_week">{{ tuition_days_week.title }}</strong> <strong v-if="!tuition_days_week"> N/A </strong> and you'll be paid <strong v-text="tutor_request_details.salary_negotiable_status == '1' ? 'Negotiable': tutor_request_details.salary + ' ' +'BDT' "></strong> per month.
-            </p>
-
-            <p class="text-center">Are you sure to apply for this job?</p>
-
-            <div>
-              <b-form-checkbox
-                id="status"
-                v-model="form.status"
-                name="status"
-                value="1"
-                unchecked-value="0"
-              >
-                I have read the above warning message.
-              </b-form-checkbox>
-
-            </div>
-
-
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="submit" :disabled="form.status != '1'" @click="applyButton" class="btn btn-success">Apply
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
 
   </div>
 </template>
@@ -164,130 +157,46 @@ export default {
   name: "index",
   validate({params}) {
     // Must be a number
-    return /^\d+$/.test(params.id)
+    return /^\d+$/.test(params.subject_id)
   },
 
   data() {
     return {
       loading: true,
-      id: this.$route.params.id,
-      username: this.$route.params.username,
-      tutor_request_details: '',
-      tuition_category: '',
-      tuition_class: '',
-      tuition_days_week: '',
-      tuition_type: '',
-      district: '',
-      thana: '',
-      union: '',
-      tutor_request_subjects: [],
+      subject_id: this.$route.params.subject_id,
+      slug: this.$route.params.slug,
+
       form: new Form({
         id: '',
         status: '0'
       }),
+      subject_wise_tutor_requests:[],
       url: this.$axios.defaults.baseURL,
     }
   },
 
   methods: {
 
-    applyModal() {
-      this.form.status = 0;
-      $('#warningApply').modal('show');
-    },
-
-    applyButton(){
-      var user = window.$nuxt.$cookies.get('user');
-
-      if (user) {
-
-        var vm = this;
-
-        if (user.type != 'employee') {
-
-          Toast.fire({
-            icon: 'warning',
-            title: 'Please login as a employee'
-          });
-
-        }
-
-        var token = window.$nuxt.$cookies.get('token');
-        this.form.post(this.url + 'apply-tutor-request?token=' + token)
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message
-            });
-
-          })
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 422) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Validation Problem'
-              });
-            }
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: error.response.data.error
-              });
-            }
-
-            if (error.response.status == 403) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Unauthorized access'
-              });
-            }
-
-          })
-
-      } else {
-
-        Toast.fire({
-          icon: 'warning',
-          title: 'Please login as a employee'
-        });
-
-      }
-
-      $('#warningApply').modal('hide');
-    },
-
     dateFormat(date) {
       return this.$moment(date).format('MMMM D,YYYY');
     },
 
-    timeFormat(time) {
-      return  this.$moment.utc(time, "HH:mm").format("h:mm a");
+    fetchTutorRequestDetails(id, slug) {
+
+      var id = id;
+      var username = slug;
+      this.$router.push(`/tutor/d/${id}/${username}`)
+
     },
 
-    fetchTutorRequestDetails() {
+    fetchSubjectWiseTutorRequest() {
       var vm = this;
-      var id = vm.id;
-      var username = vm.username;
+      var subject_id = vm.subject_id;
+      var slug = vm.slug;
 
-      this.$axios.get('frontend/fetch-tutor-request-details/' + id + '/' + username).then(function (response) {
+      this.$axios.get('frontend/subject-wise-tutor-request/' + subject_id + '/' + slug).then(function (response) {
 
-        vm.tutor_request_details = response.data;
-        vm.tuition_category = response.data.tuition_category;
-        vm.tuition_class = response.data.tuition_class;
-        vm.tuition_days_week = response.data.tuition_days_week;
-        vm.tuition_type = response.data.tuition_type;
-        vm.tutor_request_subjects = response.data.tutor_request_subjects;
-        vm.district = response.data.district;
-        vm.thana = response.data.thana;
-        vm.union = response.data.union;
+        vm.subject_wise_tutor_requests = response.data;
         vm.loading = false;
 
       }).catch(function (error) {
@@ -304,11 +213,7 @@ export default {
   },
 
   created() {
-    this.fetchTutorRequestDetails();
-
-    this.form.fill({
-      id: this.$route.params.id
-    })
+    this.fetchSubjectWiseTutorRequest();
   }
 }
 </script>
