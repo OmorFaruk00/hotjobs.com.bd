@@ -2403,7 +2403,7 @@ export default {
 
           // vm.errors = error.response.data;
 
-          cosnole.log(error.response.data);
+          // cosnole.log(error.response.data);
 
           Toast.fire({
             icon: 'warning',
@@ -2454,5 +2454,6 @@ export default {
 <style scoped>
 .b-pagination {
   float: right;
+  margin-top: 5px;
 }
 </style>

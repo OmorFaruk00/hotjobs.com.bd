@@ -69,3 +69,8 @@ thead[role="rowgroup"]{
   color: #fff;
 }
 
+/*vue bootstarp time ui*/
+.b-form-spinbutton {
+  height: 115px!important;
+}
+
