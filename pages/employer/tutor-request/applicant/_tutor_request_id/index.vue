@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                  <h1 class="text-center">{{ job_title }}</h1>
+<!--                  <h1 class="text-center">{{ job_title }}</h1>-->
                 </div>
               </div>
 
@@ -36,7 +36,7 @@
                 </template>
 
 
-                <template v-slot:cell(job_seeker)="data" :style="{width:30px}">
+                <template v-slot:cell(job_seeker)="data">
 
                   {{ data.item.employee.name }} ({{ data.item.employee.email }})
 
@@ -480,7 +480,7 @@ export default {
   name: "index",
   validate({params}) {
     // Must be a number
-    return /^\d+$/.test(params.job_id)
+    return /^\d+$/.test(params.tutor_request_id)
   },
   components: {
     employerNavbar,
@@ -489,14 +489,14 @@ export default {
 
   data() {
     return {
-      job_id: this.$route.params.job_id,
-      job_title: this.$route.params.job_title,
+
+      tutor_request_id: this.$route.params.tutor_request_id,
+
       perPage: 10,
       currentPage: 1,
       fields: [
         'index',
         'job_seeker',
-        'expected_salary',
         'action',
       ],
       post_job: '',
@@ -526,17 +526,17 @@ export default {
     fetchApplicantLists() {
 
       var vm = this;
-      var job_id = vm.job_id;
+      var tutor_request_id = vm.tutor_request_id;
       var token = window.$nuxt.$cookies.get('token');
 
-      this.$axios.post('employer-job-post-applicant?token=' + token, {
+      this.$axios.post('employer-tutor-request-applicant?token=' + token, {
 
-        job_id: job_id,
+        tutor_request_id: tutor_request_id,
 
       })
         .then((response) => {
 
-          vm.applicant_lists = response.data
+          vm.applicant_lists = response.data;
 
         })
         .catch((error) => {

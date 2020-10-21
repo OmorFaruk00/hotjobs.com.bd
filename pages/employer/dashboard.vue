@@ -10,9 +10,22 @@
 
         <div class="col-lg-12">
           <div class="card">
+
+
             <div class="card-body">
 
-              <div class="row">
+              <div class="row ">
+                <div class="col-12 text-right mb-2">
+                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info" :disabled="post_job_loading">Post Job <span
+                    v-if="post_job_loading"><i class="bx bx-check-circle"></i></span></button>
+
+                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info" :disabled="tutor_status">Tutor <span
+                    v-if="tutor_status"><i class="bx bx-check-circle"></i></span></button>
+                </div>
+              </div>
+
+              <div class="row" v-if="post_job_loading">
+
                 <div class="col-lg-2 col-md-2 col-sm-12 mb-1">
                   <select v-model="perPage" class="form-control">
                     <option value="20">20</option>
@@ -34,9 +47,7 @@
                   </div>
 
                 </div>
-              </div>
 
-              <div class="row">
                 <div class="col-12">
                   <b-table responsive id="post_job" striped hover :per-page="perPage" :current-page="currentPage"
                            :items="fetchTableData" :fields="fields">
@@ -87,7 +98,43 @@
               </div>
 
 
+              <div class="row" v-if="tutor_status">
+
+                <div class="col-12">
+                  <b-table responsive id="post_job" striped hover :per-page="perPage" :current-page="currentPage"
+                           :items="tutor_requests" :fields="load_tutor_request">
+
+                    <template v-slot:cell(index)="data">
+                      {{ data.index + 1 }}
+                    </template>
+
+                    <template v-slot:cell(tuition_type)="data">
+                       {{ data.value.title }}
+                    </template>
+
+                    <template v-slot:cell(tutor_request_subjects)="data">
+                      <span v-for="row in data.value" class="badge badge-secondary mx-1">{{ row.subject.title }}</span>
+                    </template>
+
+                    <template v-slot:cell(applicant)="data">
+
+                      <span>{{ data.value.length }}</span>
+
+                      <a v-if="data.value.length > 0" @click="fetchTutorRequestApplicant(data.item.id)"
+                         class="btn btn-info btn-sm text-light"><i class="bx bx-list-ol"></i> Lists</a>
+
+                    </template>
+
+
+
+
+                  </b-table>
+                </div>
+              </div>
+
             </div>
+
+
           </div>
         </div>
 
@@ -1638,6 +1685,8 @@ export default {
   data() {
     return {
       editMode: false,
+      post_job_loading: false,
+      tutor_status: false,
       perPage: 20,
       currentPage: 1,
       job_title: '',
@@ -1647,6 +1696,14 @@ export default {
         'application_deadline',
         'type',
         'status',
+        'applicant',
+        'action',
+      ],
+
+      load_tutor_request:[
+        'index',
+        'tuition_type',
+        {key:'tutor_request_subjects',label:'Subject'},
         'applicant',
         'action',
       ],
@@ -1807,6 +1864,7 @@ export default {
 
       }),
       post_job: [],
+      tutor_requests: [],
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -1869,6 +1927,10 @@ export default {
 
     fetchApplicant(job_title, job_id) {
       this.$router.push(`/employer/applicant/${job_id}/${job_title}`)
+    },
+
+    fetchTutorRequestApplicant(tutor_request_id){
+      this.$router.push(`/employer/tutor-request/applicant/${tutor_request_id}`)
     },
 
     async fetchLevelOfEducation() {
@@ -2428,6 +2490,54 @@ export default {
 
     },
 
+    postJob(){
+      this.tutor_status=false;
+      this.loadJobPost();
+      this.post_job_loading=true;
+    },
+
+    tutorJob(){
+      this.post_job_loading=false;
+      this.loadTutorRequest();
+      this.tutor_status=true;
+    },
+
+    async loadTutorRequest() {
+      var token = window.$nuxt.$cookies.get('token');
+      return await this.$axios.get('/frontend/tutor-request?token=' + token)
+        .then((response) => {
+          this.tutor_requests = response.data;
+        })
+
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+        })
+    },
+
 
   },
 
@@ -2442,7 +2552,7 @@ export default {
   },
 
   created() {
-    this.loadJobPost();
+    this.postJob();
 
     this.$on('afterUpdate', () => {
       this.loadJobPost();
