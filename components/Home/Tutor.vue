@@ -109,7 +109,10 @@ export default {
 
       var subject_id = id;
       var slug = slug;
-      this.$router.push(`/tutor/${subject_id}/${slug}`)
+      // this.$router.push(`/tutor/${subject_id}/${slug}`)
+
+      let route = this.$router.resolve(`/tutor/${subject_id}/${slug}`);
+      window.open(route.href, '_blank');
 
     },
 

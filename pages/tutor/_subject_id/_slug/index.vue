@@ -185,7 +185,10 @@ export default {
 
       var id = id;
       var username = slug;
-      this.$router.push(`/tutor/d/${id}/${username}`)
+      // this.$router.push(`/tutor/d/${id}/${username}`)
+
+      let route = this.$router.resolve(`/tutor/d/${id}/${username}`);
+      window.open(route.href, '_blank');
 
     },
 
