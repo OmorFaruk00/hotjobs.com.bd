@@ -177,7 +177,7 @@ export default {
 
       // this.$router.push(`/industry-job-search/${id}/${slug}`)
       // this.$router.push(`/jobsearch/${id}`)
-      
+
       let route = this.$router.resolve(`/industry-job-search/${id}/${slug}`);
       window.open(route.href, '_blank');
 

@@ -231,7 +231,9 @@ export default {
       var job_id = job_id;
       var company_name = company_name;
       var title = title;
-      this.$router.push(`/${job_id}/${company_name}/${title}`)
+      // this.$router.push(`/${job_id}/${company_name}/${title}`)
+      let route = this.$router.resolve(`/${job_id}/${company_name}/${title}`);
+      window.open(route.href, '_blank');
 
     }
 
