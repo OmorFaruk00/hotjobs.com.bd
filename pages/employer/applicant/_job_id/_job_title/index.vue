@@ -36,7 +36,7 @@
                 </template>
 
 
-                <template v-slot:cell(job_seeker)="data">
+                <template v-slot:cell(job_seeker)="data" :style="{width:30px}">
 
                   {{ data.item.employee.name }} ({{ data.item.employee.email }})
 
@@ -630,5 +630,8 @@ export default {
 </script>
 
 <style scoped>
+.b-pagination{
+  margin-top: 5px!important;
+}
 
 </style>
