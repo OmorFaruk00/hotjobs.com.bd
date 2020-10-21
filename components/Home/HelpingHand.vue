@@ -102,7 +102,10 @@ export default {
     fetchJob(id, slug) {
       var id = id;
       var slug = slug;
-      this.$router.push(`/job-search/${id}/${slug}`)
+      // this.$router.push(`/job-search/${id}/${slug}`)
+
+      let route = this.$router.resolve(`/job-search/${id}/${slug}`);
+      window.open(route.href, '_blank');
 
     },
 
