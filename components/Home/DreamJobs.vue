@@ -138,9 +138,10 @@ export default {
       var id = id;
       var company_name = company_name;
       var slug = slug;
-      this.$router.push(`/d/${id}/${company_name}/${slug}`)
-      // let route = this.$router.resolve(`/job-details/${id}`);
-      // window.open(route.href, '_blank');
+      // this.$router.push(`/d/${id}/${company_name}/${slug}`)
+
+      let route = this.$router.resolve(`/d/${id}/${company_name}/${slug}`);
+      window.open(route.href, '_blank');
 
     },
 
