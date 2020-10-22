@@ -15,7 +15,10 @@
           <div v-for="(row,key) in all_subject" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
-                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">{{ row.title }}
+                <a :href="`/tutor/${row.id}/${row.slug}`" target="_blank">
+<!--                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">-->
+
+                  {{ row.title }}
                   (
                   <countTo :startVal='0' :endVal='row.all_tuition_count'
                            :duration='5000'></countTo>
