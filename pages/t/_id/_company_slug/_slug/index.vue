@@ -31,12 +31,19 @@
                   <span v-html="job_details.text"></span>
 
 
+
+                  <div class="text-center" v-if="job_details.online_apply_status == 1">
+                    <button @click="tenderJobApply" type="button" class="tcb-animate-e tcb-info">Apply Online</button>
+                  </div>
+
+
                   <hr>
 
                   <h4>Company Name : {{ employer.company_name }}</h4>
                   <h4>Address : {{ employer.company_address }}</h4>
 
-                  <h4 v-if="employer.website_url">Web url : <a :href="employer.website_url" target="_blank">{{ employer.website_url }}</a></h4>
+                  <h4 v-if="employer.website_url">Web url : <a :href="employer.website_url"
+                                                               target="_blank">{{ employer.website_url }}</a></h4>
 
                 </div>
 
@@ -63,10 +70,90 @@
 
     </div>
 
+    <div class="modal fade bs-example-modal-center" id="tenderJobOnlineApply" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title mt-0">Apply Job</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form @submit.prevent="applyOnlineTenderJob()">
+
+            <div class="modal-body">
+
+              <div class="form-group row">
+                <label for="accountName" class="col-sm-4 col-form-label">Account Name</label>
+                <div class="col-sm-8">
+                  <input type="text" v-model="form.employee_name" class="form-control" id="accountName"
+                         readonly>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="company" class="col-sm-4 col-form-label">Company</label>
+                <div class="col-sm-8">
+                  <input type="text" v-model="form.company_name" class="form-control" id="company" readonly>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="position_Applied" class="col-sm-4 col-form-label">Position Applied</label>
+                <div class="col-sm-8">
+                  <input type="text" v-model="form.job_title" class="form-control" id="position_Applied"
+                         readonly>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="expectedSalary" class="col-sm-4 col-form-label">Your Expected Salary (Monthly) <span
+                  class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  <input type="number" v-model="form.expected_salary" class="form-control" id="expectedSalary"
+                         :class="{ 'is-invalid': form.errors.has('expected_salary') }">
+                  <has-error :form="form" field="expected_salary"></has-error>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="tcb-animate-e tcb-danger" data-dismiss="modal">Close</button>
+              <button type="submit" class="tcb-animate-e tcb-primary">Apply</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 export default {
   name: "index",
   validate({params}) {
@@ -75,12 +162,21 @@ export default {
   },
   data() {
     return {
-      loading:true,
+      loading: true,
       id: this.$route.params.id,
       company_slug: this.$route.params.company_slug,
       slug: this.$route.params.slug,
       job_details: '',
       employer: '',
+      form: new Form({
+        employee_name: '',
+        company_name: '',
+        job_title: '',
+        expected_salary: '',
+        employee_id: '',
+        job_id: '',
+      }),
+      url:this.$axios.defaults.baseURL,
     }
   },
 
@@ -108,6 +204,91 @@ export default {
       });
     },
 
+    tenderJobApply() {
+
+      var vm = this;
+      var user = window.$nuxt.$cookies.get('user');
+
+      if (user) {
+
+        var vm = this;
+
+        if (user.type != 'employee') {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'Please login as a employee'
+          });
+
+        }
+
+        vm.form.reset();
+
+        vm.form.fill({
+          job_title: vm.job_details.title,
+          company_name: vm.employer.company_name,
+          employee_id: user.id,
+          employee_name: user.name,
+          job_id: vm.job_details.id,
+
+        })
+        $('#tenderJobOnlineApply').modal('show');
+
+
+      } else {
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please login as a employee'
+        });
+
+      }
+    },
+
+    applyOnlineTenderJob(){
+      var token = window.$nuxt.$cookies.get('token');
+      this.form.post(this.url + 'apply-tender-job?token=' + token)
+        .then((response) => {
+
+          Toast.fire({
+            icon: response.data.status,
+            title: response.data.message
+          });
+
+          $('#tenderJobOnlineApply').modal('hide');
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+
+        })
+    }
+
   },
 
   created() {
@@ -120,7 +301,8 @@ export default {
 .box {
   box-shadow: 0px 1px 6px #000;
 }
-h1{
+
+h1 {
   color: #ec1a3a;
 }
 </style>
