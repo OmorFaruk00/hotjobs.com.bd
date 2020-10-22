@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <h1 class="text-center">{{ employer.company_name }}</h1>
 
-                  <span class="text-center" v-html="job_details.text"></span>
+                  <span v-html="job_details.text"></span>
 
 
                   <div class="text-center" v-if="job_details.online_apply_status == 1">

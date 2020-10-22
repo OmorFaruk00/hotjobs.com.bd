@@ -30,7 +30,7 @@
 
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mt-3">
           <div class="text-center" v-if="see_more && all_subject.length >= 20">
             <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
             <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more...</a>
