@@ -16,7 +16,7 @@
             <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
                 <a :href="`/tutor/${row.id}/${row.slug}`" target="_blank">
-<!--                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">-->
+                  <!--                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">-->
 
                   {{ row.title }}
                   (
@@ -28,6 +28,13 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="col-12">
+          <div class="text-center" v-if="see_more && all_subject.length >= 20">
+            <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+            <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more...</a>
+          </div>
         </div>
 
 
@@ -88,7 +95,6 @@ export default {
         })
     },
 
-
     async tutorRequestSeeMore() {
 
       var vm = this;
@@ -125,6 +131,21 @@ export default {
 
     async fetchSubject() {
       var vm = this;
+      return await this.$axios.get('frontend/subject')
+        .then((response) => {
+          vm.all_subject = response.data;
+          vm.loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    async fetchAllSubject() {
+      var vm = this;
       return await this.$axios.get('frontend/all-subject')
         .then((response) => {
           vm.all_subject = response.data;
@@ -137,6 +158,11 @@ export default {
           });
         })
     },
+
+    subjectSeeMore() {
+      this.fetchAllSubject();
+      this.see_more = false;
+    }
 
   },
 
