@@ -32,8 +32,11 @@
 
                   <b-card-body class="inner-dream-box" :title="row.company_name">
 
-                    <a style="display: inherit" v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
-                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">
+                    <a style="display: inherit" v-for="inner_row in row.dream_jobs" :href="`/d/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank"
+                       >
+
+                      <!--<a style="display: inherit" v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
+                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
 
                       <i class="bx bxs-right-arrow-square"></i> {{
                         inner_row.title ? inner_row.title : 'Not specified'
