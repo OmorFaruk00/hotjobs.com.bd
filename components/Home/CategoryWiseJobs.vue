@@ -63,7 +63,7 @@
           <div v-for="(row,key) in industials" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
-                <a :href="`/industry-job-search/${row.id}/${row.slug}`">{{ row.name }}
+                <a :href="`/industry-job-search/${row.id}/${row.slug}`" target="_blank">{{ row.name }}
 <!--                <a href="javaScript:void(0)" @click="fetchIndustryJob(row.id,row.slug)">{{ row.name }}-->
                   (
                   <countTo :startVal='0' :endVal='row.current_job_posts_count' :duration='5000'></countTo>

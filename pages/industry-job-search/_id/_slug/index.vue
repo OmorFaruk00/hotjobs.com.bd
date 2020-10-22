@@ -52,7 +52,8 @@
 
               <div v-for="row in current_jobs" class="card-body border mb-2 job-short-box">
 
-                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">
+                <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
+<!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
                   <h4 class="card-title">{{ row.job_title }}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">
 
