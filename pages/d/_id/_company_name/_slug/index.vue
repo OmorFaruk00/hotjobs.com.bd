@@ -221,20 +221,19 @@ export default {
 
           Swal.fire('Please login as a employee')
 
+        } else {
+          vm.form.reset();
+
+          vm.form.fill({
+            job_title: vm.job_details.title,
+            company_name: vm.employer.company_name,
+            employee_id: user.id,
+            employee_name: user.name,
+            job_id: vm.job_details.id,
+
+          })
+          $('#dreamJobOnlineApplyModal').modal('show');
         }
-
-        vm.form.reset();
-
-        vm.form.fill({
-          job_title: vm.job_details.title,
-          company_name: vm.employer.company_name,
-          employee_id: user.id,
-          employee_name: user.name,
-          job_id: vm.job_details.id,
-
-        })
-        $('#dreamJobOnlineApplyModal').modal('show');
-
 
       } else {
 

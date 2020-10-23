@@ -649,42 +649,37 @@ export default {
 
         if (user.type != 'employee') {
 
-          Toast.fire({
-            icon: 'warning',
-            title: 'Please login as a employee'
-          });
+          Swal.fire('Please login as a employee')
 
-        }
-
-        window.$nuxt.$cookies.remove('apply');
-
-        if (vm.company_info_visibility.company_name_show_status == 1) {
-          var company_name = vm.employer.company_name;
         } else {
-          var company_name = vm.company_info_visibility.company_name;
+
+          window.$nuxt.$cookies.remove('apply');
+
+          if (vm.company_info_visibility.company_name_show_status == 1) {
+            var company_name = vm.employer.company_name;
+          } else {
+            var company_name = vm.company_info_visibility.company_name;
+          }
+
+          const cookieValObject = {
+            job_title: vm.job_details.job_title,
+            company_name: company_name,
+            employee_id: user.id,
+            employee_name: user.name,
+            job_id: vm.job_details.id,
+          }
+
+          window.$nuxt.$cookies.set('apply', cookieValObject, {
+            path: '/',
+            maxAge: 1800
+          })
+
+          this.$router.push(`/my-jobs/job-online-apply`);
         }
-
-        const cookieValObject = {
-          job_title: vm.job_details.job_title,
-          company_name: company_name,
-          employee_id: user.id,
-          employee_name: user.name,
-          job_id: vm.job_details.id,
-        }
-
-        window.$nuxt.$cookies.set('apply', cookieValObject, {
-          path: '/',
-          maxAge: 1800
-        })
-
-        this.$router.push(`/my-jobs/job-online-apply`);
 
       } else {
 
-        Toast.fire({
-          icon: 'warning',
-          title: 'Please login as a employee'
-        });
+        Swal.fire('Please login as a employee')
 
       }
       $('#warningApply').modal('hide');

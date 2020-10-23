@@ -207,47 +207,47 @@ export default {
 
           Swal.fire('Please login as a employee')
 
+        } else {
+          var token = window.$nuxt.$cookies.get('token');
+          this.form.post(this.url + 'apply-tutor-request?token=' + token)
+            .then((response) => {
+
+              Toast.fire({
+                icon: response.data.status,
+                title: response.data.message
+              });
+
+            })
+            .catch((error) => {
+
+              Toast.fire({
+                icon: 'warning',
+                title: 'There was something wrong'
+              });
+
+              if (error.response.status == 422) {
+                Toast.fire({
+                  icon: 'warning',
+                  title: 'Validation Problem'
+                });
+              }
+
+              if (error.response.status == 401) {
+                Toast.fire({
+                  icon: 'warning',
+                  title: error.response.data.error
+                });
+              }
+
+              if (error.response.status == 403) {
+                Toast.fire({
+                  icon: 'warning',
+                  title: 'Unauthorized access'
+                });
+              }
+
+            })
         }
-
-        var token = window.$nuxt.$cookies.get('token');
-        this.form.post(this.url + 'apply-tutor-request?token=' + token)
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message
-            });
-
-          })
-          .catch((error) => {
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 422) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Validation Problem'
-              });
-            }
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: error.response.data.error
-              });
-            }
-
-            if (error.response.status == 403) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Unauthorized access'
-              });
-            }
-
-          })
 
       } else {
 
