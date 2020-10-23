@@ -138,11 +138,11 @@ export default {
     hostname: 'http://127.0.0.1:3001/',
     // hostname: 'https://hotjobs.com.bd/',
     sitemaps: [
-      {
+      /*{
         path: '/category-wise-job-details.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-jobs`);
           return data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
         },
@@ -152,33 +152,35 @@ export default {
       {
         path: '/category-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-jobs`);
           return data.map(v => `/job-search/${v.skill.id}/${v.skill.slug}`);
         },
         gzip: true
       },
+
       {
         path: '/dream-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-dream-jobs`);
           return data.map(v => `/d/${v.id}/${v.employer.slug}/${v.slug}`);
         },
         gzip: true
       },
+
       {
         path: '/tender-wise-job.xml',
         routes: async () => {
-          let baseURL = 'http://localhost:8000/';
-          // let baseURL = 'https://api.hotjobs.com.bd/';
+          // let baseURL = 'http://localhost:8000/';
+          let baseURL = 'https://api.hotjobs.com.bd/';
           let {data} = await axios.get(`${baseURL}/all-tender-jobs`);
           return data.map(v => `/t/${v.id}/${v.employer.slug}/${v.slug}`);
         },
         gzip: true
-      },
+      },*/
     ]
   },
 
@@ -194,8 +196,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },
