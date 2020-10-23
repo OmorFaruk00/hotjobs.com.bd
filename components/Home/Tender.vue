@@ -77,7 +77,7 @@
             <div class="col-12">
               <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
 <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more...</a>
+                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
               </div>
             </div>
 
@@ -115,6 +115,7 @@ export default {
     return {
       loading: true,
       see_more: true,
+      see_more_loadind: false,
       employer_tender_jobs: '',
       url: this.$axios.defaults.baseURL,
     }
@@ -137,22 +138,6 @@ export default {
         })
     },
 
-    /* fetchRenderJob() {
-       var vm = this;
-       this.$axios.get('tender-job').then(function (response) {
-
-         vm.employer_tender_jobs = response.data;
-         vm.loading = false;
-       }).catch(function (error) {
-
-         Toast.fire({
-           icon: 'warning',
-           title: 'There was something wrong'
-         });
-
-       });
-     },*/
-
     getPhoto(row) {
       let image_url = this.url + row;
       return image_url;
@@ -171,11 +156,13 @@ export default {
 
     async tenderJobSeeMore() {
       var vm = this;
+      vm.see_more_loadind = true;
       return await this.$axios.get('frontend/all-tender-job')
         .then((response) => {
           vm.employer_tender_jobs = response.data;
           vm.see_more = false;
           vm.loading = false;
+          vm.see_more_loadind = false;
         })
         .catch((error) => {
           Toast.fire({
