@@ -33,7 +33,7 @@
         <div class="col-12 mt-3">
           <div class="text-center" v-if="see_more && all_subject.length >= 20">
             <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-            <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more...</a>
+            <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="tutor_see_more_loadind" class="bx bx-loader bx-spin"></i></a>
           </div>
         </div>
 
@@ -74,6 +74,7 @@ export default {
       loading: true,
       all_subject: [],
       see_more: true,
+      tutor_see_more_loadind: false,
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -160,8 +161,10 @@ export default {
     },
 
     subjectSeeMore() {
+      this.tutor_see_more_loadind = true;
       this.fetchAllSubject();
       this.see_more = false;
+      this.tutor_see_more_loadind = false;
     }
 
   },
