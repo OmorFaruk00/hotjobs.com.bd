@@ -27,6 +27,10 @@
                   <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info" :disabled="dream_job_status">
                     Dream Job <span
                   ><i v-if="dream_job_status" class="bx bx-check-circle"></i></span></button>
+
+                  <button type="button" @click="tenderJob" class="tcb-animate-e tcb-info" :disabled="tender_job_status">
+                    Tender Job <span
+                  ><i v-if="tender_job_status" class="bx bx-check-circle"></i></span></button>
                 </div>
               </div>
 
@@ -184,6 +188,60 @@
                     :total-rows="itemLengthDreamJob"
                     :per-page="perPage"
                     aria-controls="dream_job"
+                  ></b-pagination>
+
+                </div>
+              </div>
+
+              <div class="row" v-if="tender_job_status">
+
+                <div class="col-lg-2 col-md-2 col-sm-12 mb-1">
+                  <select v-model="perPage" class="form-control">
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-1">
+
+                </div>
+
+
+                <div class="col-12">
+                  <b-table responsive id="tender_job" striped hover :per-page="perPage" :current-page="currentPage_tender_job"
+                           :items="tender_job_requests" :fields="tender_job">
+
+                    <template v-slot:cell(index)="data">
+                      {{ data.index + 1 }}
+                    </template>
+
+                    <template v-slot:cell(application_deadline)="data">
+
+                      {{ dateFormat(data.value) }}
+
+                    </template>
+
+                    <template v-slot:cell(applicant_count)="data">
+
+                      <span>{{ data.value }}</span>
+
+                      <a v-if="data.value > 0" @click="fetchTenderJobApplicant(data.item.id)"
+                         class="btn btn-info btn-sm text-light"><i class="bx bx-list-ol"></i> Lists</a>
+
+                    </template>
+
+                  </b-table>
+
+                  <b-pagination
+                    v-model="currentPage_tender_job"
+                    :total-rows="itemLengthTenderJob"
+                    :per-page="perPage"
+                    aria-controls="tender_job"
                   ></b-pagination>
 
                 </div>
@@ -1745,9 +1803,11 @@ export default {
       post_job_loading: false,
       tutor_status: false,
       dream_job_status: false,
+      tender_job_status: false,
       perPage: 20,
       currentPage: 1,
       currentPage_dream_job: 1,
+      currentPage_tender_job: 1,
       job_title: '',
       fields: [
         'index',
@@ -1758,7 +1818,6 @@ export default {
         'applicant',
         'action',
       ],
-
       load_tutor_request: [
         'index',
         'tuition_type',
@@ -1766,14 +1825,18 @@ export default {
         'applicant',
         'action',
       ],
-
       dream_job: [
         'index',
         'title',
         'application_deadline',
         {key: 'applicant_count', label: 'Applicant'},
       ],
-
+      tender_job: [
+        'index',
+        'title',
+        'application_deadline',
+        {key: 'applicant_count', label: 'Applicant'},
+      ],
       options_gender: [
         {item: 'Male', name: 'Male'},
         {item: 'Female', name: 'Female'},
@@ -1932,6 +1995,7 @@ export default {
       post_job: [],
       tutor_requests: [],
       dream_job_requests: [],
+      tender_job_requests: [],
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -2002,6 +2066,10 @@ export default {
 
     fetchDreamJobApplicant(dream_job_id) {
       this.$router.push(`/employer/dream-job/applicant/${dream_job_id}`)
+    },
+
+    fetchTenderJobApplicant(tender_job_id) {
+      this.$router.push(`/employer/tender-job/applicant/${tender_job_id}`)
     },
 
     async fetchLevelOfEducation() {
@@ -2564,6 +2632,7 @@ export default {
     postJob() {
       this.tutor_status = false;
       this.dream_job_status = false;
+      this.tender_job_status = false;
       this.loadJobPost();
       this.post_job_loading = true;
     },
@@ -2571,6 +2640,7 @@ export default {
     tutorJob() {
       this.post_job_loading = false;
       this.dream_job_status = false;
+      this.tender_job_status = false;
       this.loadTutorRequest();
       this.tutor_status = true;
     },
@@ -2578,8 +2648,17 @@ export default {
     dreamJob() {
       this.post_job_loading = false;
       this.tutor_status = false;
+      this.tender_job_status = false;
       this.loadDreamJob();
       this.dream_job_status = true;
+    },
+
+    tenderJob() {
+      this.post_job_loading = false;
+      this.tutor_status = false;
+      this.dream_job_status = false;
+      this.loadTenderJob();
+      this.tender_job_status = true;
     },
 
     async loadTutorRequest() {
@@ -2654,6 +2733,42 @@ export default {
         })
     },
 
+    async loadTenderJob() {
+      var token = window.$nuxt.$cookies.get('token');
+      return await this.$axios.get('/frontend/fetch-employer-tender-job?token=' + token)
+        .then((response) => {
+          this.tender_job_requests = response.data;
+        })
+
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+        })
+    },
+
 
   },
 
@@ -2664,6 +2779,10 @@ export default {
 
     itemLengthDreamJob() {
       return this.dream_job_requests.length
+    },
+
+    itemLengthTenderJob() {
+      return this.tender_job_requests.length
     },
 
     fetchTableData() {

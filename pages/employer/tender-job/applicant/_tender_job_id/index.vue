@@ -35,7 +35,7 @@
                   {{ data.index + 1 }}
                 </template>
 
-                <template v-slot:cell(dream_job_details)="data">
+                <template v-slot:cell(tender_job_details)="data">
 
                   {{ data.value.title }}
 
@@ -486,7 +486,7 @@ export default {
   name: "index",
   validate({params}) {
     // Must be a number
-    return /^\d+$/.test(params.dream_job_id)
+    return /^\d+$/.test(params.tender_job_id)
   },
   components: {
     employerNavbar,
@@ -496,13 +496,13 @@ export default {
   data() {
     return {
 
-      dream_job_id: this.$route.params.dream_job_id,
+      tender_job_id: this.$route.params.tender_job_id,
 
       perPage: 10,
       currentPage: 1,
       fields: [
         'index',
-        {key:'dream_job_details',label:'Job Title'},
+        {key:'tender_job_details',label:'Job Title'},
         'job_seeker',
         'expected_salary',
         'action',
@@ -534,12 +534,12 @@ export default {
     fetchApplicantLists() {
 
       var vm = this;
-      var dream_job_id = vm.dream_job_id;
+      var tender_job_id = vm.tender_job_id;
       var token = window.$nuxt.$cookies.get('token');
 
-      this.$axios.post('frontend/employer-dream-job-request-applicant?token=' + token, {
+      this.$axios.post('frontend/employer-tender-job-request-applicant?token=' + token, {
 
-        dream_job_id: dream_job_id,
+        tender_job_id: tender_job_id,
 
       })
         .then((response) => {
