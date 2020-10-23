@@ -16,11 +16,17 @@
 
               <div class="row ">
                 <div class="col-12 text-right mb-2">
-                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info" :disabled="post_job_loading">Post Job <span
+                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info" :disabled="post_job_loading">
+                    Post Job <span
                     v-if="post_job_loading"><i class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info" :disabled="tutor_status">Tutor <span
-                    v-if="tutor_status"><i class="bx bx-check-circle"></i></span></button>
+                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info" :disabled="tutor_status">Tutor
+                    <span
+                      v-if="tutor_status"><i class="bx bx-check-circle"></i></span></button>
+
+                  <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info" :disabled="dream_job_status">
+                    Dream Job <span
+                  ><i v-if="dream_job_status" class="bx bx-check-circle"></i></span></button>
                 </div>
               </div>
 
@@ -97,7 +103,6 @@
                 </div>
               </div>
 
-
               <div class="row" v-if="tutor_status">
 
                 <div class="col-12">
@@ -109,7 +114,7 @@
                     </template>
 
                     <template v-slot:cell(tuition_type)="data">
-                       {{ data.value.title }}
+                      {{ data.value.title }}
                     </template>
 
                     <template v-slot:cell(tutor_request_subjects)="data">
@@ -126,9 +131,61 @@
                     </template>
 
 
+                  </b-table>
+                </div>
+              </div>
 
+              <div class="row" v-if="dream_job_status">
+
+                <div class="col-lg-2 col-md-2 col-sm-12 mb-1">
+                  <select v-model="perPage" class="form-control">
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-1">
+
+                </div>
+
+
+                <div class="col-12">
+                  <b-table responsive id="dream_job" striped hover :per-page="perPage" :current-page="currentPage_dream_job"
+                           :items="dream_job_requests" :fields="dream_job">
+
+                    <template v-slot:cell(index)="data">
+                      {{ data.index + 1 }}
+                    </template>
+
+                    <template v-slot:cell(application_deadline)="data">
+
+                      {{ dateFormat(data.value) }}
+
+                    </template>
+
+                    <template v-slot:cell(applicant_count)="data">
+
+                      <span>{{ data.value }}</span>
+
+                      <a v-if="data.value > 0" @click="fetchDreamJobApplicant(data.item.id)"
+                         class="btn btn-info btn-sm text-light"><i class="bx bx-list-ol"></i> Lists</a>
+
+                    </template>
 
                   </b-table>
+
+                  <b-pagination
+                    v-model="currentPage_dream_job"
+                    :total-rows="itemLengthDreamJob"
+                    :per-page="perPage"
+                    aria-controls="dream_job"
+                  ></b-pagination>
+
                 </div>
               </div>
 
@@ -1687,8 +1744,10 @@ export default {
       editMode: false,
       post_job_loading: false,
       tutor_status: false,
+      dream_job_status: false,
       perPage: 20,
       currentPage: 1,
+      currentPage_dream_job: 1,
       job_title: '',
       fields: [
         'index',
@@ -1700,12 +1759,19 @@ export default {
         'action',
       ],
 
-      load_tutor_request:[
+      load_tutor_request: [
         'index',
         'tuition_type',
-        {key:'tutor_request_subjects',label:'Subject'},
+        {key: 'tutor_request_subjects', label: 'Subject'},
         'applicant',
         'action',
+      ],
+
+      dream_job: [
+        'index',
+        'title',
+        'application_deadline',
+        {key: 'applicant_count', label: 'Applicant'},
       ],
 
       options_gender: [
@@ -1865,6 +1931,7 @@ export default {
       }),
       post_job: [],
       tutor_requests: [],
+      dream_job_requests: [],
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -1929,8 +1996,12 @@ export default {
       this.$router.push(`/employer/applicant/${job_id}/${job_title}`)
     },
 
-    fetchTutorRequestApplicant(tutor_request_id){
+    fetchTutorRequestApplicant(tutor_request_id) {
       this.$router.push(`/employer/tutor-request/applicant/${tutor_request_id}`)
+    },
+
+    fetchDreamJobApplicant(dream_job_id) {
+      this.$router.push(`/employer/dream-job/applicant/${dream_job_id}`)
     },
 
     async fetchLevelOfEducation() {
@@ -2490,16 +2561,25 @@ export default {
 
     },
 
-    postJob(){
-      this.tutor_status=false;
+    postJob() {
+      this.tutor_status = false;
+      this.dream_job_status = false;
       this.loadJobPost();
-      this.post_job_loading=true;
+      this.post_job_loading = true;
     },
 
-    tutorJob(){
-      this.post_job_loading=false;
+    tutorJob() {
+      this.post_job_loading = false;
+      this.dream_job_status = false;
       this.loadTutorRequest();
-      this.tutor_status=true;
+      this.tutor_status = true;
+    },
+
+    dreamJob() {
+      this.post_job_loading = false;
+      this.tutor_status = false;
+      this.loadDreamJob();
+      this.dream_job_status = true;
     },
 
     async loadTutorRequest() {
@@ -2538,12 +2618,52 @@ export default {
         })
     },
 
+    async loadDreamJob() {
+      var token = window.$nuxt.$cookies.get('token');
+      return await this.$axios.get('/frontend/fetch-employer-dream-job?token=' + token)
+        .then((response) => {
+          this.dream_job_requests = response.data;
+        })
+
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+          if (error.response.status == 403) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Unauthorized access'
+            });
+          }
+        })
+    },
+
 
   },
 
   computed: {
     itemLength() {
       return this.post_job.length
+    },
+
+    itemLengthDreamJob() {
+      return this.dream_job_requests.length
     },
 
     fetchTableData() {
