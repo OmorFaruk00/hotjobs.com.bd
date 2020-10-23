@@ -649,7 +649,7 @@ export default {
 
         if (user.type != 'employee') {
 
-          Swal.fire('Please login as a employee')
+          Swal.fire('<p style="font-size: 15px">To submit online application please <a href="https://hotjobs.com.bd/my-jobs/login" target="_blank">Login</a> as Employee. If you have not any account with us please <a href="https://hotjobs.com.bd/my-jobs/create" target="_blank">create account</a></p>')
 
         } else {
 
@@ -679,7 +679,7 @@ export default {
 
       } else {
 
-        Swal.fire('Please login as a employee')
+        Swal.fire('<p style="font-size: 15px">To submit online application please <a href="https://hotjobs.com.bd/my-jobs/login" target="_blank">Login</a> as Employee. If you have not any account with us please <a href="https://hotjobs.com.bd/my-jobs/create" target="_blank">create account</a></p>')
 
       }
       $('#warningApply').modal('hide');
