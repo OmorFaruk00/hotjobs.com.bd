@@ -205,10 +205,7 @@ export default {
 
         if (user.type != 'employee') {
 
-          Toast.fire({
-            icon: 'warning',
-            title: 'Please login as a employee'
-          });
+          Swal.fire('Please login as a employee')
 
         }
 
@@ -254,10 +251,7 @@ export default {
 
       } else {
 
-        Toast.fire({
-          icon: 'warning',
-          title: 'Please login as a employee'
-        });
+        Swal.fire('Please login as a employee')
 
       }
 
