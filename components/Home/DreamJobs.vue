@@ -54,7 +54,7 @@
           <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
 <!--            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
 
-            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more...</a>
+            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
           </div>
 
 
@@ -92,6 +92,7 @@ export default {
     return {
       loading: true,
       see_more: true,
+      see_more_loadind: false,
       employer_hotjobs: '',
       url: this.$axios.defaults.baseURL,
     }
@@ -150,11 +151,13 @@ export default {
 
     async dreamJobSeeMore() {
       var vm = this;
+      vm.see_more_loadind = true;
       return await this.$axios.get('frontend/all-dream-job')
         .then((response) => {
           vm.employer_hotjobs = '';
           vm.employer_hotjobs = response.data;
           vm.see_more = false;
+          vm.see_more_loadind = false;
         })
         .catch((error) => {
           Toast.fire({
