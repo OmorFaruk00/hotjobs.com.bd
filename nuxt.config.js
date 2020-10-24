@@ -135,8 +135,8 @@ export default {
   // },
 
   sitemap: {
-    hostname: 'http://127.0.0.1:3001/',
-    // hostname: 'https://hotjobs.com.bd/',
+    // hostname: 'http://127.0.0.1:3001/',
+    hostname: 'https://hotjobs.com.bd/',
     sitemaps: [
       /*{
         path: '/category-wise-job-details.xml',
