@@ -167,31 +167,34 @@
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
                aria-labelledby="page-header-notifications-dropdown">
 
-            <div data-simplebar style="max-height: 330px;padding: 0 10px">
+            <div data-simplebar style="max-height: 350px;padding: 0 10px">
 
               <div class="card bg-light my-3">
                 <div class="card-body">
                   <div class="media">
 
                     <div class="avatar-xs mr-3">
-                        <span class="avatar-title bg-primary rounded-circle font-size-16">
-                            <i class="bx bx-user-check"></i>
+                        <span class="avatar-title rounded-circle font-size-16">
+                            <i class="bx bx-user-plus"></i>
                         </span>
                     </div>
 
                     <div class="media-body">
                       <h6 class="mt-0 mb-1">Employee</h6>
                       <div class="font-size-12 text-muted">
-                        <p class="mb-1">Sign in or create your Employee account to manage your profile</p>
+                        <p class="mb-1">Sign in or create your Employee account for apply job</p>
                         <p class="mb-0">
-                          <nuxt-link to="/my-jobs/login" class="btn btn-outline-primary">Sign in</nuxt-link>
 
-                          <!--                          <nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>-->
+                          <span class="btn-group">
+                            <nuxt-link to="/my-jobs/login" class="tcb-animate-e tcb-primary">Sign in</nuxt-link>
 
-                          <button type="button" class="btn btn-outline-info waves-effect waves-light"
-                                  @click="addGeneralEmployeeModal">
-                            Create Account
-                          </button>
+                              <button type="button" class="tcb-animate-e tcb-info"
+                                      @click="addGeneralEmployeeModal">
+                              Create Account
+                            </button>
+                          </span>
+
+                          <!--<nuxt-link to="/my-jobs/create" class="btn btn-outline-info">Create account</nuxt-link>-->
 
                         </p>
                       </div>
@@ -209,7 +212,7 @@
                   <div class="media">
 
                     <div class="avatar-xs mr-3">
-                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                        <span class="avatar-title rounded-circle font-size-16">
                             <i class="bx bx-user-pin"></i>
                         </span>
                     </div>
@@ -217,14 +220,18 @@
                     <div class="media-body">
                       <h6 class="mt-0 mb-1">Employer</h6>
                       <div class="font-size-12 text-muted">
-                        <p class="mb-1">Sign in or create your Employer account to manage your profile</p>
+                        <p class="mb-1">Sign in or create your Employer account for post job</p>
 
                         <p class="mb-0">
-                          <nuxt-link to="/employer/login" class="btn btn-outline-primary">Sign in</nuxt-link>
-                          <button type="button" class="btn btn-outline-info waves-effect waves-light"
+                          <span class="btn-group">
+
+                            <nuxt-link to="/employer/login" class="tcb-animate-e tcb-primary">Sign in</nuxt-link>
+                          <button type="button" class="tcb-animate-e tcb-info"
                                   @click="addEmployerModal">
                             Create Account
                           </button>
+
+                          </span>
                         </p>
 
                       </div>
@@ -372,7 +379,8 @@
                         <label>Password Confirmation</label>
                         <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                                placeholder="Enter password confirmation"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" required>
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
+                               required>
                         <has-error :form="form" field="password_confirmation"></has-error>
                       </div>
                     </div>
@@ -542,7 +550,8 @@
                         <textarea v-model="form.business_description" id="business_description" cols="30" rows="4"
                                   name="present_village" placeholder="Enter Business Description"
                                   class="form-control"
-                                  :class="{ 'is-invalid': form.errors.has('business_description') }" required></textarea>
+                                  :class="{ 'is-invalid': form.errors.has('business_description') }"
+                                  required></textarea>
                         <has-error :form="form" field="business_description"></has-error>
                       </div>
                     </div>
@@ -592,7 +601,8 @@
                         <label>Contact Person's Name</label>
                         <input v-model="form.contact_person_name" type="text" name="contact_person_name"
                                placeholder="Enter contact person name"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }" required>
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }"
+                               required>
                         <has-error :form="form" field="contact_person_name"></has-error>
                       </div>
 
@@ -600,7 +610,8 @@
                         <label>Contact Person's Email</label>
                         <input v-model="form.contact_person_email" type="email" name="contact_person_email"
                                placeholder="Enter contact person email"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }" required>
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }"
+                               required>
                         <has-error :form="form" field="contact_person_email"></has-error>
                       </div>
                     </div>
@@ -895,7 +906,7 @@ export default {
         category: ''
       }),
 
-      errors:'',
+      errors: '',
     }
   },
 
@@ -1211,6 +1222,14 @@ h3 {
 
 .mt-8 {
   margin-top: 8px;
+}
+
+.card-body{
+  padding: 1rem;
+}
+
+.avatar-title{
+  background-color: #423A3D;
 }
 
 </style>
