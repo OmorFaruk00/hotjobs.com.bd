@@ -7,8 +7,43 @@
 
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-body" style="max-width: 80%;margin: 0 auto;">
-              <h1 class="card-title text-center">Read candidate feedback</h1>
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+
+                  <b-form-select
+                    v-model="filter.skill_id"
+                    :options="all_categories"
+                    class="mb-3"
+                    value-field="id"
+                    text-field="name"
+                    disabled-field="notEnabled"
+                    @change="skillWiseJobFilter"
+                  ></b-form-select>
+
+                </div>
+
+                <!--<div class="col-lg-2 col-md-2 col-sm-6">
+
+                  <b-form-select v-model="filter.industry_id" class="mb-3" @change="filterIndustryJob">
+                    <b-form-select-option :value="null">Please select industry</b-form-select-option>
+                    <b-form-select-option v-for="row in industials" :value="row.id">{{
+                        row.name
+                      }}
+                    </b-form-select-option>
+                  </b-form-select>
+
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <b-form-select v-model="filter.employment_status" :options="option_employment_status"></b-form-select>
+                  <div class="mt-3">Selected: <strong>{{ filter.employment_status }}</strong></div>
+                </div>-->
+
+              </div>
+
             </div>
           </div>
         </div>
@@ -53,7 +88,7 @@
               <div id="my-table" v-for="row in lists" class="card-body border mb-2 job-short-box">
 
                 <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
-<!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
+                  <!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
                   <h4 class="card-title">{{ row.job_title }}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">
 
@@ -91,9 +126,10 @@
                     </li>
 
                       <li v-if="row.candidate_requirement.experience_type == 0"><i class="bx bx-briefcase"></i> No Experience</li>
-                      <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{ row.candidate_requirement.minimum_year_of_experience }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
+                      <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{
+                          row.candidate_requirement.minimum_year_of_experience
+                        }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
                     </span>
-
 
 
                   </ul>
@@ -110,11 +146,11 @@
               </div>
 
               <div style="float: right;">
-                  <b-pagination
-                    :total-rows="totalRows"
-                    v-model="currentPage"
-                    :per-page="perPage"
-                  />
+                <b-pagination
+                  :total-rows="totalRows"
+                  v-model="currentPage"
+                  :per-page="perPage"
+                />
               </div>
 
 
@@ -122,7 +158,7 @@
           </div>
         </div>
 
-        <div class="col-lg-10" v-else>
+        <div class="col-lg-10" v-if="!loading && current_jobs.length <= 0">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title text-center">Data not found</h4>
@@ -146,7 +182,13 @@
 
 <script>
 
+import Vue from 'vue'
 import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -172,8 +214,27 @@ export default {
       loading: true,
       id: this.$route.params.id,
       slug: this.$route.params.slug,
-      current_jobs: '',
+
+      option_employment_status: [
+        {value: '', text: 'Select Employment Status'},
+        {value: 'Full Time', text: 'Full Time'},
+        {value: 'Part Time', text: 'Part Time'},
+        {value: 'Contract', text: 'Contract'},
+        {value: 'Internship', text: 'Internship'},
+        {value: 'Freelance', text: 'Freelance'},
+      ],
+      selected: '',
+      current_jobs: [],
+      all_categories: [],
+      industry_id: '',
+      industials: [],
+      filter: new Form({
+        skill_id: this.$route.params.id,
+        industry_id: '',
+        employment_status: '',
+      }),
       without_filter_degrees: '',
+      url: this.$axios.defaults.baseURL,
     }
   },
 
@@ -183,8 +244,8 @@ export default {
       return this.$moment(date).format('MMMM D,YYYY');
     },
 
-    async fetchDegrees() {
-      return await this.$axios.get('fetch-level-of-degree')
+    fetchDegrees() {
+      return this.$axios.get('fetch-level-of-degree')
         .then((response) => {
 
           this.without_filter_degrees = response.data;
@@ -201,7 +262,7 @@ export default {
         })
     },
 
-    generalCategoryJob() {
+    generalCategoryJobShortDetails() {
       var vm = this;
 
       var id = vm.id;
@@ -245,7 +306,7 @@ export default {
 
     },
 
-    fetchJobDetails(job_id,company_name,title,) {
+    fetchJobDetails(job_id, company_name, title,) {
 
       var job_id = job_id;
       var company_name = company_name;
@@ -255,15 +316,115 @@ export default {
       let route = this.$router.resolve(`/${job_id}/${company_name}/${title}`);
       window.open(route.href, '_blank');
 
+    },
+
+    fetchAllCategory() {
+      var vm = this;
+      vm.general_category_loading = true;
+      return  this.$axios.get('skill-all-category')
+        .then((response) => {
+          vm.all_categories = response.data;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    fetchIndustryCategory() {
+      var vm = this;
+      vm.industials_loading = true;
+      return this.$axios.get('industry-category-lists')
+        .then((response) => {
+          vm.industials = response.data;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    skillWiseJobFilter() {
+
+      var items = this.all_categories;
+      var skill_id = this.filter.skill_id;
+
+      let skill_slug = [];
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id == skill_id) {
+          skill_slug.push(items[i].slug);
+        }
+      }
+
+      let separator = "";
+      let strOptions = "";
+      skill_slug.forEach(word => {
+        strOptions += separator + word;
+        separator = " [] ";
+      });
+      this.$router.push(`/job-search/${this.filter.skill_id}/${strOptions}`)
+    },
+
+    job_filter() {
+      var vm = this
+
+      vm.loading = true;
+      this.filter.post(this.url + 'frontend/filter-job')
+
+        .then((response) => {
+
+          vm.current_jobs = '';
+          vm.current_jobs = response.data;
+          vm.loading = false;
+
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+        })
+    },
+
+    filterIndustryJob: function () {
+      let vm = this;
+
+      let industry_id = vm.filter.industry_id;
+      if (industry_id === '') {
+
+        console.log('aa')
+        return vm.current_jobs;
+
+      } else {
+
+        console.log('w')
+        return this.current_jobs.filter(m => m.industry_categories_id === industry_id);
+      }
     }
 
   },
   created() {
-    this.generalCategoryJob();
+    this.generalCategoryJobShortDetails();
     this.fetchDegrees();
+    this.fetchAllCategory();
+    this.fetchIndustryCategory();
   },
+
   computed: {
-    lists () {
+    lists() {
+      var vm = this;
       const items = this.current_jobs
       // Return just page of items needed
       return items.slice(
@@ -271,9 +432,10 @@ export default {
         this.currentPage * this.perPage
       )
     },
-    totalRows () {
+
+    totalRows() {
       return this.current_jobs.length
-    }
+    },
 
   }
 }
