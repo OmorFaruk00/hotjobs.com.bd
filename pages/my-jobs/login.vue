@@ -11,14 +11,14 @@
         <form @submit.prevent="submitLoginForm()">
           <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
             <div class="form-group">
-              <input type="email" name="email" class="form-control" v-model="email" placeholder="Email Address">
+              <input type="email" name="email" class="form-control" v-model="email" placeholder="Email Address" required>
               <small id="email_help" class="form-text text-danger"></small>
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
             <div class="form-group">
-              <input type="password" name="password" class="form-control" v-model="password" placeholder="Password">
+              <input type="password" name="password" class="form-control" v-model="password" placeholder="Password" required>
 
               <small id="password_help" class="form-text text-danger"></small>
 
@@ -133,7 +133,7 @@
             if (error.response.status == 400) {
               Toast.fire({
                 icon: 'warning',
-                title: 'Employee not found'
+                title: error.response.data.error
               });
             }
 
