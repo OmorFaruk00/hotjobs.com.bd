@@ -353,7 +353,7 @@
                       <div class="form-group">
                         <label>Username</label>
                         <input v-model="form.username" type="text" name="username" placeholder="Enter username"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('username') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('username') }" required>
                         <has-error :form="form" field="username"></has-error>
                       </div>
                     </div>
@@ -362,7 +362,7 @@
                       <div class="form-group">
                         <label>Password</label>
                         <input v-model="form.password" type="password" name="password" placeholder="Enter password"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('password') }" required>
                         <has-error :form="form" field="password"></has-error>
                       </div>
                     </div>
@@ -372,8 +372,7 @@
                         <label>Password Confirmation</label>
                         <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                                placeholder="Enter password confirmation"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
-                        >
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" required>
                         <has-error :form="form" field="password_confirmation"></has-error>
                       </div>
                     </div>
@@ -391,7 +390,7 @@
                         <label>Company Name</label>
                         <input v-model="form.company_name" type="text" name="company_name"
                                placeholder="Enter company name"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('company_name') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('company_name') }" required>
                         <has-error :form="form" field="company_name"></has-error>
                       </div>
                     </div>
@@ -412,7 +411,7 @@
                         <label>Company Address</label>
                         <select v-model="form.country_id" name="country_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }"
-                                @change="countryName()">
+                                @change="countryName()" required>
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in countries" :value="row.id">{{ row.countries_name }}</option>
@@ -427,7 +426,7 @@
                       <div class="form-group">
                         <select v-model="form.district_id" name="district_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('district_id') }"
-                                v-on:change="FetchThana">
+                                v-on:change="FetchThana" required>
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in districts" :value="row.id">{{ row.name }}</option>
@@ -441,7 +440,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12" v-if="country_name == 'Bangladesh' ">
                       <div class="form-group">
                         <select v-model="form.thana_id" name="thana_id"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('thana_id') }">
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('thana_id') }" required>
                           <option value="" selected>Select one</option>
 
                           <option v-for="row in thanas" :value="row.id">{{ row.name }}</option>
@@ -455,7 +454,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12" v-if="country_name != 'Bangladesh' ">
                       <div class="form-group">
                         <input v-model="form.city" type="text" name="city" placeholder="Enter City"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('city') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('city') }" required>
                         <has-error :form="form" field="city"></has-error>
                       </div>
                     </div>
@@ -465,7 +464,7 @@
                       <textarea v-model="form.company_address" id="company_address" cols="30" rows="2"
                                 name="present_village" placeholder="Enter company address"
                                 class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('company_address') }"></textarea>
+                                :class="{ 'is-invalid': form.errors.has('company_address') }" required></textarea>
                         <has-error :form="form" field="company_address"></has-error>
                       </div>
                     </div>
@@ -485,7 +484,7 @@
                         <label>Industry Type</label>
                         <select v-model="form.industry_category_id" name="industry_category_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }"
-                                @change="fetchIndustryCategory()">
+                                @change="fetchIndustryCategory()" required>
                           <option value="0" selected>All</option>
 
                           <option v-for="row in industry_categories" :value="row.id">{{ row.name }}</option>
@@ -543,7 +542,7 @@
                         <textarea v-model="form.business_description" id="business_description" cols="30" rows="4"
                                   name="present_village" placeholder="Enter Business Description"
                                   class="form-control"
-                                  :class="{ 'is-invalid': form.errors.has('business_description') }"></textarea>
+                                  :class="{ 'is-invalid': form.errors.has('business_description') }" required></textarea>
                         <has-error :form="form" field="business_description"></has-error>
                       </div>
                     </div>
@@ -593,7 +592,7 @@
                         <label>Contact Person's Name</label>
                         <input v-model="form.contact_person_name" type="text" name="contact_person_name"
                                placeholder="Enter contact person name"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }" required>
                         <has-error :form="form" field="contact_person_name"></has-error>
                       </div>
 
@@ -601,7 +600,7 @@
                         <label>Contact Person's Email</label>
                         <input v-model="form.contact_person_email" type="email" name="contact_person_email"
                                placeholder="Enter contact person email"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }">
+                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }" required>
                         <has-error :form="form" field="contact_person_email"></has-error>
                       </div>
                     </div>
@@ -1105,11 +1104,20 @@ export default {
         })
 
         .catch((error) => {
+
           vm.errors = error.response.data;
           Toast.fire({
             icon: 'warning',
             title: 'There was something wrong'
           });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
         })
     },
 
