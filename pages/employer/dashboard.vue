@@ -15,20 +15,20 @@
             <div class="card-body">
 
               <div class="row ">
-                <div class="col-12 text-right mb-2">
-                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info" :disabled="post_job_loading">
+                <div class="col-12 text-right">
+                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info mb-2" :disabled="post_job_loading">
                     Post Job <span
                     v-if="post_job_loading"><i class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info" :disabled="tutor_status">Tutor
+                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info mb-2" :disabled="tutor_status">Tutor
                     <span
                       v-if="tutor_status"><i class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info" :disabled="dream_job_status">
+                  <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info mb-2" :disabled="dream_job_status">
                     Dream Job <span
                   ><i v-if="dream_job_status" class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="tenderJob" class="tcb-animate-e tcb-info" :disabled="tender_job_status">
+                  <button type="button" @click="tenderJob" class="tcb-animate-e tcb-info mb-2" :disabled="tender_job_status">
                     Tender Job <span
                   ><i v-if="tender_job_status" class="bx bx-check-circle"></i></span></button>
                 </div>
