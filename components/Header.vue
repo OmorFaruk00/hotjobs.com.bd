@@ -1165,6 +1165,14 @@ export default {
             icon: 'warning',
             title: 'There was something wrong'
           });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
         })
     }
 
