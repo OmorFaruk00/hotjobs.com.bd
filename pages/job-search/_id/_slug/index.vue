@@ -39,7 +39,7 @@
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
                   <b-form-select v-model="employment_status" :options="option_employment_status"
-                                 @change="filterEmploymentWiseJob"></b-form-select>
+                                 @change="filterSkillSectionEmploymentWiseJob"></b-form-select>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -236,7 +236,7 @@ export default {
       industrials: [],
       filter: new Form({
         skill_id: this.$route.params.id,
-        industry_id: 'null',
+        industry_id: null,
       }),
       without_filter_degrees: '',
       title_filter: '',
@@ -423,7 +423,7 @@ export default {
       }
     }*/
 
-    filterEmploymentWiseJob() {
+    filterSkillSectionEmploymentWiseJob() {
       var vm = this
       vm.title_filter = '';
       vm.loading = true;
@@ -487,6 +487,16 @@ export default {
     totalRows() {
       return this.current_jobs.length
     },
+
+  },
+
+  beforeMount() {
+    var search_token = window.$nuxt.$cookies.get('search_token');
+
+    if (search_token){
+      this.title_filter = search_token.search_job_title;
+      window.$nuxt.$cookies.remove('search_token');
+    }
 
   }
 }
