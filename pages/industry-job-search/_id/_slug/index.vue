@@ -183,8 +183,6 @@
 </template>
 
 <script>
-import {Form} from "vform";
-
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
@@ -406,7 +404,7 @@ export default {
       vm.title_filter = '';
       vm.loading = true;
 
-      this.$axios.post('frontend/filter-employment-wise-job', {
+      this.$axios.post('frontend/filter-industry-employment-wise-job', {
 
         employment_status: vm.employment_status,
         industry_id: vm.filter.industry_id,

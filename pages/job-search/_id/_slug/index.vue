@@ -38,14 +38,14 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
+                  <b-form-select v-model="employment_status" :options="option_employment_status"
+                                 @change="filterEmploymentWiseJob"></b-form-select>
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
                   <input type="text" class="form-control" v-model="title_filter"
                          placeholder="job title or company name">
                 </div>
-
-                <!--<div class="col-lg-2 col-md-2 col-sm-6">
-                  <b-form-select v-model="filter.employment_status" :options="option_employment_status"></b-form-select>
-                  <div class="mt-3">Selected: <strong>{{ filter.employment_status }}</strong></div>
-                </div>-->
 
               </div>
 
@@ -240,6 +240,7 @@ export default {
       }),
       without_filter_degrees: '',
       title_filter: '',
+      employment_status: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -378,6 +379,7 @@ export default {
     jobFilterIndustryWise() {
       var vm = this
       vm.title_filter = '';
+      vm.employment_status = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
@@ -419,6 +421,43 @@ export default {
        return lists;
       }
     }*/
+
+    filterEmploymentWiseJob() {
+      var vm = this
+      vm.title_filter = '';
+      vm.loading = true;
+
+      this.$axios.post('frontend/filter-skill-employment-wise-job', {
+
+        employment_status: vm.employment_status,
+        industry_id: vm.filter.industry_id,
+        skill_id: vm.filter.skill_id,
+
+      })
+        .then((response) => {
+
+          vm.current_jobs = '';
+          vm.current_jobs = response.data;
+          vm.loading = false;
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+        })
+
+    },
 
   },
   created() {
