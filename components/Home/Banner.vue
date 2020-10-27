@@ -97,15 +97,18 @@ export default {
       var vm = this;
 
       if (!vm.job_title) {
-        Toast.fire({
+        /*Toast.fire({
           icon: 'info',
           title: 'Please type job title'
-        });
+        });*/
+
+        Swal.fire('Please type job title')
       } else if (!vm.category_id) {
-        Toast.fire({
+        /*Toast.fire({
           icon: 'info',
           title: 'Please select category'
-        });
+        });*/
+        Swal.fire('Please select category')
       } else {
         var items = vm.all_categories;
         var category_id = vm.category_id;
