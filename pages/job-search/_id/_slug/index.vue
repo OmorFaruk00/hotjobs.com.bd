@@ -25,11 +25,11 @@
 
                 </div>
 
-                <!--<div class="col-lg-2 col-md-2 col-sm-6">
+                <div class="col-lg-2 col-md-2 col-sm-6">
 
-                  <b-form-select v-model="filter.industry_id" class="mb-3" @change="filterIndustryJob">
+                  <b-form-select v-model="filter.industry_id" class="mb-3" @change="jobFilterIndustryWise">
                     <b-form-select-option :value="null">Please select industry</b-form-select-option>
-                    <b-form-select-option v-for="row in industials" :value="row.id">{{
+                    <b-form-select-option v-for="row in industrials" :value="row.id">{{
                         row.name
                       }}
                     </b-form-select-option>
@@ -38,6 +38,10 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
+                  <input type="text" class="form-control" v-model="title_filter" placeholder="job title or company name">
+                </div>
+
+                <!--<div class="col-lg-2 col-md-2 col-sm-6">
                   <b-form-select v-model="filter.employment_status" :options="option_employment_status"></b-form-select>
                   <div class="mt-3">Selected: <strong>{{ filter.employment_status }}</strong></div>
                 </div>-->
@@ -146,6 +150,7 @@
               </div>
 
               <div style="float: right;">
+
                 <b-pagination
                   :total-rows="totalRows"
                   v-model="currentPage"
@@ -227,11 +232,11 @@ export default {
       current_jobs: [],
       all_categories: [],
       industry_id: '',
-      industials: [],
+      industrials: [],
+      title_filter:'',
       filter: new Form({
         skill_id: this.$route.params.id,
-        industry_id: '',
-        employment_status: '',
+        industry_id: 'null',
       }),
       without_filter_degrees: '',
       url: this.$axios.defaults.baseURL,
@@ -335,10 +340,10 @@ export default {
 
     fetchIndustryCategory() {
       var vm = this;
-      vm.industials_loading = true;
+      // vm.industrials_loading = true;
       return this.$axios.get('industry-category-lists')
         .then((response) => {
-          vm.industials = response.data;
+          vm.industrials = response.data;
         })
         .catch((error) => {
           Toast.fire({
@@ -369,7 +374,7 @@ export default {
       this.$router.push(`/job-search/${this.filter.skill_id}/${strOptions}`)
     },
 
-    job_filter() {
+    jobFilterIndustryWise() {
       var vm = this
 
       vm.loading = true;
@@ -398,21 +403,21 @@ export default {
         })
     },
 
-    filterIndustryJob: function () {
+    /*filterIndustryJob: function () {
       let vm = this;
 
       let industry_id = vm.filter.industry_id;
       if (industry_id === '') {
 
-        console.log('aa')
         return vm.current_jobs;
+        console.log('aa')
 
       } else {
 
-        console.log('w')
-        return this.current_jobs.filter(m => m.industry_categories_id === industry_id);
+        var lists =  this.current_jobs.filter(m => m.industry_categories_id === industry_id);
+       return lists;
       }
-    }
+    }*/
 
   },
   created() {
@@ -425,7 +430,11 @@ export default {
   computed: {
     lists() {
       var vm = this;
-      const items = this.current_jobs
+      var items = this.current_jobs.filter(current_jobs =>{
+
+        return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
+
+      })
       // Return just page of items needed
       return items.slice(
         (this.currentPage - 1) * this.perPage,
