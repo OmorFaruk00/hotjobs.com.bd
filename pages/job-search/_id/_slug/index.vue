@@ -42,9 +42,9 @@
                                  @change="filterEmploymentWiseJob"></b-form-select>
                 </div>
 
-                <div class="col-lg-2 col-md-2 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                   <input type="text" class="form-control" v-model="title_filter"
-                         placeholder="job title or company name">
+                         placeholder="job title or company name or job location">
                 </div>
 
               </div>
@@ -241,6 +241,7 @@ export default {
       without_filter_degrees: '',
       title_filter: '',
       employment_status: '',
+      job_location: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -473,7 +474,7 @@ export default {
       var items = this.current_jobs.filter(current_jobs => {
 
         // return current_jobs
-        return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
+        return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.more_job_inforamtion.job_location_address.toLowerCase().includes(this.title_filter.toLowerCase())
 
       })
       // Return just page of items needed
