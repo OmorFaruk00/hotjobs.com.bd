@@ -10,6 +10,7 @@
             <div class="card-body">
 
               <div class="row">
+
                 <div class="col-lg-2 col-md-2 col-sm-6">
 
                   <b-form-select
@@ -34,6 +35,10 @@
                     </b-form-select-option>
                   </b-form-select>
 
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <b-form-select v-model="employment_status" :options="option_employment_status" @change="filterEmploymentWiseJob"></b-form-select>
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
@@ -198,6 +203,15 @@ export default {
       all_categories:[],
       title_filter:'',
       without_filter_degrees: '',
+      option_employment_status: [
+        {value: '', text: 'Select Employment Status'},
+        {value: 'Full Time', text: 'Full Time'},
+        {value: 'Part Time', text: 'Part Time'},
+        {value: 'Contract', text: 'Contract'},
+        {value: 'Internship', text: 'Internship'},
+        {value: 'Freelance', text: 'Freelance'},
+      ],
+      employment_status:'',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -337,6 +351,7 @@ export default {
     jobFilterIndustryWise() {
       var vm = this
       vm.title_filter = '';
+      vm.employment_status = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
@@ -363,11 +378,50 @@ export default {
         })
     },
 
+    filterEmploymentWiseJob() {
+      var vm = this
+      vm.title_filter = '';
+      vm.loading = true;
+
+      this.$axios.post('frontend/filter-employment-wise-job', {
+
+        employment_status: vm.employment_status,
+        industry_id: vm.filter.industry_id,
+        skill_id: vm.filter.skill_id,
+
+      })
+        .then((response) => {
+
+          vm.current_jobs = '';
+          vm.current_jobs = response.data;
+          vm.loading = false;
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+        })
+
+    },
+
   },
+
   created() {
     this.industryJob();
     this.fetchDegrees();
   },
+
   computed: {
     lists () {
       const items = this.current_jobs.filter(current_jobs =>{
@@ -386,6 +440,7 @@ export default {
       return this.current_jobs.length
     }
   },
+
   beforeMount() {
     this.fetchIndustryCategory();
     this.fetchAllCategory();
