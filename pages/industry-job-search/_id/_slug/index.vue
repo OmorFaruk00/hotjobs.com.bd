@@ -38,11 +38,13 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
-                  <b-form-select v-model="employment_status" :options="option_employment_status" @change="filterEmploymentWiseJob"></b-form-select>
+                  <b-form-select v-model="employment_status" :options="option_employment_status"
+                                 @change="filterEmploymentWiseJob"></b-form-select>
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
-                  <input type="text" class="form-control" v-model="title_filter" placeholder="job title or company name">
+                  <input type="text" class="form-control" v-model="title_filter"
+                         placeholder="job title or company name">
                 </div>
 
               </div>
@@ -90,7 +92,7 @@
               <div v-for="row in lists" class="card-body border mb-2 job-short-box">
 
                 <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
-<!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
+                  <!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
                   <h4 class="card-title">{{ row.job_title }}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">
 
@@ -127,7 +129,9 @@
                     </li>
 
                     <li v-if="row.candidate_requirement.experience_type == 0"><i class="bx bx-briefcase"></i> No Experience</li>
-                      <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{ row.candidate_requirement.minimum_year_of_experience }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
+                      <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{
+                          row.candidate_requirement.minimum_year_of_experience
+                        }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
                     </span>
                   </ul>
 
@@ -181,6 +185,25 @@
 <script>
 import {Form} from "vform";
 
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 export default {
   name: "index",
   validate({params}) {
@@ -191,17 +214,17 @@ export default {
     return {
       currentPageIndustrials: 1,
       perPage: '20',
-      loading:true,
+      loading: true,
       id: this.$route.params.id,
       slug: this.$route.params.slug,
       current_jobs: [],
-      industrials:[],
+      industrials: [],
       filter: new Form({
         industry_id: this.$route.params.id,
-        skill_id:null
+        skill_id: null
       }),
-      all_categories:[],
-      title_filter:'',
+      all_categories: [],
+      title_filter: '',
       without_filter_degrees: '',
       option_employment_status: [
         {value: '', text: 'Select Employment Status'},
@@ -211,7 +234,7 @@ export default {
         {value: 'Internship', text: 'Internship'},
         {value: 'Freelance', text: 'Freelance'},
       ],
-      employment_status:'',
+      employment_status: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -246,7 +269,7 @@ export default {
       var id = vm.id;
       var slug = vm.slug;
 
-      this.$axios.get('industry-wise-job/'+ id + '/' + slug).then(function (response) {
+      this.$axios.get('industry-wise-job/' + id + '/' + slug).then(function (response) {
 
         vm.current_jobs = response.data;
         vm.loading = false;
@@ -284,7 +307,7 @@ export default {
 
     },
 
-    fetchJobDetails(job_id,company_name,title,) {
+    fetchJobDetails(job_id, company_name, title,) {
 
       var job_id = job_id;
       var company_name = company_name;
@@ -423,8 +446,8 @@ export default {
   },
 
   computed: {
-    lists () {
-      const items = this.current_jobs.filter(current_jobs =>{
+    lists() {
+      const items = this.current_jobs.filter(current_jobs => {
 
         return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
 
@@ -436,7 +459,7 @@ export default {
         this.currentPageIndustrials * this.perPage
       )
     },
-    totalRows () {
+    totalRows() {
       return this.current_jobs.length
     }
   },
