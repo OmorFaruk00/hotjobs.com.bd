@@ -38,7 +38,8 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
-                  <input type="text" class="form-control" v-model="title_filter" placeholder="job title or company name">
+                  <input type="text" class="form-control" v-model="title_filter"
+                         placeholder="job title or company name">
                 </div>
 
                 <!--<div class="col-lg-2 col-md-2 col-sm-6">
@@ -233,12 +234,12 @@ export default {
       all_categories: [],
       industry_id: '',
       industrials: [],
-
       filter: new Form({
         skill_id: this.$route.params.id,
         industry_id: 'null',
       }),
       without_filter_degrees: '',
+      title_filter: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -326,7 +327,7 @@ export default {
     fetchAllCategory() {
       var vm = this;
       vm.general_category_loading = true;
-      return  this.$axios.get('skill-all-category')
+      return this.$axios.get('skill-all-category')
         .then((response) => {
           vm.all_categories = response.data;
         })
@@ -376,7 +377,7 @@ export default {
 
     jobFilterIndustryWise() {
       var vm = this
-
+      vm.title_filter = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
@@ -430,8 +431,9 @@ export default {
   computed: {
     lists() {
       var vm = this;
-      var items = this.current_jobs.filter(current_jobs =>{
+      var items = this.current_jobs.filter(current_jobs => {
 
+        // return current_jobs
         return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
 
       })

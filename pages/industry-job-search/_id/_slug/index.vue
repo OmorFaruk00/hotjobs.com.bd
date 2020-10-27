@@ -336,7 +336,7 @@ export default {
 
     jobFilterIndustryWise() {
       var vm = this
-
+      vm.title_filter = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
