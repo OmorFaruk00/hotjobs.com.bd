@@ -7,8 +7,40 @@
 
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-body" style="max-width: 80%;margin: 0 auto;">
-              <h1 class="card-title text-center">Read candidate feedback</h1>
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-6">
+
+                  <b-form-select
+                    v-model="filter.industry_id"
+                    :options="industrials"
+                    class="mb-3"
+                    value-field="id"
+                    text-field="name"
+                    disabled-field="notEnabled"
+                    @change="industrialWiseJobFilter"
+                  ></b-form-select>
+
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+
+                  <b-form-select v-model="filter.skill_id" class="mb-3" @change="jobFilterIndustryWise">
+                    <b-form-select-option :value="null">Please select category</b-form-select-option>
+                    <b-form-select-option v-for="row in all_categories" :value="row.id">{{
+                        row.name
+                      }}
+                    </b-form-select-option>
+                  </b-form-select>
+
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <input type="text" class="form-control" v-model="title_filter" placeholder="job title or company name">
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -33,7 +65,7 @@
 
       </div>
 
-      <div class="row" v-if="current_jobs">
+      <div class="row" v-if="current_jobs && !loading">
         <div class="col-lg-10" v-if="current_jobs.length > 0">
           <div class="card">
             <div class="card-body">
@@ -50,7 +82,7 @@
                 </div>
               </div>
 
-              <div v-for="row in current_jobs" class="card-body border mb-2 job-short-box">
+              <div v-for="row in lists" class="card-body border mb-2 job-short-box">
 
                 <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
 <!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
@@ -106,10 +138,11 @@
 
               </div>
 
-              <div style="float: right;">
+              <div style="float: right;" v-if="totalRows > perPage">
+
                 <b-pagination
                   :total-rows="totalRows"
-                  v-model="currentPage"
+                  v-model="currentPageIndustrials"
                   :per-page="perPage"
                 />
               </div>
@@ -141,6 +174,8 @@
 </template>
 
 <script>
+import {Form} from "vform";
+
 export default {
   name: "index",
   validate({params}) {
@@ -149,13 +184,21 @@ export default {
   },
   data() {
     return {
-      currentPage: 1,
+      currentPageIndustrials: 1,
       perPage: '20',
       loading:true,
       id: this.$route.params.id,
       slug: this.$route.params.slug,
-      current_jobs: '',
+      current_jobs: [],
+      industrials:[],
+      filter: new Form({
+        industry_id: this.$route.params.id,
+        skill_id:null
+      }),
+      all_categories:[],
+      title_filter:'',
       without_filter_degrees: '',
+      url: this.$axios.defaults.baseURL,
     }
   },
 
@@ -236,7 +279,89 @@ export default {
       let route = this.$router.resolve(`/${job_id}/${company_name}/${title}`);
       window.open(route.href, '_blank');
 
-    }
+    },
+
+    async fetchIndustryCategory() {
+      var vm = this;
+      vm.industrials_loading = true;
+      return await this.$axios.get('industry-category-lists')
+        .then((response) => {
+          vm.industrials = response.data;
+          vm.industrials_loading = false;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    industrialWiseJobFilter() {
+
+      var items = this.industrials;
+      var industry_id = this.filter.industry_id;
+
+      let industrial_slug = [];
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id == industry_id) {
+          industrial_slug.push(items[i].slug);
+        }
+      }
+
+      let separator = "";
+      let strOptions = "";
+      industrial_slug.forEach(word => {
+        strOptions += separator + word;
+        separator = " [] ";
+      });
+
+      this.$router.push(`/industry-job-search/${this.filter.industry_id}/${strOptions}`)
+    },
+
+    async fetchAllCategory() {
+      var vm = this;
+      vm.general_category_loading = true;
+      return await this.$axios.get('skill-all-category')
+        .then((response) => {
+          vm.all_categories = response.data;
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+        })
+    },
+
+    jobFilterIndustryWise() {
+      var vm = this
+
+      vm.loading = true;
+      this.filter.post(this.url + 'frontend/filter-job')
+
+        .then((response) => {
+
+          vm.current_jobs = '';
+          vm.current_jobs = response.data;
+          vm.loading = false;
+
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+        })
+    },
 
   },
   created() {
@@ -245,17 +370,25 @@ export default {
   },
   computed: {
     lists () {
-      const items = this.current_jobs
+      const items = this.current_jobs.filter(current_jobs =>{
+
+        return current_jobs.job_title.toLowerCase().includes(this.title_filter.toLowerCase()) || current_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
+
+      })
+
       // Return just page of items needed
       return items.slice(
-        (this.currentPage - 1) * this.perPage,
-        this.currentPage * this.perPage
+        (this.currentPageIndustrials - 1) * this.perPage,
+        this.currentPageIndustrials * this.perPage
       )
     },
     totalRows () {
       return this.current_jobs.length
     }
-
+  },
+  beforeMount() {
+    this.fetchIndustryCategory();
+    this.fetchAllCategory();
   }
 }
 </script>

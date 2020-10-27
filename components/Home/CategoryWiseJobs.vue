@@ -14,14 +14,14 @@
                       :class="general_category_step ? 'active' : ''">Functional
               </button>
 
-              <button @click="industialsStep" type="button" class="btn btn-outline-secondary"
-                      :class="industials_step ? 'active' : ''">Industrial
+              <button @click="industrialsStep" type="button" class="btn btn-outline-secondary"
+                      :class="industrials_step ? 'active' : ''">Industrial
               </button>
 
               <br>-->
 
               <button type="button" @click="generalCategoryStep" class="tcb-animate-e tcb-info" :disabled="general_category_step">Functional <span v-if="general_category_step"><i class="bx bx-check-circle"></i></span></button>
-              <button type="button" @click="industialsStep" class="tcb-animate-e tcb-info" :disabled="industials_step">Industrial <span v-if="industials_step"><i class="bx bx-check-circle"></i></span></button>
+              <button type="button" @click="industrialsStep" class="tcb-animate-e tcb-info" :disabled="industrials_step">Industrial <span v-if="industrials_step"><i class="bx bx-check-circle"></i></span></button>
 
 
 
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="row" v-if="industials_loading">
+        <div class="row" v-if="industrials_loading">
           <div class="col-lg-12 col-md-12 col-sm-12 text-center">
             <i class="bx bx-loader bx-spin" style="font-size: 40px;color: #EC1A3A"></i>
           </div>
@@ -59,8 +59,8 @@
           </div>
         </div>
 
-        <div class="row" v-if="industials_step">
-          <div v-for="(row,key) in industials" class="col-lg-3 col-md-3 col-sm-12">
+        <div class="row" v-if="industrials_step">
+          <div v-for="(row,key) in industrials" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
                 <a :href="`/industry-job-search/${row.id}/${row.slug}`" target="_blank">{{ row.name }}
@@ -106,12 +106,12 @@ export default {
     return {
       loading: true,
       general_category_step: true,
-      industials_step: false,
+      industrials_step: false,
       general_category_loading:true,
-      industials_loading:false,
+      industrials_loading:false,
       url: this.$axios.defaults.baseURL,
       general_categories: '',
-      industials: '',
+      industrials: '',
     }
   },
 
@@ -135,11 +135,11 @@ export default {
 
     async fetchIndustryCategory() {
       var vm = this;
-      vm.industials_loading = true;
+      vm.industrials_loading = true;
       return await this.$axios.get('industry-category-lists')
         .then((response) => {
-          vm.industials = response.data;
-          vm.industials_loading = false;
+          vm.industrials = response.data;
+          vm.industrials_loading = false;
         })
         .catch((error) => {
           Toast.fire({
@@ -151,14 +151,14 @@ export default {
 
     generalCategoryStep() {
       this.general_category_step = true;
-      this.industials_step = false;
+      this.industrials_step = false;
       this.general_categories='';
-      this.industials='';
+      this.industrials='';
       this.fetchGeneralCategory();
     },
 
-    industialsStep() {
-      this.industials_step = true;
+    industrialsStep() {
+      this.industrials_step = true;
       this.general_category_step = false;
       this.fetchIndustryCategory();
     },

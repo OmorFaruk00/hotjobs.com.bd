@@ -72,7 +72,7 @@
 
       </div>
 
-      <div class="row" v-if="current_jobs">
+      <div class="row" v-if="current_jobs && !loading">
         <div class="col-lg-10" v-if="current_jobs.length > 0">
           <div class="card">
             <div class="card-body">
@@ -149,7 +149,7 @@
 
               </div>
 
-              <div style="float: right;">
+              <div style="float: right;" v-if="totalRows > perPage">
 
                 <b-pagination
                   :total-rows="totalRows"
@@ -163,7 +163,7 @@
           </div>
         </div>
 
-        <div class="col-lg-10" v-if="!loading && current_jobs.length <= 0">
+        <div class="col-lg-10" v-else>
           <div class="card">
             <div class="card-body">
               <h4 class="card-title text-center">Data not found</h4>
@@ -233,7 +233,7 @@ export default {
       all_categories: [],
       industry_id: '',
       industrials: [],
-      title_filter:'',
+
       filter: new Form({
         skill_id: this.$route.params.id,
         industry_id: 'null',
