@@ -42,17 +42,22 @@
                                  @change="filterEmploymentWiseJob"></b-form-select>
                 </div>
 
-                <div class="col-lg-2 col-md-2 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6">
                   <div class="input-group mb-3">
-                    <input v-model="salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="Expected salary"
-                           aria-label="Expected salary" aria-describedby="basic-addon2">
+
+                    <input v-model="min_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="min salary"
+                           aria-label="min-salary" aria-describedby="min-salary">
+
+                    <input v-model="max_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="max salary"
+                           aria-label="max-salary" aria-describedby="max-salary">
+
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" @click="salaryWiseIndustryJobFilter"><i class="bx bx-search" title="Submit"></i></button>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                   <input type="text" class="form-control" v-model="title_filter"
                          placeholder="job title or company name or job location">
                 </div>
@@ -247,7 +252,8 @@ export default {
         {value: 'Freelance', text: 'Freelance'},
       ],
       employment_status: '',
-      salary: '',
+      min_salary: '',
+      max_salary: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -388,7 +394,8 @@ export default {
       var vm = this
       vm.title_filter = '';
       vm.employment_status = '';
-      vm.salary = '';
+      vm.min_salary = '';
+      vm.max_salary = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
@@ -418,7 +425,8 @@ export default {
     filterEmploymentWiseJob() {
       var vm = this
       vm.title_filter = '';
-      vm.salary = '';
+      vm.min_salary = '';
+      vm.max_salary = '';
       vm.loading = true;
 
       this.$axios.post('frontend/filter-industry-employment-wise-job', {
@@ -457,11 +465,18 @@ export default {
 
       var vm = this;
 
-      if (!vm.salary){
+      if (!vm.min_salary){
 
         Toast.fire({
           icon: 'warning',
-          title: 'Please type expected salary'
+          title: 'Please type min salary'
+        });
+
+      }else if (!vm.max_salary){
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please type max salary'
         });
 
       }else {
@@ -474,7 +489,8 @@ export default {
           employment_status: vm.employment_status,
           industry_id: vm.filter.industry_id,
           skill_id: vm.filter.skill_id,
-          salary: vm.salary,
+          min_salary: vm.min_salary,
+          max_salary: vm.max_salary,
 
         })
           .then((response) => {

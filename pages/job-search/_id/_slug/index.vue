@@ -499,7 +499,7 @@ export default {
           title: 'Please type min salary'
         });
 
-      }else if(!vm.min_salary){
+      }else if(!vm.max_salary){
 
         Toast.fire({
           icon: 'warning',
