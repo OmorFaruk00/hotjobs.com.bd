@@ -42,9 +42,23 @@
                                  @change="filterEmploymentWiseJob"></b-form-select>
                 </div>
 
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <div class="input-group mb-3">
+                    <input v-model="salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="Expected salary"
+                           aria-label="Expected salary" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" @click="salaryWiseIndustryJobFilter"><i class="bx bx-search" title="Submit"></i></button>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <input type="text" class="form-control" v-model="title_filter"
                          placeholder="job title or company name or job location">
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <button class="btn btn-warning" @click="searchCredentialRefresh" title="Search Credential Refresh"><i class="bx bx-revision"></i></button>
                 </div>
 
               </div>
@@ -233,6 +247,7 @@ export default {
         {value: 'Freelance', text: 'Freelance'},
       ],
       employment_status: '',
+      salary: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -373,6 +388,7 @@ export default {
       var vm = this
       vm.title_filter = '';
       vm.employment_status = '';
+      vm.salary = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
 
@@ -402,6 +418,7 @@ export default {
     filterEmploymentWiseJob() {
       var vm = this
       vm.title_filter = '';
+      vm.salary = '';
       vm.loading = true;
 
       this.$axios.post('frontend/filter-industry-employment-wise-job', {
@@ -435,6 +452,60 @@ export default {
         })
 
     },
+
+    salaryWiseIndustryJobFilter(){
+
+      var vm = this;
+
+      if (!vm.salary){
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please type expected salary'
+        });
+
+      }else {
+
+        vm.title_filter = '';
+        vm.loading = true;
+
+        this.$axios.post('frontend/salary-wise-industry-job-filter', {
+
+          employment_status: vm.employment_status,
+          industry_id: vm.filter.industry_id,
+          skill_id: vm.filter.skill_id,
+          salary: vm.salary,
+
+        })
+          .then((response) => {
+
+            vm.current_jobs = '';
+            vm.current_jobs = response.data;
+            vm.loading = false;
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Problem'
+              });
+            }
+
+          })
+
+      }
+    },
+
+    searchCredentialRefresh(){
+      window.location.reload();
+    }
 
   },
 

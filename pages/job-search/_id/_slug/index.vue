@@ -44,7 +44,7 @@
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
                   <div class="input-group mb-3">
-                    <input v-model="salary" type="number" min="0" class="form-control" placeholder="Expected salary"
+                    <input v-model="salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="Expected salary"
                            aria-label="Expected salary" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" @click="salaryWiseCategoryJobFilter"><i class="bx bx-search" title="Submit"></i></button>
