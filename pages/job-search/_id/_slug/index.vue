@@ -37,15 +37,31 @@
 
                 </div>
 
-                <div class="col-lg-2 col-md-2 col-sm-6">
+                <div class="col-lg-2 col-md-2 col-sm-6 mb-3">
                   <b-form-select v-model="employment_status" :options="option_employment_status"
                                  @change="filterSkillSectionEmploymentWiseJob"></b-form-select>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <div class="input-group mb-3">
+                    <input v-model="salary" type="number" min="0" class="form-control" placeholder="Expected salary"
+                           aria-label="Expected salary" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" @click="salaryWiseCategoryJobFilter"><i class="bx bx-search" title="Submit"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                   <input type="text" class="form-control" v-model="title_filter"
                          placeholder="job title or company name or job location">
                 </div>
+
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+                  <button class="btn btn-warning" @click="searchCredentialRefresh" title="Search Credential Refresh"><i class="bx bx-revision"></i></button>
+                </div>
+
 
               </div>
 
@@ -242,6 +258,7 @@ export default {
       title_filter: '',
       employment_status: '',
       job_location: '',
+      salary: '',
       url: this.$axios.defaults.baseURL,
     }
   },
@@ -380,6 +397,7 @@ export default {
     jobFilterIndustryWise() {
       var vm = this
       vm.title_filter = '';
+      vm.salary = '';
       vm.employment_status = '';
       vm.loading = true;
       this.filter.post(this.url + 'frontend/filter-job')
@@ -426,6 +444,7 @@ export default {
     filterSkillSectionEmploymentWiseJob() {
       var vm = this
       vm.title_filter = '';
+      vm.salary = '';
       vm.loading = true;
 
       this.$axios.post('frontend/filter-skill-employment-wise-job', {
@@ -460,6 +479,60 @@ export default {
 
     },
 
+    salaryWiseCategoryJobFilter(){
+
+      var vm = this;
+
+      if (!vm.salary){
+
+        Toast.fire({
+          icon: 'warning',
+          title: 'Please type expected salary'
+        });
+
+      }else {
+
+        vm.title_filter = '';
+        vm.loading = true;
+
+        this.$axios.post('frontend/salary-wise-category-job-filter', {
+
+          employment_status: vm.employment_status,
+          industry_id: vm.filter.industry_id,
+          skill_id: vm.filter.skill_id,
+          salary: vm.salary,
+
+        })
+          .then((response) => {
+
+            vm.current_jobs = '';
+            vm.current_jobs = response.data;
+            vm.loading = false;
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Problem'
+              });
+            }
+
+          })
+
+      }
+    },
+
+    searchCredentialRefresh(){
+      window.location.reload();
+    }
+
   },
   created() {
     this.generalCategoryJobShortDetails();
@@ -493,7 +566,7 @@ export default {
   beforeMount() {
     var search_token = window.$nuxt.$cookies.get('search_token');
 
-    if (search_token){
+    if (search_token) {
       this.title_filter = search_token.search_job_title;
       window.$nuxt.$cookies.remove('search_token');
     }
