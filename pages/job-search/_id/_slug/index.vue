@@ -671,12 +671,15 @@ export default {
 }
 
 .dream-job-box {
-  background-image: linear-gradient(90deg, #909090, #EBB38B);
+  /*background-image: linear-gradient(90deg, #909090, #EBB38B);*/
   padding: 10px 25px;
+  border: 1px solid transparent;
+  border-image: linear-gradient(45deg,#EE453B,#307BF7,#4CE603);
+  border-image-slice: 1;
 }
 
 .dream-job-box h4 {
-  color: #fff !important;
+  color: #EC1A3A !important;
   font-size: 17px;
 }
 
@@ -689,7 +692,7 @@ export default {
   font-size: 12px;
 }
 
-.dream-job-box img {
+/*.dream-job-box img {
   height: 100px;
-}
+}*/
 </style>
