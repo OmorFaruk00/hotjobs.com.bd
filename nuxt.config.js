@@ -135,8 +135,8 @@ export default {
   // },
 
   sitemap: {
-    hostname: 'http://127.0.0.1:3001/',
-    // hostname: 'https://hotjobs.com.bd/',
+    // hostname: 'http://127.0.0.1:3001/',
+    hostname: 'https://hotjobs.com.bd/',
     sitemaps: [
       /*{
         path: '/category-wise-job-details.xml',
@@ -196,8 +196,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },
