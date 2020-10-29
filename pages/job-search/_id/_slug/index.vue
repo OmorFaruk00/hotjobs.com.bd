@@ -45,15 +45,18 @@
                 <div class="col-lg-3 col-md-3 col-sm-6">
                   <div class="input-group mb-3">
 
-                    <input v-model="min_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="min salary"
+                    <input v-model="min_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48"
+                           class="form-control" placeholder="min salary"
                            aria-label="min-salary" aria-describedby="min-salary">
 
-                    <input v-model="max_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48" class="form-control" placeholder="max salary"
+                    <input v-model="max_salary" type="number" min="1" step="1" onkeypress="return event.charCode >= 48"
+                           class="form-control" placeholder="max salary"
                            aria-label="max-salary" aria-describedby="max-salary">
 
 
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" @click="salaryWiseCategoryJobFilter"><i class="bx bx-search" title="Submit"></i></button>
+                      <button class="btn btn-outline-secondary" type="button" @click="salaryWiseCategoryJobFilter"><i
+                        class="bx bx-search" title="Submit"></i></button>
                     </div>
                   </div>
                 </div>
@@ -65,7 +68,8 @@
 
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
-                  <button class="btn btn-warning" @click="searchCredentialRefresh" title="Search Credential Refresh"><i class="bx bx-revision"></i></button>
+                  <button class="btn btn-warning" @click="searchCredentialRefresh" title="Search Credential Refresh"><i
+                    class="bx bx-revision"></i></button>
                 </div>
 
 
@@ -95,12 +99,12 @@
 
       </div>
 
-      <div class="row" v-if="current_jobs && !loading">
-        <div class="col-lg-10" v-if="current_jobs.length > 0">
+      <div class="row" v-if="(current_jobs || dream_jobs) && !loading">
+        <div class="col-lg-10" v-if="current_jobs.length > 0 || dream_jobs.length > 0">
           <div class="card">
             <div class="card-body">
 
-              <div class="mb-2">
+              <div class="mb-2" v-if="current_jobs.length > 0">
                 <div class="row">
                   <div class="col-lg-2 col-md-2 col-sm-12">
                     <select v-model="perPage" class="form-control">
@@ -112,7 +116,48 @@
                 </div>
               </div>
 
-              <div id="my-table" v-for="row in lists" class="card-body border mb-2 job-short-box">
+              <!--dream job-->
+              <div class="row">
+
+                <div v-for="dream_job in fetchDreamJobData" class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="card-body mb-2 dream-job-box">
+                    <a :href="`/d/${dream_job.id}/${dream_job.employer.slug}/${dream_job.slug}`" target="_blank">
+
+                      <span class="row">
+                        <span class="col-9">
+
+                      <h4 class="card-title">{{ dream_job.title }}</h4>
+                      <h6 class="card-subtitle mb-2 text-muted"><span>{{ dream_job.employer.company_name }}</span></h6>
+                        <ul class="job-preview-list">
+
+                        <li v-if="dream_job.employment_status">
+                          <i class="bx bx-map"></i>
+                          <span>{{ dream_job.employment_status }}</span>
+                        </li>
+
+                        <li>
+                          <i class="bx bx-calendar"></i>
+
+                          Application Deadline:
+                          <strong v-html="dateFormat(dream_job.application_deadline)"></strong>
+                        </li>
+                      </ul>
+                      </span>
+
+
+                      <span class="col-3 text-right" v-if="dream_job.employer.company_logo">
+                          <img :src="`${url}${dream_job.employer.company_logo}`" :alt="dream_job.employer.company_name" class="img-fluid">
+                        </span>
+                      </span>
+
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div v-for="row in lists" class="card-body border mb-2 job-short-box">
 
                 <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
                   <!--                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">-->
@@ -186,7 +231,7 @@
           </div>
         </div>
 
-        <div class="col-lg-10" v-else>
+        <div class="col-lg-10" v-if="current_jobs== '' && dream_jobs== '' && !loading">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title text-center">Data not found</h4>
@@ -253,6 +298,7 @@ export default {
       ],
       selected: '',
       current_jobs: [],
+      dream_jobs: [],
       all_categories: [],
       industry_id: '',
       industrials: [],
@@ -302,7 +348,8 @@ export default {
 
       this.$axios.get('general-category-wise-job/' + id + '/' + slug).then(function (response) {
 
-        vm.current_jobs = response.data;
+        vm.current_jobs = response.data.current_jobs;
+        vm.dream_jobs = response.data.dream_jobs;
         vm.loading = false;
 
       }).catch(function (error) {
@@ -413,7 +460,8 @@ export default {
         .then((response) => {
 
           vm.current_jobs = '';
-          vm.current_jobs = response.data;
+          vm.current_jobs = response.data.current_jobs;
+          vm.dream_jobs = response.data.dream_jobs;
           vm.loading = false;
 
         })
@@ -466,7 +514,8 @@ export default {
         .then((response) => {
 
           vm.current_jobs = '';
-          vm.current_jobs = response.data;
+          vm.current_jobs = response.data.current_jobs;
+          vm.dream_jobs = response.data.dream_jobs;
           vm.loading = false;
 
         })
@@ -488,18 +537,18 @@ export default {
 
     },
 
-    salaryWiseCategoryJobFilter(){
+    salaryWiseCategoryJobFilter() {
 
       var vm = this;
 
-      if (!vm.min_salary){
+      if (!vm.min_salary) {
 
         Toast.fire({
           icon: 'warning',
           title: 'Please type min salary'
         });
 
-      }else if(!vm.max_salary){
+      } else if (!vm.max_salary) {
 
         Toast.fire({
           icon: 'warning',
@@ -523,7 +572,8 @@ export default {
           .then((response) => {
 
             vm.current_jobs = '';
-            vm.current_jobs = response.data;
+            vm.current_jobs = response.data.current_jobs;
+            vm.dream_jobs = response.data.dream_jobs;
             vm.loading = false;
 
           })
@@ -546,7 +596,7 @@ export default {
       }
     },
 
-    searchCredentialRefresh(){
+    searchCredentialRefresh() {
       window.location.reload();
     }
 
@@ -576,6 +626,12 @@ export default {
 
     totalRows() {
       return this.current_jobs.length
+    },
+
+    fetchDreamJobData() {
+       return  this.dream_jobs.filter(dream_jobs => {
+        return dream_jobs.title.toLowerCase().includes(this.title_filter.toLowerCase()) || dream_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
+      })
     },
 
   },
@@ -612,5 +668,27 @@ export default {
 
 .job-short-box h4:hover {
   text-decoration: underline;
+}
+
+.dream-job-box {
+  background-image: linear-gradient(90deg, #909090, #EBB38B);
+}
+
+.dream-job-box h4 {
+  color: #fff !important;
+  font-size: 17px;
+}
+
+.dream-job-box h4:hover {
+  text-decoration: underline;
+}
+
+.dream-job-box h6 {
+  color: #000 !important;
+  font-size: 12px;
+}
+
+.dream-job-box img {
+  height: 100px;
 }
 </style>
