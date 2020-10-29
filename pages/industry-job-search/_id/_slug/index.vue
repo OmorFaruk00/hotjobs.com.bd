@@ -123,7 +123,7 @@
                         <ul class="job-preview-list">
 
                         <li v-if="dream_job.employment_status">
-                          <i class="bx bx-map"></i>
+                          <i class="bx bx-slider-alt"></i>
                           <span>{{ dream_job.employment_status }}</span>
                         </li>
 
