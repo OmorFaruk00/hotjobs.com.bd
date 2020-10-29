@@ -672,6 +672,7 @@ export default {
 
 .dream-job-box {
   background-image: linear-gradient(90deg, #909090, #EBB38B);
+  padding: 10px 25px;
 }
 
 .dream-job-box h4 {

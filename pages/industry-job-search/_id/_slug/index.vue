@@ -27,7 +27,7 @@
 
                 <div class="col-lg-2 col-md-2 col-sm-6">
 
-                  <b-form-select v-model="filter.skill_id" class="mb-3" @change="jobFilterIndustryWise">
+                  <b-form-select v-model="filter.skill_id" class="mb-3" @change="jobFilterIndustrySkillWise">
                     <b-form-select-option :value="null">Please select category</b-form-select-option>
                     <b-form-select-option v-for="row in all_categories" :value="row.id">{{
                         row.name
@@ -91,12 +91,12 @@
 
       </div>
 
-      <div class="row" v-if="current_jobs && !loading">
-        <div class="col-lg-10" v-if="current_jobs.length > 0">
+      <div class="row" v-if="(current_jobs || dream_jobs) && !loading">
+        <div class="col-lg-10" v-if="current_jobs.length > 0 || dream_jobs.length > 0">
           <div class="card">
             <div class="card-body">
 
-              <div class="mb-2">
+              <div class="mb-2" v-if="current_jobs.length > 0">
                 <div class="row">
                   <div class="col-lg-2 col-md-2 col-sm-12">
                     <select v-model="perPage" class="form-control">
@@ -106,6 +106,46 @@
                     </select>
                   </div>
                 </div>
+              </div>
+
+              <!--dream job-->
+              <div class="row">
+
+                <div v-for="dream_job in fetchDreamJobData" class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="card-body mb-2 dream-job-box">
+                    <a :href="`/d/${dream_job.id}/${dream_job.employer.slug}/${dream_job.slug}`" target="_blank">
+
+                      <span class="row">
+                        <span class="col-9">
+
+                      <h4 class="card-title">{{ dream_job.title }}</h4>
+                      <h6 class="card-subtitle mb-2 text-muted"><span>{{ dream_job.employer.company_name }}</span></h6>
+                        <ul class="job-preview-list">
+
+                        <li v-if="dream_job.employment_status">
+                          <i class="bx bx-map"></i>
+                          <span>{{ dream_job.employment_status }}</span>
+                        </li>
+
+                        <li>
+                          <i class="bx bx-calendar"></i>
+
+                          Application Deadline:
+                          <strong v-html="dateFormat(dream_job.application_deadline)"></strong>
+                        </li>
+                      </ul>
+                      </span>
+
+
+                      <span class="col-3 text-right" v-if="dream_job.employer.company_logo">
+                          <img :src="`${url}${dream_job.employer.company_logo}`" :alt="dream_job.employer.company_name" class="img-fluid">
+                        </span>
+                      </span>
+
+                    </a>
+                  </div>
+                </div>
+
               </div>
 
               <div v-for="row in lists" class="card-body border mb-2 job-short-box">
@@ -236,6 +276,7 @@ export default {
       slug: this.$route.params.slug,
       current_jobs: [],
       industrials: [],
+      dream_jobs: [],
       filter: new Form({
         industry_id: this.$route.params.id,
         skill_id: null
@@ -290,7 +331,8 @@ export default {
 
       this.$axios.get('industry-wise-job/' + id + '/' + slug).then(function (response) {
 
-        vm.current_jobs = response.data;
+        vm.current_jobs = response.data.current_jobs;
+        vm.dream_jobs = response.data.dream_jobs;
         vm.loading = false;
 
       }).catch(function (error) {
@@ -390,7 +432,7 @@ export default {
         })
     },
 
-    jobFilterIndustryWise() {
+    jobFilterIndustrySkillWise() {
       var vm = this
       vm.title_filter = '';
       vm.employment_status = '';
@@ -402,7 +444,8 @@ export default {
         .then((response) => {
 
           vm.current_jobs = '';
-          vm.current_jobs = response.data;
+          vm.current_jobs = response.data.current_jobs;
+          vm.dream_jobs = response.data.dream_jobs;
           vm.loading = false;
 
         })
@@ -439,7 +482,8 @@ export default {
         .then((response) => {
 
           vm.current_jobs = '';
-          vm.current_jobs = response.data;
+          vm.current_jobs = response.data.current_jobs;
+          vm.dream_jobs = response.data.dream_jobs;
           vm.loading = false;
 
         })
@@ -496,7 +540,8 @@ export default {
           .then((response) => {
 
             vm.current_jobs = '';
-            vm.current_jobs = response.data;
+            vm.current_jobs = response.data.current_jobs;
+            vm.dream_jobs = response.data.dream_jobs;
             vm.loading = false;
 
           })
@@ -546,7 +591,13 @@ export default {
     },
     totalRows() {
       return this.current_jobs.length
-    }
+    },
+
+    fetchDreamJobData() {
+      return  this.dream_jobs.filter(dream_jobs => {
+        return dream_jobs.title.toLowerCase().includes(this.title_filter.toLowerCase()) || dream_jobs.employer.company_name.toLowerCase().includes(this.title_filter.toLowerCase())
+      })
+    },
   },
 
   beforeMount() {
@@ -576,5 +627,28 @@ export default {
 
 .job-short-box h4:hover {
   text-decoration: underline;
+}
+
+.dream-job-box {
+  background-image: linear-gradient(90deg, #909090, #EBB38B);
+  padding: 10px 25px;
+}
+
+.dream-job-box h4 {
+  color: #fff !important;
+  font-size: 17px;
+}
+
+.dream-job-box h4:hover {
+  text-decoration: underline;
+}
+
+.dream-job-box h6 {
+  color: #000 !important;
+  font-size: 12px;
+}
+
+.dream-job-box img {
+  height: 100px;
 }
 </style>
