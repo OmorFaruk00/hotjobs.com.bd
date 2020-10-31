@@ -67,7 +67,7 @@ export default {
   methods: {
 
     async counterInfo() {
-      return await this.$axios.get('counter-details')
+      return await this.$axios.get('frontend/counter-details')
         .then((response) => {
 
           this.data = response.data;
