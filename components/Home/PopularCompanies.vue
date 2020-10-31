@@ -62,7 +62,7 @@ export default {
   methods: {
 
     async popularCompanies() {
-      return await this.$axios.get('popular-company')
+      return await this.$axios.get('frontend/popular-company')
         .then((response) => {
           this.popular_companies = response.data;
           this.loading = false;
