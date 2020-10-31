@@ -50,9 +50,9 @@
                   <b-col md="3" class='text-center'>
 
                     <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
-                                class="rounded-0" style="width:65px;padding:10px 0"></b-card-img>
+                                class="p-3" fluid></b-card-img>
 
-                    <img v-else src="~/static/favicon.png" alt="Hot Jobs" style="width:80px;padding:10px 0">
+                    <img v-else src="~/static/favicon.png" alt="Hot Jobs" class="img-fluid p-3">
                   </b-col>
 
                   <b-col md="9">
