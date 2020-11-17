@@ -6,6 +6,7 @@
 
       <nuxt-link to="/my-jobs/view-resume" class="nav-link mb-2"  :class="$nuxt.$route.name == 'my-jobs-view-resume' ? 'active' : ''">View Resume</nuxt-link>
       <nuxt-link to="/my-jobs/edit-resume" class="nav-link mb-2"  :class="$nuxt.$route.name == 'my-jobs-edit-resume' ? 'active' : ''">Edit Resume</nuxt-link>
+      <nuxt-link to="/my-jobs/upload-resume" class="nav-link mb-2" :class="$nuxt.$route.name == 'my-jobs-upload-resume' ? 'active' : ''">Upload Resume</nuxt-link>
 
     </div>
   </div>

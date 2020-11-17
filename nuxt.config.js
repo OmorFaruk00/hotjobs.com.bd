@@ -92,7 +92,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [],
-  
+
   /*
   ** Nuxt.js modules
   */
@@ -196,8 +196,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    // baseURL: 'http://localhost:8000/',
-    baseURL: 'https://api.hotjobs.com.bd/',
+    baseURL: 'http://localhost:8000/',
+    // baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },
