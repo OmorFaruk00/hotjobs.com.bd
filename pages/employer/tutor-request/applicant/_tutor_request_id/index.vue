@@ -111,12 +111,14 @@
 
               <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
 
-                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px"> br
+                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px">
 
-                <span class="text-center" v-if="employee.cv_url">
-                  <a :href="`${url}`+employee.cv_url" class="btn btn-info btn-sm my-2" target="_blank"><i
-                    class="bx bx-show-alt"></i> Uploded Cv</a>
-                </span>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 my-2 text-right" v-if="employee.cv_url">
+
+                <a :href="`${url}`+employee.cv_url" class="btn btn-info btn-sm my-2" target="_blank"><i
+                  class="bx bx-show-alt"></i> Uploded Cv</a>
 
               </div>
 
