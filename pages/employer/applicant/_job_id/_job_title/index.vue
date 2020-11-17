@@ -103,15 +103,20 @@
 
                 </h6>
 
-                <h6 v-if="personal_details">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
-                <h6 v-if="personal_details">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
-                <h6 v-if="personal_details">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
-                <h6 v-if="personal_details">Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
+                <h6 v-if="personal_details.mobile_no_1">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
+                <h6 v-if="personal_details.mobile_no_2">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
+                <h6 v-if="personal_details.mobile_no_3">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
+                <h6 v-if="personal_details">Email: {{ personal_details.email }} <span v-if="personal_details.alternate_email">,{{ personal_details.alternate_email }}</span></h6>
               </div>
 
               <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
 
-                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px">
+                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px"> <br>
+
+                <span class="text-center" v-if="employee.cv_url">
+                  <a :href="`${url}`+employee.cv_url" class="btn btn-info btn-sm my-2" target="_blank"><i
+                    class="bx bx-show-alt"></i> Uploded Cv</a>
+                </span>
 
               </div>
 

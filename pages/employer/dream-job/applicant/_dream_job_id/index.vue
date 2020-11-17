@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                  <h1 class="text-center">{{  }}</h1>
+                  <h1 class="text-center">{{ }}</h1>
                 </div>
               </div>
 
@@ -96,7 +96,8 @@
             <div class="row">
               <div class="col-lg-8 col-md-8 col-sm-12">
                 <h4 v-if="employee.personal_details">{{ employee.personal_details.first_name }} {{
-                    employee.personal_details.last_name }}</h4>
+                    employee.personal_details.last_name
+                  }}</h4>
                 <h6 v-if="address">Address:
 
                   <span v-if="address.present_location == 0">
@@ -109,15 +110,22 @@
 
                 </h6>
 
-                <h6 v-if="personal_details">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
-                <h6 v-if="personal_details">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
-                <h6 v-if="personal_details">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
-                <h6 v-if="personal_details">Email:{{ personal_details.email }}, {{ personal_details.alternate_email}}</h6>
+                <h6 v-if="personal_details.mobile_no_1">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
+                <h6 v-if="personal_details.mobile_no_2">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
+                <h6 v-if="personal_details.mobile_no_3">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
+                <h6 v-if="personal_details">Email: {{ personal_details.email }} <span
+                  v-if="personal_details.alternate_email">,{{ personal_details.alternate_email }}</span></h6>
               </div>
 
               <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
 
-                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px">
+                <img :src="getPhoto()" :alt="employee.personal_details.first_name" width="160px"> <br>
+
+                <span class="text-center" v-if="employee.cv_url">
+                  <a :href="`${url}`+employee.cv_url" class="btn btn-info btn-sm my-2" target="_blank"><i
+                    class="bx bx-show-alt"></i> Uploded Cv</a>
+                </span>
+
 
               </div>
 
@@ -132,9 +140,9 @@
                 <h4 class="bg-soft-light">Employment History:</h4>
 
                 <div class="card-body" v-for="(row,index) in employment_histories">
-                  <h5>{{ index+1 }}. {{ row.designation }} ({{ row.from_date }} - <span
+                  <h5>{{ index + 1 }}. {{ row.designation }} ({{ row.from_date }} - <span
                     v-if="row.currently_working == '1'">Continuing</span> <span v-else>{{ row.to_date }}</span>)</h5>
-                  <h6>{{ row.company_name}}</h6>
+                  <h6>{{ row.company_name }}</h6>
                   <h6>Company Location : {{ row.company_location }}</h6>
                   <h6>Department : {{ row.department }}</h6>
                 </div>
@@ -194,7 +202,7 @@
 
                     <tbody>
                     <tr v-for="row in training_summaries">
-                      <td>{{ row.training_title}}</td>
+                      <td>{{ row.training_title }}</td>
                       <td>{{ row.topics_covered }}</td>
                       <td>{{ row.institute }}</td>
                       <td>{{ row.country.countries_name }}</td>
@@ -502,7 +510,7 @@ export default {
       currentPage: 1,
       fields: [
         'index',
-        {key:'dream_job_details',label:'Job Title'},
+        {key: 'dream_job_details', label: 'Job Title'},
         'job_seeker',
         'expected_salary',
         'action',
@@ -652,8 +660,8 @@ export default {
 </script>
 
 <style scoped>
-.b-pagination{
-  margin-top: 5px!important;
+.b-pagination {
+  margin-top: 5px !important;
 }
 
 </style>
