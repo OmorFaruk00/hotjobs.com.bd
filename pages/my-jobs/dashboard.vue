@@ -18,7 +18,93 @@
           <div class="card">
             <div class="card-body">
               <h1>Dashboard</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, iste!</p>
+
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <a href="javaScript:void(0)">
+                    <div class="card mini-stats-wid bg-soft-dark">
+                      <div class="card-body">
+                        <div class="media">
+                          <div class="media-body">
+                            <p class="text-dark font-weight-medium">Job Apply</p>
+                            <h4 class="mb-0 text-muted">{{ apply_job.job_post }}</h4>
+                          </div>
+
+                          <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                              <span class="avatar-title">
+                                  <i class="bx bx-brightness-half font-size-24"></i>
+                              </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                  <a href="javaScript:void(0)">
+                    <div class="card mini-stats-wid bg-soft-dark">
+                      <div class="card-body">
+                        <div class="media">
+                          <div class="media-body">
+                            <p class="text-dark font-weight-medium">Dream Job Apply</p>
+                            <h4 class="mb-0 text-muted">{{ apply_job.dream_job }}</h4>
+                          </div>
+
+                          <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                                        </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                  <a href="javaScript:void(0)">
+                    <div class="card mini-stats-wid bg-soft-dark">
+                      <div class="card-body">
+                        <div class="media">
+                          <div class="media-body">
+                            <p class="text-dark font-weight-medium">Tender Job Apply</p>
+                            <h4 class="mb-0 text-muted">{{ apply_job.tender_job }}</h4>
+                          </div>
+
+                          <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-brightness-half font-size-24"></i>
+                                                        </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                  <a href="javaScript:void(0)">
+                    <div class="card mini-stats-wid bg-soft-dark">
+                      <div class="card-body">
+                        <div class="media">
+                          <div class="media-body">
+                            <p class="text-dark font-weight-medium">Tutor Request Apply</p>
+                            <h4 class="mb-0 text-muted">{{ apply_job.tutor_request_job }}</h4>
+                          </div>
+
+                          <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                                        </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+              </div>
 
             </div>
           </div>
@@ -33,15 +119,56 @@
 </template>
 
 <script>
-  import dashboardNavbar from '~/components/MyJobs/navbar'
+import dashboardNavbar from '~/components/MyJobs/navbar'
 
-  export default {
-    middleware: 'employeeAuthenticated',
-    name: "dashboard",
-    components: {
-      dashboardNavbar
+export default {
+  middleware: 'employeeAuthenticated',
+  name: "dashboard",
+  components: {
+    dashboardNavbar
+  },
+  data(){
+    return{
+      apply_job:[],
     }
-  }
+  },
+  methods: {
+    async getUserApplyJobReport() {
+      var token = window.$nuxt.$cookies.get('token');
+
+      return await this.$axios.get('/employee-apply-job-report/'+ '?token=' + token)
+        .then((response) => {
+          this.apply_job = response.data;
+          // console.log(response.data);
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Token Not Found'
+            });
+          }
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Error'
+            });
+          }
+
+        })
+    },
+  },
+  mounted() {
+    this.getUserApplyJobReport();
+  },
+}
 </script>
 
 <style scoped>

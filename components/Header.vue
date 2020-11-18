@@ -252,7 +252,7 @@
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-            <img class="rounded-circle header-profile-user" v-if="getPhoto()" :src="getPhoto()" alt="">
+            <img class="rounded-circle header-profile-user" v-if="getEmployeePhoto()" :src="getEmployeePhoto()" :alt="authUser.email">
 
             <img class="rounded-circle header-profile-user" v-else src="~/static/images/logo.png" alt="">
 
@@ -921,6 +921,11 @@ export default {
 
     getPhoto() {
       let image_url = this.url + this.authUser.company_logo;
+      return image_url;
+    },
+
+    getEmployeePhoto(){
+      let image_url = this.url + this.authUser.image_url;
       return image_url;
     },
 
