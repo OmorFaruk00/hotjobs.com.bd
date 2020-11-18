@@ -25,7 +25,7 @@
                   <i class="bx bxs-file-pdf"></i>
 
                   <br>
-                  <p>{{ employee.name }} .pdf</p>
+                  <p>{{ employee.name }}_{{ employee.id }}.pdf</p>
                 </div>
 
               </div>
