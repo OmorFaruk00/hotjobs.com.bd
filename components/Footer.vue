@@ -138,7 +138,7 @@
                   </nuxt-link>
                 </li>
                 <li>
-                  <a href="https://hotjobs.com.bd/blog/" target="_blank">
+                  <a href="https://blog.hotjobs.com.bd/" target="_blank">
                     <i class="icofont-simple-right"></i>
                     Blogs
                   </a>
