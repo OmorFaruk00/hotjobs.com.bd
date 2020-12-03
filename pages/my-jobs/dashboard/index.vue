@@ -21,7 +21,7 @@
 
               <div class="row">
                 <div class="col-md-3 col-sm-6">
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/my-jobs/dashboard/job-post">
                     <div class="card mini-stats-wid bg-soft-dark">
                       <div class="card-body">
                         <div class="media">
@@ -38,7 +38,7 @@
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </nuxt-link>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
@@ -123,7 +123,7 @@ import dashboardNavbar from '~/components/MyJobs/navbar'
 
 export default {
   middleware: 'employeeAuthenticated',
-  name: "dashboard",
+  name: "index",
   components: {
     dashboardNavbar
   },
@@ -136,10 +136,9 @@ export default {
     async getUserApplyJobReport() {
       var token = window.$nuxt.$cookies.get('token');
 
-      return await this.$axios.get('/employee-apply-job-report/'+ '?token=' + token)
+      return await this.$axios.get('employee/report/employee-apply-job-report/'+ '?token=' + token)
         .then((response) => {
           this.apply_job = response.data;
-          // console.log(response.data);
         })
         .catch((error) => {
 
@@ -165,7 +164,7 @@ export default {
         })
     },
   },
-  mounted() {
+  created() {
     this.getUserApplyJobReport();
   },
 }

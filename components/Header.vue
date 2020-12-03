@@ -252,7 +252,8 @@
           <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-            <img class="rounded-circle header-profile-user" v-if="getEmployeePhoto()" :src="getEmployeePhoto()" :alt="authUser.email">
+            <img class="rounded-circle header-profile-user" v-if="getEmployeePhoto()" :src="getEmployeePhoto()"
+                 :alt="authUser.email">
 
             <img class="rounded-circle header-profile-user" v-else src="~/static/images/logo.png" alt="">
 
@@ -269,9 +270,14 @@
             <nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i
               class="bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
             </nuxt-link>
+
             <nuxt-link class="dropdown-item" to="/my-jobs/edit-resume"><i
               class="bx bx-edit-alt font-size-16 align-middle mr-1"></i>Edit Resume
             </nuxt-link>
+
+            <button class="dropdown-item" @click="openChangePasswordModal"><i
+              class="bx bx-key font-size-16 align-middle mr-1"></i>Change Password
+            </button>
 
             <div class="dropdown-divider"></div>
             <!--<a class="dropdown-item text-danger" href="#"><i
@@ -312,12 +318,9 @@
               class="bx bxs-edit font-size-16 align-middle mr-1"></i>Edit Profile
             </nuxt-link>
 
-            <!--<nuxt-link class="dropdown-item" to="/my-jobs/view-resume"><i
-              class="bx bx bx-show-alt font-size-16 align-middle mr-1"></i>View Resume
-            </nuxt-link>
-            <nuxt-link class="dropdown-item" to="/my-jobs/edit-resume"><i
-              class="bx bx-edit-alt font-size-16 align-middle mr-1"></i>Edit Resume
-            </nuxt-link>-->
+            <button class="dropdown-item" @click="openChangePasswordModal"><i
+              class="bx bx-key font-size-16 align-middle mr-1"></i>Change Password
+            </button>
 
             <div class="dropdown-divider"></div>
             <!--<a class="dropdown-item text-danger" href="#"><i
@@ -666,7 +669,6 @@
 
         </div>
 
-
         <!--    <addGeneralEmployee/>-->
         <div class="modal fade" id="addGeneralEmployee" tabindex="-1" role="dialog" aria-labelledby="addGeneralEmployee"
              aria-hidden="true">
@@ -825,6 +827,105 @@
           </div>
 
         </div>
+
+        <div class="modal fade" id="openChangePasswordModal" tabindex="-1" role="dialog"
+             aria-labelledby="openChangePasswordModal"
+             aria-hidden="true">
+
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" v-if="authUser">
+              <div class="modal-header">
+
+                <h5 class="modal-title">Change Password</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form @submit.prevent="authUser.type == 'employee' ? changeEmployeePassword() : changeEmployerPassword()">
+                <div class="modal-body">
+                  <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+                      <div class="form-group">
+
+                        <span v-if="authUser.type == 'employee'">
+                        <label>Email</label>
+                        <input v-model="authUser.email" type="email" name="email" class="form-control" readonly
+                               required>
+                        </span>
+
+                        <span v-if="authUser.type == 'employer'">
+                          <label>Username</label>
+                          <input v-model="authUser.username" type="username"
+                                 name="username" class="form-control" readonly required>
+                        </span>
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+
+                      <div class="form-group">
+                        <label>Old Password</label>
+                        <input v-model="password_change.old_password" type="password" name="old_password"
+                               placeholder="Enter old password"
+                               class="form-control" :class="{ 'is-invalid': password_change.errors.has('old_password') }">
+
+                        <has-error :form="password_change" field="old_password"></has-error>
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input v-model="password_change.password" type="password" name="password"
+                               placeholder="Enter password"
+                               class="form-control" :class="{ 'is-invalid': password_change.errors.has('password') }">
+
+                        <has-error :form="password_change" field="password"></has-error>
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+
+                      <div class="form-group">
+                        <label>Password Confirmation</label>
+                        <input v-model="password_change.password_confirmation" type="password"
+                               name="password_confirmation"
+                               placeholder="Enter password confirmation"
+                               class="form-control" :class="{ 'is-invalid': password_change.errors.has('password_confirmation') }">
+
+                        <has-error :form="password_change" field="password_confirmation"></has-error>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <ul>
+                        <li class="text-danger" style="font-size: .7rem;">After changing the password successfully, you have to login again with your new password.</li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="submit" :disabled="password_change.busy" class="btn btn-success">Submit</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
@@ -906,6 +1007,12 @@ export default {
         category: ''
       }),
 
+      password_change: new Form({
+        old_password: '',
+        password: '',
+        password_confirmation: '',
+      }),
+
       errors: '',
     }
   },
@@ -924,7 +1031,7 @@ export default {
       return image_url;
     },
 
-    getEmployeePhoto(){
+    getEmployeePhoto() {
       let image_url = this.url + this.authUser.image_url;
       return image_url;
     },
@@ -1190,6 +1297,58 @@ export default {
           }
 
         })
+    },
+
+    openChangePasswordModal() {
+      this.password_change.reset();
+      $('#openChangePasswordModal').modal('show');
+    },
+
+    changeEmployeePassword() {
+
+      var vm = this;
+      var token = window.$nuxt.$cookies.get('token');
+
+      this.password_change.post(vm.url + 'employee-password-change?token=' + token)
+        .then((response) => {
+
+
+          $('#openChangePasswordModal').modal('hide');
+
+          Toast.fire({
+            icon: response.data.status,
+            title: response.data.message
+          });
+
+          vm.logout();
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+        })
+    },
+
+    changeEmployerPassword() {
+      alert('employer')
     }
 
   },
@@ -1229,11 +1388,11 @@ h3 {
   margin-top: 8px;
 }
 
-.card-body{
+.card-body {
   padding: 1rem;
 }
 
-.avatar-title{
+.avatar-title {
   background-color: #423A3D;
 }
 
