@@ -74,3 +74,9 @@ thead[role="rowgroup"]{
   height: 115px!important;
 }
 
+/*employee dashboarad active color*/
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #423A3D!important;
+}
+
