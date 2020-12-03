@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6">
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/my-jobs/dashboard/tender-job">
                     <div class="card mini-stats-wid bg-soft-dark">
                       <div class="card-body">
                         <div class="media">
@@ -80,7 +80,7 @@
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </nuxt-link>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
@@ -127,16 +127,16 @@ export default {
   components: {
     dashboardNavbar
   },
-  data(){
-    return{
-      apply_job:[],
+  data() {
+    return {
+      apply_job: [],
     }
   },
   methods: {
     async getUserApplyJobReport() {
       var token = window.$nuxt.$cookies.get('token');
 
-      return await this.$axios.get('employee/report/employee-apply-job-report/'+ '?token=' + token)
+      return await this.$axios.get('employee/report/employee-apply-job-report/' + '?token=' + token)
         .then((response) => {
           this.apply_job = response.data;
         })
