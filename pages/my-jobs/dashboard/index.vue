@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6">
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/my-jobs/dashboard/dream-job">
                     <div class="card mini-stats-wid bg-soft-dark">
                       <div class="card-body">
                         <div class="media">
@@ -59,7 +59,7 @@
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </nuxt-link>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
