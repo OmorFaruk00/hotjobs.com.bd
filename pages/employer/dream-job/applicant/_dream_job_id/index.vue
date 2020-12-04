@@ -49,7 +49,8 @@
 
                 <template v-slot:cell(action)="data">
 
-                  <button type="button" @click="openDetails(data.item.employee.id)" class="btn btn-info"><i
+                  <button type="button" @click="openDetails(data.item.employee.id,data.item.status,data.item.id)"
+                          class="btn btn-info"><i
                     class="bx bx-expand"></i></button>
 
                 </template>
@@ -640,11 +641,58 @@ export default {
       });
     },
 
-    openDetails(id) {
+    openDetails(id, status, apply_id) {
 
       this.fetchApplicantDetails(id);
-
       $('#details').modal('show');
+
+      if (status == 0) {
+        this.applyJobStatusChange(apply_id)
+      }
+
+    },
+
+    applyJobStatusChange(job_id) {
+
+      var vm = this;
+      var token = window.$nuxt.$cookies.get('token');
+      var job_id = job_id;
+      var job_type = 'dream_job';
+
+      this.$axios.post('employer/report/apply-job-status-change?token=' + token, {
+
+        job_type: job_type,
+        job_id: job_id,
+
+      })
+        .then((response) => {
+
+          console.log(response.data)
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Error'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Token Not Found'
+            });
+          }
+
+        })
+
     }
 
   },
