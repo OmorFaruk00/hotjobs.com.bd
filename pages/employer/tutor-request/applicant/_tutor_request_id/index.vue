@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
-<!--                  <h1 class="text-center">{{ job_title }}</h1>-->
+                  <!--                  <h1 class="text-center">{{ job_title }}</h1>-->
                 </div>
               </div>
 
@@ -44,7 +44,8 @@
 
                 <template v-slot:cell(action)="data">
 
-                  <button type="button" @click="openDetails(data.item.employee.id)" class="btn btn-info"><i
+                  <button type="button" @click="openDetails(data.item.employee.id,data.item.status,data.item.id)"
+                          class="btn btn-info"><i
                     class="bx bx-expand"></i></button>
 
                 </template>
@@ -90,7 +91,8 @@
             <div class="row">
               <div class="col-lg-8 col-md-8 col-sm-12">
                 <h4 v-if="employee.personal_details">{{ employee.personal_details.first_name }} {{
-                    employee.personal_details.last_name }}</h4>
+                    employee.personal_details.last_name
+                  }}</h4>
                 <h6 v-if="address">Address:
 
                   <span v-if="address.present_location == 0">
@@ -106,7 +108,8 @@
                 <h6 v-if="personal_details.mobile_no_1">Mobile No 1: {{ personal_details.mobile_no_1 }}</h6>
                 <h6 v-if="personal_details.mobile_no_2">Mobile No 2: {{ personal_details.mobile_no_2 }}</h6>
                 <h6 v-if="personal_details.mobile_no_3">Mobile No 3: {{ personal_details.mobile_no_3 }}</h6>
-                <h6 v-if="personal_details">Email: {{ personal_details.email }} <span v-if="personal_details.alternate_email">,{{ personal_details.alternate_email }}</span></h6>
+                <h6 v-if="personal_details">Email: {{ personal_details.email }} <span
+                  v-if="personal_details.alternate_email">,{{ personal_details.alternate_email }}</span></h6>
               </div>
 
               <div class="col-lg-4 col-md-4 col-sm-12 text-right" v-if="employee.image_url">
@@ -133,9 +136,9 @@
                 <h4 class="bg-soft-light">Employment History:</h4>
 
                 <div class="card-body" v-for="(row,index) in employment_histories">
-                  <h5>{{ index+1 }}. {{ row.designation }} ({{ row.from_date }} - <span
+                  <h5>{{ index + 1 }}. {{ row.designation }} ({{ row.from_date }} - <span
                     v-if="row.currently_working == '1'">Continuing</span> <span v-else>{{ row.to_date }}</span>)</h5>
-                  <h6>{{ row.company_name}}</h6>
+                  <h6>{{ row.company_name }}</h6>
                   <h6>Company Location : {{ row.company_location }}</h6>
                   <h6>Department : {{ row.department }}</h6>
                 </div>
@@ -195,7 +198,7 @@
 
                     <tbody>
                     <tr v-for="row in training_summaries">
-                      <td>{{ row.training_title}}</td>
+                      <td>{{ row.training_title }}</td>
                       <td>{{ row.topics_covered }}</td>
                       <td>{{ row.institute }}</td>
                       <td>{{ row.country.countries_name }}</td>
@@ -629,11 +632,60 @@ export default {
       });
     },
 
-    openDetails(id) {
+    openDetails(id, status, apply_id) {
 
       this.fetchApplicantDetails(id);
 
       $('#details').modal('show');
+
+      if (status == 0) {
+        this.applyJobStatusChange(apply_id);
+        this.fetchApplicantLists();
+      }
+
+    },
+
+    applyJobStatusChange(job_id) {
+
+      var vm = this;
+      var token = window.$nuxt.$cookies.get('token');
+      var job_id = job_id;
+      var job_type = 'tutor_job';
+
+      this.$axios.post('employer/report/apply-job-status-change?token=' + token, {
+
+        job_type: job_type,
+        job_id: job_id,
+
+      })
+        .then((response) => {
+
+          console.log(response.data)
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Error'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Token Not Found'
+            });
+          }
+
+        })
+
     }
 
   },
@@ -651,8 +703,8 @@ export default {
 </script>
 
 <style scoped>
-.b-pagination{
-  margin-top: 5px!important;
+.b-pagination {
+  margin-top: 5px !important;
 }
 
 </style>

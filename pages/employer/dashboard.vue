@@ -16,19 +16,23 @@
 
               <div class="row ">
                 <div class="col-12 text-right">
-                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info mb-2" :disabled="post_job_loading">
+                  <button type="button" @click="postJob" class="tcb-animate-e tcb-info mb-2"
+                          :disabled="post_job_loading">
                     Post Job <span
                     v-if="post_job_loading"><i class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info mb-2" :disabled="tutor_status">Tutor
+                  <button type="button" @click="tutorJob" class="tcb-animate-e tcb-info mb-2" :disabled="tutor_status">
+                    Tutor
                     <span
                       v-if="tutor_status"><i class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info mb-2" :disabled="dream_job_status">
+                  <button type="button" @click="dreamJob" class="tcb-animate-e tcb-info mb-2"
+                          :disabled="dream_job_status">
                     Dream Job <span
                   ><i v-if="dream_job_status" class="bx bx-check-circle"></i></span></button>
 
-                  <button type="button" @click="tenderJob" class="tcb-animate-e tcb-info mb-2" :disabled="tender_job_status">
+                  <button type="button" @click="tenderJob" class="tcb-animate-e tcb-info mb-2"
+                          :disabled="tender_job_status">
                     Tender Job <span
                   ><i v-if="tender_job_status" class="bx bx-check-circle"></i></span></button>
                 </div>
@@ -159,7 +163,8 @@
 
 
                 <div class="col-12">
-                  <b-table responsive id="dream_job" striped hover :per-page="perPage" :current-page="currentPage_dream_job"
+                  <b-table responsive id="dream_job" striped hover :per-page="perPage"
+                           :current-page="currentPage_dream_job"
                            :items="dream_job_requests" :fields="dream_job">
 
                     <template v-slot:cell(index)="data">
@@ -213,7 +218,8 @@
 
 
                 <div class="col-12">
-                  <b-table responsive id="tender_job" striped hover :per-page="perPage" :current-page="currentPage_tender_job"
+                  <b-table responsive id="tender_job" striped hover :per-page="perPage"
+                           :current-page="currentPage_tender_job"
                            :items="tender_job_requests" :fields="tender_job">
 
                     <template v-slot:cell(index)="data">
