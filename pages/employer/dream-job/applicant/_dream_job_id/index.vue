@@ -647,7 +647,8 @@ export default {
       $('#details').modal('show');
 
       if (status == 0) {
-        this.applyJobStatusChange(apply_id)
+        this.applyJobStatusChange(apply_id);
+        this.fetchApplicantLists();
       }
 
     },
