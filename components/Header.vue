@@ -1348,7 +1348,46 @@ export default {
     },
 
     changeEmployerPassword() {
-      alert('employer')
+
+      var vm = this;
+      var token = window.$nuxt.$cookies.get('token');
+
+      this.password_change.post(vm.url + 'employer-password-change?token=' + token)
+        .then((response) => {
+
+          $('#openChangePasswordModal').modal('hide');
+
+          Toast.fire({
+            icon: response.data.status,
+            title: response.data.message
+          });
+
+          vm.logout();
+
+        })
+        .catch((error) => {
+
+          Toast.fire({
+            icon: 'warning',
+            title: 'There was something wrong'
+          });
+
+          if (error.response.status == 422) {
+            Toast.fire({
+              icon: 'warning',
+              title: 'Validation Problem'
+            });
+          }
+
+          if (error.response.status == 401) {
+            Toast.fire({
+              icon: 'warning',
+              title: error.response.data.error
+            });
+          }
+
+        })
+
     }
 
   },
