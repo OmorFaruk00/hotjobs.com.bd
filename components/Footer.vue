@@ -15,6 +15,7 @@
           <img src="../static/images/shape/2.png" alt="Shape">
           <img src="../static/images/shape/1.png" alt="Shape">
         </div>
+
         <div class="subscribe-item">
           <form class="newsletter-form" @submit.prevent="addNewsLatter()">
             <input type="email" v-model="form.email" class="form-control" placeholder="Enter Your Email" name="email"
@@ -32,7 +33,7 @@
       </div>
       <!-- End Subscribe Form -->
 
-      <div class="row">
+      <div class="row" style="margin-top: -45px;">
         <div class="col-sm-6 col-lg-3">
           <div class="footer-item">
             <div class="footer-logo">
@@ -84,17 +85,17 @@
               <h3>Category</h3>
               <ul>
                 <li>
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/about-us">
                     <i class="bx bx-right-arrow-alt"></i>
                     About Us
-                  </a>
+                  </nuxt-link>
                 </li>
 
                 <li>
-                  <a href="javaScript:void(0)">
+                  <nuxt-link to="/feedback-form">
                     <i class="bx bx-right-arrow-alt"></i>
                     Feedback Form
-                  </a>
+                  </nuxt-link>
                 </li>
 
                 <li>
@@ -149,6 +150,13 @@
                   </a>
                 </li>
 
+                <li>
+                  <nuxt-link to="/faq">
+                    <i class="bx bx-right-arrow-alt"></i>
+                    FAQ
+                  </nuxt-link>
+                </li>
+
               </ul>
             </div>
           </div>
@@ -193,7 +201,7 @@
           <div class="col-12">
             <div class="copyright-item text-center">
               <p>
-                Copyright © {{ date }} HotJobs. Technical Team: <a href="http://it.diu.ac" target="_blank" style="color: #EC1A3A;">Hotjobs</a>
+                Copyright © {{ current_year }} HotJobs. Technical Team: <a href="http://it.diu.ac" target="_blank" style="color: #EC1A3A;">Hotjobs</a>
               </p>
             </div>
           </div>
@@ -213,6 +221,7 @@
               </ul>
             </div>
           </div>-->
+
         </div>
       </div>
 
@@ -244,7 +253,7 @@ export default {
   name: "Footer",
   data() {
     return {
-      date: this.$moment().format('Y'),
+      current_year: this.$moment().format('Y'),
       form: new Form({
         email: '',
       }),
@@ -315,7 +324,7 @@ export default {
 footer {
   background-image: url("../static/images/footer_bg.png");
   background-size: cover;
-  background-position: center center;
+  /*background-position: center center;*/
   background-repeat: no-repeat;
   opacity: .9;
 }
@@ -464,10 +473,11 @@ footer {
 }
 
 .copyright-area {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  /*padding-top: 30px;*/
+  /*padding-bottom: 30px;*/
+  padding: 10px 0;
   border-top: 1px solid #6bbf75;
-  margin-top: 70px;
+  /*margin-top: 70px;*/
 }
 
 .copyright-item p {

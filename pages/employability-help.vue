@@ -35,8 +35,6 @@
   import employabilityHelpReadCandidateFeedback from "~/components/EmployabilityHelp/ReadCandidateFeedback";
   import employabilityHelpFaq from "~/components/EmployabilityHelp/Faq";
 
-
-
   export default {
     name: "employability-help",
     components: {

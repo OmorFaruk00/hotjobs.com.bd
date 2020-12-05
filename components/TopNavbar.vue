@@ -21,12 +21,12 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="topnav-layout">
-                  <nuxt-link to="/" class="dropdown-item">Career Guide</nuxt-link>
-                  <nuxt-link to="/" class="dropdown-item">Interview Tips</nuxt-link>
-                  <nuxt-link to="/" class="dropdown-item">Resume Writing Tips</nuxt-link>
-                  <nuxt-link to="/" class="dropdown-item">Cover Letter</nuxt-link>
-                  <nuxt-link to="/" class="dropdown-item">Articles</nuxt-link>
-                  <nuxt-link to="/" class="dropdown-item">Career Counseling <span class="badge badge-info">New</span></nuxt-link>
+                  <nuxt-link to="/career/career-guide" class="dropdown-item">Career Guide</nuxt-link>
+                  <nuxt-link to="/career/interview-tips" class="dropdown-item">Interview Tips</nuxt-link>
+                  <nuxt-link to="/career/resume-writing-tips" class="dropdown-item">Resume Writing Tips</nuxt-link>
+                  <nuxt-link to="/career/cover-letter" class="dropdown-item">Cover Letter</nuxt-link>
+                  <nuxt-link to="/career/article" class="dropdown-item">Articles</nuxt-link>
+                  <nuxt-link to="/career/career-counseling" class="dropdown-item">Career Counseling <span class="badge badge-info">New</span></nuxt-link>
 
                 </div>
               </li>

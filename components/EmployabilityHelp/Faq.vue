@@ -4,11 +4,12 @@
       <div class="card-body">
 
         <div role="tablist">
-          <b-card no-body class="mb-1 ">
+
+          <b-card no-body class="mb-1" v-for="(row,index) in 5" :key="index">
             <b-card-header header-tag="header" class="p-1" role="tab">
-              <b-button block v-b-toggle.accordion-1 variant="light" class="faq_tab">Accordion 1</b-button>
+              <b-button block v-b-toggle="'accordion-' + row" variant="light" class="faq_tab">Accordion {{ row }}</b-button>
             </b-card-header>
-            <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+            <b-collapse :id="`accordion-${row}`" visible accordion="my-accordion" role="tabpanel">
               <b-card-body>
                 <b-card-text>I start opened because <code>visible</code> is <code>true</code></b-card-text>
                 <b-card-text>{{ text }}</b-card-text>
@@ -16,7 +17,7 @@
             </b-collapse>
           </b-card>
 
-          <b-card no-body class="mb-1">
+<!--          <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
               <b-button block v-b-toggle.accordion-2  class="faq_tab">Accordion 2</b-button>
             </b-card-header>
@@ -47,7 +48,7 @@
                 <b-card-text>{{ text }}</b-card-text>
               </b-card-body>
             </b-collapse>
-          </b-card>
+          </b-card>-->
 
         </div>
 
