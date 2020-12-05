@@ -16,9 +16,9 @@
           <img src="../static/images/shape/1.png" alt="Shape">
         </div>
         <div class="subscribe-item">
-          <form class="newsletter-form" @submit.prevent="addNewsLatter()" >
+          <form class="newsletter-form" @submit.prevent="addNewsLatter()">
             <input type="email" v-model="form.email" class="form-control" placeholder="Enter Your Email" name="email"
-                  required  autocomplete="off">
+                   required autocomplete="off">
             <small v-if="errors.email" class="text-danger with-errors"
                    v-html="errors.email[0]"></small>
 
@@ -36,13 +36,10 @@
         <div class="col-sm-6 col-lg-3">
           <div class="footer-item">
             <div class="footer-logo">
-              <a href="#">
+
+              <nuxt-link to="/">
                 <img src="../static/images/logo.png" alt="HotJobs">
-              </a>
-
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. </p>-->
-
+              </nuxt-link>
 
               <ul>
                 <li>
@@ -88,34 +85,32 @@
               <ul>
                 <li>
                   <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Development
+                    <i class="bx bx-right-arrow-alt"></i>
+                    About Us
                   </a>
                 </li>
+
                 <li>
                   <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Business
+                    <i class="bx bx-right-arrow-alt"></i>
+                    Feedback Form
                   </a>
                 </li>
+
                 <li>
-                  <a href="http://it.diu.ac" target="_blank">
-                    <i class="icofont-simple-right"></i>
-                    Tech & IT
-                  </a>
+                  <nuxt-link to="/terms-and-conditions">
+                    <i class="bx bx-right-arrow-alt"></i>
+                    Terms & Conditions
+                  </nuxt-link>
                 </li>
+
                 <li>
-                  <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Finance
-                  </a>
+                  <nuxt-link to="/privacy-policy">
+                    <i class="bx bx-right-arrow-alt"></i>
+                    Privacy Policy
+                  </nuxt-link>
                 </li>
-                <li>
-                  <a href="javaScript:void(0)">
-                    <i class="icofont-simple-right"></i>
-                    Networking
-                  </a>
-                </li>
+
               </ul>
             </div>
           </div>
@@ -125,24 +120,35 @@
             <div class="footer-category">
               <h3>Quick Links</h3>
               <ul>
+
                 <li>
                   <nuxt-link to="/">
-                    <i class="icofont-simple-right"></i>
+                    <i class="bx bx-right-arrow-alt"></i>
                     Home
                   </nuxt-link>
                 </li>
+
+                <li>
+                  <nuxt-link to="/my-jobs/create">
+                    <i class="bx bx-right-arrow-alt"></i>
+                    Create Account
+                  </nuxt-link>
+                </li>
+
                 <li>
                   <nuxt-link to="/contact">
-                    <i class="icofont-simple-right"></i>
+                    <i class="bx bx-right-arrow-alt"></i>
                     Contact Us
                   </nuxt-link>
                 </li>
+
                 <li>
                   <a href="https://blog.hotjobs.com.bd/" target="_blank">
-                    <i class="icofont-simple-right"></i>
+                    <i class="bx bx-right-arrow-alt"></i>
                     Blogs
                   </a>
                 </li>
+
               </ul>
             </div>
           </div>
@@ -152,21 +158,27 @@
             <div class="footer-find">
               <h3>Find Us</h3>
               <ul>
-                <li>Al-Hera Tower, Ka-86/1/A
+
+                <li>
+                  <i class="bx bx-home-circle"></i>
+                  Al-Hera Tower, Ka-86/1/A
                   Kuratoli Bazar, Dhaka-1229
                   Bangladesh.
                 </li>
                 <li>
                   <a href="tel:+8801726893448">
+                    <i class="bx bx-phone-incoming"></i>
                     +88 017 2689 3448
                   </a>
 
                   <a href="javaScript:void(0)">
-                    +880255040889 (Extension: 221)
+                    <i class="bx bx-phone-incoming"></i>
+                    +880255040889 (Exten: 221)
                   </a>
                 </li>
                 <li>
                   <a href="mailto:info@hotjobs.com.bd">
+                    <i class="bx bx-envelope"></i>
                     info@hotjobs.com.bd
                   </a>
                 </li>
@@ -175,16 +187,18 @@
           </div>
         </div>
       </div>
+
       <div class="copyright-area">
         <div class="row">
-          <div class="col-lg-6">
-            <div class="copyright-item">
+          <div class="col-12">
+            <div class="copyright-item text-center">
               <p>
-                Copyright @{{ date }} HotJobs. Technical Team: <a href="http://it.diu.ac" target="_blank">Hotjobs</a>
+                Copyright © {{ date }} HotJobs. Technical Team: <a href="http://it.diu.ac" target="_blank" style="color: #EC1A3A;">Hotjobs</a>
               </p>
             </div>
           </div>
-          <div class="col-lg-6">
+
+<!--          <div class="col-lg-6">
             <div class="copyright-item copyright-right">
               <ul>
                 <li>
@@ -198,7 +212,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
 
@@ -234,14 +248,14 @@ export default {
       form: new Form({
         email: '',
       }),
-      errors:'',
-      url : this.$axios.defaults.baseURL,
+      errors: '',
+      url: this.$axios.defaults.baseURL,
     }
   },
 
   methods: {
     addNewsLatter() {
-      var vm =this;
+      var vm = this;
 
       vm.form.post(this.url + 'news-latter')
         .then((response) => {
@@ -253,7 +267,7 @@ export default {
           });
 
           vm.form.email = '';
-          vm.errors=[];
+          vm.errors = [];
 
         })
         .catch((error) => {
