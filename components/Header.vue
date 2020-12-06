@@ -610,12 +610,37 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Contact Person's Email</label>
-                        <input v-model="form.contact_person_email" type="email" name="contact_person_email"
-                               placeholder="Enter contact person email"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }"
-                               required>
-                        <has-error :form="form" field="contact_person_email"></has-error>
+
+                        <div class="input-group">
+                          <input v-model="form.contact_person_email" type="email" name="contact_person_email"
+                                 placeholder="Enter contact person email"
+                                 class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_email') }"
+                                 required
+                                 :readonly="email_verify_status == 'verified' || email_verify_status == 'pending'">
+
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                    :disabled="email_verify_status=='pending' || email_verify_status == 'verified'"
+                                    @click="sendEmailOtp">Send OTP
+                            </button>
+                          </div>
+
+                          <has-error :form="form" field="contact_person_email"></has-error>
+
+                          <div class="input-group mt-3" v-if="email_verify_status=='pending'">
+                            <input type="number" v-model="email_otp" name="email_otp" class="form-control"
+                                   placeholder="Enter email otp">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="button" @click="verifyEmailOtp">Verify
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <span v-if="errors.email" class="text-danger with-errors"
+                               v-html="errors.email[0]"></span>
+
                       </div>
                     </div>
 
@@ -630,11 +655,25 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Contact Person's Mobile</label>
-                        <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
-                               placeholder="Enter contact person mobile"
-                               class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }">
-                        <has-error :form="form" field="contact_person_mobile"></has-error>
+
+                        <div class="input-group">
+                          <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
+                                 placeholder="Enter contact person mobile"
+                                 class="form-control"
+                                 :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }"
+                                 required>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Send OTP</button>
+                          </div>
+                        </div>
+
+                        <div class="input-group mt-3">
+                          <input type="number" class="form-control" placeholder="Enter mobile otp">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Verify</button>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 
@@ -871,7 +910,8 @@
                         <label>Old Password</label>
                         <input v-model="password_change.old_password" type="password" name="old_password"
                                placeholder="Enter old password"
-                               class="form-control" :class="{ 'is-invalid': password_change.errors.has('old_password') }">
+                               class="form-control"
+                               :class="{ 'is-invalid': password_change.errors.has('old_password') }">
 
                         <has-error :form="password_change" field="old_password"></has-error>
                       </div>
@@ -898,7 +938,8 @@
                         <input v-model="password_change.password_confirmation" type="password"
                                name="password_confirmation"
                                placeholder="Enter password confirmation"
-                               class="form-control" :class="{ 'is-invalid': password_change.errors.has('password_confirmation') }">
+                               class="form-control"
+                               :class="{ 'is-invalid': password_change.errors.has('password_confirmation') }">
 
                         <has-error :form="password_change" field="password_confirmation"></has-error>
 
@@ -909,7 +950,9 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <ul>
-                        <li class="text-danger" style="font-size: .7rem;">After changing the password successfully, you have to login again with your new password.</li>
+                        <li class="text-danger" style="font-size: .7rem;">After changing the password successfully, you
+                          have to login again with your new password.
+                        </li>
                       </ul>
                     </div>
 
@@ -1012,6 +1055,10 @@ export default {
         password: '',
         password_confirmation: '',
       }),
+
+      email_otp: '',
+
+      email_verify_status: '',
 
       errors: '',
     }
@@ -1388,6 +1435,63 @@ export default {
 
         })
 
+    },
+
+    sendEmailOtp() {
+
+      var vm = this;
+      if (!vm.form.contact_person_email) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please enter email'
+        });
+      } else {
+
+        this.$axios.post('verification/employer-email-otp', {
+
+          email: vm.form.contact_person_email,
+          type:'email'
+
+        })
+          .then((response) => {
+
+            Toast.fire({
+              icon: 'info',
+              title: 'Email otp send successfully'
+            });
+
+            vm.email_verify_status = 'pending';
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
+          })
+      }
+    },
+
+    verifyEmailOtp() {
+      this.email_verify_status = 'verified';
     }
 
   },

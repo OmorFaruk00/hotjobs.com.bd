@@ -464,14 +464,14 @@ button:focus {
 }
 
 .account-wrap {
-  max-width: 710px;
+  /*max-width: 710px;*/
   margin-left: auto;
   margin-right: auto;
 }
 
 .account-item {
   text-align: center;
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
   position: relative;
 }
 
@@ -485,21 +485,21 @@ button:focus {
   background-color: #ffffff61;
 }
 
-.account-item:hover i {
+/*.account-item:hover i {
   -webkit-box-shadow: 0 0 0 8px #4bcc5a;
   box-shadow: 0 0 0 8px #4bcc5a;
-}
+}*/
 
 .account-item i {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  width: 65px;
-  height: 65px;
-  line-height: 65px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   color: #000000;
   background-color: #ffffff;
-  font-size: 30px;
+  font-size: 20px;
   -webkit-box-shadow: 0 0 0 8px #ffffff61;
   box-shadow: 0 0 0 8px #ffffff61;
   margin-top: 8px;
@@ -511,7 +511,7 @@ button:focus {
 .account-item span {
   display: block;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .account-last:before {
