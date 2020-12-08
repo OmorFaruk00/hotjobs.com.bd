@@ -621,7 +621,10 @@
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button"
                                     :disabled="email_verify_status=='pending' || email_verify_status == 'verified'"
-                                    @click="sendEmailOtp">Send OTP
+                                    @click="sendEmailOtp">
+
+                              <span v-if="email_verify_status == 'verified'">Verified</span>
+                              <span v-else>Send OTP</span>
                             </button>
                           </div>
 
@@ -638,8 +641,11 @@
                         </div>
 
 
+                        <span v-if="errors.error" class="text-danger with-errors"
+                              v-html="errors.error"></span> <br>
+
                         <span v-if="errors.email" class="text-danger with-errors"
-                               v-html="errors.email[0]"></span>
+                              v-html="errors.email[0]"></span>
 
                       </div>
                     </div>
@@ -661,16 +667,26 @@
                                  placeholder="Enter contact person mobile"
                                  class="form-control"
                                  :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }"
-                                 required>
+                                 required
+                                 :readonly="mobile_verify_status == 'verified' || mobile_verify_status == 'pending'"
+                          >
+
                           <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Send OTP</button>
+                            <button class="btn btn-outline-secondary" type="button"
+                                    :disabled="mobile_verify_status=='pending' || mobile_verify_status == 'verified'"
+                                    @click="sendMobileOtp">
+
+                              <span v-if="mobile_verify_status == 'verified'">Verified</span>
+                              <span v-else>Send OTP</span>
+
+                            </button>
                           </div>
                         </div>
 
-                        <div class="input-group mt-3">
-                          <input type="number" class="form-control" placeholder="Enter mobile otp">
+                        <div class="input-group mt-3" v-if="mobile_verify_status=='pending'">
+                          <input type="number" v-model="mobile_otp" class="form-control" placeholder="Enter mobile otp" >
                           <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Verify</button>
+                            <button class="btn btn-outline-secondary" type="button" @click="verifyMobileOtp">Verify</button>
                           </div>
                         </div>
 
@@ -1057,9 +1073,10 @@ export default {
       }),
 
       email_otp: '',
-
       email_verify_status: '',
 
+      mobile_otp: '',
+      mobile_verify_status: '',
       errors: '',
     }
   },
@@ -1092,6 +1109,13 @@ export default {
 
     addEmployerModal() {
       this.form.reset();
+
+      this.email_verify_status = '';
+      this.email_otp = '';
+      this.mobile_verify_status = '';
+      this.mobile_otp = '';
+
+      this.errors = '';
       this.$emit('FetchData');
       $('#addEmployer').modal('show');
     },
@@ -1450,14 +1474,14 @@ export default {
         this.$axios.post('verification/employer-email-otp', {
 
           email: vm.form.contact_person_email,
-          type:'email'
+          type: 'email'
 
         })
           .then((response) => {
 
             Toast.fire({
-              icon: 'info',
-              title: 'Email otp send successfully'
+              icon: response.data.status,
+              title: response.data.message,
             });
 
             vm.email_verify_status = 'pending';
@@ -1482,7 +1506,60 @@ export default {
             if (error.response.status == 401) {
               Toast.fire({
                 icon: 'warning',
-                title: 'Token Not Found'
+                title: error.response.data.error
+              });
+            }
+
+          })
+      }
+    },
+
+    sendMobileOtp() {
+
+      var vm = this;
+      if (!vm.form.contact_person_mobile) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please enter mobile number'
+        });
+      } else {
+
+        this.$axios.post('verification/employer-mobile-otp', {
+
+          cell_number: vm.form.contact_person_mobile,
+          type: 'cell'
+
+        })
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message,
+            });
+
+            vm.mobile_verify_status = 'pending';
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
               });
             }
 
@@ -1491,7 +1568,59 @@ export default {
     },
 
     verifyEmailOtp() {
-      this.email_verify_status = 'verified';
+
+      var vm = this;
+
+      if (!vm.email_otp) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please enter email otp'
+        });
+      } else {
+
+        this.$axios.post('verification/employer-email-otp-verify', {
+
+          email_otp: vm.email_otp,
+          email: vm.form.contact_person_email,
+          type: 'email',
+
+        })
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message,
+            })
+
+            vm.email_verify_status = 'verified';
+            vm.errors = '';
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
+              });
+            }
+
+          })
+      }
     }
 
   },
