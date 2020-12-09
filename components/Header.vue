@@ -361,7 +361,7 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-12">
                       <div class="form-group">
-                        <label>Username</label>
+                        <label>Username <span class="text-danger">*</span></label>
                         <input v-model="form.username" type="text" name="username" placeholder="Enter username"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('username') }" required>
                         <has-error :form="form" field="username"></has-error>
@@ -370,7 +370,7 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-12">
                       <div class="form-group">
-                        <label>Password</label>
+                        <label>Password <span class="text-danger">*</span></label>
                         <input v-model="form.password" type="password" name="password" placeholder="Enter password"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('password') }" required>
                         <has-error :form="form" field="password"></has-error>
@@ -379,7 +379,7 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-12">
                       <div class="form-group">
-                        <label>Password Confirmation</label>
+                        <label>Password Confirmation <span class="text-danger">*</span></label>
                         <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                                placeholder="Enter password confirmation"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
@@ -398,7 +398,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
-                        <label>Company Name</label>
+                        <label>Company Name <span class="text-danger">*</span></label>
                         <input v-model="form.company_name" type="text" name="company_name"
                                placeholder="Enter company name"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('company_name') }" required>
@@ -419,7 +419,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-group">
-                        <label>Company Address</label>
+                        <label>Company Address <span class="text-danger">*</span></label>
                         <select v-model="form.country_id" name="country_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('country_id') }"
                                 @change="countryName()" required>
@@ -492,7 +492,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
-                        <label>Industry Type</label>
+                        <label>Industry Type <span class="text-danger">*</span></label>
                         <select v-model="form.industry_category_id" name="industry_category_id"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('industry_category_id') }"
                                 @change="fetchIndustryCategory()" required>
@@ -549,7 +549,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-group">
-                        <label>Business Description</label>
+                        <label>Business Description <span class="text-danger">*</span></label>
                         <textarea v-model="form.business_description" id="business_description" cols="30" rows="4"
                                   name="present_village" placeholder="Enter Business Description"
                                   class="form-control"
@@ -581,13 +581,22 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Website URL</label>
                         <input v-model="form.website_url" type="text" name="website_url"
                                placeholder="Enter website url"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('website_url') }">
                         <has-error :form="form" field="website_url"></has-error>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Trade License/Tin/Vat/Bank Statement <span class="text-danger">*</span></label>
+                        <input @change="companyDocumentUrl" type="file" name="document_url"
+                               class="form-control" accept="application/pdf" :class="{ 'is-invalid': form.errors.has('document_url') }">
+                        <has-error :form="form" field="document_url"></has-error>
                       </div>
                     </div>
 
@@ -601,7 +610,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
-                        <label>Contact Person's Name</label>
+                        <label>Contact Person's Name <span class="text-danger">*</span></label>
                         <input v-model="form.contact_person_name" type="text" name="contact_person_name"
                                placeholder="Enter contact person name"
                                class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }"
@@ -652,7 +661,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="form-group">
-                        <label>Contact Person's Designation</label>
+                        <label>Contact Person's Designation <span class="text-danger">*</span></label>
                         <input v-model="form.contact_person_designation" type="text" name="contact_person_designation"
                                placeholder="Enter contact person designation"
                                class="form-control"
@@ -690,6 +699,12 @@
                           </div>
                         </div>
 
+                        <span v-if="errors.mobile_error" class="text-danger with-errors"
+                              v-html="errors.mobile_error"></span> <br>
+
+                        <span v-if="errors.contact_person_mobile" class="text-danger with-errors"
+                              v-html="errors.contact_person_mobile[0]"></span>
+
                       </div>
                     </div>
 
@@ -711,9 +726,11 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button type="submit" v-if="form.pricing_policy == 1" :disabled="form.busy" class="btn btn-success">
+
+                  <button type="submit" v-if="form.pricing_policy == 1 && email_verify_status == 'verified' && mobile_verify_status == 'verified'" :disabled="form.busy" class="btn btn-success">
                     Submit
                   </button>
+
                   <button type="submit" v-else class="btn btn-success" style="cursor: not-allowed" disabled>Submit
                   </button>
                 </div>
@@ -1050,7 +1067,7 @@ export default {
         contact_person_designation: '',
         contact_person_mobile: '',
         pricing_policy: '',
-
+        document_url:'',
       }),
 
       employee_form: new Form({
@@ -1514,59 +1531,6 @@ export default {
       }
     },
 
-    sendMobileOtp() {
-
-      var vm = this;
-      if (!vm.form.contact_person_mobile) {
-        Toast.fire({
-          icon: 'info',
-          title: 'Please enter mobile number'
-        });
-      } else {
-
-        this.$axios.post('verification/employer-mobile-otp', {
-
-          cell_number: vm.form.contact_person_mobile,
-          type: 'cell'
-
-        })
-          .then((response) => {
-
-            Toast.fire({
-              icon: response.data.status,
-              title: response.data.message,
-            });
-
-            vm.mobile_verify_status = 'pending';
-
-          })
-          .catch((error) => {
-
-            vm.errors = error.response.data;
-
-            Toast.fire({
-              icon: 'warning',
-              title: 'There was something wrong'
-            });
-
-            if (error.response.status == 422) {
-              Toast.fire({
-                icon: 'warning',
-                title: 'Validation Error'
-              });
-            }
-
-            if (error.response.status == 401) {
-              Toast.fire({
-                icon: 'warning',
-                title: error.response.data.error
-              });
-            }
-
-          })
-      }
-    },
-
     verifyEmailOtp() {
 
       var vm = this;
@@ -1621,6 +1585,139 @@ export default {
 
           })
       }
+    },
+
+    sendMobileOtp() {
+
+      var vm = this;
+      vm.errors = '';
+      if (!vm.form.contact_person_mobile) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please enter mobile number'
+        });
+      } else {
+
+        this.$axios.post('verification/employer-mobile-otp', {
+
+          contact_person_mobile: vm.form.contact_person_mobile,
+          type: 'cell'
+
+        })
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message,
+            });
+
+            vm.mobile_verify_status = 'pending';
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
+              });
+            }
+
+          })
+      }
+    },
+
+    verifyMobileOtp() {
+
+      var vm = this;
+
+      if (!vm.mobile_otp) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please enter mobile otp'
+        });
+      } else {
+
+        this.$axios.post('verification/employer-mobile-otp-verify', {
+
+          mobile_otp: vm.mobile_otp,
+          contact_person_mobile: vm.form.contact_person_mobile,
+          type: 'cell',
+
+        })
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message,
+            })
+
+            vm.mobile_verify_status = 'verified';
+            vm.errors = '';
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
+              });
+            }
+
+          })
+      }
+    },
+
+    companyDocumentUrl(e){
+
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      let limit = 1024 * 1024 * 2;
+      if (file['size'] < limit) {
+        reader.onloadend = (e) => {
+          // console.log('RESULT', reader.result)
+          this.form.document_url = reader.result;
+        }
+        reader.readAsDataURL(file);
+
+      } else {
+        Swal.fire(
+          'Oops!',
+          'Your are upload large file.',
+          'error'
+        )
+        return false;
+      }
+
     }
 
   },
