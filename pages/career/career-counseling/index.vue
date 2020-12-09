@@ -9,18 +9,7 @@
           <div class="card">
             <div class="card-body contact">
 
-              <h3>career-counseling</h3>
-
-              <p>
-                This is a public site with free access and
-                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
-                assumes no liability for the quality and
-                genuineness of responses.
-                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
-                is not liable for any information provided by any individual.
-                The individual/company would have to conduct its own background checks on the bona fide nature of all
-                responses.
-              </p>
+              <h1>Career Counseling</h1>
 
             </div>
           </div>
