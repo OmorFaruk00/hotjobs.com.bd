@@ -9,18 +9,33 @@
           <div class="card">
             <div class="card-body contact">
 
-              <h3>career-guide</h3>
+              <h1>Career Guide & Tips</h1>
 
-              <p>
-                This is a public site with free access and
-                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
-                assumes no liability for the quality and
-                genuineness of responses.
-                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
-                is not liable for any information provided by any individual.
-                The individual/company would have to conduct its own background checks on the bona fide nature of all
-                responses.
-              </p>
+              <ul class="career-guide">
+                <li>
+                  <nuxt-link to="/career/career-guide/freelancing">Freelancing</nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link to="/career/career-guide/hrm">Human Resource Management (HRM)</nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link to="/career/career-guide/banking">Banking</nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link to="/career/career-guide/rmg">RMG</nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link to="/career/career-guide/career-in-ngo">Career In NGO</nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link to="/career/career-guide/career-in-media">Career In Media</nuxt-link>
+                </li>
+              </ul>
 
             </div>
           </div>
@@ -41,5 +56,11 @@ export default {
 </script>
 
 <style scoped>
+.career-guide li a{
+  color: #423A3D;
+}
 
+.career-guide li a:hover{
+  color: #EC1A3A;
+}
 </style>
