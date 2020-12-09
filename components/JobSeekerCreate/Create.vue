@@ -457,6 +457,7 @@
                     <label>Trade License/Tin/Vat/Bank Statement <span class="text-danger">*</span></label>
                     <input @change="companyDocumentUrl" type="file" name="document_url"
                            class="form-control" :class="{ 'is-invalid': form.errors.has('document_url') }">
+                    <small class="text-danger">(file extension must be .pdf and max size 1024KB)</small>
                     <has-error :form="form" field="document_url"></has-error>
                   </div>
                 </div>
@@ -534,7 +535,7 @@
 
                     <div class="input-group">
                       <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
-                             placeholder="Enter contact person mobile"
+                             placeholder="01XXXXXXXXX"
                              class="form-control"
                              :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }"
                              required
