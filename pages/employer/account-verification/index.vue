@@ -29,7 +29,8 @@
 
                         <span v-if="email_frontend_verify_status == 'pending'">Re send</span>
                         <span
-                          v-if="email_frontend_verify_status == 'verified' || email_verify_status == '1'">Verified <i class="bx bx-check-double"></i></span>
+                          v-if="email_frontend_verify_status == 'verified' || email_verify_status == '1'">Verified <i
+                          class="bx bx-check-double"></i></span>
                         <span v-if="email_frontend_verify_status == '' && email_verify_status != '1'">Send OTP</span>
                       </button>
                     </div>
@@ -65,7 +66,8 @@
 
                         <span v-if="mobile_frontend_verify_status == 'pending'">Re send</span>
                         <span
-                          v-if="mobile_frontend_verify_status == 'verified' || mobile_verify_status == '1'">Verified <i class="bx bx-check-double"></i></span>
+                          v-if="mobile_frontend_verify_status == 'verified' || mobile_verify_status == '1'">Verified <i
+                          class="bx bx-check-double"></i></span>
                         <span v-if="mobile_frontend_verify_status == '' && mobile_verify_status != '1'">Send OTP</span>
                       </button>
                     </div>
@@ -84,11 +86,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                   <label for="">Trade License / Tin / Vat / Bank Statement <span class="text-danger">*</span></label>
 
-                  <form action="">
+                  <form @submit.prevent="createEmployerDocument()" v-if="document_verify_status != '1'">
                     <div class="input-group">
-                      <input type="file" name="document)url"
-                             class="form-control"
-                      >
+                      <input type="file" name="document_url" class="form-control" @change="documentUpload"
+                             accept="application/pdf">
 
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">
@@ -97,7 +98,10 @@
                         </button>
                       </div>
                     </div>
+
                   </form>
+                  <br>
+                  <a v-if="document_url" :href="`${url}`+document_url" class="btn btn-info btn-sm" target="_blank">See Upload File <i v-if="document_verify_status == '1'" class="bx bx-check-double"></i></a>
 
                 </div>
 
@@ -122,13 +126,20 @@
       </div>
 
     </div>
+
+
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Swal from 'sweetalert2'
+import {Form, HasError, AlertError} from 'vform'
 import employerNavbar from '~/components/Employer/Navbar'
 import employerSubNavbar from '~/components/Employer/SubNavbar'
-import Swal from 'sweetalert2'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 const Toast = Swal.mixin({
   toast: true,
@@ -163,6 +174,10 @@ export default {
       document_verify_status: '',
       email_verify_status: '',
       mobile_verify_status: '',
+
+      trade_license: new Form({
+        document_url: '',
+      }),
     }
   },
   methods: {
@@ -414,10 +429,88 @@ export default {
       }
     },
 
+    documentUpload(e) {
+
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      let limit = 1024 * 1024 * 2;
+      if (file['size'] < limit) {
+        reader.onloadend = (e) => {
+          // console.log('RESULT', reader.result)
+          this.trade_license.document_url = reader.result;
+        }
+        reader.readAsDataURL(file);
+
+      } else {
+        Swal.fire(
+          'Oops!',
+          'Your are upload large file.',
+          'error'
+        )
+        return false;
+      }
+    },
+
+    createEmployerDocument() {
+
+      var vm = this;
+
+      if (!vm.trade_license.document_url) {
+        Toast.fire({
+          icon: 'info',
+          title: 'Please insert Trade License / Tin / Vat / Bank Statement'
+        });
+      } else {
+
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.trade_license.post(this.url + '/employer-trade-license' + '?token=' + token)
+
+          .then((response) => {
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message
+            });
+
+            this.$emit('afterCreate');
+            this.trade_license.reset();
+
+          })
+          .catch((error) => {
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Problem'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: error.response.data.error
+              });
+            }
+
+          })
+
+      }
+    },
+
   },
 
   created() {
     this.findEmployer();
+
+    this.$on('afterCreate', () => {
+      this.findEmployer();
+    });
 
     this.$on('verify', () => {
       this.findEmployer();
