@@ -225,7 +225,7 @@
                   <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
                     <div class="form-group">
 
-                      <img :src="getPhoto()" alt="employee.image_url" width="250px">
+                      <img :src="getPhoto()" :alt="form.company_name" width="250px">
 
                       <br>
 
@@ -259,9 +259,19 @@
                           <has-error :form="form" field="contact_person_name"></has-error>
                         </div>
                       </div>
+
+                      <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                          <label for="" class="d-none">xd</label> <br>
+                          <button class="btn btn-info" type="button" @click="editContactPersonDetails">Edit Contact Personal Details</button>
+                        </div>
+
+                      </div>
+
                     </div>
 
                   </div>
+
 
                   <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="form-group">
@@ -349,6 +359,80 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="openContactPersonDetailsModal" tabindex="-1" role="dialog"
+           aria-labelledby="openContactPersonDetailsModal"
+           aria-hidden="true">
+
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+
+              <h5 class="modal-title">Contact Person Details</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+                    <div class="form-group">
+                      <label>Contact Person Name</label>
+                      <input v-model="contact_person_name" type="text" name="contact_person_name"
+                             class="form-control">
+
+                      <small v-if="errors.contact_person_name" class="text-danger with-errors"
+                             v-html="errors.contact_person_name[0]"></small>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+                    <div class="form-group">
+                      <label>Contact Person Designation</label>
+                      <input v-model="contact_person_designation" type="text" name="contact_person_designation"
+                             class="form-control">
+                      <small v-if="errors.contact_person_designation" class="text-danger with-errors"
+                             v-html="errors.contact_person_designation[0]"></small>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3" v-if="form.email_verify_status != '1'">
+                    <div class="form-group">
+                      <label>Contact Person Email</label>
+                      <input v-model="contact_person_email" type="email" name="contact_person_email"
+                             class="form-control">
+                      <small v-if="errors.contact_person_email" class="text-danger with-errors"
+                             v-html="errors.contact_person_email[0]"></small>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3" v-if="form.mobile_verify_status != '1'">
+                    <div class="form-group">
+                      <label>Contact Person Mobile</label>
+                      <input v-model="contact_person_mobile" type="email" name="contact_person_mobile"
+                             class="form-control">
+                      <small v-if="errors.contact_person_mobile" class="text-danger with-errors"
+                             v-html="errors.contact_person_mobile[0]"></small>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" @click="updateEmployerContactPersonDetails">Submit</button>
+              </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </template>
@@ -419,12 +503,15 @@
           billing_address: '',
           billing_contact_number: '',
           billing_contact_email: '',
+          email_verify_status: '',
+          mobile_verify_status: '',
         }),
         contact_persons: '',
         contact_person_designation: '',
         contact_person_email: '',
         contact_person_mobile: '',
-        test:[],
+        contact_person_name:'',
+
       }
     },
 
@@ -605,6 +692,7 @@
           vm.contact_person_designation = response.data.contact_person_designation;
           vm.contact_person_email = response.data.contact_person_email;
           vm.contact_person_mobile = response.data.contact_person_mobile;
+          vm.contact_person_name = response.data.contact_person_name;
 
         }).catch(function (error) {
 
@@ -642,6 +730,8 @@
           vm.form.website_url = employee.website_url;
           vm.form.company_logo = employee.company_logo;
           vm.form.contact_people_id = employee.contact_people_id;
+          vm.form.email_verify_status = employee.email_verify_status;
+          vm.form.mobile_verify_status = employee.mobile_verify_status;
 
           vm.contact_persons = employee.company_contact_peoples;
 
@@ -665,7 +755,6 @@
             vm.form.industry_types.push(value.industry_types_id);
           };
 
-          // var test = employee.employer_industry_types;
 
         }).catch(function (error) {
 
@@ -699,7 +788,19 @@
           })
 
           .catch((error) => {
-            Swal("Failed!", "There was something wrong.", "warning");
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'The image url must be an image.'
+              });
+            }
+
           });
       },
 
@@ -837,6 +938,74 @@
 
         });
       },
+
+      editContactPersonDetails(){
+        var vm = this;
+
+        if (!vm.form.contact_people_id){
+          Toast.fire({
+            icon: 'warning',
+            title: 'Please select contact people'
+          });
+
+        }else {
+          this.fetchContactPeopleDetails();
+          $('#openContactPersonDetailsModal').modal('show');
+        }
+
+      },
+
+      updateEmployerContactPersonDetails(){
+
+        var vm = this;
+        var token = window.$nuxt.$cookies.get('token');
+
+        this.$axios.post('employer-contact-person' + '?token=' + token, {
+
+          contact_people_id: vm.form.contact_people_id,
+          contact_person_name: vm.contact_person_name,
+          contact_person_designation: vm.contact_person_designation,
+          contact_person_email: vm.contact_person_email,
+          contact_person_mobile: vm.contact_person_mobile,
+
+        })
+          .then((response) => {
+
+
+            Toast.fire({
+              icon: response.data.status,
+              title: response.data.message
+            });
+
+            vm.$emit('afterUpdate');
+            $('#openContactPersonDetailsModal').modal('hide');
+
+          })
+          .catch((error) => {
+
+            vm.errors = error.response.data;
+
+            Toast.fire({
+              icon: 'warning',
+              title: 'There was something wrong'
+            });
+
+            if (error.response.status == 422) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Validation Error'
+              });
+            }
+
+            if (error.response.status == 401) {
+              Toast.fire({
+                icon: 'warning',
+                title: 'Token Not Found'
+              });
+            }
+
+          })
+      }
 
     },
 
