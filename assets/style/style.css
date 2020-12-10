@@ -39,6 +39,10 @@ input[placeholder="select date"]{
   background-color: #423A3D;
   color: #ffffff;
 }
+
+.twitter-bs-wizard .twitter-bs-wizard-nav .nav-link.active{
+  color: #fff;
+}
 .twitter-bs-wizard .twitter-bs-wizard-pager-link li a {
   padding: 0.38rem 0.75rem;
 }

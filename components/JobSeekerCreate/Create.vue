@@ -442,7 +442,7 @@
                   </div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label>Website URL</label>
                     <input v-model="form.website_url" type="text" name="website_url"
@@ -452,7 +452,7 @@
                   </div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+<!--                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label>Trade License/Tin/Vat/Bank Statement <span class="text-danger">*</span></label>
                     <input @change="companyDocumentUrl" type="file" name="document_url"
@@ -460,7 +460,7 @@
                     <small class="text-danger">(file extension must be .pdf and max size 1024KB)</small>
                     <has-error :form="form" field="document_url"></has-error>
                   </div>
-                </div>
+                </div>-->
 
                 <div class="col-12">
                   <div class="border-bottom"></div>
@@ -481,6 +481,15 @@
                   </div>
 
                   <div class="form-group">
+                    <label>Contact Person's Email <span class="text-danger">*</span></label>
+                    <input v-model="form.contact_person_email" type="text" name="contact_person_email"
+                           placeholder="Enter contact person email"
+                           class="form-control" :class="{ 'is-invalid': form.errors.has('contact_person_name') }"
+                           required>
+                    <has-error :form="form" field="contact_person_email"></has-error>
+                  </div>
+
+<!--                  <div class="form-group">
 
                     <div class="input-group">
                       <input v-model="form.contact_person_email" type="email" name="contact_person_email"
@@ -518,7 +527,8 @@
                     <span v-if="errors.email" class="text-danger with-errors"
                           v-html="errors.email[0]"></span>
 
-                  </div>
+                  </div>-->
+
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -532,6 +542,15 @@
                   </div>
 
                   <div class="form-group">
+                    <label>Contact Person's Mobile <span class="text-danger">*</span></label>
+                    <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
+                           placeholder="Enter contact person mobile"
+                           class="form-control"
+                           :class="{ 'is-invalid': form.errors.has('contact_person_mobile') }" required>
+                    <has-error :form="form" field="contact_person_mobile"></has-error>
+                  </div>
+
+<!--                  <div class="form-group">
 
                     <div class="input-group">
                       <input v-model="form.contact_person_mobile" type="text" name="contact_person_mobile"
@@ -567,7 +586,7 @@
                     <span v-if="errors.contact_person_mobile" class="text-danger with-errors"
                           v-html="errors.contact_person_mobile[0]"></span>
 
-                  </div>
+                  </div>-->
                 </div>
 
                 <div class="col-12">
