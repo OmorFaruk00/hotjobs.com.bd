@@ -36,4 +36,7 @@ export default {
 h5 {
   color: #423A3D;
 }
+p{
+  font-size: 1rem;
+}
 </style>
