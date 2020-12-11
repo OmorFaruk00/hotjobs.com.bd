@@ -10,6 +10,7 @@
             <div class="card-body contact">
 
               <h3>About us</h3>
+              <p>Stay tuned.</p>
 
             </div>
           </div>

@@ -10,6 +10,7 @@
             <div class="card-body contact">
 
               <h1>Career Counseling</h1>
+              <p>Stay tuned.</p>
 
             </div>
           </div>

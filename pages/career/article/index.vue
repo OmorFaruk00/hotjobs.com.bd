@@ -11,6 +11,8 @@
 
               <h1>Article</h1>
 
+              <p>Stay tuned.</p>
+
             </div>
           </div>
         </div>

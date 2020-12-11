@@ -55,7 +55,7 @@
           <homePopularCompanies/>
 
           <!--Pay Online For Training-->
-          <homePayOnlineForTraining/>
+<!--          <homePayOnlineForTraining />-->
 
 
         </div>

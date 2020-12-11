@@ -11,6 +11,8 @@
 
               <h3>Feedback Form</h3>
 
+              <p>Stay tuned.</p>
+
             </div>
           </div>
         </div>

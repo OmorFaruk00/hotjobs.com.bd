@@ -26,7 +26,7 @@
                   <nuxt-link to="/career/resume-writing-tips" class="dropdown-item">Resume Writing Tips</nuxt-link>
                   <nuxt-link to="/career/cover-letter" class="dropdown-item">Cover Letter</nuxt-link>
                   <nuxt-link to="/career/article" class="dropdown-item">Articles</nuxt-link>
-                  <nuxt-link to="/career/career-counseling" class="dropdown-item">Career Counseling <span class="badge badge-info">New</span></nuxt-link>
+                  <nuxt-link to="/career/career-counseling" class="dropdown-item">Career Counseling </nuxt-link>
 
                 </div>
               </li>

@@ -11,6 +11,8 @@
 
               <h3>FAQ</h3>
 
+              <p>Stay tuned.</p>
+
 <!--              <p>
                 This is a public site with free access and
                 <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
@@ -30,7 +32,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
-              
+
               <employabilityHelpFaq />
 
             </div>

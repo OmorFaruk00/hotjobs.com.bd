@@ -11,6 +11,8 @@
 
               <h1>Interview Tips</h1>
 
+              <p>Stay tuned.</p>
+
             </div>
           </div>
         </div>

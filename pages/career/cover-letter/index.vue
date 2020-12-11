@@ -11,6 +11,8 @@
 
               <h1>Cover letter</h1>
 
+              <p>Stay tuned.</p>
+
             </div>
           </div>
         </div>
