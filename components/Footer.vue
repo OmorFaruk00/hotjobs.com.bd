@@ -91,12 +91,12 @@
                   </nuxt-link>
                 </li>
 
-                <li>
+<!--                <li>
                   <nuxt-link to="/feedback-form">
                     <i class="bx bx-right-arrow-alt"></i>
                     Feedback Form
                   </nuxt-link>
-                </li>
+                </li>-->
 
                 <li>
                   <nuxt-link to="/terms-and-conditions">
@@ -174,10 +174,10 @@
                   Bangladesh.
                 </li>
                 <li>
-                  <a href="tel:+8801726893448">
+<!--                  <a href="tel:+8801726893448">
                     <i class="bx bx-phone-incoming"></i>
                     +88 017 2689 3448
-                  </a>
+                  </a>-->
 
                   <a href="javaScript:void(0)">
                     <i class="bx bx-phone-incoming"></i>

@@ -91,7 +91,9 @@ export default {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/pwa',
+  ],
 
   /*
   ** Nuxt.js modules
@@ -100,7 +102,6 @@ export default {
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
     'nuxt-moment',
-    '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     ['nuxt-gmaps', {
@@ -118,7 +119,12 @@ export default {
   ],
 
   pwa: {
-    icon: false // disables the icon module
+    icon: true, // enable the icon module
+    manifest: {
+      name: 'HotJobs',
+      lang: 'en',
+      useWebmanifestExtension: false
+    }
   },
 
   // sitemap
@@ -196,8 +202,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },

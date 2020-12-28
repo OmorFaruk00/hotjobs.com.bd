@@ -35,6 +35,10 @@
                 <nuxt-link class="nav-link dropdown-toggle arrow-none" to="/contact">Contact Us</nuxt-link>
               </li>
 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow-none" href="https://blog.hotjobs.com.bd/" target="_blank">Blog</a>
+              </li>
+
 
             </ul>
 
