@@ -43,10 +43,10 @@ export default {
       {rel: 'stylesheet', href: '/css/icons.min.css'},
       {rel: 'stylesheet', href: '/css/app.min.css'},
       {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
-      {rel: 'stylesheet', href: '/css/style.css'},
-      // {rel: 'stylesheet', href: '/css/min_style.css'},
-      {rel: 'stylesheet', href: '/css/responsive.css'},
-      // {rel: 'stylesheet', href: '/css/min_responsive.css'},
+      // {rel: 'stylesheet', href: '/css/style.css'},
+      {rel: 'stylesheet', href: '/css/min_style.css'},
+      // {rel: 'stylesheet', href: '/css/responsive.css'},
+      {rel: 'stylesheet', href: '/css/min_responsive.css'},
     ],
 
     script: [
@@ -115,6 +115,9 @@ export default {
       track: 'PageView',
       pixelId: '1220812434962332',
       disabled: false
+    }],
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-8949556359258143'
     }]
   ],
 
