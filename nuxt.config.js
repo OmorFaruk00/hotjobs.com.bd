@@ -28,9 +28,15 @@ export default {
       {
         hid: 'description',
         name: 'description',
+        itemprop: 'description',
         content: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training'
       },
-      {name: 'keywords', content: 'HotJobs'},
+      {
+        hid: 'keyword',
+        name: 'keywords',
+        itemprop: 'keywords',
+        content: 'HotJobs,HotJobsBD,jobsbd'
+      },
       {name: 'author', content: 'HotJobs'},
     ],
 
@@ -122,25 +128,30 @@ export default {
   ],
 
   pwa: {
-    icon: true, // enable the icon module
     manifest: {
-      name: 'HotJobs',
+      name: 'HotJobsBD',
+      short_name: 'HotJobs',
       lang: 'en',
+      description: 'hotjobs.com.bd is one of the most trusted online source for job opportunities. Apply for your desired job, get career advice and improve your skill through training',
+      display: 'standalone',
       useWebmanifestExtension: false
+    },
+    meta: {
+      mobileAppIOS: true,
     }
   },
 
   // sitemap
   // sitemap: {
-    // hostname: 'https://hotjobs.com.bd/',
-    // gzip: true,
+  // hostname: 'https://hotjobs.com.bd/',
+  // gzip: true,
 
-    /*routes: async () => {
-      // let baseURL= 'http://localhost:8000/';
-      let baseURL = 'https://api.hotjobs.com.bd/';
-      let {data} = await axios.get(`${baseURL}/all-jobs`);
-      return data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
-    }*/
+  /*routes: async () => {
+    // let baseURL= 'http://localhost:8000/';
+    let baseURL = 'https://api.hotjobs.com.bd/';
+    let {data} = await axios.get(`${baseURL}/all-jobs`);
+    return data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
+  }*/
   // },
 
   sitemap: {
