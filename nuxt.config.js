@@ -35,7 +35,7 @@ export default {
         hid: 'keyword',
         name: 'keywords',
         itemprop: 'keywords',
-        content: 'HotJobs,HotJobsBD,jobsbd'
+        content: 'HotJobs,HotJobsBD,jobsbd,JobsBD'
       },
       {name: 'author', content: 'HotJobs'},
     ],
@@ -124,7 +124,11 @@ export default {
     }],
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-8949556359258143'
-    }]
+    }],
+    ['nuxt-lazy-load', {
+      defaultImage: '/images/loading.gif',
+      directiveOnly: true
+    }],
   ],
 
   pwa: {
@@ -140,19 +144,6 @@ export default {
       mobileAppIOS: true,
     }
   },
-
-  // sitemap
-  // sitemap: {
-  // hostname: 'https://hotjobs.com.bd/',
-  // gzip: true,
-
-  /*routes: async () => {
-    // let baseURL= 'http://localhost:8000/';
-    let baseURL = 'https://api.hotjobs.com.bd/';
-    let {data} = await axios.get(`${baseURL}/all-jobs`);
-    return data.map(v => `/${v.id}/${v.employer.slug}/${v.slug}`);
-  }*/
-  // },
 
   sitemap: {
     // hostname: 'http://127.0.0.1:3001/',
