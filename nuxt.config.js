@@ -88,6 +88,7 @@ export default {
     {src: '@/plugins/owl.js', ssr: false},
     {src: '@/plugins/vueBootstrap.js'},
     {src: '@/plugins/scrollTo.js'},
+    { src: '@/plugins/vue-fb-customer-chat.js', ssr: false },
   ],
   /*
   ** Auto import components
