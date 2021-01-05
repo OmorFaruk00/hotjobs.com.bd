@@ -124,7 +124,10 @@ export default {
       disabled: false
     }],
     ['@nuxtjs/google-adsense', {
-      id: 'ca-pub-8949556359258143'
+      id: 'ca-pub-8949556359258143',
+      pageLevelAds:true,
+      overlayBottom:true,
+      onPageLoad:true,
     }],
     ['nuxt-lazy-load', {
       defaultImage: '/images/loading.gif',
