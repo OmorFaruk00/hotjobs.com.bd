@@ -20,16 +20,17 @@
 
     <a href="javaScript:void(0)" id="scrollUp" v-scroll-to="'body'"><i class="bx bx-up-arrow-alt"></i></a>
 
+
   </div>
 
   <!-- Load Facebook SDK for JavaScript -->
   <!-- Your Chat Plugin code -->
-<!--  <div id="fb-root"></div>
-  <div class="fb-customerchat"
-       attribution=setup_tool
-       page_id="116211993297878"
-       theme_color="#EC1A3A">
-  </div>-->
+  <!--  <div id="fb-root"></div>
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="116211993297878"
+         theme_color="#EC1A3A">
+    </div>-->
 
   </body>
 </template>
@@ -68,7 +69,7 @@ export default {
 
 #scrollUp {
   /*background: #EC1A3A none repeat scroll 0 0;*/
-  background: linear-gradient(#EE453B,#6F323D);
+  background: linear-gradient(#EE453B, #6F323D);
   bottom: 7px;
   /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);*/
   color: #fff;
@@ -85,7 +86,7 @@ export default {
 }
 
 #scrollUp:hover {
-  background: linear-gradient(#6F323D,#EE453B);
+  background: linear-gradient(#6F323D, #EE453B);
 }
 
 /*.nuxt-progress {

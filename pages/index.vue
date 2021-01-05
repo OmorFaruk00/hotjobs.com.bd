@@ -10,6 +10,9 @@
           <!--banner-->
           <homeBanner/>
 
+
+          <ads />
+
           <div class="col-lg-12">
             <div class="card">
             </div>
@@ -18,17 +21,29 @@
           <!--Desire Category-->
           <homeCategoryWiseJobs/>
 
+
+          <ads />
+
           <!--Skilled jobs-->
           <homeHelpingHand/>
+
+
+          <ads />
 
           <!--dream Jobs-->
           <homeDreamJobs/>
 
+          <ads />
+
           <!--TUTOR-->
           <homeTutor/>
 
+          <ads />
+
           <!--TENDER / EOI-->
           <homeTender/>
+
+          <ads />
 
         </div>
 
@@ -45,12 +60,17 @@
 
       <div class="container-fluid">
 
+        <ads />
 
         <!--Most Popular-->
         <homeMostPopular/>
 
 
         <div class="row">
+
+          <ads />
+
+
           <!--Pay Online For Training-->
           <homePopularCompanies/>
 
@@ -78,6 +98,7 @@
   import homeMostPopular from "~/components/Home/MostPopular";
   import homePopularCompanies from "~/components/Home/PopularCompanies";
   import homePayOnlineForTraining from "~/components/Home/PayOnlineForTraining";
+  import ads from "~/components/Ads";
 
   export default {
     name: "index",
@@ -91,7 +112,8 @@
       homeCounter,
       homeMostPopular,
       homePopularCompanies,
-      homePayOnlineForTraining
+      homePayOnlineForTraining,
+      ads
     },
 
   }
