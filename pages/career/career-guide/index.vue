@@ -5,6 +5,8 @@
 
       <div class="row">
 
+        <ads/>
+
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
@@ -41,6 +43,7 @@
           </div>
         </div>
 
+        <ads/>
 
       </div>
 
@@ -50,17 +53,22 @@
 </template>
 
 <script>
+import ads from "~/components/Ads";
+
 export default {
-  name: "index"
+  name: "index",
+  components: {
+    ads
+  },
 }
 </script>
 
 <style scoped>
-.career-guide li a{
+.career-guide li a {
   color: #423A3D;
 }
 
-.career-guide li a:hover{
+.career-guide li a:hover {
   color: #EC1A3A;
 }
 </style>

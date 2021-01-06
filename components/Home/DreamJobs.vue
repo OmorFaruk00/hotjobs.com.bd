@@ -20,7 +20,12 @@
 
                 <b-col md="3" class='text-center'>
 
-                  <b-card-img class="p-3" v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name" fluid></b-card-img>
+
+                    <img v-if="row.company_logo" class="p-3 card-img" :data-src="`${url}`+row.company_logo" :alt="row.company_name"
+                         :title="row.company_name" v-lazy-load>
+
+<!--                  <b-card-img class="p-3" v-if="row.company_logo" :src="getPhoto(row.company_logo)"
+                              :alt="row.company_name" fluid></b-card-img>-->
 
                   <img v-else src="~/static/favicon.png" alt="Hot Jobs" class="img-fluid p-3">
                 </b-col>
@@ -29,8 +34,9 @@
 
                   <b-card-body class="inner-dream-box" :title="row.company_name">
 
-                    <a style="display: inherit" v-for="inner_row in row.dream_jobs" :href="`/d/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank"
-                       >
+                    <a style="display: inherit" v-for="inner_row in row.dream_jobs"
+                       :href="`/d/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank"
+                    >
 
                       <!--<a style="display: inherit" v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
                        @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
@@ -49,9 +55,10 @@
 
 
           <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
-<!--            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+            <!--            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
 
-            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+              v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
           </div>
 
 
@@ -177,7 +184,8 @@ export default {
 h1 {
   font-size: 35px;
 }
-h4{
+
+h4 {
   color: #EC1A3A;
 }
 

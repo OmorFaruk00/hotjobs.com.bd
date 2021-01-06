@@ -5,6 +5,8 @@
 
       <div class="row">
 
+        <ads/>
+
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
@@ -32,7 +34,9 @@
                 to be placed on the website by technical or any
                 other means is not the responsibility of
                 <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
-                . <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> does not guarantee
+                .
+                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                does not guarantee
                 confidentiality of information provided to it by any person acquiring/using all/any information
                 displayed on
                 the
@@ -44,39 +48,60 @@
               <h5>RESUME DISPLAY</h5>
 
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> allows you to Post/Submit your resume in the <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> website free of cost.
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  allows you to Post/Submit your resume in the
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  website free of cost.
                 </li>
                 <li>The resume displayed can be updated free of cost.</li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers no guarantee n (or) warranties that there would be a satisfactory response or
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers no guarantee n (or) warranties that there would be a satisfactory response or
                   any
                   response once the resume is put on display.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> neither guarantees nor offers any warranty about the credentials of the prospective
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  neither guarantees nor offers any warranty about the credentials of the prospective
                   employer/organization which down loads the information and uses it to contact the prospective
                   employee.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for loss of any data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for loss of any data technical or otherwise, information,
                   particulars
                   supplied by customers due to reasons beyond its control like corruption of data or delay or failure to
                   perform
-                  as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control including
+                  as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control including
                   but not
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strikes, riots, civil unrest, Govt. policies, tampering of data by unauthorized
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strikes, riots, civil unrest, Govt. policies, tampering of data by unauthorized
                   persons like
                   hackers, war and natural calamities.
                 </li>
                 <li>t shall be sole prerogative and responsibility of the individual to check the authenticity of all or
                   any response
-                  received pursuant to the resume being displayed by <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for going out of station or in
+                  received pursuant to the resume being displayed by
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for going out of station or in
                   station for
-                  any job, interview and <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> assumes no responsibility in respect thereof
+                  any job, interview and
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  assumes no responsibility in respect thereof
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason.
                 </li>
                 <li>This subscription is not transferable i.e. it is for the same person through out whole period.</li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> has the right to make all such modifications/editing of resume in order to fit resume
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  has the right to make all such modifications/editing of resume in order to fit resume
                   in
                   database.
                 </li>
@@ -85,26 +110,38 @@
               <h5>RESUME FLASH</h5>
 
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers neither guarantee nor warranties that there would be a satisfactory response
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers neither guarantee nor warranties that there would be a satisfactory response
                   or any
                   response once the resume is zapped.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> neither guarantees nor offers any warranty about the credentials of the prospective
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  neither guarantees nor offers any warranty about the credentials of the prospective
                   employer/organization which receives the information and uses it to contact the prospective employee.
                 </li>
                 <li>It shall be sole prerogative and responsibility of the individual to check the authenticity of all
                   or any response
-                  received pursuant to the resume being zapped by <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for going out of station or in station
+                  received pursuant to the resume being zapped by
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for going out of station or in station
                   for
-                  any job interview and <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> assumes no responsibility in respect thereof.
+                  any job interview and
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  assumes no responsibility in respect thereof.
                 </li>
                 <li>The user shall have no right to demand any information regarding the organizations to whom the
                   resume
-                  has been sent and <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would be in no legal or other obligation to disclose/reveal the
+                  has been sent and
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would be in no legal or other obligation to disclose/reveal the
                   particulars
                   of the organizations.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason. But in such an eventuality, any amount so paid for, shall be refunded to the
                   user on
@@ -115,21 +152,33 @@
 
               <h5>RESUME DEVELOPMENT</h5>
               <ol>
-                <li>The user shall certify that the information/data supplied by it to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> is accurate and
+                <li>The user shall certify that the information/data supplied by it to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  is accurate and
                   correct.
                 </li>
-                <li>The user shall give a reasonable time to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for development of resume.</li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for loss of any data technical or otherwise, information,
+                <li>The user shall give a reasonable time to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for development of resume.
+                </li>
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for loss of any data technical or otherwise, information,
                   particulars
                   supplied by customers due to reasons beyond its control like corruption of data or delay or failure to
                   perform
-                  as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control including
+                  as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control including
                   but not
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strikes, riots, civil unrest, Govt. policies, tampering of data by unauthorized
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strikes, riots, civil unrest, Govt. policies, tampering of data by unauthorized
                   persons like
                   hackers, war and natural calamities.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason.
                 </li>
@@ -137,21 +186,31 @@
 
               <h5>CLASSIFIED JOB LISTING (SINGLE)</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will allow the Subscriber/Recruiter to place the information only in classified
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will allow the Subscriber/Recruiter to place the information only in classified
                   section of the
-                  site <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>.
+                  site
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  .
                 </li>
-                <li>The insertion so displayed in the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will be for a period of
+                <li>The insertion so displayed in the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will be for a period of
                   maximum 30
                   days, which period is subject to change without notice.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason. In such an eventuality, any amount so paid for, shall be refunded to the user on
                   a pro-
                   rata basis.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> has the right to make all such modifications/editing of the vacancy details in order
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  has the right to make all such modifications/editing of the vacancy details in order
                   to fit in
                   database.
                 </li>
@@ -159,49 +218,76 @@
                   <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
                   in the Classified section to collect response.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> may at its sole discretion include the vacancy intimated by client for display on
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in the print media through various media alliances in other print vehicles with no
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  may at its sole discretion include the vacancy intimated by client for display on
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in the print media through various media alliances in other print vehicles with no
                   extra costs
                   to the client. However, if a client wishes not to have its vacancies/requirement from appearing in
                   print media,
-                  then the client shall specifically inform <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in writing accordingly at the time of
+                  then the client shall specifically inform
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in writing accordingly at the time of
                   intimating of the
                   vacancy.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers neither guarantee nor warrantee that there would be a satisfactory response or
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers neither guarantee nor warrantee that there would be a satisfactory response or
                   any
                   response once the job is put on display.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall in no way be held liable for any information provided by the applicant to the
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall in no way be held liable for any information provided by the applicant to the
                   subscriber
                   and it shall be the sole responsibility of the user to check, authenticate and verify the
                   information/response
                   received at its own cost and expense.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for any loss of data, technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for any loss of data, technical or otherwise, information,
                   particulars
                   supplied by the customers, due the reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that the jobs sought to be
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that the jobs sought to be
                   advertised
-                  on the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> are in existence, are genuine and that the subscriber has
+                  on the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  are in existence, are genuine and that the subscriber has
                   the
                   authority to list the jobs.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that there will be no fee
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that there will be no fee
                   charged from
-                  an applicant who responds to jobs advertised on the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for
+                  an applicant who responds to jobs advertised on the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for
                   processing of
                   the application.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to change the look, feel, design, and prominence, and depiction,
-                  classification of the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> at any time without assigning any reason
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to change the look, feel, design, and prominence, and depiction,
+                  classification of the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  at any time without assigning any reason
                   and
                   without giving any notice.
                 </li>
@@ -210,21 +296,31 @@
 
               <h5>CLASSIFIED SUBSCRIPTIONS FOR VARIOUS PERIOD</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will allow the Subscriber/Recruiter to place the information only in classified
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will allow the Subscriber/Recruiter to place the information only in classified
                   section of the
-                  site <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>.
+                  site
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  .
                 </li>
-                <li>Each insertion so displayed in the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall be for a period of 30
+                <li>Each insertion so displayed in the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall be for a period of 30
                   days,
                   which period is subject to change without notice.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason. On such an eventuality, any amount so paid for, shall be refunded to the user on
                   pro-
                   rata basis.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> has the right to make all such modifications/editing of the vacancy details in order
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  has the right to make all such modifications/editing of the vacancy details in order
                   to fit in
                   database.
                 </li>
@@ -232,53 +328,82 @@
                   <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
                   in the Classified section to collect response.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> may at its sole discretion include the vacancy intimated by client for display on
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in the print media through various media alliances in other print vehicles with no
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  may at its sole discretion include the vacancy intimated by client for display on
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in the print media through various media alliances in other print vehicles with no
                   extra costs
                   to the client. However, if a client wishes not to have its vacancies/requirement from appearing in
                   print media,
-                  then the client shall specifically inform <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in writing accordingly at the time of
+                  then the client shall specifically inform
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in writing accordingly at the time of
                   intimating of the
                   vacancy.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers neither guarantee nor warranties that there would be a satisfactory response
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers neither guarantee nor warranties that there would be a satisfactory response
                   or any
                   response once the job is put on display.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall in no way be held liable for any information provided by the applicant to the
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall in no way be held liable for any information provided by the applicant to the
                   subscriber
                   and it shall be the sole responsibility of the subscriber to check, authenticate and verify the
                   information/response received at its own cost and expense.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for loss of any data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for loss of any data technical or otherwise, information,
                   particulars
                   supplied by the customers due to the reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that the jobs sought to be
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that the jobs sought to be
                   advertised
-                  on the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> are in existence, are genuine and that the subscriber has
+                  on the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  are in existence, are genuine and that the subscriber has
                   the
                   authority to list the jobs.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that there will be no fee
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that there will be no fee
                   charged from
-                  an applicant who responds to jobs advertised on the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for
+                  an applicant who responds to jobs advertised on the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for
                   processing of
                   the application.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to change the look, feel, design, prominence, depiction,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to change the look, feel, design, prominence, depiction,
                   classification of
-                  the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> at any time without assigning any reason and without giving
+                  the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  at any time without assigning any reason and without giving
                   any
                   notice.
                 </li>
-                <li>The subscriber to this service shall be entitled to un<nuxt-link to="/">Hotjobs.com.bd</nuxt-link> listings during the period of
+                <li>The subscriber to this service shall be entitled to un
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  listings during the period of
                   subscription.
                 </li>
                 <li>This service is neither resalable nor transferable by the subscriber to any other person, corporate
@@ -295,72 +420,109 @@
                   subscriber cannot
                   give multiple contact information/data for the purpose of listing.
                 </li>
-                <li>Only insertions with contact information registered with <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will be displayed on the
+                <li>Only insertions with contact information registered with
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will be displayed on the
                   site
                 </li>
               </ol>
 
               <h5>HOT JOB (SINGLE)</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall place the information relating to vacancies in the Hot Jobs & Classified
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall place the information relating to vacancies in the Hot Jobs & Classified
                   sections of
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>.
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  .
                 </li>
-                <li>The insertion so displayed at <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall be for a period of 30 days, which period is
+                <li>The insertion so displayed at
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall be for a period of 30 days, which period is
                   subject to
                   change without notice.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> has the right to make all such modifications/editing of the vacancy details in order
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  has the right to make all such modifications/editing of the vacancy details in order
                   to fit in
                   database.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason. In such an eventuality, any amount so paid for, shall be refunded to the user on
                   a pro-
                   rata basis.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> may at its sole discretion include the vacancy intimated by client for display on
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in the print media through various media alliances in other print vehicles with no
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  may at its sole discretion include the vacancy intimated by client for display on
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in the print media through various media alliances in other print vehicles with no
                   extra costs
                   to the client. However, if a client wishes not to have its vacancies/requirement from appearing in
                   print media,
-                  then the client shall specifically inform <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in writing accordingly at the time of
+                  then the client shall specifically inform
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in writing accordingly at the time of
                   intimating of the
                   vacancy.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers no guarantee nor warranties that there would be a satisfactory response or any
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers no guarantee nor warranties that there would be a satisfactory response or any
                   response once the job vacancy is put on display.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall in no way be held liable for any information provided by applicant(s) to the
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall in no way be held liable for any information provided by applicant(s) to the
                   subscriber
                   and it shall be the sole responsibility of the subscriber to check, authenticate and verify the
                   information/response received at its own cost and expense.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for any loss of data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for any loss of data technical or otherwise, information,
                   particulars
                   supplied by the customers due to the reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that the jobs sought to be
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that the jobs sought to be
                   advertised
-                  on the `Hot Jobs' and `Classified' sections of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> are in existence, genuine and the
+                  on the `Hot Jobs' and `Classified' sections of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  are in existence, genuine and the
                   subscriber
                   has the authority to list the jobs.
                 </li>
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that the there will be no fee
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that the there will be no fee
                   charged
                   from an applicant who responds to jobs advertised on the 'Dream Jobs' and 'Classified' sections of
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> for processing of the application.
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  for processing of the application.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to change the look, feel, design, prominence, depiction,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to change the look, feel, design, prominence, depiction,
                   classification of
-                  the `Hot Jobs' and `Classified' sections of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> at any time without assigning any reason
+                  the `Hot Jobs' and `Classified' sections of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  at any time without assigning any reason
                   and
                   without giving any notice.
                 </li>
@@ -369,79 +531,116 @@
 
               <h5>HOT JOB SUBSCRIPTIONS</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall place the information relating to vacancies only in `Dream Jobs' and
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall place the information relating to vacancies only in `Dream Jobs' and
                   `Classified'
-                  sections of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>.
+                  sections of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  .
                 </li>
 
-                <li>The insertion so displayed in the classified section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall be for a period of 30
+                <li>The insertion so displayed in the classified section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall be for a period of 30
                   days, which
                   is subject to change without notice.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> has the right to make all such modifications/editing of the vacancy details in order
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  has the right to make all such modifications/editing of the vacancy details in order
                   to fit in
                   database.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by the user
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by the user
                   without
                   assigning any reason. In such an eventuality, any amount so paid for, shall be refunded to the user on
                   a pro-
                   rata basis.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> may at its sole discretion include the vacancy intimated by client for display on
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in the print media through various media alliances in other print vehicles with no
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  may at its sole discretion include the vacancy intimated by client for display on
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in the print media through various media alliances in other print vehicles with no
                   extra costs
                   to the client. However, if a client wishes not to have its vacancies/requirement from appearing in
                   print media,
-                  then the client shall specifically inform <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> in writing accordingly at the time of
+                  then the client shall specifically inform
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  in writing accordingly at the time of
                   intimating of the
                   vacancy.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers neither guarantee nor warranties that there would be a satisfactory response
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers neither guarantee nor warranties that there would be a satisfactory response
                   or any
                   response once the job vacancy is put on display.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> shall in no way be held liable for any information provided by applicant(s) to the
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  shall in no way be held liable for any information provided by applicant(s) to the
                   subscriber
                   and it shall be the sole responsibility of the subscriber to check, authenticate and verify the
                   information/response received at its own cost and expense.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for any loss of data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for any loss of data technical or otherwise, information,
                   particulars
                   supplied by the customers due to reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
 
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that the jobs sought to be
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that the jobs sought to be
                   advertised
-                  on the `Dream Job' and `Classified' sections of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> are in existence, genuine and the
+                  on the `Dream Job' and `Classified' sections of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  are in existence, genuine and the
                   subscriber
                   has the authority to list the jobs.
                 </li>
 
-                <li>The subscriber/Recruiter must give an undertaking to <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> that there will be no fee
+                <li>The subscriber/Recruiter must give an undertaking to
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  that there will be no fee
                   charged from
                   an applicant who responds to jobs advertised on the 'Hot Jobs' and 'Classified' sections of
                   <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
                   for processing of the application.
                 </li>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to change the look, feel, design, prominence, depiction,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to change the look, feel, design, prominence, depiction,
                   classification of
-                  the classified and/or Hot Jobs section of <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> at any time without assigning any reason and
+                  the classified and/or Hot Jobs section of
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  at any time without assigning any reason and
                   without giving any notice.
                 </li>
 
-                <li>The subscriber to this service shall be entitled for un<nuxt-link to="/">Hotjobs.com.bd</nuxt-link> listing during the period of
+                <li>The subscriber to this service shall be entitled for un
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  listing during the period of
                   subscription.
                   This service is neither resalable nor transferable by the subscriber to any other person, corporate
                   body, firm
@@ -453,25 +652,35 @@
               <h5>MANUAL SHORTLISTING</h5>
 
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> agrees to provide the service to the subscriber only for the duration and the number
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  agrees to provide the service to the subscriber only for the duration and the number
                   of
                   vacancies contracted for, to the best of its ability.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will receive, open, read and sort all resumes received in response to the vacancies
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will receive, open, read and sort all resumes received in response to the vacancies
                   for
                   which the service is offered.
                 </li>
 
                 <li>Sorting shall be done using the parameters for selection decided by the subscriber.</li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for any loss of data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for any loss of data technical or otherwise, information,
                   particulars
                   supplied by the customers due to the reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
@@ -484,37 +693,53 @@
 
               <h5>DISPLAY OF BANNERS</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> agrees to provide the service to the subscriber only for the duration or the number
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  agrees to provide the service to the subscriber only for the duration or the number
                   of
                   impressions contracted for, to the best of its ability.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will display banners on the home page on a rotation basis, wherein banners from
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will display banners on the home page on a rotation basis, wherein banners from
                   different
                   subscribers are displayed in a sequential manner, managed by smart software.
                 </li>
 
-                <li>In case of "Run of the Web site" deals, <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves the right to choose the sections
+                <li>In case of "Run of the Web site" deals,
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves the right to choose the sections
                   where the banners of a subscriber are to be displayed, at any point in time, during the period of the
-                  contract.4. <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reserves its right to reject any insertion or information/data provided by
+                  contract.4.
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reserves its right to reject any insertion or information/data provided by
                   the user without
                   assigning any reason. In such an eventuality, any amount so paid for, shall be refunded to the user on
                   a pro-
                   rata basis.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> offers neither guarantee nor warranties that there would be a satisfactory response
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  offers neither guarantee nor warranties that there would be a satisfactory response
                   or any
                   response once the banners are put on display.
                 </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> would not be held liable for any loss of data technical or otherwise, information,
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  would not be held liable for any loss of data technical or otherwise, information,
                   particulars
                   supplied by the customers due to the reasons beyond its control like corruption of data or delay or
                   failure to
-                  perform as a result of any causes or conditions that are beyond <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> reasonable control
+                  perform as a result of any causes or conditions that are beyond
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  reasonable control
                   including
-                  but not <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> to strike, riots, civil unrest, Govt. policies, tampering of data by
+                  but not
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  to strike, riots, civil unrest, Govt. policies, tampering of data by
                   unauthorized persons
                   like hackers, war and natural calamities.
                 </li>
@@ -552,47 +777,76 @@
 
               <h5>App Permission</h5>
               <ol>
-                <li>Hotjobs App needs certain permissions to run on Android and requires access to certain systems within your
-                  device. App can save personalize data for user. A common reason of storage permissions is that these data
-                  will help user to get personalized App experience.</li>
+                <li>Hotjobs App needs certain permissions to run on Android and requires access to certain systems
+                  within your
+                  device. App can save personalize data for user. A common reason of storage permissions is that these
+                  data
+                  will help user to get personalized App experience.
+                </li>
               </ol>
 
               <h5>Warning</h5>
               <ol>
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> works as an online job portal of communication between employers and job-seekers.
-                  Bdjob.com <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> is not liable on account of any kind of financial transaction between the
-                  employers and job-seekers.</li>
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  works as an online job portal of communication between employers and job-seekers.
+                  Bdjob.com
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  is not liable on account of any kind of financial transaction between the
+                  employers and job-seekers.
+                </li>
 
-                <li>Any job description published in <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> website is provided by the employers. Individual
+                <li>Any job description published in
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  website is provided by the employers. Individual
                   Organizations are responsible for any type of job description or recruitment process published by
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> Website.</li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  Website.
+                </li>
 
                 <li>Users are expressly prohibited from involving with any kind of financial dealing. If the job-seekers
                   provides/discloses any financial information such as Credit/Debit card number, personal bank account,
-                  online payment information and if anyone makes arrangements transaction via money order, wire transfer,
-                  international funds transfer, electronic currency etc. <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> Ltd will not be responsible regarding
-                  these sort of transaction issues.</li>
+                  online payment information and if anyone makes arrangements transaction via money order, wire
+                  transfer,
+                  international funds transfer, electronic currency etc.
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  Ltd will not be responsible regarding
+                  these sort of transaction issues.
+                </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> is not accountable for any kind of fraud by the recruiting company after applying through the
-                  website as well as transferring money or retains a portion in the name of payment for security charge to the
-                  employers.</li>
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  is not accountable for any kind of fraud by the recruiting company after applying through the
+                  website as well as transferring money or retains a portion in the name of payment for security charge
+                  to the
+                  employers.
+                </li>
 
-                <li><nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will not be liable on account of any irregularity, incomplete information, inaccuracy of
-                  information provided by the employers on this website. It is the responsibility for the job-seeker doing further
-                  research regarding the information given on the site.</li>
+                <li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will not be liable on account of any irregularity, incomplete information, inaccuracy of
+                  information provided by the employers on this website. It is the responsibility for the job-seeker
+                  doing further
+                  research regarding the information given on the site.
+                </li>
 
-                <li>any other excuse. So, if any job-seeker relays on any fraudster, <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will not be accountable for
-                  this.</li>
+                <li>any other excuse. So, if any job-seeker relays on any fraudster,
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will not be accountable for
+                  this.
+                </li>
 
                 <li>If the job-seekers respond any email or call from the employers regarding financial transaction,
-                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> will not be responsible for any kind of circumstances</li>
+                  <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                  will not be responsible for any kind of circumstances
+                </li>
               </ol>
 
             </div>
           </div>
         </div>
 
-
+        <ads/>
       </div>
 
     </div>
@@ -601,8 +855,13 @@
 </template>
 
 <script>
+import ads from "~/components/Ads";
+
 export default {
-  name: "index"
+  name: "index",
+  components: {
+    ads
+  },
 }
 </script>
 

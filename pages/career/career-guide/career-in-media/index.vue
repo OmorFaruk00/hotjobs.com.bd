@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
       <div class="row">
-
+        <ads/>
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
@@ -17,11 +17,15 @@
               <ul class="career-guide">
 
                 <li>
-                  <nuxt-link to="/career/career-guide/career-in-media/career-in-print-media">Career In Print Media (প্রিন্ট মিডিয়ায় ক্যারিয়ার)</nuxt-link>
+                  <nuxt-link to="/career/career-guide/career-in-media/career-in-print-media">Career In Print Media
+                    (প্রিন্ট মিডিয়ায় ক্যারিয়ার)
+                  </nuxt-link>
                 </li>
 
                 <li>
-                  <nuxt-link to="/career/career-guide/career-in-media/career-in-electronic-media">Career In Electronic Media (ইলেকট্রনিক মিডিয়ায় ক্যারিয়ার)</nuxt-link>
+                  <nuxt-link to="/career/career-guide/career-in-media/career-in-electronic-media">Career In Electronic
+                    Media (ইলেকট্রনিক মিডিয়ায় ক্যারিয়ার)
+                  </nuxt-link>
                 </li>
 
               </ul>
@@ -29,8 +33,7 @@
             </div>
           </div>
         </div>
-
-
+        <ads/>
       </div>
 
     </div>
@@ -39,8 +42,13 @@
 </template>
 
 <script>
+import ads from "~/components/Ads";
+
 export default {
-  name: "index"
+  name: "index",
+  components: {
+    ads
+  },
 }
 </script>
 
@@ -53,11 +61,11 @@ p {
   font-size: 1rem;
 }
 
-.career-guide li a{
+.career-guide li a {
   color: #423A3D;
 }
 
-.career-guide li a:hover{
+.career-guide li a:hover {
   color: #EC1A3A;
 }
 </style>

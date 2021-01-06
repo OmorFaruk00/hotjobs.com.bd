@@ -4,6 +4,10 @@
     <div class="container-fluid">
 
       <div class="row">
+        <ads/>
+      </div>
+
+      <div class="row">
         <div class="offset-lg-1 col-lg-10" v-if="loading">
           <div class="card">
             <div class="card-body box">
@@ -65,8 +69,9 @@
 
       </div>
 
-      <div class="row">
 
+      <div class="row">
+        <ads/>
       </div>
 
     </div>
@@ -140,6 +145,7 @@
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
+import ads from "~/components/Ads";
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -162,6 +168,9 @@ export default {
     // Must be a number
     return /^\d+$/.test(params.id)
   },
+  components: {
+    ads
+  },
   data() {
     return {
       loading: true,
@@ -179,7 +188,7 @@ export default {
         job_id: '',
       }),
       dream_job_items: '',
-      url:this.$axios.defaults.baseURL,
+      url: this.$axios.defaults.baseURL,
     }
   },
 
@@ -242,7 +251,7 @@ export default {
       }
     },
 
-    applyOnlineDreamJob(){
+    applyOnlineDreamJob() {
       var token = window.$nuxt.$cookies.get('token');
       this.form.post(this.url + 'apply-dream-job?token=' + token)
         .then((response) => {

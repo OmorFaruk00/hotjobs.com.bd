@@ -42,6 +42,18 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-lg-6">
+            <adsbygoogle />
+          </div>
+
+          <div class="col-sm-6 col-lg-6">
+            <adsbygoogle />
+          </div>
+        </div>
+
+
       </div>
 
     </div>
@@ -629,6 +641,8 @@
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
+import ads from "~/components/Ads";
+
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -647,6 +661,10 @@ const Toast = Swal.mixin({
 
 export default {
   name: "Create",
+
+  components: {
+    ads
+  },
 
   data() {
     return {

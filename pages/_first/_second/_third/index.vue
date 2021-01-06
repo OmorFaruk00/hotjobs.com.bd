@@ -3,6 +3,10 @@
 
     <div class="container-fluid">
 
+      <div class="row">
+        <ads/>
+      </div>
+
       <div class="row" v-if="loading">
         <div class="offset-lg-1 col-lg-10">
           <div class="card">
@@ -340,7 +344,11 @@
                       <p>{{ job_details.job_title }}</p>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                      <img :src="getCompanyLogo(job_details.image_url)" :alt="employer.company_name" class="img-fluid">
+
+<!--                      <img :src="`${url}`+job_details.image_url" :alt="employer.company_name" class="img-fluid">-->
+
+                      <img :data-src="`${url}`+job_details.image_url" :alt="employer.company_name" :title="employer.company_name" v-lazy-load>
+
                     </div>
                   </div>
                 </div>
@@ -364,6 +372,10 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="row">
+        <ads/>
       </div>
 
     </div>
@@ -419,6 +431,7 @@
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
+import ads from "~/components/Ads";
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -440,7 +453,9 @@ export default {
     // Must be a number
     return /^\d+$/.test(params.first)
   },
-
+  components: {
+    ads
+  },
   data() {
     return {
       loading: true,

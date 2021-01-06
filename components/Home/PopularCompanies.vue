@@ -17,7 +17,10 @@
 
 
           <div class="popular-company" :key="index" v-for="(row, index) in popular_companies">
-            <img :src="`${url}` + row.company_logo" :alt="row.company_logo">
+
+            <img :data-src="`${url}`+row.company_logo" :alt="row.company_logo"
+                 :title="row.company_logo" v-lazy-load>
+
             <h3>
               <a href="javaScript:void(0)">{{ row.company_name }}</a>
             </h3>

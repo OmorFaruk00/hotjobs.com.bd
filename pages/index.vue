@@ -60,8 +60,6 @@
 
       <div class="container-fluid">
 
-        <ads />
-
         <!--Most Popular-->
         <homeMostPopular/>
 
@@ -73,6 +71,8 @@
 
           <!--Pay Online For Training-->
           <homePopularCompanies/>
+
+          <ads />
 
           <!--Pay Online For Training-->
 <!--          <homePayOnlineForTraining />-->

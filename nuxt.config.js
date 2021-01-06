@@ -125,8 +125,6 @@ export default {
     }],
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-8949556359258143',
-      pageLevelAds:true,
-      overlayBottom:true,
       onPageLoad:true,
     }],
     ['nuxt-lazy-load', {

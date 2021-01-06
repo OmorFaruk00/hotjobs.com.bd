@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
       <div class="row">
-
+        <ads/>
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
@@ -13,7 +13,8 @@
 
               <p>
 
-                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> collects few information about visitors. This information
+                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                collects few information about visitors. This information
                 includes your IP address, referring addresses, browser information, domain
                 names and access Date & times. We use this information for operating our
                 services, security management, maintaining the quality of the service, and
@@ -86,7 +87,7 @@
               </p>
 
               <p>
-               <span>E-Mail Notification Services</span> When you subscribe to a Hotjobs.com.bd E-mail
+                <span>E-Mail Notification Services</span> When you subscribe to a Hotjobs.com.bd E-mail
                 Notification, We use your email address to send you the notification(s) you have requested
                 like Hotjobs.com.bd Newsletter, Hotjobs.com.bd workshop/Training, Third Party offers and
                 Promotions. You may subscribe and unsubscribe services by following the prominent
@@ -94,7 +95,9 @@
               </p>
 
               <p>
-                <span>Third-Party Tracking Technologies</span> <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> uses the Google Analytics
+                <span>Third-Party Tracking Technologies</span>
+                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                uses the Google Analytics
                 tracking technology to track visits to our website. It allows us to analyze the usage of our
                 website and is merely for our internal use.
               </p>
@@ -120,7 +123,8 @@
               </p>
 
               <p>
-                <span>Security</span> We use lots of tools (encryption, passwords, and physical security) to protect your
+                <span>Security</span> We use lots of tools (encryption, passwords, and physical security) to protect
+                your
                 personal information against unauthorized access and disclosure.
               </p>
 
@@ -130,15 +134,16 @@
               </p>
 
               <p>
-                <span>Revision and updates</span> <nuxt-link to="/">Hotjobs.com.bd</nuxt-link> regularly revises and updates its privacy policy
+                <span>Revision and updates</span>
+                <nuxt-link to="/">Hotjobs.com.bd</nuxt-link>
+                regularly revises and updates its privacy policy
                 and publishes changes to the policy at our website.
               </p>
 
             </div>
           </div>
         </div>
-
-
+        <ads/>
       </div>
 
     </div>
@@ -147,16 +152,22 @@
 </template>
 
 <script>
+import ads from "~/components/Ads";
+
 export default {
-  name: "index"
+  name: "index",
+  components: {
+    ads
+  },
 }
 </script>
 
 <style scoped>
-h3{
+h3 {
   color: #ec1a3a;
 }
-span{
+
+span {
   color: #423a3d;
   font-weight: 500;
 }

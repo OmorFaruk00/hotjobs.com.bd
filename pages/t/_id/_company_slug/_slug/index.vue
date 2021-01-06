@@ -4,6 +4,10 @@
     <div class="container-fluid">
 
       <div class="row">
+        <ads/>
+      </div>
+
+      <div class="row">
         <div class="offset-lg-1 col-lg-10" v-if="loading">
           <div class="card">
             <div class="card-body box">
@@ -67,6 +71,11 @@
         </div>
 
       </div>
+
+      <div class="row">
+        <ads/>
+      </div>
+
 
     </div>
 
@@ -138,6 +147,7 @@
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
+import ads from "~/components/Ads";
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -159,6 +169,9 @@ export default {
   validate({params}) {
     // Must be a number
     return /^\d+$/.test(params.id)
+  },
+  components: {
+    ads
   },
   data() {
     return {
