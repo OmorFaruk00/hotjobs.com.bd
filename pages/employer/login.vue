@@ -36,12 +36,17 @@
     </div>
     <!-- End Login -->
 
+    <div class="row">
+      <ads/>
+    </div>
+
   </div>
 </template>
 
 <script>
   import jobSeekerBanner from '~/components/JobSeekerLogin/Banner'
-  import Swal from 'sweetalert2'
+  import Swal from 'sweetalert2';
+  import ads from "~/components/Ads";
 
   const Toast = Swal.mixin({
     toast: true,
@@ -58,7 +63,8 @@
   export default {
     name: "login",
     components: {
-      jobSeekerBanner
+      jobSeekerBanner,
+      ads
     },
     data() {
       return {

@@ -5,13 +5,29 @@
       <div class="row">
 
         <div class="col-lg-2">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <dashboardNavbar/>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <dashboardNavbar/>
+                </div>
               </div>
             </div>
           </div>
+
+
+          <div class="col-12">
+            <div class="card" style="background: transparent">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+              </div>
+            </div>
+          </div>
+
+
         </div>
 
         <div class="col-lg-10">
@@ -109,24 +125,31 @@
 
             </div>
           </div>
+
+
+          <div class="row">
+            <ads/>
+          </div>
+
         </div>
 
       </div>
 
-
     </div>
-
   </div>
+
 </template>
 
 <script>
 import dashboardNavbar from '~/components/MyJobs/navbar'
+import ads from "@/components/Ads";
 
 export default {
   middleware: 'employeeAuthenticated',
   name: "index",
   components: {
-    dashboardNavbar
+    dashboardNavbar,
+    ads
   },
   data() {
     return {

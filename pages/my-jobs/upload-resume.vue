@@ -5,13 +5,29 @@
       <div class="row">
 
         <div class="col-lg-2">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <dashboardNavbar/>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <dashboardNavbar/>
+                </div>
               </div>
             </div>
           </div>
+
+
+          <div class="col-12">
+            <div class="card" style="background: transparent">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+              </div>
+            </div>
+          </div>
+
+
         </div>
 
         <div class="col-lg-10">
@@ -50,6 +66,10 @@
 
             </div>
           </div>
+
+          <div class="row">
+            <ads/>
+          </div>
         </div>
 
       </div>
@@ -64,6 +84,7 @@
 
 import dashboardNavbar from '~/components/MyJobs/navbar'
 import Swal from 'sweetalert2'
+import ads from "@/components/Ads";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -81,7 +102,8 @@ export default {
   middleware: 'employeeAuthenticated',
   name: "upload-resume",
   components: {
-    dashboardNavbar
+    dashboardNavbar,
+    ads
   },
   data() {
     return {
