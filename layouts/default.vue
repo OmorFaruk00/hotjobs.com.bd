@@ -12,6 +12,22 @@
 
     <div class="main-content bg-light">
 
+      <div style="padding-top: 80px" class="d-md-none">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col text-center">
+              <a href="https://admission.diu.ac/" target="_blank">
+                <img src="~/static/images/diu.gif" class="img-fluid" alt="DIU">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
       <nuxt/>
 
       <!--footer-->

@@ -42,6 +42,7 @@
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
+    "@nuxtjs/google-fonts": "^1.2.0",
     "@nuxtjs/pwa": "^3.3.3"
   }
 }

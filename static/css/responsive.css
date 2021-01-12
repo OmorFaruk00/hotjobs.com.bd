@@ -3,13 +3,13 @@
     background-color: #fff!important;
   }
   .employability-help{
-    margin-top: 72px!important;
+    margin-top: 10px!important;
   }
   .employability-text h1 {
-    font-size: 25px;
+    font-size: 20px;
   }
   .employability-text p {
-    font-size: 15px;
+    font-size: 12px;
   }
   .employability-text{
     margin-top: 15px;
@@ -1282,6 +1282,10 @@
     height: 400px;
   }
   /*-- End Map --*/
+
+  body[data-layout="horizontal"] .page-content{
+    margin-top: -60px;
+  }
   /*----- End Contact Page -----*/
 }
 

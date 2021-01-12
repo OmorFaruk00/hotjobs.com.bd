@@ -47,18 +47,18 @@ export default {
       {rel: 'apple-touch-icon', sizes: '152x152', href: '/favicon.png'},
       {rel: 'stylesheet', id: 'bootstrap-style', href: '/css/bootstrap.min.css'},
       {rel: 'stylesheet', href: '/css/icons.min.css'},
-      {rel: 'stylesheet', href: '/css/app.min.css'},
+      {rel: 'stylesheet', href: '/css/app.css'},
       {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
       // {rel: 'stylesheet', href: '/css/style.css'},
       {rel: 'stylesheet', href: '/css/min_style.css'},
-      // {rel: 'stylesheet', href: '/css/responsive.css'},
-      {rel: 'stylesheet', href: '/css/min_responsive.css'},
+      {rel: 'stylesheet', href: '/css/responsive.css'},
+      // {rel: 'stylesheet', href: '/css/min_responsive.css'},
     ],
 
     script: [
       {src: '/libs/jquery/jquery.min.js'},
       {src: '/libs/bootstrap/js/bootstrap.bundle.min.js'},
-      {src: '/js/facebook.js'},
+      // {src: '/js/facebook.js'},
       {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
       {src: '/libs/metismenu/metisMenu.min.js'},
       {src: '/libs/simplebar/simplebar.min.js'},
@@ -88,7 +88,7 @@ export default {
     {src: '@/plugins/owl.js', ssr: false},
     {src: '@/plugins/vueBootstrap.js'},
     {src: '@/plugins/scrollTo.js'},
-    { src: '@/plugins/vue-fb-customer-chat.js', ssr: false },
+    {src: '@/plugins/vue-fb-customer-chat.js', ssr: false},
   ],
   /*
   ** Auto import components
@@ -100,7 +100,22 @@ export default {
   */
   buildModules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/google-fonts'
   ],
+  /* google font */
+  googleFonts: {
+
+    families: {
+      Poppins: true,
+      Lato: [300, 400, 500, 600, 700],
+      display:'swap',
+      Raleway: {
+        wght: [100, 400],
+        ital: [100]
+      },
+    }
+
+  },
 
   /*
   ** Nuxt.js modules
@@ -125,7 +140,7 @@ export default {
     }],
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-8949556359258143',
-      onPageLoad:true,
+      onPageLoad: true,
     }],
     ['nuxt-lazy-load', {
       defaultImage: '/images/loading.gif',
