@@ -396,7 +396,7 @@
                                      class="mb-3"
                       >
 
-                        <b-form-select-option v-for="(row,key) in jobs_types" :value="row.id">
+                        <b-form-select-option v-for="(row,index) in jobs_types" :key="index" :value="row.id">
                           {{ row.name }}
                         </b-form-select-option>
 
@@ -433,10 +433,12 @@
                 <label class="col-md-2 col-form-label">Application Deadline <span class="text-danger">*</span></label>
                 <div class="col-md-10">
 
-                  <no-ssr>
+<!--                  <no-ssr>-->
+                    <client-only>
                     <datepicker placeholder="select date" v-model="primary_job_information.application_deadline"
                                 :class="{ 'is-invalid': primary_job_information.errors.has('application_deadline') }"></datepicker>
-                  </no-ssr>
+                    </client-only>
+<!--                  </no-ssr>-->
                   <small v-if="errors.application_deadline" class="text-danger with-errors"
                          v-html="errors.application_deadline[0]"></small>
                 </div>
@@ -863,7 +865,7 @@
                                      @change="fetchLevelOfEducationDegree()" class="mb-3">
 
                         <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                        <b-form-select-option v-for="row in level_of_educations" :value="row.id">{{
+                        <b-form-select-option v-for="(row,index) in level_of_educations" :key="index" :value="row.id">{{
                             row.name
                           }}
                         </b-form-select-option>
@@ -877,7 +879,7 @@
                       <b-form-select v-model="degrees.degree_id" class="mb-3">
                         <b-form-select-option :value="null">Please select an option</b-form-select-option>
 
-                        <b-form-select-option v-for="row in all_degrees" :value="row.id">{{ row.name }}
+                        <b-form-select-option v-for="(row,index) in all_degrees" :key="index" :value="row.id">{{ row.name }}
                         </b-form-select-option>
 
                       </b-form-select>
@@ -1896,8 +1898,8 @@ export default {
         {item: 'Over time allowance', name: 'Over time allowance'},
       ],
 
-      jobs_types: '',
-      level_of_educations: '',
+      jobs_types: [],
+      level_of_educations: [],
       institutes: '',
       without_filter_degrees: '',
       all_degrees: '',

@@ -29,7 +29,7 @@
 
                   <b-form-select v-model="filter.industry_id" class="mb-3" @change="jobFilterIndustryWise">
                     <b-form-select-option :value="null">Please select industry</b-form-select-option>
-                    <b-form-select-option v-for="row in industrials" :value="row.id">{{
+                    <b-form-select-option v-for="(row,index) in industrials" :key="index" :value="row.id">{{
                         row.name
                       }}
                     </b-form-select-option>

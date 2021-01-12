@@ -15,7 +15,7 @@
           <div v-if="!loading">
 
             <b-card-group columns>
-              <b-card v-for="row in employer_tender_jobs" no-body class="overflow-hidden">
+              <b-card v-for="(row,index) in employer_tender_jobs" :key="index" no-body class="overflow-hidden">
                 <b-row no-gutters class="dream-box">
 
                   <b-col md="3" class='text-center'>

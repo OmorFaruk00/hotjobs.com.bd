@@ -56,6 +56,8 @@ import Header from "~/components/Header";
 import TopNavbar from "~/components/TopNavbar";
 import myFooter from "~/components/Footer";
 
+const PRIMARY_HOSTS = `hotjobs.com.bd`
+
 export default {
   name: "default",
   components: {

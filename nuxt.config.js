@@ -108,12 +108,12 @@ export default {
     families: {
       Poppins: true,
       Lato: [300, 400, 500, 600, 700],
-      display:'swap',
       Raleway: {
         wght: [100, 400],
         ital: [100]
       },
-    }
+    },
+    display: 'swap',
 
   },
 
@@ -126,6 +126,7 @@ export default {
     'nuxt-moment',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
+    'nuxt-helmet',
     ['nuxt-gmaps', {
       key: 'AIzaSyBU8GPGJ8ihYBpfMRnbCOsVZJlyvWafPq4',
     }],
@@ -224,8 +225,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },

@@ -194,7 +194,7 @@
                                                class="mb-3"
                                 >
 
-                                  <b-form-select-option v-for="(row,key) in jobs_types" :value="row.id">{{ row.name }}
+                                  <b-form-select-option v-for="(row,index) in jobs_types" :key="index" :value="row.id">{{ row.name }}
                                   </b-form-select-option>
 
                                 </b-form-select>
@@ -693,7 +693,7 @@
                                                  @change="fetchLevelOfEducationDegree()" class="mb-3">
 
                                     <b-form-select-option :value="null">Please select an option</b-form-select-option>
-                                    <b-form-select-option v-for="row in level_of_educations" :value="row.id">{{ row.name
+                                    <b-form-select-option v-for="(row,index) in level_of_educations" :key="index" :value="row.id">{{ row.name
                                       }}
                                     </b-form-select-option>
 
@@ -706,7 +706,7 @@
                                   <b-form-select v-model="degrees.degree_id" class="mb-3">
                                     <b-form-select-option :value="null">Please select an option</b-form-select-option>
 
-                                    <b-form-select-option v-for="row in all_degrees" :value="row.id">{{ row.name }}
+                                    <b-form-select-option v-for="(row,index) in all_degrees" :key="index" :value="row.id">{{ row.name }}
                                     </b-form-select-option>
 
                                   </b-form-select>
@@ -2096,8 +2096,8 @@
           {item: 'Over time allowance', name: 'Over time allowance'},
         ],
 
-        jobs_types: '',
-        level_of_educations: '',
+        jobs_types: [],
+        level_of_educations: [],
         institutes: '',
         without_filter_degrees: '',
         all_degrees: '',

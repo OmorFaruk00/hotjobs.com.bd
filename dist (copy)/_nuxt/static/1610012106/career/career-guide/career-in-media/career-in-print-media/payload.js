@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/career/career-guide/career-in-media/career-in-print-media", {data:[{}],fetch:[],mutations:void 0});

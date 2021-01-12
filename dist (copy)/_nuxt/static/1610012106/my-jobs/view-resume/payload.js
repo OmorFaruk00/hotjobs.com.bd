@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/my-jobs/view-resume", {data:[],fetch:[],mutations:void 0});

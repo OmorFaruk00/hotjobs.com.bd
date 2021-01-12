@@ -15,7 +15,7 @@
 
           <b-card-group columns>
 
-            <b-card v-for="row in employer_hotjobs" no-body class="overflow-hidden">
+            <b-card v-for="(row,index) in employer_hotjobs" :key="index" no-body class="overflow-hidden">
               <b-row no-gutters class="dream-box">
 
                 <b-col md="3" class='text-center'>

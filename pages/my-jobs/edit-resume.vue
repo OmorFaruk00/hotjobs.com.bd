@@ -2075,7 +2075,7 @@
 
                       <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
-                      <b-form-select-option v-for="(row,key) in skill_general_categories" :value="row.id">{{ row.name }}
+                      <b-form-select-option v-for="(row,index) in skill_general_categories" :key="index" :value="row.id">{{ row.name }}
                       </b-form-select-option>
 
                     </b-form-select>
@@ -2093,7 +2093,7 @@
 
                       <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
 
-                      <b-form-select-option v-for="(row,key) in skill_special_categories" :value="row.id">{{ row.name }}
+                      <b-form-select-option v-for="(row,index) in skill_special_categories" :key="index" :value="row.id">{{ row.name }}
                       </b-form-select-option>
 
                     </b-form-select>

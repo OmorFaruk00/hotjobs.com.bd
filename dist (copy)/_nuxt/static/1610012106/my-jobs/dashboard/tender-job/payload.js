@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/my-jobs/dashboard/tender-job", {data:[],fetch:[],mutations:void 0});
