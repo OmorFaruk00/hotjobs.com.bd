@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/career/cover-letter", {data:[{}],fetch:[],mutations:void 0});

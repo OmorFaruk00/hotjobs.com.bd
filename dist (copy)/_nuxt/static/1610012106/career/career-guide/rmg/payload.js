@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/career/career-guide/rmg", {data:[{}],fetch:[],mutations:void 0});

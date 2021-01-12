@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/career/article", {data:[{}],fetch:[],mutations:void 0});

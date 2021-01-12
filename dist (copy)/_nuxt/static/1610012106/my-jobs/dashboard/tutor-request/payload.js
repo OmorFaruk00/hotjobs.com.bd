@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/my-jobs/dashboard/tutor-request", {data:[],fetch:[],mutations:void 0});

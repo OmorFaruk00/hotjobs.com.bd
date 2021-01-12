@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/career/career-guide/career-in-ngo", {data:[{}],fetch:[],mutations:void 0});
