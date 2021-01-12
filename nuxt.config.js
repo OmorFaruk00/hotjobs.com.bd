@@ -1,6 +1,7 @@
 const https = require('https');
 const axios = require('axios');
 export default {
+
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode

@@ -14,17 +14,20 @@
 
       <div style="padding-top: 80px" class="d-md-none">
 
-        <div class="container-fluid">
 
-          <div class="row">
-            <div class="col text-center">
-              <a href="https://admission.diu.ac/" target="_blank">
-                <img src="~/static/images/diu.gif" class="img-fluid" alt="DIU">
-              </a>
-            </div>
-          </div>
+        <!--diu banner start-->
+        <!--        <div class="container-fluid">
 
-        </div>
+                  <div class="row">
+                    <div class="col text-center">
+                      <a href="https://admission.diu.ac/" target="_blank">
+                        <img src="~/static/images/diu.gif" class="img-fluid" alt="DIU">
+                      </a>
+                    </div>
+                  </div>
+
+                </div>-->
+        <!--diu banner end-->
 
       </div>
 
@@ -36,17 +39,7 @@
 
     <a href="javaScript:void(0)" id="scrollUp" v-scroll-to="'body'"><i class="bx bx-up-arrow-alt"></i></a>
 
-
   </div>
-
-  <!-- Load Facebook SDK for JavaScript -->
-  <!-- Your Chat Plugin code -->
-  <!--  <div id="fb-root"></div>
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="116211993297878"
-         theme_color="#EC1A3A">
-    </div>-->
 
   </body>
 </template>
@@ -55,8 +48,6 @@
 import Header from "~/components/Header";
 import TopNavbar from "~/components/TopNavbar";
 import myFooter from "~/components/Footer";
-
-const PRIMARY_HOSTS = `hotjobs.com.bd`
 
 export default {
   name: "default",
