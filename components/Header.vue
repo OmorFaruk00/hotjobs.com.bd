@@ -8,11 +8,11 @@
           <nuxt-link to="/" class="logo logo-dark">
 
             <span class="logo-sm">
-              <img src="~/static/images/small_logo.png" alt="" height="45">
+              <img src="~/static/images/small_logo.png" alt="HotJobs" height="45">
             </span>
 
             <span class="logo-lg">
-              <img src="~/static/images/logo.png" alt="" height="28">
+              <img src="~/static/images/logo.png" alt="HotJobs" height="28">
             </span>
 
           </nuxt-link>
@@ -128,25 +128,29 @@
 
         <div class="dropdown d-inline-block">
 
-          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Facebook">
-            <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
+          <a href="https://admission.diu.ac/" target="_blank">
+            <img src="~/static/images/diu.gif" class="img-fluid" alt="DIU">
           </a>
 
-          <a href="https://www.linkedin.com/company/hotjobs-com-bd" target="_blank" title="Linkedin">
-            <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
-          </a>
+          <!--          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Facebook">
+                      <i class="bx bxl-facebook-circle" style="font-size: 40px;color: #423A3D;"></i>
+                    </a>
 
-          <a href="https://www.instagram.com/bdhotjobs/" target="_blank" title="Instagram">
-            <i class="bx bxl-instagram-alt" style="font-size: 40px;color: #423A3D;"></i>
-          </a>
+                    <a href="https://www.linkedin.com/company/hotjobs-com-bd" target="_blank" title="Linkedin">
+                      <i class="bx bxl-linkedin-square" style="font-size: 40px;color: #423A3D;"></i>
+                    </a>
 
-          <a href="https://twitter.com/bdhotjobs" target="_blank" title="Twitter">
-            <i class="bx bxl-twitter" style="font-size: 40px;color: #423A3D;"></i>
-          </a>
+                    <a href="https://www.instagram.com/bdhotjobs/" target="_blank" title="Instagram">
+                      <i class="bx bxl-instagram-alt" style="font-size: 40px;color: #423A3D;"></i>
+                    </a>
 
-          <a href="https://youtube.com/channel/UC-n5t2attDAAlT3oFYQalWg" target="_blank" title="Youtube">
-            <i class="bx bxl-youtube" style="font-size: 40px;color: #423A3D;"></i>
-          </a>
+                    <a href="https://twitter.com/bdhotjobs" target="_blank" title="Twitter">
+                      <i class="bx bxl-twitter" style="font-size: 40px;color: #423A3D;"></i>
+                    </a>
+
+                    <a href="https://youtube.com/channel/UC-n5t2attDAAlT3oFYQalWg" target="_blank" title="Youtube">
+                      <i class="bx bxl-youtube" style="font-size: 40px;color: #423A3D;"></i>
+                    </a>-->
 
         </div>
 
