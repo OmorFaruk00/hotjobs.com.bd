@@ -129,7 +129,7 @@
         <div class="dropdown d-inline-block">
 
           <a href="https://admission.diu.ac/" target="_blank">
-            <img src="~/static/images/diu.png" class="img-fluid" alt="DIU">
+            <img src="~/static/images/diu.gif" class="img-fluid" alt="DIU">
           </a>
 
           <!--          <a href="https://www.facebook.com/hotjobs.com.bd" target="_blank" title="Facebook">
