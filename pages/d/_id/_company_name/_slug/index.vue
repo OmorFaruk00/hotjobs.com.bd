@@ -29,7 +29,19 @@
               <div class="row">
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                  <h1 class="text-center">{{ employer.company_name }}</h1>
+                  <h1 class="text-center">"{{ employer.company_name }}"</h1>
+
+                  <h4 v-if="job_details.title">Job Title : <span>{{ job_details.title }} .</span></h4>
+                  <h4 v-if="job_details.employment_status">Employment Status : <span>{{ job_details.employment_status }} .</span></h4>
+                  <h4 v-if="job_details.application_deadline">Application Deadline :  <span>{{ dateFormat(job_details.application_deadline) }}.</span></h4>
+                  <h4>Salary :
+
+                    <span v-if="job_details.negotiable_status">Negotiable</span>
+                    <span v-else v-html="job_details.minimum_salary + '-' + job_details.maximum_salary + ' BDT.'"></span>
+
+                  </h4>
+
+                  <hr>
 
                   <span v-html="job_details.text"></span>
 
@@ -293,8 +305,11 @@ export default {
           }
 
         })
-    }
+    },
 
+    dateFormat(date) {
+      return this.$moment(date).format('MMMM D, YYYY');
+    },
   },
 
   created() {
@@ -309,6 +324,10 @@ export default {
 }
 
 h1 {
+  color: #ec1a3a;
+}
+
+h4 span {
   color: #ec1a3a;
 }
 </style>
