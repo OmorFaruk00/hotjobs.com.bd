@@ -257,20 +257,22 @@
 
           <div class="row">
             <div class="col-12">
-              <div class="card" style="background: transparent">
+              <div class="card" style="background: transparent;box-shadow: none;">
                 <div class="card-body">
 
                   <adsbygoogle/>
+
 
                 </div>
               </div>
             </div>
 
             <div class="col-12 mt-2">
-              <div class="card" style="background: transparent">
+              <div class="card" style="background: transparent;box-shadow: none;">
                 <div class="card-body">
 
                   <adsbygoogle/>
+
 
                 </div>
               </div>
@@ -280,178 +282,6 @@
         </div>
 
       </div>
-
-      <!--      <div class="row" v-if="(current_jobs || dream_jobs) && !loading">
-
-              <div class="col-lg-10" v-if="current_jobs.length > 0 || dream_jobs.length > 0">
-                <div class="card">
-                  <div class="card-body">
-
-                    <div class="mb-2" v-if="current_jobs.length > 0">
-                      <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                          <select v-model="perPage" class="form-control">
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    &lt;!&ndash;dream job&ndash;&gt;
-                    <div class="row">
-
-                      <div v-for="dream_job in fetchDreamJobData" class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card-body mb-2 dream-job-box">
-                          <a :href="`/d/${dream_job.id}/${dream_job.employer.slug}/${dream_job.slug}`" target="_blank">
-
-                            <span class="row">
-                              <span class="col-9">
-
-                            <h4 class="card-title">{{ dream_job.title }}</h4>
-                            <h6 class="card-subtitle mb-2 text-muted"><span>{{ dream_job.employer.company_name }}</span></h6>
-                              <ul class="job-preview-list">
-
-                              <li v-if="dream_job.employment_status">
-                                <i class="bx bx-slider-alt"></i>
-                                <span>{{ dream_job.employment_status }}</span>
-                              </li>
-
-                              <li>
-                                <i class="bx bx-calendar"></i>
-
-                                Application Deadline:
-                                <strong v-html="dateFormat(dream_job.application_deadline)"></strong>
-                              </li>
-                            </ul>
-                            </span>
-
-
-                            <span class="col-3 text-right" v-if="dream_job.employer.company_logo">
-
-                              <img :data-src="`${url}`+dream_job.employer.company_logo" :alt="dream_job.employer.company_name"
-                                   :title="dream_job.employer.company_name" v-lazy-load>
-
-                              &lt;!&ndash;                          <img :src="`${url}${dream_job.employer.company_logo}`" :alt="dream_job.employer.company_name" class="img-fluid">&ndash;&gt;
-
-                              </span>
-                            </span>
-
-                          </a>
-                        </div>
-                      </div>
-
-                    </div>
-
-
-                    <div v-for="row in lists" class="card-body border mb-2 job-short-box">
-
-                      <a :href="`/${row.id}/${row.employer.slug}/${row.slug}`" target="_blank">
-                        &lt;!&ndash;                <a href="javaScript:void(0)" @click="fetchJobDetails(row.id,row.employer.slug,row.slug)">&ndash;&gt;
-                        <h4 class="card-title">{{ row.job_title }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">
-
-
-                          <span v-if="row.company_info_visibility">
-                            <span v-if="row.company_info_visibility.company_name_show_status == 1">
-                            {{ row.employer.company_name }}
-                        </span>
-                          <span v-else>{{ row.company_info_visibility.company_name }}</span>
-                          </span>
-
-
-                        </h6>
-
-                        <ul class="job-preview-list">
-                          <li v-if="row.more_job_inforamtion">
-                            <i class="bx bx-map"></i>
-
-                            <span
-                              v-html="row.more_job_inforamtion.job_location_type == '0' ? 'Inside Bangladesh' : 'Outside Bangladesh'"></span>,
-                            <span>{{ row.more_job_inforamtion.job_location_address }}</span>
-
-
-                          </li>
-
-                          <span v-if="row.candidate_requirement">
-                            <li v-if="row.candidate_requirement.candidate_requirement_degree.length > 0">
-                            <i class="bx bxs-graduation"></i>
-
-                            <span v-for="(inner_row,index) in row.candidate_requirement.candidate_requirement_degree">
-                            <span class="badge badge-secondary mx-1" v-text="degreeName(inner_row.degree_id)"></span>
-                            <span v-if="inner_row.concentration != ''">({{ inner_row.concentration }})</span>
-                          </span>
-
-                          </li>
-
-                            <li v-if="row.candidate_requirement.experience_type == 0"><i class="bx bx-briefcase"></i> No Experience</li>
-                            <li v-if="row.candidate_requirement.experience_type == 1"><i class="bx bx-briefcase"></i> {{
-                                row.candidate_requirement.minimum_year_of_experience
-                              }} - {{ row.candidate_requirement.maximum_year_of_experience }} years</li>
-                          </span>
-
-
-                        </ul>
-
-                        <ul class="job-preview-list text-right" v-if="row.application_deadline !=''">
-                          <li><i class="bx bx-calendar"></i> Application Deadline:
-
-                            <strong v-html="dateFormat(row.application_deadline)"></strong>
-
-                          </li>
-                        </ul>
-                      </a>
-
-                    </div>
-
-                    <div style="float: right;" v-if="totalRows > perPage">
-
-                      <b-pagination
-                        :total-rows="totalRows"
-                        v-model="currentPage"
-                        :per-page="perPage"
-                      />
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-10" v-if="current_jobs== '' && dream_jobs== '' && !loading">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title text-center">Data not found</h4>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-2">
-                <div class="col-12">
-                  <div class="card" style="background: transparent">
-                    <div class="card-body" style="max-width: 98%;margin: 0 auto;">
-
-                      <adsbygoogle/>
-
-                    </div>
-                  </div>
-                </div>
-
-                &lt;!&ndash;          <div class="col-12 mt-2">
-                            <div class="card" style="background: transparent">
-                              <div class="card-body" style="max-width: 98%;margin: 0 auto;">
-
-                                <div class="col">
-                                  <adsbygoogle/>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>&ndash;&gt;
-
-              </div>
-            </div>-->
 
     </div>
 

@@ -5,9 +5,8 @@
 
       <div class="row">
 
-        <ads />
 
-        <div class="col-lg-12">
+        <div class="col-lg-10">
           <div class="card">
             <div class="card-body contact">
 
@@ -257,7 +256,31 @@
           </div>
         </div>
 
-        <ads />
+        <div class="col-lg-2">
+          <div class="col-12">
+            <div class="card" style="background: transparent;box-shadow: none;">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mt-2">
+            <div class="card" style="background: transparent;box-shadow: none;">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <doubleAds/>
 
       </div>
 
@@ -267,11 +290,11 @@
 </template>
 
 <script>
-import ads from "~/components/Ads";
+import doubleAds from "@/components/DoubleAds";
 export default {
   name: "index",
   components: {
-    ads
+    doubleAds
   },
 }
 </script>

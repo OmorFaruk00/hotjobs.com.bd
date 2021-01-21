@@ -1,7 +1,7 @@
 <template>
   <div style="display: contents">
     <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
-<!--            <div class="card">-->
+      <!--            <div class="card">-->
       <div class="card" style="background: transparent;box-shadow: none;">
         <div class="card-body text-center">
 
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "ads"
+name: "DoubleAds"
 }
 </script>
 

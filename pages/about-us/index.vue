@@ -4,7 +4,6 @@
     <div class="container-fluid">
 
       <div class="row">
-        <ads/>
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body contact">
@@ -15,7 +14,7 @@
             </div>
           </div>
         </div>
-        <ads/>
+        <singleAds/>
       </div>
 
     </div>
@@ -24,12 +23,12 @@
 </template>
 
 <script>
-import ads from "~/components/Ads";
+import singleAds from "~/components/SingleAds";
 
 export default {
   name: "index",
   components: {
-    ads
+    singleAds
   },
 }
 </script>

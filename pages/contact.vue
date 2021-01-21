@@ -6,7 +6,8 @@
       <div class="container-fluid">
 
         <div class="row">
-          <ads/>
+          <singleAds/>
+
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body contact">
@@ -30,7 +31,7 @@
         </div>
 
         <div class="row">
-          <ads/>
+
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
@@ -62,7 +63,8 @@
               </div>
             </div>
           </div>
-          <ads/>
+
+          <thirdAds/>
         </div>
 
       </div>
@@ -72,11 +74,15 @@
 </template>
 
 <script>
-import ads from "~/components/Ads";
+import singleAds from "~/components/SingleAds";
+import doubleAds from "~/components/DoubleAds";
+import thirdAds from "~/components/ThirdAds";
 export default {
   name: "contact",
   components: {
-    ads
+    singleAds,
+    doubleAds,
+    thirdAds,
   },
   data() {
     return {

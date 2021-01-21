@@ -9,21 +9,17 @@
 
         <div class="row">
 
-          <ads/>
-
           <!--HotJobs Certification Test's-->
           <employabilityHelpHotJobsCertificationTest/>
 
-          <ads/>
+          <singleAds/>
 
           <!--ReadCandidateFeedback-->
           <employabilityHelpReadCandidateFeedback/>
 
-          <ads/>
+          <thirdAds/>
 
           <employabilityHelpFaq/>
-
-          <ads/>
 
         </div>
 
@@ -40,7 +36,8 @@ import employabilityHelpBanner from "~/components/EmployabilityHelp/Banner";
 import employabilityHelpHotJobsCertificationTest from "~/components/EmployabilityHelp/HotJobsCertificationTest";
 import employabilityHelpReadCandidateFeedback from "~/components/EmployabilityHelp/ReadCandidateFeedback";
 import employabilityHelpFaq from "~/components/EmployabilityHelp/Faq";
-import ads from "~/components/Ads";
+import singleAds from "~/components/SingleAds";
+import doubleAds from "~/components/DoubleAds";
 
 export default {
   name: "employability-help",
@@ -49,7 +46,8 @@ export default {
     employabilityHelpHotJobsCertificationTest,
     employabilityHelpReadCandidateFeedback,
     employabilityHelpFaq,
-    ads
+    singleAds,
+    doubleAds,
   },
 }
 </script>

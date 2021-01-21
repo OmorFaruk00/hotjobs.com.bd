@@ -4,8 +4,8 @@
     <div class="container-fluid">
 
       <div class="row">
-        <ads />
-        <div class="col-lg-12">
+
+        <div class="col-lg-10">
           <div class="card">
             <div class="card-body contact">
 
@@ -77,7 +77,31 @@
             </div>
           </div>
         </div>
-        <ads />
+        <div class="col-lg-2">
+          <div class="col-12">
+            <div class="card" style="background: transparent;box-shadow: none;">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mt-2">
+            <div class="card" style="background: transparent;box-shadow: none;">
+              <div class="card-body">
+
+                <adsbygoogle/>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <doubleAds/>
       </div>
 
     </div>
@@ -86,11 +110,12 @@
 </template>
 
 <script>
-import ads from "~/components/Ads";
+import doubleAds from "@/components/DoubleAds";
+
 export default {
   name: "index",
   components: {
-    ads
+    doubleAds
   },
 }
 </script>
@@ -99,7 +124,8 @@ export default {
 h5 {
   color: #423A3D;
 }
-p{
+
+p {
   font-size: 1rem;
 }
 </style>
