@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
       <div class="row">
-        <ads/>
+        <adsSingle/>
       </div>
 
       <div class="row" v-if="loading">
@@ -375,7 +375,7 @@
       </div>
 
       <div class="row">
-        <ads/>
+        <doubleAds/>
       </div>
 
     </div>
@@ -431,7 +431,8 @@
 import Vue from 'vue'
 import Swal from 'sweetalert2'
 import {Form, HasError, AlertError} from 'vform'
-import ads from "~/components/Ads";
+import adsSingle from "~/components/AdsSingle";
+import doubleAds from "~/components/DoubleAds";
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -454,7 +455,8 @@ export default {
     return /^\d+$/.test(params.first)
   },
   components: {
-    ads
+    adsSingle,
+    doubleAds
   },
   data() {
     return {
