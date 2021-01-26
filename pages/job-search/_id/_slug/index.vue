@@ -122,7 +122,7 @@
 
                       <div v-for="dream_job in fetchDreamJobData" class="col-lg-6 col-md-6 col-sm-12">
                         <div class="card-body mb-2 dream-job-box">
-                          <a :href="`/d/${dream_job.id}/${dream_job.employer.slug}/${dream_job.slug}`" target="_blank">
+                          <a :href="`/jobs/${dream_job.id}/${dream_job.employer.slug}/${dream_job.slug}`" target="_blank">
 
                       <span class="row">
                         <span class="col-9">

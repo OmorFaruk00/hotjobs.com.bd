@@ -36,7 +36,7 @@ export default {
         hid: 'keyword',
         name: 'keywords',
         itemprop: 'keywords',
-        content: 'HotJobs,HotJobsBD,jobsbd,JobsBD'
+        content: 'HotJobs,HotJobsBD,jobsbd,JobsBD,Jobs'
       },
       {name: 'author', content: 'HotJobs'},
     ],
