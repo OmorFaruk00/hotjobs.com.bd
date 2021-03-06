@@ -57,15 +57,15 @@ export default {
     ],
 
     script: [
-      {src: '/libs/jquery/jquery.min.js'},
-      {src: '/libs/bootstrap/js/bootstrap.bundle.min.js'},
+      {src: '/libs/jquery/jquery.min.js', defer: true},
+      {src: '/libs/bootstrap/js/bootstrap.bundle.min.js', defer: true},
       // {src: '/js/facebook.js'},
-      {src: '/bootstrap-select/dist/js/bootstrap-select.min.js'},
-      {src: '/libs/metismenu/metisMenu.min.js'},
-      {src: '/libs/simplebar/simplebar.min.js'},
+      {src: '/bootstrap-select/dist/js/bootstrap-select.min.js', defer: true},
+      {src: '/libs/metismenu/metisMenu.min.js', defer: true},
+      {src: '/libs/simplebar/simplebar.min.js', defer: true},
       // {src: '/libs/node-waves/waves.min.js'},
       // {src: '/js/pages/dashboard.init.js'},
-      {src: '/js/app.js'},
+      {src: '/js/app.js', defer: true},
     ],
   },
   /*
@@ -243,7 +243,7 @@ export default {
   **loading height customize
    */
   loading: {
-    color: '#EC1A3A',
+    color: '#ec1a3a',
     height: '3px'
   },
 
