@@ -20,21 +20,24 @@
 
                   <b-col md="3" class='text-center'>
 
-<!--                    <b-card-img v-if="row.company_logo" :src="getPhoto(row.company_logo)" :alt="row.company_name"
-                                class="p-3" fluid></b-card-img>-->
 
-                    <img v-if="row.company_logo" class="p-3 card-img" :data-src="`${url}`+row.company_logo" :alt="row.company_name"
+                    <img v-if="row.company_logo" class="p-3 card-img" :data-src="`${url}`+row.company_logo"
+                         :alt="row.company_name"
                          :title="row.company_name" v-lazy-load>
 
-                    <img v-else src="~/static/favicon.png" alt="Hot Jobs" class="img-fluid p-3">
+
+                    <img v-else
+                         :src="`https://ui-avatars.com/api/?name=${row.company_name}&color=EC1A3A&background=ffffff&fbclid=IwAR06QImURpdBRxNNVrfp-hjlHOJKlj9yrPJy-HWGYDHk8U4yRG8skvQxjZc`"
+                         :alt="row.company_name" class="img-fluid p-3">
                   </b-col>
 
                   <b-col md="9">
 
                     <b-card-body class="inner-dream-box" :title="row.company_name">
 
-                      <a style="display: inherit" v-for="inner_row in row.tender_jobs" :href="`/t/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank">
-<!--                      <a style="display: inherit" v-for="inner_row in row.tender_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
+                      <a style="display: inherit" v-for="inner_row in row.tender_jobs"
+                         :href="`/t/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank">
+                        <!--                      <a style="display: inherit" v-for="inner_row in row.tender_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
 
                         <i class="bx bxs-right-arrow-square"></i> {{
                           inner_row.title ? inner_row.title : 'Not specified'
@@ -50,8 +53,9 @@
 
             <div class="col-12">
               <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
-<!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+                <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+                  v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
               </div>
             </div>
 

@@ -21,13 +21,14 @@
                 <b-col md="3" class='text-center'>
 
 
-                    <img v-if="row.company_logo" class="p-3 card-img" :data-src="`${url}`+row.company_logo" :alt="row.company_name"
-                         :title="row.company_name" v-lazy-load>
+                  <img v-if="row.company_logo" class="p-3 card-img" :data-src="`${url}`+row.company_logo"
+                       :alt="row.company_name"
+                       :title="row.company_name" v-lazy-load>
 
-<!--                  <b-card-img class="p-3" v-if="row.company_logo" :src="getPhoto(row.company_logo)"
-                              :alt="row.company_name" fluid></b-card-img>-->
 
-                  <img v-else src="~/static/favicon.png" alt="Hot Jobs" class="img-fluid p-3">
+                  <img v-else
+                       :src="`https://ui-avatars.com/api/?name=${row.company_name}&color=EC1A3A&background=ffffff&fbclid=IwAR06QImURpdBRxNNVrfp-hjlHOJKlj9yrPJy-HWGYDHk8U4yRG8skvQxjZc`"
+                       :alt="row.company_name" class="img-fluid p-3">
                 </b-col>
 
                 <b-col md="9">
