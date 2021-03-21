@@ -39,9 +39,6 @@
                        :href="`/jobs/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank"
                     >
 
-                      <!--<a style="display: inherit" v-for="inner_row in row.dream_jobs" href="javaScript:void(0)"
-                       @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
-
                       <i class="bx bxs-right-arrow-square"></i> {{
                         inner_row.title ? inner_row.title : 'Not specified'
                       }}</a>
@@ -55,12 +52,18 @@
           </b-card-group>
 
 
-          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
-            <!--            <button type="button" @click="dreamJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
+          <div class="text-center">
+            <client-only>
+              <infinite-loading v-if="this.page <= this.last_page" @distance="1"
+                                @infinite="infiniteHandlerDreamJobs"></infinite-loading>
+            </client-only>
+          </div>
 
+
+<!--          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
             <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
               v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
-          </div>
+          </div>-->
 
 
         </div>
@@ -72,6 +75,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import InfiniteLoading from 'vue-infinite-loading';
 
 const Toast = Swal.mixin({
   toast: true,
@@ -95,12 +99,18 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: false,
       see_more: true,
       see_more_loadind: false,
-      employer_hotjobs: '',
+      employer_hotjobs: [],
       url: this.$axios.defaults.baseURL,
+      page: 1,
+      last_page: ''
     }
+  },
+
+  components: {
+    InfiniteLoading
   },
 
   methods: {
@@ -120,40 +130,6 @@ export default {
         })
     },
 
-    fetchDreamJob() {
-      var vm = this;
-      this.$axios.get('dream-job').then(function (response) {
-
-        vm.employer_hotjobs = response.data;
-        vm.loading = false;
-
-      }).catch(function (error) {
-
-        Toast.fire({
-          icon: 'warning',
-          title: 'There was something wrong'
-        });
-
-      });
-    },
-
-    getPhoto(row) {
-      let image_url = this.url + row;
-      return image_url;
-    },
-
-    fetchJobDetails(id, company_name, slug) {
-
-      var id = id;
-      var company_name = company_name;
-      var slug = slug;
-      // this.$router.push(`/d/${id}/${company_name}/${slug}`)
-
-      let route = this.$router.resolve(`/d/${id}/${company_name}/${slug}`);
-      window.open(route.href, '_blank');
-
-    },
-
     async dreamJobSeeMore() {
       var vm = this;
       vm.see_more_loadind = true;
@@ -170,12 +146,36 @@ export default {
             title: 'There was something wrong'
           });
         })
+    },
+
+
+    infiniteHandlerDreamJobs($state) {
+      let vm = this;
+      this.$axios.get('frontend/dream-job?page=' + this.page)
+        .then(response => {
+
+          vm.last_page = response.data.last_page;
+
+          console.log(response.data)
+
+          return response.data;
+
+        }).then(data => {
+        $.each(data.data, function (key, value) {
+          vm.employer_hotjobs.push(value);
+        });
+
+        if (this.page <= this.last_page){
+          $state.loaded();
+        }
+      });
+
+      this.page = this.page + 1;
     }
 
   },
   beforeMount() {
-    // this.fetchDreamJob();
-    this.fetchDreamJobs();
+    this.infiniteHandlerDreamJobs();
   }
 
 }
