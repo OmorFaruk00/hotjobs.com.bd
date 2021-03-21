@@ -37,6 +37,7 @@
     "vue-count-to": "^1.0.13",
     "vue-fb-customer-chat": "^0.2.0",
     "vue-filter-number-format": "^3.0.1",
+    "vue-infinite-loading": "^2.4.5",
     "vue-scrollto": "^2.18.2",
     "vue-search-select": "^2.9.3",
     "vue-select2": "^0.2.6",

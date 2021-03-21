@@ -15,11 +15,7 @@
           <div v-for="(row,key) in all_subject" class="col-lg-3 col-md-3 col-sm-12">
             <div class="companies-item category-item-box helping_hand_scrollbar scroll_style">
               <h3>
-                <a :href="`/tutor/${row.id}/${row.slug}`" target="_blank">
-                  <!--                <a href="javaScript:void(0)" @click="fetchSubjectWiseJob(row.id,row.slug)">-->
-
-                  {{ row.title }}
-                  (
+                <a :href="`/tutor/${row.id}/${row.slug}`" target="_blank">{{ row.title }} (
                   <countTo :startVal='0' :endVal='row.all_tuition_count'
                            :duration='5000'></countTo>
                   )
@@ -31,10 +27,17 @@
         </div>
 
         <div class="col-12 mt-3">
-          <div class="text-center" v-if="see_more && all_subject.length >= 20">
-            <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-            <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more... <i v-if="tutor_see_more_loadind" class="bx bx-loader bx-spin"></i></a>
-          </div>
+
+          <client-only>
+            <infinite-loading v-if="this.page <= this.last_page" @distance="1" @infinite="infiniteHandlerFetchSubject"></infinite-loading>
+          </client-only>
+
+
+<!--          <div class="text-center" v-if="see_more && all_subject.length >= 20">
+            <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more... <i
+              v-if="tutor_see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+          </div>-->
+
         </div>
 
 
@@ -47,6 +50,8 @@
 // tender-job
 import Swal from 'sweetalert2'
 import countTo from "vue-count-to";
+import InfiniteLoading from 'vue-infinite-loading';
+
 
 const Toast = Swal.mixin({
   toast: true,
@@ -68,14 +73,17 @@ export default {
   },
   components: {
     countTo,
+    InfiniteLoading
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       all_subject: [],
       see_more: true,
       tutor_see_more_loadind: false,
       url: this.$axios.defaults.baseURL,
+      page: 1,
+      last_page:''
     }
   },
 
@@ -115,17 +123,6 @@ export default {
 
     },
 
-    fetchSubjectWiseJob(id, slug) {
-
-      var subject_id = id;
-      var slug = slug;
-      // this.$router.push(`/tutor/${subject_id}/${slug}`)
-
-      let route = this.$router.resolve(`/tutor/${subject_id}/${slug}`);
-      window.open(route.href, '_blank');
-
-    },
-
     dateFormat(date) {
       return this.$moment(date).format('MMMM D,YYYY');
     },
@@ -134,7 +131,7 @@ export default {
       var vm = this;
       return await this.$axios.get('frontend/subject')
         .then((response) => {
-          vm.all_subject = response.data;
+          vm.all_subject = response.data.data;
           vm.loading = false;
         })
         .catch((error) => {
@@ -165,12 +162,35 @@ export default {
       this.fetchAllSubject();
       this.see_more = false;
       this.tutor_see_more_loadind = false;
+    },
+
+    infiniteHandlerFetchSubject($state) {
+      let vm = this;
+      this.$axios.get('frontend/subject?page=' + this.page)
+        .then(response => {
+
+          vm.last_page = response.data.last_page;
+
+          return response.data;
+
+        }).then(data => {
+        $.each(data.data, function (key, value) {
+          vm.all_subject.push(value);
+        });
+
+        if (this.page <= this.last_page){
+          $state.loaded();
+        }
+      });
+
+      this.page = this.page + 1;
     }
 
   },
 
   beforeMount() {
-    this.fetchSubject();
+    // this.fetchSubject();
+    this.infiniteHandlerFetchSubject();
   }
 
 }
