@@ -156,8 +156,6 @@ export default {
 
           vm.last_page = response.data.last_page;
 
-          console.log(response.data)
-
           return response.data;
 
         }).then(data => {

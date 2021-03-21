@@ -37,7 +37,6 @@
 
                       <a style="display: inherit" v-for="inner_row in row.tender_jobs"
                          :href="`/t/${inner_row.id}/${row.slug}/${inner_row.slug}`" target="_blank">
-                        <!--                      <a style="display: inherit" v-for="inner_row in row.tender_jobs" href="javaScript:void(0)" @click="fetchJobDetails(inner_row.id,row.slug,inner_row.slug)">-->
 
                         <i class="bx bxs-right-arrow-square"></i> {{
                           inner_row.title ? inner_row.title : 'Not specified'
@@ -52,12 +51,21 @@
 
 
             <div class="col-12">
-              <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
-                <!--                <button type="button" @click="tenderJobSeeMore" class="btn btn-outline-info active">See more.....</button>-->
-                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
-                  v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+              <div class="text-center">
+                <client-only>
+                  <infinite-loading v-if="this.page <= this.last_page" @distance="1"
+                                    @infinite="infiniteHandlerTenderJobs"></infinite-loading>
+                </client-only>
               </div>
             </div>
+
+            <!--            <div class="col-12">
+
+                          <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
+                            <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+                              v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+                          </div>
+                        </div>-->
 
           </div>
         </div>
@@ -70,6 +78,7 @@
 <script>
 // tender-job
 import Swal from 'sweetalert2'
+import InfiniteLoading from "vue-infinite-loading";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -91,12 +100,18 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       see_more: true,
       see_more_loadind: false,
-      employer_tender_jobs: '',
+      employer_tender_jobs: [],
       url: this.$axios.defaults.baseURL,
+      page: 1,
+      last_page: ''
     }
+  },
+
+  components: {
+    InfiniteLoading
   },
 
   methods: {
@@ -116,22 +131,6 @@ export default {
         })
     },
 
-    getPhoto(row) {
-      let image_url = this.url + row;
-      return image_url;
-    },
-
-    fetchJobDetails(id, company_slug, slug) {
-
-      var id = id;
-      var company_slug = company_slug;
-      var slug = slug;
-      // this.$router.push(`/t/${id}/${company_slug}/${slug}`)
-      let route = this.$router.resolve(`/t/${id}/${company_slug}/${slug}`);
-      window.open(route.href, '_blank');
-
-    },
-
     async tenderJobSeeMore() {
       var vm = this;
       vm.see_more_loadind = true;
@@ -148,11 +147,33 @@ export default {
             title: 'There was something wrong'
           });
         })
+    },
+
+    infiniteHandlerTenderJobs($state) {
+      let vm = this;
+      this.$axios.get('frontend/tender-job?page=' + this.page)
+        .then(response => {
+
+          vm.last_page = response.data.last_page;
+
+          return response.data;
+
+        }).then(data => {
+        $.each(data.data, function (key, value) {
+          vm.employer_tender_jobs.push(value);
+        });
+
+        if (this.page <= this.last_page){
+          $state.loaded();
+        }
+      });
+
+      this.page = this.page + 1;
     }
 
   },
   beforeMount() {
-    this.fetchTenderJob();
+    this.infiniteHandlerTenderJobs();
   }
 
 }
