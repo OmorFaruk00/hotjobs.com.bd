@@ -159,13 +159,16 @@ export default {
           return response.data;
 
         }).then(data => {
-          $.each(data.data, function (key, value) {
-            vm.employer_hotjobs.push(value);
-          });
 
           if (this.page <= this.last_page) {
+            $.each(data.data, function (key, value) {
+              vm.employer_hotjobs.push(value);
+            });
+            
             $state.loaded();
           }
+
+
         });
 
       this.page = this.page + 1;
