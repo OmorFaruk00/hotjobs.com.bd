@@ -149,9 +149,9 @@ export default {
         })
     },
 
-    infiniteHandlerTenderJobs($state) {
+    async infiniteHandlerTenderJobs($state) {
       let vm = this;
-      this.$axios.get('frontend/tender-job?page=' + this.page)
+      await this.$axios.get('frontend/tender-job?page=' + this.page)
         .then(response => {
 
           vm.last_page = response.data.last_page;

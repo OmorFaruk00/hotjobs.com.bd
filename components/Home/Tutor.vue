@@ -164,9 +164,9 @@ export default {
       this.tutor_see_more_loadind = false;
     },
 
-    infiniteHandlerFetchSubject($state) {
+    async infiniteHandlerFetchSubject($state) {
       let vm = this;
-      this.$axios.get('frontend/subject?page=' + this.page)
+      await this.$axios.get('frontend/subject?page=' + this.page)
         .then(response => {
 
           vm.last_page = response.data.last_page;

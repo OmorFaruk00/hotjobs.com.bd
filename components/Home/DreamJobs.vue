@@ -60,10 +60,10 @@
           </div>
 
 
-<!--          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
-            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
-              v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
-          </div>-->
+          <!--          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
+                      <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+                        v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+                    </div>-->
 
 
         </div>
@@ -149,9 +149,9 @@ export default {
     },
 
 
-    infiniteHandlerDreamJobs($state) {
+    async infiniteHandlerDreamJobs($state) {
       let vm = this;
-      this.$axios.get('frontend/dream-job?page=' + this.page)
+      await this.$axios.get('frontend/dream-job?page=' + this.page)
         .then(response => {
 
           vm.last_page = response.data.last_page;
@@ -159,14 +159,14 @@ export default {
           return response.data;
 
         }).then(data => {
-        $.each(data.data, function (key, value) {
-          vm.employer_hotjobs.push(value);
-        });
+          $.each(data.data, function (key, value) {
+            vm.employer_hotjobs.push(value);
+          });
 
-        if (this.page <= this.last_page){
-          $state.loaded();
-        }
-      });
+          if (this.page <= this.last_page) {
+            $state.loaded();
+          }
+        });
 
       this.page = this.page + 1;
     }
