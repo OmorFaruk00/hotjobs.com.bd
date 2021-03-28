@@ -154,7 +154,7 @@ export default {
       await this.$axios.get('frontend/tender-job?page=' + this.page)
         .then(response => {
 
-          vm.last_page = response.data.last_page;
+          vm.last_page = response.data.meta.last_page;
 
           return response.data;
 

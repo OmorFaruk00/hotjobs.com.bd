@@ -119,7 +119,7 @@ export default {
       var vm = this;
       return await this.$axios.get('frontend/dream-job')
         .then((response) => {
-          vm.employer_hotjobs = response.data;
+          vm.employer_hotjobs = response.data.data;
           vm.loading = false;
         })
         .catch((error) => {
@@ -136,7 +136,7 @@ export default {
       return await this.$axios.get('frontend/all-dream-job')
         .then((response) => {
           vm.employer_hotjobs = '';
-          vm.employer_hotjobs = response.data;
+          vm.employer_hotjobs = response.data.data;
           vm.see_more = false;
           vm.see_more_loadind = false;
         })
@@ -154,7 +154,7 @@ export default {
       await this.$axios.get('frontend/dream-job?page=' + this.page)
         .then(response => {
 
-          vm.last_page = response.data.last_page;
+          vm.last_page = response.data.meta.last_page;
 
           return response.data;
 
@@ -164,7 +164,7 @@ export default {
             $.each(data.data, function (key, value) {
               vm.employer_hotjobs.push(value);
             });
-            
+
             $state.loaded();
           }
 
