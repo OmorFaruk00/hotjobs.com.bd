@@ -30,7 +30,7 @@
           <!--dream Jobs-->
           <homeDreamJobs/>
 
-          <singleAds/>
+          <doubleAds/>
 
           <!--TUTOR-->
           <homeTutor/>

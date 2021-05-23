@@ -5,7 +5,7 @@
       <div class="card" style="background: transparent;box-shadow: none;">
         <div class="card-body text-center">
 
-          <adsbygoogle ad-format="fluid"/>
+          <adsbygoogle ad-format="horizontal"/>
 
         </div>
         <!--        </div>-->
@@ -18,7 +18,7 @@
       <div class="card" style="background: transparent;box-shadow: none;">
         <div class="card-body text-center">
 
-          <adsbygoogle ad-format="fluid"/>
+          <adsbygoogle ad-format="horizontal"/>
 
         </div>
       </div>

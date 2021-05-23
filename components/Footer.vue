@@ -317,9 +317,9 @@ export default {
 /*-- End Subscribe --*/
 /*-- Footer --*/
 
-#footer-section {
+/*#footer-section {
   margin-top: 102px;
-}
+}*/
 
 footer {
   background-image: url("../static/images/footer_bg.png");

@@ -48,12 +48,12 @@ export default {
       {rel: 'apple-touch-icon', sizes: '152x152', href: '/favicon.png'},
       {rel: 'stylesheet', id: 'bootstrap-style', href: '/css/bootstrap.min.css'},
       {rel: 'stylesheet', href: '/css/icons.min.css'},
-      {rel: 'stylesheet', href: '/css/app.css'},
+      {rel: 'stylesheet', href: '/css/app.min.css'},
       {rel: 'stylesheet', href: '/bootstrap-select/dist/css/bootstrap-select.min.css'},
       // {rel: 'stylesheet', href: '/css/style.css'},
-      {rel: 'stylesheet', href: '/css/min_style.css'},
-      {rel: 'stylesheet', href: '/css/responsive.css'},
-      // {rel: 'stylesheet', href: '/css/min_responsive.css'},
+      {rel: 'stylesheet', href: '/css/style.min.css'},
+      // {rel: 'stylesheet', href: '/css/responsive.css'},
+      {rel: 'stylesheet', href: '/css/responsive.min.css'},
     ],
 
     script: [
@@ -227,8 +227,8 @@ export default {
       axios.defaults.httpAgent = new http.Agent({rejectUnauthorized: false});
     },
     headers: {'Access-Control-Allow-Origin': '*'},
-    baseURL: 'http://localhost:8000/',
-    // baseURL: 'https://api.hotjobs.com.bd/',
+    // baseURL: 'http://localhost:8000/',
+    baseURL: 'https://api.hotjobs.com.bd/',
     proxyHeaders: false,
     credentials: false,
   },

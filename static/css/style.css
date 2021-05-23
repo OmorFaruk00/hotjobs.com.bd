@@ -4837,5 +4837,8 @@ button:focus {
   color: #423A3D;
 }
 
+.card{
+  margin-bottom: 0px!important;
+}
 
 
