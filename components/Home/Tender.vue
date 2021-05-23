@@ -50,22 +50,22 @@
             </b-card-group>
 
 
-            <div class="col-12">
-              <div class="text-center">
-                <client-only>
-                  <infinite-loading v-if="this.page <= this.last_page" @distance="1"
-                                    @infinite="infiniteHandlerTenderJobs"></infinite-loading>
-                </client-only>
-              </div>
-            </div>
-
             <!--            <div class="col-12">
-
-                          <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
-                            <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
-                              v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+                          <div class="text-center">
+                            <client-only>
+                              <infinite-loading v-if="this.page <= this.last_page" @distance="1"
+                                                @infinite="infiniteHandlerTenderJobs"></infinite-loading>
+                            </client-only>
                           </div>
                         </div>-->
+
+            <div class="col-12">
+
+              <div class="text-center" v-if="see_more && employer_tender_jobs.length >= 20">
+                <a href="javaScript:void(0)" @click="tenderJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+                  v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -120,7 +120,7 @@ export default {
       var vm = this;
       return await this.$axios.get('frontend/tender-job')
         .then((response) => {
-          vm.employer_tender_jobs = response.data;
+          vm.employer_tender_jobs = response.data.data;
           vm.loading = false;
         })
         .catch((error) => {
@@ -136,7 +136,7 @@ export default {
       vm.see_more_loadind = true;
       return await this.$axios.get('frontend/all-tender-job')
         .then((response) => {
-          vm.employer_tender_jobs = response.data;
+          vm.employer_tender_jobs = response.data.data;
           vm.see_more = false;
           vm.loading = false;
           vm.see_more_loadind = false;
@@ -159,21 +159,22 @@ export default {
           return response.data;
 
         }).then(data => {
-        $.each(data.data, function (key, value) {
-          vm.employer_tender_jobs.push(value);
-        });
+          $.each(data.data, function (key, value) {
+            vm.employer_tender_jobs.push(value);
+          });
 
-        if (this.page <= this.last_page){
-          $state.loaded();
-        }
-      });
+          if (this.page <= this.last_page) {
+            $state.loaded();
+          }
+        });
 
       this.page = this.page + 1;
     }
 
   },
   beforeMount() {
-    this.infiniteHandlerTenderJobs();
+    this.fetchTenderJob();
+    // this.infiniteHandlerTenderJobs();
   }
 
 }

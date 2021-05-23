@@ -52,18 +52,18 @@
           </b-card-group>
 
 
-          <div class="text-center">
+<!--          <div class="text-center">
             <client-only>
               <infinite-loading v-if="this.page <= this.last_page" @distance="1"
                                 @infinite="infiniteHandlerDreamJobs"></infinite-loading>
             </client-only>
+          </div>-->
+
+
+          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
+            <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
+              v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
           </div>
-
-
-          <!--          <div class="text-center" v-if="see_more && employer_hotjobs.length >=20 ">
-                      <a href="javaScript:void(0)" @click="dreamJobSeeMore" class="tcb-animate-e tcb-info">See more... <i
-                        v-if="see_more_loadind" class="bx bx-loader bx-spin"></i></a>
-                    </div>-->
 
 
         </div>
@@ -148,7 +148,6 @@ export default {
         })
     },
 
-
     async infiniteHandlerDreamJobs($state) {
       let vm = this;
       await this.$axios.get('frontend/dream-job?page=' + this.page)
@@ -175,8 +174,10 @@ export default {
     }
 
   },
+
   beforeMount() {
-    this.infiniteHandlerDreamJobs();
+    this.fetchDreamJobs();
+    // this.infiniteHandlerDreamJobs();
   }
 
 }

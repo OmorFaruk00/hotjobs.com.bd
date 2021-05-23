@@ -28,15 +28,16 @@
 
         <div class="col-12 mt-3">
 
-          <client-only>
-            <infinite-loading v-if="this.page <= this.last_page" @distance="1" @infinite="infiniteHandlerFetchSubject"></infinite-loading>
-          </client-only>
+<!--          <client-only>
+            <infinite-loading v-if="this.page <= this.last_page" @distance="1"
+                              @infinite="infiniteHandlerFetchSubject"></infinite-loading>
+          </client-only>-->
 
 
-<!--          <div class="text-center" v-if="see_more && all_subject.length >= 20">
+          <div class="text-center" v-if="see_more && all_subject && all_subject.length >= 12">
             <a href="javaScript:void(0)" @click="subjectSeeMore" class="tcb-animate-e tcb-info">See more... <i
               v-if="tutor_see_more_loadind" class="bx bx-loader bx-spin"></i></a>
-          </div>-->
+          </div>
 
         </div>
 
@@ -83,7 +84,7 @@ export default {
       tutor_see_more_loadind: false,
       url: this.$axios.defaults.baseURL,
       page: 1,
-      last_page:''
+      last_page: ''
     }
   },
 
@@ -131,7 +132,7 @@ export default {
       var vm = this;
       return await this.$axios.get('frontend/subject')
         .then((response) => {
-          vm.all_subject = response.data.data;
+          vm.all_subject = response.data;
           vm.loading = false;
         })
         .catch((error) => {
@@ -174,23 +175,23 @@ export default {
           return response.data;
 
         }).then(data => {
-        $.each(data.data, function (key, value) {
-          vm.all_subject.push(value);
-        });
+          $.each(data.data, function (key, value) {
+            vm.all_subject.push(value);
+          });
 
-        if (this.page <= this.last_page){
-          $state.loaded();
-        }
-      });
+          if (this.page <= this.last_page) {
+            $state.loaded();
+          }
+        });
 
       this.page = this.page + 1;
     }
 
   },
 
-  beforeMount() {
-    // this.fetchSubject();
-    this.infiniteHandlerFetchSubject();
+  created() {
+    this.fetchSubject();
+    // this.infiniteHandlerFetchSubject();
   }
 
 }
