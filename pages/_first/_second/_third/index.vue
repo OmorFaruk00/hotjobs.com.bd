@@ -309,7 +309,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <strong>Published On</strong> <br>
-                      {{ dateFormat(job_details.application_deadline) }}
+                      {{ dateFormat(job_details.created_at) }}
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 mt-3" v-if="company_info_visibility">

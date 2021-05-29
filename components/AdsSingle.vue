@@ -4,7 +4,7 @@
       <div class="card" style="background: transparent;box-shadow: none;">
         <div class="card-body text-center">
 
-          <adsbygoogle/>
+          <adsbygoogle ad-format="horizontal"/>
 
         </div>
 
