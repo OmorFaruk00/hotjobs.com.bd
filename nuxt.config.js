@@ -66,6 +66,7 @@ export default {
       // {src: '/libs/node-waves/waves.min.js'},
       // {src: '/js/pages/dashboard.init.js'},
       {src: '/js/app.js', defer: true},
+     
     ],
   },
   /*
@@ -143,7 +144,9 @@ export default {
     }],
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-8949556359258143',
-      onPageLoad: true,
+      // onPageLoad: true,
+      async:true,
+    
     }],
     ['nuxt-lazy-load', {
       defaultImage: '/images/loading.gif',
